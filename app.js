@@ -24,7 +24,7 @@ app.get('/' + affirmationTodayString, (req,res) => {
   res.send('hello world')
 })
 
-app.get('/webhook', function(req, res) {
+app.get('/' + affirmationTodayString, function(req, res) {
     if (req.query['hub.mode'] === 'subscribe' && req.query['hub.verify_token'] === 'jai_jai_ganesha') {
         console.log("Validating webhook");
         res.status(200).send(req.query['hub.challenge'])
