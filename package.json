@@ -1,0 +1,11 @@
+{
+  "name": "chat-sass-messenger-uploader",
+  "version": "1.0.0",
+  "description": "Server to recieve data and send it out via facebook messenger",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "niquedasneak",
+  "license": "ISC"
+}
