@@ -4,7 +4,8 @@
   "description": "Server to recieve data and send it out via facebook messenger",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
   },
   "author": "niquedasneak",
   "license": "ISC",
