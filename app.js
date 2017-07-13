@@ -5,6 +5,8 @@ var express = require('express')
 
 // APP DEFINITIONS
 var app = express()
+
+// WEBHOOK VARIABLES
 var affirmationTodayString = 'hoOUtqfjwQ'
 var app1String = 'WYfhUsS0v3'
 var app2String = 'iJ6TQVbTXH'
@@ -19,7 +21,7 @@ var app9String = 'u9nltnhPj7'
 // ROUTES
 
 // affirmation.today webhook
-var num = 12399
+var num = 1239
 app.get('/' + affirmationTodayString, (req,res) => {
   res.send('hello affirmation.today')
 })
