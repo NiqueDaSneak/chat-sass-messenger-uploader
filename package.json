@@ -10,6 +10,12 @@
   "author": "niquedasneak",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.15.3"
+    "body-parser": "^1.17.2",
+    "express": "^4.15.3",
+    "moment": "^2.18.1",
+    "mongoose": "^4.11.1",
+    "node-schedule": "^1.2.3",
+    "request": "^2.81.0",
+    "serve-favicon": "^2.4.3"
   }
 }
