@@ -19,21 +19,14 @@ var app8String = '37aD3CcZtU'
 var app9String = 'u9nltnhPj7'
 
 // ROUTES
+var affirmationToday = require('./router/affirmationToday')
+
+app.use('/' + affirmationTodayString, affirmationToday)
 
 // affirmation.today webhook
 var num = 1239
 app.get('/' + num, (req,res) => {
   res.send('hello affirmation.today')
-})
-
-app.get('/' + affirmationTodayString, function(req, res) {
-    if (req.query['hub.mode'] === 'subscribe' && req.query['hub.verify_token'] === 'jai_jai_ganesha') {
-        console.log("Validating webhook");
-        res.status(200).send(req.query['hub.challenge'])
-    } else {
-        console.error("Failed validation. Make sure the validation tokens match.")
-        res.sendStatus(403)
-    }
 })
 
 // SERVER LISTENING
