@@ -22,7 +22,7 @@ var app9String = 'u9nltnhPj7'
 
 // affirmation.today webhook
 var num = 1239
-app.get('/' + affirmationTodayString, (req,res) => {
+app.get('/' + num, (req,res) => {
   res.send('hello affirmation.today')
 })
 
