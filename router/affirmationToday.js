@@ -46,6 +46,7 @@ router.get('/', function(req, res) {
     }
 })
 
+
 router.post('/', function(req, res) {
     var data = req.body
     // Make sure this is a page subscription
@@ -59,7 +60,7 @@ router.post('/', function(req, res) {
                 if (event.message || event.postback) {
                     eventHandler(event)
                 } else {
-                    console.log("Webhook received unknown event: ", event)
+                    console.log("Webhook received unknown event: ", data)
                 }
             })
         })
