@@ -7,7 +7,7 @@ var express = require('express')
 var app = express()
 
 // WEBHOOK VARIABLES
-var affirmationTodayString = 'hoOUtqfjwQ'
+var affirmationTodayString = '5695'
 var app1String = 'WYfhUsS0v3'
 var app2String = 'iJ6TQVbTXH'
 var app3String = 'mPNXmPE2C9'
@@ -28,6 +28,7 @@ var num = 1239
 app.get('/' + num, (req,res) => {
   res.send('hello affirmation.today')
 })
+
 
 // SERVER LISTENING
 var port = process.env.PORT || 5000;
