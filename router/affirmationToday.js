@@ -49,6 +49,7 @@ router.get('/', function(req, res) {
 
 router.post('/', function(req, res) {
     var data = req.body
+    console.log(data)
     // Make sure this is a page subscription
     if (data.object === 'page') {
         // Iterate over each entry - there may be multiple if batched
@@ -71,11 +72,10 @@ router.post('/', function(req, res) {
         // will time out and we will keep trying to resend.
         res.sendStatus(200)
     } else {
-      
+
       console.log(req.body)
       res.sendStatus(200)
     }
-
 })
 
 // HELPER FUNCTIONS
