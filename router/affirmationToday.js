@@ -50,29 +50,30 @@ router.get('/', function(req, res) {
 router.post('/', function(req, res) {
     var data = req.body
     // Make sure this is a page subscription
-    // if (data.object === 'page') {
-    //     // Iterate over each entry - there may be multiple if batched
-    //     data.entry.forEach(function(entry) {
-    //         var pageID = entry.id
-    //         var timeOfEvent = entry.time
-    //         // Iterate over each messaging event
-    //         entry.messaging.forEach(function(event) {
-    //             if (event.message || event.postback) {
-    //                 eventHandler(event)
-    //             } else {
-    //                 console.log("Webhook received unknown event: ", data)
-    //             }
-    //         })
-    //     })
-    //     // Assume all went well.
-    //     //
-    //     // You must send back a 200, within 20 seconds, to let us know
-    //     // you've successfully received the callback. Otherwise, the request
-    //     // will time out and we will keep trying to resend.
-    //     res.sendStatus(200)
-    // }
-    console.log(req.body)
-    res.sendStatus(200)
+    if (data.object === 'page') {
+        // Iterate over each entry - there may be multiple if batched
+        data.entry.forEach(function(entry) {
+            var pageID = entry.id
+            var timeOfEvent = entry.time
+            // Iterate over each messaging event
+            entry.messaging.forEach(function(event) {
+                if (event.message || event.postback) {
+                    eventHandler(event)
+                } else {
+                    console.log("Webhook received unknown event: ", data)
+                }
+            })
+        })
+        // Assume all went well.
+        //
+        // You must send back a 200, within 20 seconds, to let us know
+        // you've successfully received the callback. Otherwise, the request
+        // will time out and we will keep trying to resend.
+        res.sendStatus(200)
+    } else {
+      console.log(req.body)
+      res.sendStatus(200)
+    }
 
 })
 
