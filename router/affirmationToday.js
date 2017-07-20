@@ -69,9 +69,9 @@ router.post('/', function(req, res) {
         res.sendStatus(200)
     } else {
       var senderID = 1680960081915899
-      // sendTextMessage(senderID, 'Welcome back! Use the menu for your actions!')
-      console.log('from sass')
-      console.log(req.body)
+      sendTextMessage(senderID, req.body.assetManifest.text)
+      console.log('from sass. you shouldve recieved a text')
+      // console.log(req.body)
       res.sendStatus(200)
     }
 })
