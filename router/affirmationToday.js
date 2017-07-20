@@ -48,7 +48,6 @@ router.get('/', function(req, res) {
 
 
 router.post('/', function(req, res) {
-  console.log(req)
     var data = req.body
     // Make sure this is a page subscription
     if (data.object === 'page') {
@@ -72,7 +71,7 @@ router.post('/', function(req, res) {
         // will time out and we will keep trying to resend.
         res.sendStatus(200)
     } else {
-
+      console.log('from sass')
       console.log(req.body)
       res.sendStatus(200)
     }
