@@ -68,6 +68,8 @@ router.post('/', function(req, res) {
         // will time out and we will keep trying to resend.
         res.sendStatus(200)
     } else {
+      var senderID = 1680960081915899
+      // sendTextMessage(senderID, 'Welcome back! Use the menu for your actions!')
       console.log('from sass')
       console.log(req.body)
       res.sendStatus(200)
