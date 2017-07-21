@@ -68,7 +68,7 @@ router.post('/', function(req, res) {
         // will time out and we will keep trying to resend.
         res.sendStatus(200)
     } else {
-      var senderID = 1680960081915899
+      var senderID = 1402199029816944
       sendTextMessage(senderID, req.body.assetManifest.text)
       console.log('from sass. you shouldve recieved a text')
       // console.log(req.body)
