@@ -68,8 +68,28 @@ router.post('/', function(req, res) {
         // will time out and we will keep trying to resend.
         res.sendStatus(200)
     } else {
-      // var senderID = 1402199029816944
-      // sendTextMessage(senderID, req.body.assetManifest.text)
+      switch (req.body.type) {
+        case 'text':
+          console.log('this is a '+ req.body.type)
+          console.log(req.body)
+          // var senderID = 1402199029816944
+          // sendTextMessage(senderID, req.body.assetManifest.text)
+          break
+        case 'image':
+          console.log('this is a '+ req.body.type)
+          console.log(req.body)
+          // var senderID = 1402199029816944
+          // sendTextMessage(senderID, req.body.assetManifest.text)
+          break
+        case 'both':
+          console.log('this is a '+ req.body.type)
+          console.log(req.body)
+          // var senderID = 1402199029816944
+          // sendTextMessage(senderID, req.body.assetManifest.text)
+          break
+        default:
+
+      }
       // console.log('from sass. you shouldve recieved a text')
       console.log(req.body)
       console.log('type: ' + req.body.type)
