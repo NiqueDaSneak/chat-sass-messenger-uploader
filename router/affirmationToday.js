@@ -72,23 +72,20 @@ router.post('/', function(req, res) {
       switch (req.body.type) {
         case 'text':
           console.log('this is a '+ req.body.type)
-          console.log(req.body)
           sendTextMessage(senderID, req.body.assetManifest.text)
           break
         case 'image':
           console.log('this is a '+ req.body.type)
-          console.log(req.body)
-          sendTextMessage(senderID, req.body.assetManifest.text)
+          sendImage(senderID, req.body.assetManifest.image)
           break
         case 'both':
           console.log('this is a '+ req.body.type)
-          console.log(req.body)
-          // sendTextMessage(senderID, req.body.assetManifest.text)
+          sendImage(senderID, req.body.assetManifest.image)
+          sendTextMessage(senderID, req.body.assetManifest.text)
           break
         default:
 
       }
-      // console.log('from sass. you shouldve recieved a text')
       res.sendStatus(200)
     }
 })
