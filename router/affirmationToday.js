@@ -68,31 +68,27 @@ router.post('/', function(req, res) {
         // will time out and we will keep trying to resend.
         res.sendStatus(200)
     } else {
+      var senderID = 1680960081915899
       switch (req.body.type) {
         case 'text':
           console.log('this is a '+ req.body.type)
           console.log(req.body)
-          // var senderID = 1402199029816944
-          // sendTextMessage(senderID, req.body.assetManifest.text)
+          sendTextMessage(senderID, req.body.assetManifest.text)
           break
         case 'image':
           console.log('this is a '+ req.body.type)
           console.log(req.body)
-          // var senderID = 1402199029816944
-          // sendTextMessage(senderID, req.body.assetManifest.text)
+          sendTextMessage(senderID, req.body.assetManifest.text)
           break
         case 'both':
           console.log('this is a '+ req.body.type)
           console.log(req.body)
-          // var senderID = 1402199029816944
           // sendTextMessage(senderID, req.body.assetManifest.text)
           break
         default:
 
       }
       // console.log('from sass. you shouldve recieved a text')
-      console.log(req.body)
-      console.log('type: ' + req.body.type)
       res.sendStatus(200)
     }
 })
@@ -141,7 +137,7 @@ function eventHandler(event) {
                       var aff
                       if (err) return console.error(err)
                       aff = affirmation[Math.floor(Math.random() * affirmation.length) + 1].text
-                      sendImage(senderID)
+                      sendImage(senderID, "www.affirmation.today/img/affirmations/image" + rand + ".jpg")
                       sendTextMessage(senderID, aff)
                     })
                   )
@@ -171,7 +167,7 @@ function eventHandler(event) {
                   })
                 })
                 var msg3 = new Promise(function(resolve, reject) {
-                  resolve(sendImage(senderID))
+                  resolve(sendImage(senderID, "www.affirmation.today/img/affirmations/image" + rand + ".jpg"))
                 });
 
                 msg1.then(() => {
@@ -197,7 +193,7 @@ function eventHandler(event) {
                   })
                 })
                 var msg3 = new Promise(function(resolve, reject) {
-                  resolve(sendImage(senderID))
+                  resolve(sendImage(senderID, "www.affirmation.today/img/affirmations/image" + rand + ".jpg"))
                 })
 
                 msg1.then(() => {
@@ -285,9 +281,9 @@ function sendTextMessage(recipientId, messageText) {
     callSendAPI(messageData);
 }
 
-function sendImage(recipientId) {
+function sendImage(recipientId, url) {
   var rand = Math.floor((Math.random() * 23) + 1);
-  var image = "www.affirmation.today/img/affirmations/image" + rand + ".jpg"
+  // var image = "www.affirmation.today/img/affirmations/image" + rand + ".jpg"
 
     var messageData = {
         recipient: {
@@ -297,7 +293,7 @@ function sendImage(recipientId) {
             "attachment": {
               "type": "image",
               "payload": {
-                "url": image
+                "url": url
               }
             }
         }
@@ -358,7 +354,7 @@ var n_america_west_coast = scheduler.scheduleJob('4 44 13 * * *', function(){
       }
       affProm.then((aff) => {
         for (var i = 0; i < member.length; i++) {
-          sendImage(members[i])
+          sendImage(members[i], "www.affirmation.today/img/affirmations/image" + rand + ".jpg")
           sendTextMessage(members[i], aff[Math.floor(Math.random() * aff.length)].text)
         }
       })
@@ -428,7 +424,7 @@ var africa_and_w_europe = scheduler.scheduleJob('4 44 3 * * *', function(){
       }
       affProm.then((aff) => {
         for (var i = 0; i < members.length; i++) {
-          sendImage(members[i])
+          sendImage(members[i], "www.affirmation.today/img/affirmations/image" + rand + ".jpg")
           sendTextMessage(members[i], aff[Math.floor(Math.random() * aff.length)].text)
         }
       })
@@ -463,7 +459,7 @@ var middle_east_and_e_europe = scheduler.scheduleJob('4 44 1 * * *', function(){
       }
       affProm.then((aff) => {
         for (var i = 0; i < members.length; i++) {
-          sendImage(members[i])
+          sendImage(members[i], "www.affirmation.today/img/affirmations/image" + rand + ".jpg")
           sendTextMessage(members[i], aff[Math.floor(Math.random() * aff.length)].text)
         }
       })
@@ -498,7 +494,7 @@ var asia_and_oceania = scheduler.scheduleJob('4 44 18 * * *', function(){
       }
       affProm.then((aff) => {
         for (var i = 0; i < members.length; i++) {
-          sendImage(members[i])
+          sendImage(members[i], "www.affirmation.today/img/affirmations/image" + rand + ".jpg")
           sendTextMessage(members[i], aff[Math.floor(Math.random() * aff.length)].text)
         }
       })
