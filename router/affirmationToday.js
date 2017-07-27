@@ -72,7 +72,7 @@ router.post('/', function(req, res) {
         res.sendStatus(200)
     } else {
       var sendees = []
-      var senderID = 1680960081915899
+      // var senderID = 1680960081915899
 
       var getSendees = new Promise(function(resolve, reject) {
         for (var i = 0; i < req.body.groupNames.length; i++) {
@@ -83,7 +83,6 @@ router.post('/', function(req, res) {
               for (var i = 0; i < group.groupMembers.length; i++) {
                 sendees.push(group.groupMembers[i])
               }
-              console.log('sendees first: ' + sendees)
               resolve(sendees)
             }
           })
@@ -91,20 +90,15 @@ router.post('/', function(req, res) {
       })
 
       getSendees.then((sendees) => {
-
-        console.log("sendees length: " + sendees.length)
         for (var i = 0; i < sendees.length; i++) {
           switch (req.body.type) {
             case 'text':
-            console.log('this is a '+ req.body.type)
             sendTextMessage(sendees[i], req.body.assetManifest.text)
             break
             case 'image':
-            console.log('this is a '+ req.body.type)
             sendImage(sendees[i], req.body.assetManifest.image)
             break
             case 'both':
-            console.log('this is a '+ req.body.type)
             sendImage(sendees[i], req.body.assetManifest.image)
             sendTextMessage(sendees[i], req.body.assetManifest.text)
             break
