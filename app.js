@@ -70,9 +70,15 @@ app.post('/', function(req, res) {
             var timeOfEvent = entry.time
             // Iterate over each messaging event
             entry.messaging.forEach(function(event) {
-                if (event.message || event.postback) {
+                if (event.message) {
                     console.log('event: ' + JSON.stringify(event))
-                    // eventHandler(event)
+                } else if (event.postback) {
+                  if (event.postback.payload === 'GET_STARTED_PAYLOAD') {
+                    console.log('this is the pageid: ' + event.recipient.id)
+                    sendTextMessage(event.sender.id, 'Thanks for signing up. More content to come!')
+                  } else {
+                    eventHandler(event)
+                  }
                 } else {
                     console.log("Webhook received unknown event: ", data)
                 }
@@ -273,6 +279,8 @@ function eventHandler(event) {
       }
     }
 }
+
+// function sendGenericWelcomeMsg(recipientId,)
 
 function sendWelcomeMessage(recipientId, messageText) {
     var messageData = {
