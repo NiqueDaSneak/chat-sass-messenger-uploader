@@ -64,12 +64,14 @@ app.post('/', function(req, res) {
     // Make sure this is a page subscription
     if (data.object === 'page') {
         // Iterate over each entry - there may be multiple if batched
+        console.log('data.entry: ' + data.entry)
         data.entry.forEach(function(entry) {
             var pageID = entry.id
             var timeOfEvent = entry.time
             // Iterate over each messaging event
             entry.messaging.forEach(function(event) {
                 if (event.message || event.postback) {
+                    console.log('event: ' + event)
                     eventHandler(event)
                 } else {
                     console.log("Webhook received unknown event: ", data)
@@ -126,7 +128,8 @@ app.post('/', function(req, res) {
 // HELPER FUNCTIONS
 var sendingFeedback = false
 function eventHandler(event) {
-  console.log('find who the sender is!: ' + event)
+  console.log('event.sender: ' + event.sender)
+
   var senderID = event.sender.id
     if (event.postback) {
       var existingMember
@@ -315,7 +318,6 @@ function sendTextMessage(recipientId, messageText) {
 
 function sendImage(recipientId, url) {
   var rand = Math.floor((Math.random() * 23) + 1);
-  // var image = "www.affirmation.today/img/affirmations/image" + rand + ".jpg"
 
     var messageData = {
         recipient: {
@@ -350,7 +352,7 @@ function callSendAPI(messageData) {
             console.log("Successfully sent generic message with id %s to recipient %s", messageId, recipientId);
         } else {
             console.error("Unable to send message.");
-            console.error(response);
+            // console.error(response);
             console.error(error);
         }
     });
