@@ -81,7 +81,7 @@ app.post('/', function(req, res) {
                         console.error(err)
                       } else {
                         console.log('this is the pageid: ' + event.recipient.id)
-                        console.log('this is the pageid from user: 'user.pageID)
+                        console.log('this is the pageid from user: ' + user.pageID)
                         // sendGenericWelcomeText(event.sender.id, user.accessToken, 'Thanks for signing up. More content to come!')
                       }
                     })
