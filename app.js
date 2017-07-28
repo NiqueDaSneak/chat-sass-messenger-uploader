@@ -126,6 +126,7 @@ app.post('/', function(req, res) {
 // HELPER FUNCTIONS
 var sendingFeedback = false
 function eventHandler(event) {
+  console.log('find who the sender is!: ' + event)
   var senderID = event.sender.id
     if (event.postback) {
       var existingMember
@@ -143,6 +144,7 @@ function eventHandler(event) {
                          return console.error('upload failed:', error);
                        }
                        var data = JSON.parse(body)
+                       // NEED TO FIND ORG NAME AND REPLACE BELOW
                        var newMember = new Member({organization: 'AffirmationToday', fbID: senderID, fullName: data.first_name + ' ' + data.last_name, photo: data.profile_pic, enrolled: false, timezone: data.timezone})
                        newMember.save((err, member) => {
                          if (err) return console.error(err)
