@@ -78,10 +78,11 @@ app.post('/', function(req, res) {
                   if (event.postback.payload === 'GET_STARTED_PAYLOAD') {
                     User.findOne({pageID: event.recipient.id}, (err, user) => {
                       if (err) {
-                        console.log(err)
+                        console.error(err)
                       } else {
                         console.log('this is the pageid: ' + event.recipient.id)
-                        sendGenericWelcomeText(event.sender.id, user.accessToken, 'Thanks for signing up. More content to come!')
+                        console.log('this is the pageid from user: 'user.pageID)
+                        // sendGenericWelcomeText(event.sender.id, user.accessToken, 'Thanks for signing up. More content to come!')
                       }
                     })
                   } else {
