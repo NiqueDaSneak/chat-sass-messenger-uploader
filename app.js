@@ -74,8 +74,14 @@ app.post('/', function(req, res) {
                     console.log('event: ' + JSON.stringify(event))
                 } else if (event.postback) {
                   if (event.postback.payload === 'GET_STARTED_PAYLOAD') {
-                    console.log('this is the pageid: ' + event.recipient.id)
-                    sendTextMessage(event.sender.id, 'Thanks for signing up. More content to come!')
+                    Users.findOne({pageID: event.recipient.id}, (err, user) => {
+                      if (err) {
+                        console.log(err)
+                      } else {
+                        console.log('this is the pageid: ' + event.recipient.id)
+                        sendGenericWelcomeText(event.sender.id, user.accesToken, 'Thanks for signing up. More content to come!')
+                      }
+                    })
                   } else {
                     eventHandler(event)
                   }
@@ -280,7 +286,41 @@ function eventHandler(event) {
     }
 }
 
-// function sendGenericWelcomeMsg(recipientId,)
+function sendGenericWelcomeText(recipientId, accessToken, textMsg) {
+  var messageData = {
+      recipient: {
+          id: recipientId
+      },
+      message: {
+          text: textMsg
+      }
+  }
+
+  callSendAPI(accessToken, messageData)
+}
+
+function callSendAPI(accessToken, messageData) {
+    request({
+        uri: 'https://graph.facebook.com/v2.6/me/messages',
+        qs: {
+            access_token: accessToken
+        },
+        method: 'POST',
+        json: messageData
+
+    }, function(error, response, body) {
+        if (!error && response.statusCode == 200) {
+            var recipientId = body.recipient_id;
+            var messageId = body.message_id;
+
+            console.log("Successfully sent generic message with id %s to recipient %s", messageId, recipientId);
+        } else {
+            console.error("Unable to send message.")
+            console.error('response: ' + response)
+            console.error('error: ' + error)
+        }
+    });
+}
 
 function sendWelcomeMessage(recipientId, messageText) {
     var messageData = {
@@ -343,28 +383,28 @@ function sendImage(recipientId, url) {
     callSendAPI(messageData)
 }
 
-function callSendAPI(messageData) {
-    request({
-        uri: 'https://graph.facebook.com/v2.6/me/messages',
-        qs: {
-            access_token: PAGE_ACCESS_TOKEN
-        },
-        method: 'POST',
-        json: messageData
-
-    }, function(error, response, body) {
-        if (!error && response.statusCode == 200) {
-            var recipientId = body.recipient_id;
-            var messageId = body.message_id;
-
-            console.log("Successfully sent generic message with id %s to recipient %s", messageId, recipientId);
-        } else {
-            // console.error("Unable to send message.")
-            // console.error(response)
-            console.error(error)
-        }
-    });
-}
+// function callSendAPI(messageData) {
+//     request({
+//         uri: 'https://graph.facebook.com/v2.6/me/messages',
+//         qs: {
+//             access_token: PAGE_ACCESS_TOKEN
+//         },
+//         method: 'POST',
+//         json: messageData
+//
+//     }, function(error, response, body) {
+//         if (!error && response.statusCode == 200) {
+//             var recipientId = body.recipient_id;
+//             var messageId = body.message_id;
+//
+//             console.log("Successfully sent generic message with id %s to recipient %s", messageId, recipientId);
+//         } else {
+//             // console.error("Unable to send message.")
+//             // console.error(response)
+//             console.error(error)
+//         }
+//     });
+// }
 
 // SCHEDULER
 var scheduler = require('node-schedule')
