@@ -31,6 +31,8 @@ var Member = mongoose.model('Member', memberSchema)
 var groupSchema = mongoose.Schema({groupName: String, groupMembers: Array, organization: String})
 var Group = mongoose.model('Group', groupSchema)
 
+var userSchema = mongoose.Schema({email: String, organization: String, password: String, webhook: Number})
+var User = mongoose.model('User', userSchema)
 
 // WEBHOOK VARIABLES
 var affirmationTodayString = '7660'
