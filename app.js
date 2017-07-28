@@ -31,7 +31,17 @@ var Member = mongoose.model('Member', memberSchema)
 var groupSchema = mongoose.Schema({groupName: String, groupMembers: Array, organization: String})
 var Group = mongoose.model('Group', groupSchema)
 
-var userSchema = mongoose.Schema({email: String, organization: String, password: String, webhook: Number})
+var userSchema = mongoose.Schema({
+  email: String,
+  organization: String,
+  facebook: {
+    userID: Number,
+    pageID: Number,
+    accessToken: String
+  },
+  webhook: Number
+})
+
 var User = mongoose.model('User', userSchema)
 
 // WEBHOOK VARIABLES
@@ -76,13 +86,13 @@ app.post('/', function(req, res) {
                     console.log('event: ' + JSON.stringify(event))
                 } else if (event.postback) {
                   if (event.postback.payload === 'GET_STARTED_PAYLOAD') {
-                    User.findOne({ facebook.pageID: event.recipient.id }, (err, user) => {
+                    User.findOne({ 'facebook.pageID': event.recipient.id }, (err, user) => {
                       if (err) {
                         console.error(err)
                       } else {
                         console.log('this is the pageid: ' + event.recipient.id)
                         console.log('this is the pageid from user: ' + user.facebook.pageID)
-                        sendGenericWelcomeText(event.sender.id, user.facebook.accessToken, 'Thanks for signing up. More content to come!')
+                        // sendGenericWelcomeText(event.sender.id, user.facebook.accessToken, 'Thanks for signing up. More content to come!')
                       }
                     })
                   } else {
