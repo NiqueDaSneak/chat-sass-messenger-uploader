@@ -76,7 +76,7 @@ app.post('/', function(req, res) {
                     console.log('event: ' + JSON.stringify(event))
                 } else if (event.postback) {
                   if (event.postback.payload === 'GET_STARTED_PAYLOAD') {
-                    User.findOne({ 'facebook.pageID': event.recipient.id }, (err, user) => {
+                    User.findOne({ facebook.pageID: event.recipient.id }, (err, user) => {
                       if (err) {
                         console.error(err)
                       } else {
