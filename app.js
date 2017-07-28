@@ -83,16 +83,14 @@ app.post('/', function(req, res) {
             // Iterate over each messaging event
             entry.messaging.forEach(function(event) {
                 if (event.message) {
-                    console.log('event: ' + JSON.stringify(event))
+                    // console.log('event: ' + JSON.stringify(event))
                 } else if (event.postback) {
                   if (event.postback.payload === 'GET_STARTED_PAYLOAD') {
                     User.findOne({ 'facebook.pageID': event.recipient.id }, (err, user) => {
                       if (err) {
                         console.error(err)
                       } else {
-                        console.log('this is the pageid: ' + event.recipient.id)
-                        console.log('this is the pageid from user: ' + user.facebook.pageID)
-                        // sendGenericWelcomeText(event.sender.id, user.facebook.accessToken, 'Thanks for signing up. More content to come!')
+                        sendGenericWelcomeText(event.sender.id, user.facebook.accessToken, 'Thanks for signing up. More content to come!')
                       }
                     })
                   } else {
