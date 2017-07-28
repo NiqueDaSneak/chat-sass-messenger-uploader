@@ -104,16 +104,17 @@ app.post('/', function(req, res) {
                             Member.findOne({fbID: event.sender.id, organization: user.organization}, (err, member) => {
                               if (member === null) {
                                 console.log('create member')
+                                var newMember = new Member({organization: user.organization, fbID: event.sender.id, fullName: data.first_name + ' ' + data.last_name, photo: data.profile_pic, timezone: data.timezone})
+                                newMember.save((err, member) => {
+                                  if (err) return console.error(err)
+                                })
+                                sendText(event.sender.id, user.facebook.accessToken, 'Thanks for signing up. More content to come!')
                               } else {
+                                sendText(event.sender.id, user.facebook.accessToken, 'Welcome back!')
                                 console.log('member exists: ' + member)
                               }
                             })
                             // NEED TO FIND ORG NAME AND REPLACE BELOW
-                            var newMember = new Member({organization: user.organization, fbID: event.sender.id, fullName: data.first_name + ' ' + data.last_name, photo: data.profile_pic, timezone: data.timezone})
-                            newMember.save((err, member) => {
-                              if (err) return console.error(err)
-                            })
-                            sendGenericWelcomeText(event.sender.id, user.facebook.accessToken, 'Thanks for signing up. More content to come!')
                           })
                         }
                       })
@@ -322,7 +323,7 @@ function eventHandler(event) {
     }
 }
 
-function sendGenericWelcomeText(recipientId, accessToken, textMsg) {
+function sendText(recipientId, accessToken, textMsg) {
   var messageData = {
       recipient: {
           id: recipientId
