@@ -64,15 +64,15 @@ app.post('/', function(req, res) {
     // Make sure this is a page subscription
     if (data.object === 'page') {
         // Iterate over each entry - there may be multiple if batched
-        console.log('data.entry: ' + data.entry)
+        console.log('data.entry: ' + JSON.stringify(data.entry))
         data.entry.forEach(function(entry) {
             var pageID = entry.id
             var timeOfEvent = entry.time
             // Iterate over each messaging event
             entry.messaging.forEach(function(event) {
                 if (event.message || event.postback) {
-                    console.log('event: ' + event)
-                    eventHandler(event)
+                    console.log('event: ' + JSON.stringify(event))
+                    // eventHandler(event)
                 } else {
                     console.log("Webhook received unknown event: ", data)
                 }
