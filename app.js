@@ -86,31 +86,27 @@ app.post('/', function(req, res) {
                     // console.log('event: ' + JSON.stringify(event))
                 } else if (event.postback) {
                   if (event.postback.payload === 'GET_STARTED_PAYLOAD') {
-                    if (true) {
-
-                    } else {
-                      User.findOne({ 'facebook.pageID': event.recipient.id }, (err, user) => {
-                        if (err) {
-                          console.error(err)
-                        } else {
-                          request({
-                            uri: 'https://graph.facebook.com/v2.6/' + event.sender.id + '?access_token=' + user.facebook.accessToken,
-                            method: 'GET'
-                          }, function(error, response, body) {
-                            if (error) {
-                              return console.error('upload failed:', error)
-                            }
-                            var data = JSON.parse(body)
-                            // NEED TO FIND ORG NAME AND REPLACE BELOW
-                            var newMember = new Member({organization: user.organization, fbID: event.sender.id, fullName: data.first_name + ' ' + data.last_name, photo: data.profile_pic, timezone: data.timezone})
-                            newMember.save((err, member) => {
-                              if (err) return console.error(err)
-                            })
-                            sendGenericWelcomeText(event.sender.id, user.facebook.accessToken, 'Thanks for signing up. More content to come!')
+                    User.findOne({ 'facebook.pageID': event.recipient.id }, (err, user) => {
+                      if (err) {
+                        console.error(err)
+                      } else {
+                        request({
+                          uri: 'https://graph.facebook.com/v2.6/' + event.sender.id + '?access_token=' + user.facebook.accessToken,
+                          method: 'GET'
+                        }, function(error, response, body) {
+                          if (error) {
+                            return console.error('upload failed:', error)
+                          }
+                          var data = JSON.parse(body)
+                          // NEED TO FIND ORG NAME AND REPLACE BELOW
+                          var newMember = new Member({organization: user.organization, fbID: event.sender.id, fullName: data.first_name + ' ' + data.last_name, photo: data.profile_pic, timezone: data.timezone})
+                          newMember.save((err, member) => {
+                            if (err) return console.error(err)
                           })
-                        }
-                      })
-                    }
+                          sendGenericWelcomeText(event.sender.id, user.facebook.accessToken, 'Thanks for signing up. More content to come!')
+                        })
+                      }
+                    })
                   } else {
                     eventHandler(event)
                   }
