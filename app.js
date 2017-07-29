@@ -107,8 +107,8 @@ app.post('/', function(req, res) {
                           sendText(event.sender.id, user.facebook.accessToken, 'Thanks for signing up. More content to come!')
                         })
                       }
-                       else {
-
+                      else {
+                        sendText(event.sender.id, user.facebook.accessToken, 'Welcome back!')
                       }
                     })
                   } else {
