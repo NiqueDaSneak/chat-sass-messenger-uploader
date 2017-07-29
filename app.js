@@ -89,7 +89,8 @@ app.post('/', function(req, res) {
                     User.findOne({ 'facebook.pageID': event.recipient.id }, (err, user) => {
                       if (err) {
                         console.error(err)
-                      } else {
+                      }
+                      if (user === null) {
                         request({
                           uri: 'https://graph.facebook.com/v2.6/' + event.sender.id + '?access_token=' + user.facebook.accessToken,
                           method: 'GET'
@@ -103,8 +104,11 @@ app.post('/', function(req, res) {
                           newMember.save((err, member) => {
                             if (err) return console.error(err)
                           })
-                          sendGenericWelcomeText(event.sender.id, user.facebook.accessToken, 'Thanks for signing up. More content to come!')
+                          sendText(event.sender.id, user.facebook.accessToken, 'Thanks for signing up. More content to come!')
                         })
+                      }
+                       else {
+
                       }
                     })
                   } else {
@@ -311,7 +315,7 @@ function eventHandler(event) {
     }
 }
 
-function sendGenericWelcomeText(recipientId, accessToken, textMsg) {
+function sendText(recipientId, accessToken, textMsg) {
   var messageData = {
       recipient: {
           id: recipientId
