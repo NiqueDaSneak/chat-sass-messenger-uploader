@@ -181,14 +181,15 @@ app.post('/', (req, res) => {
       getSendees.then((sendees) => {
             for (var i = 0; i < sendees.length; i++) {
               if (req.body.image) {
-                // console.log('sendee: ' + sendees[i])
+                console.log('sendee: ' + sendees[i])
                 // console.log('accessToken: ' + user.facebook.accessToken)
-                // sendImage(sendees[i], req.body.assetManifest.image)
+                sendImage(sendees[i], user.facebook.pageAccessToken, req.body.image)
                 console.log('sending image message...')
               }
 
               if (req.body.videoURL) {
                 console.log('sending video link...')
+                sendVideoMessage(sendees[i], user.facebook.pageAccessToken, req.body.videoURL)
                 // }
                 // switch (req.body.type) {
                 //   case 'text':
@@ -232,6 +233,23 @@ function sendTextMessage(recipientId, accessToken, textMsg) {
   callSendAPI(accessToken, messageData)
 }
 
+function sendVideoMessage(recipientId, accessToken, videoURL) {
+  var messageData = {
+    recipient: {
+      id: recipientId
+    },
+    message:{
+    attachment:{
+      type: video,
+      payload:{
+        url: videoURL      }
+    }
+  }
+  }
+
+  callSendAPI(accessToken, messageData)
+}
+
 function callSendAPI(accessToken, messageData) {
   request({
     uri: 'https://graph.facebook.com/v2.6/me/messages',
@@ -255,7 +273,7 @@ function callSendAPI(accessToken, messageData) {
   });
 }
 
-function sendImage(recipientId, url) {
+function sendImage(recipientId, accessToken,  url) {
   var rand = Math.floor((Math.random() * 23) + 1);
 
   var messageData = {
@@ -271,7 +289,7 @@ function sendImage(recipientId, url) {
       }
     }
   }
-  callSendAPI(messageData)
+  callSendAPI(accessToken, messageData)
 }
 
 // function callSendAPI(messageData) {
