@@ -94,12 +94,6 @@ app.post('/', (req, res) => {
         } else if (event.postback) {
           if (event.postback.payload === 'GET_STARTED_PAYLOAD') {
 
-            getUser.then((user) => {
-              findMember.then((member, user) => {
-                welcomeMember(member, user)
-              })
-            })
-
             var getUser = new Promise(function(resolve, reject) {
                 User.findOne({
                   'facebook.pageID': event.recipient.id
@@ -149,6 +143,12 @@ app.post('/', (req, res) => {
                 sendTextMessage(event.sender.id, user.facebook.accessToken, 'Welcome back!')
               }
             }
+
+            getUser.then((user) => {
+              findMember.then((member, user) => {
+                welcomeMember(member, user)
+              })
+            })
 
             // User.findOne({
             //   'facebook.pageID': event.recipient.id
