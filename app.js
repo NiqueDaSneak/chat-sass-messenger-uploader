@@ -115,6 +115,7 @@ app.post('/', (req, res) => {
                   if (member === null) {
                     resolve(user)
                   } else {
+                    sendTextMessage(event.sender.id, user.facebook.accessToken, 'Welcome back!')
                     resolve()
                   }
                 })
@@ -145,14 +146,12 @@ app.post('/', (req, res) => {
                   })
                   sendTextMessage(event.sender.id, user.facebook.accessToken, 'Thanks for signing up. More content to come!')
                 })
-              } else {
-                sendTextMessage(event.sender.id, user.facebook.accessToken, 'Welcome back!')
               }
             }
 
             getUser().then((user) => {
               findMember(user).then((member, user) => {
-                welcomeMember(member, user)
+                welcomeMember(user)
               })
             })
 
