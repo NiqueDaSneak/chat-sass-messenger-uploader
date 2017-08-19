@@ -112,13 +112,17 @@ app.post('/', (req, res) => {
                   if (err) {
                     console.error(err)
                   }
-                  resolve(member, user)
+                  if (member === null) {
+                    resolve(user)
+                  } else {
+                    resolve()
+                  }
                 })
               })
             }
 
-            function welcomeMember(member, user) {
-              if (member === null) {
+            function welcomeMember(user) {
+              if (user) {
                 request({
                   uri: 'https://graph.facebook.com/v2.6/' + event.sender.id + '?access_token=' + user.facebook.accessToken,
                   method: 'GET'
