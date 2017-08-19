@@ -113,7 +113,7 @@ app.post('/', (req, res) => {
                   }
                   if (member === null) {
                     request({
-                      uri: 'https://graph.facebook.com/v2.6/' + event.sender.id + '?access_token=' + user.facebook.accessToken,
+                      uri: 'https://graph.facebook.com/v2.6/' + event.sender.id + '?access_token=' + user.facebook.pageAccessToken,
                       method: 'GET'
                     }, function(error, response, body) {
                       if (error) {
