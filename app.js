@@ -31,7 +31,6 @@ var memberSchema = mongoose.Schema({
   organization: String,
   fbID: Number,
   fullName: String,
-  enrolled: Boolean,
   timezone: Number,
   photo: String
 })
