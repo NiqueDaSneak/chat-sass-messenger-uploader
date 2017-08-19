@@ -94,16 +94,18 @@ app.post('/', (req, res) => {
         } else if (event.postback) {
           if (event.postback.payload === 'GET_STARTED_PAYLOAD') {
 
-            var getUser = new Promise(function(resolve, reject) {
+            function getUser() {
+              var promise = new Promise(function(resolve, reject) {
                 User.findOne({
                   'facebook.pageID': event.recipient.id
                 }, (err, user) => {
                   resolve(user)
                 })
               })
+            }
 
-
-            var findMember = new Promise(function(resolve, reject) {
+            function findMember(user) {
+              var promise = new Promise(function(resolve, reject) {
                 Member.findOne({
                   fbID: event.sender.id
                 }, (err, member) => {
@@ -113,7 +115,7 @@ app.post('/', (req, res) => {
                   resolve(member, user)
                 })
               })
-
+            }
 
             function welcomeMember(member, user) {
               if (member === null) {
