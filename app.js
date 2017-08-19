@@ -90,28 +90,26 @@ app.post('/', (req, res) => {
       // Iterate over each messaging event
       entry.messaging.forEach(function(event) {
         if (event.message) {
+          // send event to appropriate app handler
         } else if (event.postback) {
           if (event.postback.payload === 'GET_STARTED_PAYLOAD') {
 
-            getUser().then((user) => {
-              findMember(user).then((member, user) => {
-                welcomeMember(member, user).then((member) => {
-                })
+            getUser.then((user) => {
+              findMember.then((member, user) => {
+                welcomeMember(member, user)
               })
             })
 
-            function getUser() {
-              var promise = new Promise(function(resolve, reject) {
+            var getUser = new Promise(function(resolve, reject) {
                 User.findOne({
                   'facebook.pageID': event.recipient.id
                 }, (err, user) => {
                   resolve(user)
                 })
               })
-            }
 
-            function findMember(user) {
-              var promise = new Promise(function(resolve, reject) {
+
+            var findMember = new Promise(function(resolve, reject) {
                 Member.findOne({
                   fbID: event.sender.id
                 }, (err, member) => {
@@ -121,7 +119,7 @@ app.post('/', (req, res) => {
                   resolve(member, user)
                 })
               })
-            }
+
 
             function welcomeMember(member, user) {
               if (member === null) {
