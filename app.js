@@ -189,23 +189,45 @@ app.post('/', (req, res) => {
 
       getSendees.then((sendees) => {
             for (var i = 0; i < sendees.length; i++) {
-              if (req.body.image) {
-                console.log('sendee: ' + sendees[i])
-                sendImage(sendees[i], user.facebook.pageAccessToken, req.body.image)
-                console.log('sending image message...')
-              }
 
-              if (req.body.videoURL) {
-                console.log('sending video link...')
-                sendVideoMessage(sendees[i], user.facebook.pageAccessToken, req.body.videoURL)
-              }
-
-              if (req.body.text) {
-                sendTextMessage(sendees[i], user.facebook.pageAccessToken, req.body.text)
-                console.log('sending text message...')
+              var sendImage = new Promise(function(resolve, reject) {
+                if (req.body.image) {
+                  console.log('sendee: ' + sendees[i])
+                  sendImage(sendees[i], user.facebook.pageAccessToken, req.body.image)
+                  console.log('sending image message...')
+                  resolve()
+                } else {
+                  resolve()
                 }
+              })
+
+              var sendVideo = new Promise(function(resolve, reject) {
+                if (req.body.videoURL) {
+                  console.log('sending video link...')
+                  sendVideoMessage(sendees[i], user.facebook.pageAccessToken, req.body.videoURL)
+                  resolve()
+                } else {
+                  resolve()
+                }
+              })
+
+              var sendText = new Promise(function(resolve, reject) {
+                if (req.body.text) {
+                  sendTextMessage(sendees[i], user.facebook.pageAccessToken, req.body.text)
+                  console.log('sending text message...')
+                  resolve()
+                } else {
+                  resolve()
+                }
+              })
+
+              sendImage.then(() => {
+                sendVideo.then(() => {
+                  sendText
+                })
+              })
                 res.sendStatus(200)
-              }
+          }
       })
     })
   }
