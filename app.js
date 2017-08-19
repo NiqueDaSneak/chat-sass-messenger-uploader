@@ -95,7 +95,7 @@ app.post('/', (req, res) => {
           if (event.postback.payload === 'GET_STARTED_PAYLOAD') {
 
             function getUser() {
-              var promise = new Promise(function(resolve, reject) {
+              return new Promise(function(resolve, reject) {
                 User.findOne({
                   'facebook.pageID': event.recipient.id
                 }, (err, user) => {
@@ -105,7 +105,7 @@ app.post('/', (req, res) => {
             }
 
             function findMember(user) {
-              var promise = new Promise(function(resolve, reject) {
+              return new Promise(function(resolve, reject) {
                 Member.findOne({
                   fbID: event.sender.id
                 }, (err, member) => {
