@@ -146,8 +146,8 @@ app.post('/', (req, res) => {
               }
             }
 
-            getUser.then((user) => {
-              findMember.then((member, user) => {
+            getUser().then((user) => {
+              findMember(user).then((member, user) => {
                 welcomeMember(member, user)
               })
             })
