@@ -120,6 +120,8 @@ app.post('/', (req, res) => {
                         return console.error('upload failed:', error)
                       }
                       var facebookProfileResponse = JSON.parse(body)
+                      console.log('first: ' + facebookProfileResponse)
+                      console.log('second: ' + JSON.stringify(facebookProfileResponse))
 
                       // NEED TO FIND ORG NAME AND REPLACE BELOW
                       var newMember = new Member({
