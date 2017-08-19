@@ -193,7 +193,7 @@ app.post('/', (req, res) => {
               var sendImage = new Promise(function(resolve, reject) {
                 if (req.body.image) {
                   console.log('sendee: ' + sendees[i])
-                  sendImage(sendees[i], user.facebook.pageAccessToken, req.body.image)
+                  sendImageMessage(sendees[i], user.facebook.pageAccessToken, req.body.image)
                   console.log('sending image message...')
                   resolve()
                 } else {
@@ -282,7 +282,7 @@ function callSendAPI(accessToken, messageData) {
   });
 }
 
-function sendImage(recipientId, accessToken,  url) {
+function sendImageMessage(recipientId, accessToken,  url) {
   var rand = Math.floor((Math.random() * 23) + 1);
 
   var messageData = {
