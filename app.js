@@ -6,7 +6,6 @@ var bodyParser = require('body-parser')
 var moment = require('moment')
 var request = require('request')
 var path = require('path')
-var PAGE_ACCESS_TOKEN = 'EAAFTJz88HJUBAJqx5WkPGiIi0jPRyBXmpuN56vZB0FowKCZCzej8zpM4hKTt2ZCXqDZASqL4GUC5ywuOjakob1icM4Sfa4L3xcpsTKsjHl0QHzPylbHjJakyq1hcPNA4i8wt7XjsGZBGoUNYP7Yx2hg8RYiG9xzUoo0dzuThqGwZDZD'
 
 // APP DEFINITIONS
 var app = express()
@@ -20,12 +19,6 @@ db.on('error', console.error.bind(console, 'connection error:'))
 var affirmationSchema = mongoose.Schema({
   text: String
 })
-var Affirmation = mongoose.model('Affirmation', affirmationSchema)
-
-var feedbackSchema = mongoose.Schema({
-  text: String
-})
-var Feedback = mongoose.model('Feedback', feedbackSchema)
 
 var memberSchema = mongoose.Schema({
   organization: String,
@@ -49,13 +42,12 @@ var Group = mongoose.model('Group', groupSchema)
 var userSchema = mongoose.Schema({
   email: String,
   organization: String,
-  facebook: {
-    userID: Number,
-    pageID: Number,
-    pageAccessToken: String,
-    userAccessToken: String,
-    refreshToken: String
-  }
+  onboarded: Boolean,
+  username: String,
+  userID: Number,
+  pageID: Number,
+  pageAccessToken: String,
+  userAccessToken: String,
 })
 
 var User = mongoose.model('User', userSchema)
@@ -80,6 +72,7 @@ app.get('/', function(req, res) {
 app.post('/', (req, res) => {
   var data = req.body
   // Make sure this is a page subscription
+  console.log('' + data.object)
   if (data.object === 'page') {
     // Iterate over each entry - there may be multiple if batched
     console.log('data.entry: ' + JSON.stringify(data.entry))
@@ -92,12 +85,12 @@ app.post('/', (req, res) => {
           // send event to appropriate app handler
         } else if (event.postback) {
           if (event.postback.payload === 'GET_STARTED_PAYLOAD') {
-            
+
             // ENROLLING MEMBERS INTO THE IRRIGATE APP
             function getUser() {
               return new Promise(function(resolve, reject) {
                 User.findOne({
-                  'facebook.pageID': event.recipient.id
+                  'pageID': event.recipient.id
                 }, (err, user) => {
                   resolve(user)
                 })
@@ -114,7 +107,7 @@ app.post('/', (req, res) => {
                   }
                   if (member === null) {
                     request({
-                      uri: 'https://graph.facebook.com/v2.6/' + event.sender.id + '?access_token=' + user.facebook.pageAccessToken,
+                      uri: 'https://graph.facebook.com/v2.6/' + event.sender.id + '?access_token=' + user.pageAccessToken,
                       method: 'GET'
                     }, function(error, response, body) {
                       if (error) {
@@ -134,12 +127,12 @@ app.post('/', (req, res) => {
                       })
                       newMember.save((err, member) => {
                         if (err) return console.error(err)
-                        sendTextMessage(event.sender.id, user.facebook.pageAccessToken, 'Thanks for signing up. More content to come!')
+                        sendTextMessage(event.sender.id, user.pageAccessToken, 'Thanks for signing up. More content to come!')
                         resolve()
                       })
                     })
                   } else {
-                    sendTextMessage(event.sender.id, user.facebook.pageAccessToken, 'Welcome back!')
+                    sendTextMessage(event.sender.id, user.pageAccessToken, 'Welcome back!')
                     resolve()
                   }
                 })
@@ -194,7 +187,7 @@ app.post('/', (req, res) => {
               var sendImage = new Promise(function(resolve, reject) {
                 if (req.body.image) {
                   console.log('sendee: ' + sendees[i])
-                  sendImageMessage(sendees[i], user.facebook.pageAccessToken, req.body.image)
+                  sendImageMessage(sendees[i], user.pageAccessToken, req.body.image)
                   console.log('sending image message...')
                   resolve()
                 } else {
@@ -205,7 +198,7 @@ app.post('/', (req, res) => {
               var sendVideo = new Promise(function(resolve, reject) {
                 if (req.body.videoURL) {
                   console.log('sending video link...')
-                  sendVideoMessage(sendees[i], user.facebook.pageAccessToken, req.body.videoURL)
+                  sendVideoMessage(sendees[i], user.pageAccessToken, req.body.videoURL)
                   resolve()
                 } else {
                   resolve()
@@ -214,7 +207,7 @@ app.post('/', (req, res) => {
 
               var sendText = new Promise(function(resolve, reject) {
                 if (req.body.text) {
-                  sendTextMessage(sendees[i], user.facebook.pageAccessToken, req.body.text)
+                  sendTextMessage(sendees[i], user.pageAccessToken, req.body.text)
                   console.log('sending text message...')
                   resolve()
                 } else {
