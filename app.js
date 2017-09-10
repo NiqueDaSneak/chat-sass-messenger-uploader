@@ -82,7 +82,18 @@ app.post('/', (req, res) => {
       // Iterate over each messaging event
       entry.messaging.forEach(function(event) {
         if (event.message) {
+          getUser().then((user) => {
+            if (user.messageResponse) {
+              // send it
+            } else {
+              sendTextMessage(event.sender.id, user.pageAccessToken, 'Thanks for your message! We will get back to you shortly.')
+            }
+          })
           // send event to appropriate app handler
+          // find the user with id event.recipient.id
+          // if the above user has a user.messageResponse
+            // send it to event.sender.id as a text message
+          // else send a generic message
         } else if (event.postback) {
           if (event.postback.payload === 'GET_STARTED_PAYLOAD') {
 
