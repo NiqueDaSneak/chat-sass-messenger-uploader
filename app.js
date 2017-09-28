@@ -79,10 +79,11 @@ app.post('/', (req, res) => {
       var timeOfEvent = entry.time
       // Iterate over each messaging event
       entry.messaging.forEach(function(event) {
+
         if (event.recipient.id === '1420531884696101') {
-          
           console.log("this is wendell's page")
         }
+        
         if (event.message) {
 
           function getUser() {
