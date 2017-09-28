@@ -56,6 +56,8 @@ app.use(bodyParser.urlencoded({
   extended: false
 }))
 app.use(bodyParser.json())
+var nightmakers = require('./router/nightmakers.js')
+app.use('/nightmakers', nightmakers)
 
 // ROUTES
 app.get('/', function(req, res) {
@@ -82,8 +84,11 @@ app.post('/', (req, res) => {
 
         if (event.recipient.id === '1420531884696101') {
           console.log("this is wendell's page")
+          // send data to router and stop process here
+          res.redirect('/nightmakers')
+          return 0
         }
-        
+
         if (event.message) {
 
           function getUser() {
