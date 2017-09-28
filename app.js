@@ -12,7 +12,6 @@ var app = express()
 
 // DATABASE SETUP
 var mongoose = require('mongoose')
-// mongoose.connect('mongodb://dom:Losangeleslakers47@ds123182.mlab.com:23182/chat-sass-frontend')
 mongoose.connect('mongodb://domclemmer:domclemmerpasswordirrigate@ds153173-a0.mlab.com:53173,ds153173-a1.mlab.com:53173/irrigate?replicaSet=rs-ds153173', {useMongoClient: true})
 var db = mongoose.connection
 db.on('error', console.error.bind(console, 'connection error:'))
@@ -81,6 +80,9 @@ app.post('/', (req, res) => {
       var timeOfEvent = entry.time
       // Iterate over each messaging event
       entry.messaging.forEach(function(event) {
+        if (event.recipient.id === 1420531884696101) {
+          console.log("this is wendell's page")
+        }
         if (event.message) {
 
           function getUser() {
@@ -131,8 +133,6 @@ app.post('/', (req, res) => {
                         return console.error('upload failed:', error)
                       }
                       var facebookProfileResponse = JSON.parse(body)
-                      console.log('first: ' + facebookProfileResponse)
-                      console.log('second: ' + JSON.stringify(facebookProfileResponse))
 
                       // NEED TO FIND ORG NAME AND REPLACE BELOW
                       var newMember = new Member({
