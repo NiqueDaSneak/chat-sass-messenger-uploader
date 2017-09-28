@@ -71,7 +71,6 @@ app.get('/', function(req, res) {
 app.post('/', (req, res) => {
   var data = req.body
   // Make sure this is a page subscription
-  console.log('' + data.object)
   if (data.object === 'page') {
     // Iterate over each entry - there may be multiple if batched
     console.log('data.entry: ' + JSON.stringify(data.entry))
@@ -80,7 +79,7 @@ app.post('/', (req, res) => {
       var timeOfEvent = entry.time
       // Iterate over each messaging event
       entry.messaging.forEach(function(event) {
-        if (event.recipient.id === 1420531884696101) {
+        if (event.recipient.id === '1420531884696101') {
           console.log("this is wendell's page")
         }
         if (event.message) {
