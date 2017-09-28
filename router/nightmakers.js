@@ -17,8 +17,8 @@ router.post('/', (req, res, next) => {
         } else if (event.postback) {
 
         }
-      }
-    }
+      })
+    })
   }
 
   res.sendStatus(200)
