@@ -85,7 +85,7 @@ app.post('/', (req, res) => {
         if (event.recipient.id === '1420531884696101') {
           console.log("this is wendell's page")
           // send data to router and stop process here
-          res.redirect('/nightmakers')
+          res.redirect(307, '/nightmakers')
           return 0
         }
 
