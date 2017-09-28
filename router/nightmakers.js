@@ -15,8 +15,11 @@ router.post('/', (req, res, next) => {
       entry.messaging.forEach(function(event) {
         if (event.message) {
         } else if (event.postback) {
-          
+
         }
+      }
+    }
+  }
 
   res.sendStatus(200)
 })
