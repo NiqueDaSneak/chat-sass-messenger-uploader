@@ -108,6 +108,7 @@ app.post('/', (req, res) => {
             }
           })
         } else if (event.postback) {
+
           if (event.postback.payload === 'GET_STARTED_PAYLOAD') {
 
             // ENROLLING MEMBERS INTO THE IRRIGATE APP
