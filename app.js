@@ -9,6 +9,7 @@ var path = require('path')
 
 // APP DEFINITIONS
 var app = express()
+var nightmakersRouter = express.Router()
 
 // DATABASE SETUP
 var mongoose = require('mongoose')
@@ -56,8 +57,8 @@ app.use(bodyParser.urlencoded({
   extended: false
 }))
 app.use(bodyParser.json())
-var nightmakers = require('./router/nightmakers.js')
-app.use('/nightmakers', nightmakers)
+// var nightmakers = require('./router/nightmakers.js')
+app.use('/nightmakers', nightmakersRouter)
 
 // ROUTES
 app.get('/', function(req, res) {
@@ -248,6 +249,10 @@ app.post('/', (req, res) => {
       })
     })
   }
+})
+
+nightmakersRouter.post('/', (req, res, next) => {
+  console.log('testing route')
 })
 
 function sendTextMessage(recipientId, accessToken, textMsg) {
