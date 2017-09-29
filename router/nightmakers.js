@@ -17,6 +17,38 @@ var affirmationSchema = mongoose.Schema({
   text: String
 })
 
+var memberSchema = mongoose.Schema({
+  organization: String,
+  fbID: Number,
+  fullName: String,
+  timezone: Number,
+  photo: String
+})
+memberSchema.virtual('firstName').get(() => {
+  return this.fullName.split(' ')[0]
+})
+var Member = mongoose.model('Member', memberSchema)
+
+var groupSchema = mongoose.Schema({
+  groupName: String,
+  groupMembers: Array,
+  organization: String
+})
+var Group = mongoose.model('Group', groupSchema)
+
+var userSchema = mongoose.Schema({
+  email: String,
+  organization: String,
+  onboarded: Boolean,
+  username: String,
+  userID: Number,
+  pageID: Number,
+  pageAccessToken: String,
+  userAccessToken: String,
+})
+
+var User = mongoose.model('User', userSchema)
+
 // MIDDLEWARE
 router.use(bodyParser.urlencoded({
   extended: false
