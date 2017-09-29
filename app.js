@@ -252,7 +252,106 @@ app.post('/', (req, res) => {
 })
 
 nightmakersRouter.post('/', (req, res, next) => {
-  console.log('testing route')
+  console.log('sucessfully passed to diff router')
+  var data = req.body
+  // Make sure this is a page subscription
+  if (data.object === 'page') {
+    // Iterate over each entry - there may be multiple if batched
+    console.log('data.entry: ' + JSON.stringify(data.entry))
+    data.entry.forEach(function(entry) {
+      var pageID = entry.id
+      var timeOfEvent = entry.time
+      // Iterate over each messaging event
+      entry.messaging.forEach(function(event) {
+        if (event.message) {
+
+          function getUser() {
+            return new Promise(function(resolve, reject) {
+              User.findOne({
+                'pageID': event.recipient.id
+              }, (err, user) => {
+                resolve(user)
+              })
+            })
+          }
+
+          getUser().then((user) => {
+            if (user.messageResponse) {
+              // send it to event.sender.id as a text message
+            } else {
+              sendTextMessage(event.sender.id, user.pageAccessToken, 'Thanks for your message! We will get back to you shortly.')
+            }
+          })
+
+        } else if (event.postback) {
+
+          if (event.postback.payload === 'GET_STARTED_PAYLOAD') {
+
+            // ENROLLING MEMBERS INTO THE IRRIGATE APP
+            function getUser() {
+              return new Promise(function(resolve, reject) {
+                User.findOne({
+                  'pageID': event.recipient.id
+                }, (err, user) => {
+                  resolve(user)
+                })
+              })
+            }
+
+            function findMember(user) {
+              return new Promise(function(resolve, reject) {
+                Member.findOne({
+                  fbID: event.sender.id
+                }, (err, member) => {
+                  if (err) {
+                    console.error(err)
+                  }
+                  if (member === null) {
+                    request({
+                      uri: 'https://graph.facebook.com/v2.6/' + event.sender.id + '?access_token=' + user.pageAccessToken,
+                      method: 'GET'
+                    }, function(error, response, body) {
+                      if (error) {
+                        return console.error('upload failed:', error)
+                      }
+                      var facebookProfileResponse = JSON.parse(body)
+
+                      // NEED TO FIND ORG NAME AND REPLACE BELOW
+                      var newMember = new Member({
+                        organization: user.organization,
+                        fbID: event.sender.id,
+                        fullName: facebookProfileResponse.first_name + ' ' + facebookProfileResponse.last_name,
+                        photo: facebookProfileResponse.profile_pic,
+                        timezone: facebookProfileResponse.timezone
+                      })
+                      newMember.save((err, member) => {
+                        if (err) return console.error(err)
+                        sendTextMessage(event.sender.id, user.pageAccessToken, 'Thanks for signing up with the Nightmakers. More content to come!')
+                        resolve()
+                      })
+                    })
+                  } else {
+                    sendTextMessage(event.sender.id, user.pageAccessToken, 'Welcome back!')
+                    resolve()
+                  }
+                })
+              })
+            }
+
+            getUser().then((user) => {
+              findMember(user)
+            })
+          } else {
+            eventHandler(event)
+          }
+        } else {
+          console.log("Webhook received unknown event: ", data)
+        }
+      })
+    })
+  }
+
+  res.sendStatus(200)
 })
 
 function sendTextMessage(recipientId, accessToken, textMsg) {
