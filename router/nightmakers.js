@@ -22,7 +22,8 @@ var memberSchema = mongoose.Schema({
   fbID: Number,
   fullName: String,
   timezone: Number,
-  photo: String
+  photo: String,
+  gender: String
 })
 memberSchema.virtual('firstName').get(() => {
   return this.fullName.split(' ')[0]
@@ -119,7 +120,8 @@ router.post('/', (req, res, next) => {
                         return console.error('upload failed:', error)
                       }
                       var facebookProfileResponse = JSON.parse(body)
-
+                      console.log(JSON.stringify(facebookProfileResponse))
+                      
                       // NEED TO FIND ORG NAME AND REPLACE BELOW
                       var newMember = new Member({
                         organization: user.organization,
