@@ -104,7 +104,6 @@ router.post('/', (req, res, next) => {
             }
 
             function findMember(user) {
-              console.log('finding member....')
               return new Promise(function(resolve, reject) {
                 Member.findOne({
                   fbID: event.sender.id
@@ -113,7 +112,6 @@ router.post('/', (req, res, next) => {
                     console.error(err)
                   }
                   if (member === null) {
-                    console.log('found no member')
                     request({
                       uri: 'https://graph.facebook.com/v2.6/' + event.sender.id + '?access_token=' + user.pageAccessToken,
                       method: 'GET'
@@ -122,9 +120,6 @@ router.post('/', (req, res, next) => {
                         return console.error('upload failed:', error)
                       }
                       var facebookProfileResponse = JSON.parse(body)
-                      console.log('HELLOOOOOOOO')
-                      console.log('body: ' + body)
-                      console.log('fb response parsed: ' + facebookProfileResponse)
 
                       // NEED TO FIND ORG NAME AND REPLACE BELOW
                       var newMember = new Member({
@@ -134,9 +129,7 @@ router.post('/', (req, res, next) => {
                         photo: facebookProfileResponse.profile_pic,
                         timezone: facebookProfileResponse.timezone
                       })
-                      if (facebookProfileResponse.gender) {
-                        newMember.gender = facebookProfileResponse.gender
-                      }
+
                       newMember.save((err, member) => {
                         if (err) return console.error(err)
                         sendTextMessage(event.sender.id, user.pageAccessToken, 'Thanks for signing up with the Nightmakers. More content to come!')
