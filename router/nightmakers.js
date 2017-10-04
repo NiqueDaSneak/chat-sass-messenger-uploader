@@ -121,7 +121,7 @@ router.post('/', (req, res, next) => {
                       }
                       var facebookProfileResponse = JSON.parse(body)
                       console.log(JSON.stringify(facebookProfileResponse))
-                      
+
                       // NEED TO FIND ORG NAME AND REPLACE BELOW
                       var newMember = new Member({
                         organization: user.organization,
@@ -130,6 +130,9 @@ router.post('/', (req, res, next) => {
                         photo: facebookProfileResponse.profile_pic,
                         timezone: facebookProfileResponse.timezone
                       })
+                      if (facebookProfileResponse.gender) {
+                        newMember.gender = facebookProfileResponse.gender
+                      }
                       newMember.save((err, member) => {
                         if (err) return console.error(err)
                         sendTextMessage(event.sender.id, user.pageAccessToken, 'Thanks for signing up with the Nightmakers. More content to come!')
