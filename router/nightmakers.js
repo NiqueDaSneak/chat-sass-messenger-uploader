@@ -120,6 +120,7 @@ router.post('/', (req, res, next) => {
                         return console.error('upload failed:', error)
                       }
                       var facebookProfileResponse = JSON.parse(body)
+                      console.log('HELLOOOOOOOO')
                       console.log('body: ' + body)
                       console.log('fb response parsed: ' + facebookProfileResponse)
 

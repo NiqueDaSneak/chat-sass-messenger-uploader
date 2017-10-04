@@ -86,7 +86,6 @@ app.post('/', (req, res) => {
         if (event.recipient.id === '1420531884696101') {
           // send data to router and stop process here
           return res.redirect(307, '/nightmakers')
-          // return 0
         }
 
         if (event.message) {
