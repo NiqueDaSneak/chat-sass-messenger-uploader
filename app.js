@@ -352,7 +352,32 @@ nightmakersRouter.post('/', (req, res, next) => {
               findMember(user)
             })
           } else {
-            console.log(event)
+            switch (event.postback.payload) {
+              case 'BUY_SECTION':
+                console.log(event.postback.payload)
+                break
+              case 'BUY_BOTTLE':
+                console.log(event.postback.payload)
+                break
+              case 'WIN_SECTION':
+                console.log(event.postback.payload)
+                break
+              case 'EVENTS':
+                console.log(event.postback.payload)
+                break
+              case 'BECOME_NIGHTMAKER':
+                console.log(event.postback.payload)
+                break
+              case 'SHOP':
+                console.log(event.postback.payload)
+                break
+              case 'MENU':
+                console.log(event.postback.payload)
+                break
+              default:
+
+            }
+            console.log(event.postback.payload)
           }
         } else {
           console.log("Webhook received unknown event: ", data)
