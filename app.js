@@ -25,7 +25,8 @@ var memberSchema = mongoose.Schema({
   fbID: Number,
   fullName: String,
   timezone: Number,
-  photo: String
+  photo: String,
+  gender: String
 })
 memberSchema.virtual('firstName').get(() => {
   return this.fullName.split(' ')[0]
@@ -331,7 +332,7 @@ nightmakersRouter.post('/', (req, res, next) => {
                       if (facebookProfileResponse.gender) {
                         newMember.gender = facebookProfileResponse.gender
                       }
-                      
+
                       newMember.save((err, member) => {
                         if (err) return console.error(err)
                         sendTextMessage(event.sender.id, user.pageAccessToken, 'Thanks for signing up with the Nightmakers. More content to come!')
