@@ -139,6 +139,9 @@ app.post('/', (req, res) => {
                         return console.error('upload failed:', error)
                       }
                       var facebookProfileResponse = JSON.parse(body)
+                      console.log('HELLOOOOOOOO')
+                      console.log('body: ' + body)
+                      console.log('fb response parsed: ' + facebookProfileResponse)
 
                       // NEED TO FIND ORG NAME AND REPLACE BELOW
                       var newMember = new Member({
@@ -148,9 +151,9 @@ app.post('/', (req, res) => {
                         photo: facebookProfileResponse.profile_pic,
                         timezone: facebookProfileResponse.timezone
                       })
-                      if (facebookProfileResponse.gender) {
-                        newMember.gender = facebookProfileResponse.gender
-                      }
+                      // if (facebookProfileResponse.gender) {
+                      //   newMember.gender = facebookProfileResponse.gender
+                      // }
                       newMember.save((err, member) => {
                         if (err) return console.error(err)
                         sendTextMessage(event.sender.id, user.pageAccessToken, 'Thanks for signing up. More content to come!')
