@@ -148,6 +148,9 @@ app.post('/', (req, res) => {
                         photo: facebookProfileResponse.profile_pic,
                         timezone: facebookProfileResponse.timezone
                       })
+                      if (facebookProfileResponse.gender) {
+                        newMember.gender = facebookProfileResponse.gender
+                      }
                       newMember.save((err, member) => {
                         if (err) return console.error(err)
                         sendTextMessage(event.sender.id, user.pageAccessToken, 'Thanks for signing up. More content to come!')
