@@ -352,7 +352,7 @@ nightmakersRouter.post('/', (req, res, next) => {
               findMember(user)
             })
           } else {
-            eventHandler(event)
+            console.log(event)
           }
         } else {
           console.log("Webhook received unknown event: ", data)
