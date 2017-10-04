@@ -120,7 +120,8 @@ router.post('/', (req, res, next) => {
                         return console.error('upload failed:', error)
                       }
                       var facebookProfileResponse = JSON.parse(body)
-                      console.log(JSON.stringify(facebookProfileResponse))
+                      console.log('body: ' + body)
+                      console.log('fb response parsed: ' + facebookProfileResponse)
 
                       // NEED TO FIND ORG NAME AND REPLACE BELOW
                       var newMember = new Member({
