@@ -57,12 +57,12 @@ router.use(bodyParser.urlencoded({
 router.use(bodyParser.json())
 
 router.post('/', (req, res, next) => {
-  console.log('sucessfully passed to diff router')
+  console.log('nightmakers Router received')
   var data = req.body
   // Make sure this is a page subscription
   if (data.object === 'page') {
     // Iterate over each entry - there may be multiple if batched
-    console.log('data.entry: ' + JSON.stringify(data.entry))
+    // console.log('data.entry: ' + JSON.stringify(data.entry))
     data.entry.forEach(function(entry) {
       var pageID = entry.id
       var timeOfEvent = entry.time
@@ -104,6 +104,7 @@ router.post('/', (req, res, next) => {
             }
 
             function findMember(user) {
+              console.log('finding member....')
               return new Promise(function(resolve, reject) {
                 Member.findOne({
                   fbID: event.sender.id
@@ -112,6 +113,7 @@ router.post('/', (req, res, next) => {
                     console.error(err)
                   }
                   if (member === null) {
+                    console.log('found no member')
                     request({
                       uri: 'https://graph.facebook.com/v2.6/' + event.sender.id + '?access_token=' + user.pageAccessToken,
                       method: 'GET'
