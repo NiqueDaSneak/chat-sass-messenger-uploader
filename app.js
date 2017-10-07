@@ -242,7 +242,8 @@ app.post('/', (req, res) => {
           console.log('sending to sendees')
           console.log('sendees.length2: ' + sendees.length)
           for (var i = 0; i < sendees.length; i++) {
-            if (sendees[i] === '1680960081915899') {
+            console.log('sendee: ' + sendees[i])
+            if (sendees[i] === 1680960081915899) {
               var sendImage = new Promise(function(resolve, reject) {
                 if (req.body.image) {
                   console.log('sendee: ' + sendees[i])
