@@ -225,11 +225,12 @@ app.post('/', (req, res) => {
                 console.log(err)
               }
               console.log('putting all memebers in array')
-              console.log('members.length' + members.length)
+              console.log('members.length: ' + members.length)
               for (var i = 0; i < members.length; i++) {
                 sendees.push(members[i])
               }
               console.log('done with sendees')
+              console.log('sendees.length1: ' + sendees.length)
               resolve(sendees)
             })
           } else {
@@ -239,8 +240,9 @@ app.post('/', (req, res) => {
 
         checkSendeeLength.then((sendees) => {
           console.log('sending to sendees')
+          console.log('sendees.length2: ' + sendees.length)
           for (var i = 0; i < sendees.length; i++) {
-            if (sendees[i] === 1680960081915899) {
+            if (sendees[i] === '1680960081915899') {
               var sendImage = new Promise(function(resolve, reject) {
                 if (req.body.image) {
                   console.log('sendee: ' + sendees[i])
