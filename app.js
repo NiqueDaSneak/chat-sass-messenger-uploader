@@ -210,27 +210,20 @@ app.post('/', (req, res) => {
             })
           }
         } else {
-          console.log('sending to all!')
           resolve(sendees)
         }
       })
 
       getSendees.then((sendees) => {
-        console.log('checking sendees length')
         let checkSendeeLength = new Promise(function(resolve, reject) {
           if (sendees.length === 0) {
-            console.log('no sendees')
             Member.find({organization: req.body.organization}, (err, members) => {
               if (err) {
                 console.log(err)
               }
-              console.log('putting all members in array')
-              console.log('members.length: ' + members.length)
               for (var i = 0; i < members.length; i++) {
                 sendees.push(members[i].fbID)
               }
-              console.log('done with sendees')
-              console.log('sendees.length1: ' + sendees.length)
               resolve(sendees)
             })
           } else {
@@ -239,14 +232,9 @@ app.post('/', (req, res) => {
         })
 
         checkSendeeLength.then((sendees) => {
-          console.log('sending to sendees')
-          console.log('sendees.length2: ' + sendees.length)
           for (var i = 0; i < sendees.length; i++) {
-            console.log('sendee: ' + sendees[i])
-            if (sendees[i] === 1680960081915899) {
               var sendImage = new Promise(function(resolve, reject) {
                 if (req.body.image) {
-                  console.log('sendee: ' + sendees[i])
                   sendImageMessage(sendees[i], user.pageAccessToken, req.body.image)
                   console.log('sending image message...')
                   resolve()
@@ -283,7 +271,6 @@ app.post('/', (req, res) => {
                 })
               })
               res.sendStatus(200)
-            }
           }
         })
       })
