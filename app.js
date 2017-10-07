@@ -224,10 +224,10 @@ app.post('/', (req, res) => {
               if (err) {
                 console.log(err)
               }
-              console.log('putting all memebers in array')
+              console.log('putting all members in array')
               console.log('members.length: ' + members.length)
               for (var i = 0; i < members.length; i++) {
-                sendees.push(members[i])
+                sendees.push(members[i].fbID)
               }
               console.log('done with sendees')
               console.log('sendees.length1: ' + sendees.length)
