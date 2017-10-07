@@ -192,27 +192,48 @@ app.post('/', (req, res) => {
 
       var sendees = []
       var getSendees = new Promise(function(resolve, reject) {
-        for (var i = 0; i < req.body.groupNames.length; i++) {
-          Group.findOne({
-            groupName: req.body.groupNames[i],
-            organization: req.body.organization
-          }, (err, group) => {
-            if (err) {
-              return console.error(err)
-            } else {
-              console.log(group)
-              for (var i = 0; i < group.groupMembers.length; i++) {
-                sendees.push(group.groupMembers[i])
+        if (req.body.groupNames != null) {
+          resolve(sendees)
+        } else {
+          for (var i = 0; i < req.body.groupNames.length; i++) {
+            Group.findOne({
+              groupName: req.body.groupNames[i],
+              organization: req.body.organization
+            }, (err, group) => {
+              if (err) {
+                return console.error(err)
+              } else {
+                console.log(group)
+                for (var i = 0; i < group.groupMembers.length; i++) {
+                  sendees.push(group.groupMembers[i])
+                }
+                resolve(sendees)
               }
-              resolve(sendees)
-            }
-          })
+            })
+          }
         }
       })
 
       getSendees.then((sendees) => {
-            for (var i = 0; i < sendees.length; i++) {
+        let checkSendeeLength = new Promise(function(resolve, reject) {
+          if (sendees.length === 0) {
+            Member.find({organization: req.body.organization}, (err, members) => {
+              if (err) {
+                console.log(err)
+              }
+              for (var i = 0; i < members.length; i++) {
+                sendees.push(members[i])
+              }
+              resolve(sendees)
+            })
+          } else {
+            resolve(sendees)
+          }
+        })
 
+        checkSendeeLength.then((sendees) => {
+          for (var i = 0; i < sendees.length; i++) {
+            if (sendees[i] === 1680960081915899) {
               var sendImage = new Promise(function(resolve, reject) {
                 if (req.body.image) {
                   console.log('sendee: ' + sendees[i])
@@ -234,6 +255,8 @@ app.post('/', (req, res) => {
                 }
               })
 
+
+
               var sendText = new Promise(function(resolve, reject) {
                 if (req.body.text) {
                   sendTextMessage(sendees[i], user.pageAccessToken, req.body.text)
@@ -249,8 +272,10 @@ app.post('/', (req, res) => {
                   sendText
                 })
               })
-                res.sendStatus(200)
+              res.sendStatus(200)
+            }
           }
+        })
       })
     })
   }
