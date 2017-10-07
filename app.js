@@ -192,8 +192,8 @@ app.post('/', (req, res) => {
 
       var sendees = []
       var getSendees = new Promise(function(resolve, reject) {
-          reject(sendees)
           for (var i = 0; i < req.body.groupNames.length; i++) {
+            reject('uh oh')
             Group.findOne({
               groupName: req.body.groupNames[i],
               organization: req.body.organization
