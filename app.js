@@ -210,21 +210,26 @@ app.post('/', (req, res) => {
             })
           }
         } else {
+          console.log('sending to all!')
           resolve(sendees)
-          
         }
       })
 
       getSendees.then((sendees) => {
+        console.log('checking sendees length')
         let checkSendeeLength = new Promise(function(resolve, reject) {
           if (sendees.length === 0) {
+            console.log('no sendees')
             Member.find({organization: req.body.organization}, (err, members) => {
               if (err) {
                 console.log(err)
               }
+              console.log('putting all memebers in array')
+              console.log('members.length' + members.length)
               for (var i = 0; i < members.length; i++) {
                 sendees.push(members[i])
               }
+              console.log('done with sendees')
               resolve(sendees)
             })
           } else {
@@ -233,6 +238,7 @@ app.post('/', (req, res) => {
         })
 
         checkSendeeLength.then((sendees) => {
+          console.log('sending to sendees')
           for (var i = 0; i < sendees.length; i++) {
             if (sendees[i] === 1680960081915899) {
               var sendImage = new Promise(function(resolve, reject) {
