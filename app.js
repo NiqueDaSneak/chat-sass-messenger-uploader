@@ -192,9 +192,6 @@ app.post('/', (req, res) => {
 
       var sendees = []
       var getSendees = new Promise(function(resolve, reject) {
-        if (req.body.groupNames[i] === undefined) {
-          resolve(sendees)
-        } else {
           for (var i = 0; i < req.body.groupNames.length; i++) {
             Group.findOne({
               groupName: req.body.groupNames[i],
@@ -211,7 +208,7 @@ app.post('/', (req, res) => {
               }
             })
           }
-        }
+          reject(sendees)
       })
 
       getSendees.then((sendees) => {
