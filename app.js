@@ -26,7 +26,8 @@ var memberSchema = mongoose.Schema({
   fullName: String,
   timezone: Number,
   photo: String,
-  gender: String
+  gender: String,
+  createdDate: Date
 })
 memberSchema.virtual('firstName').get(() => {
   return this.fullName.split(' ')[0]
@@ -376,24 +377,35 @@ nightmakersRouter.post('/', (req, res, next) => {
           } else {
             switch (event.postback.payload) {
               case 'BUY_SECTION':
+                // need to create inventory item model
+                  // price, image, title
+                // generate flow control: send section lists/prices => on selection (section) =>
+                // send bottle options => then (bottle option, section) => ask if they want a bottle =>
+                // if yes => send bottle list, if no, send link to spend money and save to list
                 console.log(event.postback.payload)
                 break
               case 'BUY_BOTTLE':
+                // send bottle list => then (bottle array) => ask if they want more bottles, if yes, send bottle list, else => send link to spend money
                 console.log(event.postback.payload)
                 break
               case 'WIN_SECTION':
+                // just save their user id into a list => send text confirmation message
                 console.log(event.postback.payload)
                 break
               case 'EVENTS':
+                // send flyer image & video link
                 console.log(event.postback.payload)
                 break
               case 'BECOME_NIGHTMAKER':
+                // create a list => send text confirmation message
                 console.log(event.postback.payload)
                 break
               case 'SHOP':
+                // send text that says 'coming soon'
                 console.log(event.postback.payload)
                 break
               case 'MENU':
+                // send text that says 'coming soon'
                 console.log(event.postback.payload)
                 break
               default:
