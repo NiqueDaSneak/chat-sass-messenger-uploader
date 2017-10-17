@@ -117,7 +117,7 @@ app.post('/', (req, res) => {
             function getUser() {
               return new Promise(function(resolve, reject) {
                 User.findOne({
-                  'pageID': event.recipient.id
+                  'pageID': event.recipient.id.toString()
                 }, (err, user) => {
                   ("event.recipient.id: " + event.recipient.id)
                   console.log('user: ' + user)
