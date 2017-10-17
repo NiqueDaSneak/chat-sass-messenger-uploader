@@ -46,8 +46,8 @@ var userSchema = mongoose.Schema({
   organization: String,
   onboarded: Boolean,
   username: String,
-  userID: Number,
-  pageID: Number,
+  userID: String,
+  pageID: String,
   pageAccessToken: String,
   userAccessToken: String,
 })
@@ -117,7 +117,7 @@ app.post('/', (req, res) => {
             function getUser() {
               return new Promise(function(resolve, reject) {
                 User.findOne({
-                  'pageID': event.recipient.id.toString()
+                  'pageID': event.recipient.id
                 }, (err, user) => {
                   ("event.recipient.id: " + event.recipient.id)
                   console.log('user: ' + user)
