@@ -148,7 +148,8 @@ app.post('/', (req, res) => {
                         fbID: event.sender.id,
                         fullName: facebookProfileResponse.first_name + ' ' + facebookProfileResponse.last_name,
                         photo: facebookProfileResponse.profile_pic,
-                        timezone: facebookProfileResponse.timezone
+                        timezone: facebookProfileResponse.timezone,
+                        createdDate: moment().format('MM-DD-YYYY')
                       })
 
                       if (facebookProfileResponse.gender) {
