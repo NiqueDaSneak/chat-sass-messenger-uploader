@@ -119,6 +119,8 @@ app.post('/', (req, res) => {
                 User.findOne({
                   'pageID': event.recipient.id
                 }, (err, user) => {
+                  ("event.recipient.id: " + event.recipient.id)
+                  console.log('user: ' + user)
                   resolve(user)
                 })
               })
