@@ -61,6 +61,7 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json())
 // var nightmakers = require('./router/nightmakers.js')
 app.use('/nightmakers', nightmakersRouter)
+app.use('/affirmation-today', affirmationTodayRouter)
 
 // ROUTES
 app.get('/', function(req, res) {
@@ -88,6 +89,10 @@ app.post('/', (req, res) => {
         if (event.recipient.id === '1420531884696101') {
           // send data to router and stop process here
           return res.redirect(307, '/nightmakers')
+        }
+
+        if (event.recipient.id === '307853062976814') {
+          return res.redirect(307, '/affirmation-today')
         }
 
         if (event.message) {
@@ -119,8 +124,6 @@ app.post('/', (req, res) => {
                 User.findOne({
                   'pageID': event.recipient.id
                 }, (err, user) => {
-                  ("event.recipient.id: " + event.recipient.id)
-                  console.log('user: ' + user)
                   resolve(user)
                 })
               })
@@ -177,6 +180,276 @@ app.post('/', (req, res) => {
             })
           } else {
             eventHandler(event)
+          }
+        } else {
+          console.log("Webhook received unknown event: ", data)
+        }
+      })
+    })
+    res.sendStatus(200)
+  } else {
+
+    // SENDING A SCHEDULED MESSAGE
+    User.findOne({
+      'organization': req.body.organization
+    }, (err, user) => {
+      if (err) {
+        console.log(err)
+      }
+
+      var sendees = []
+      var getSendees = new Promise(function(resolve, reject) {
+        if (req.body.groupNames) {
+          for (var i = 0; i < req.body.groupNames.length; i++) {
+            Group.findOne({
+              groupName: req.body.groupNames[i],
+              organization: req.body.organization
+            }, (err, group) => {
+              if (err) {
+                return console.error(err)
+              } else {
+                console.log(group)
+                for (var i = 0; i < group.groupMembers.length; i++) {
+                  sendees.push(group.groupMembers[i])
+                }
+                resolve(sendees)
+              }
+            })
+          }
+        } else {
+          resolve(sendees)
+        }
+      })
+
+      getSendees.then((sendees) => {
+        let checkSendeeLength = new Promise(function(resolve, reject) {
+          if (sendees.length === 0) {
+            Member.find({organization: req.body.organization}, (err, members) => {
+              if (err) {
+                console.log(err)
+              }
+              for (var i = 0; i < members.length; i++) {
+                sendees.push(members[i].fbID)
+              }
+              resolve(sendees)
+            })
+          } else {
+            resolve(sendees)
+          }
+        })
+
+        checkSendeeLength.then((sendees) => {
+          for (var i = 0; i < sendees.length; i++) {
+              var sendImage = new Promise(function(resolve, reject) {
+                if (req.body.image) {
+                  sendImageMessage(sendees[i], user.pageAccessToken, req.body.image)
+                  console.log('sending image message...')
+                  resolve()
+                } else {
+                  resolve()
+                }
+              })
+
+              var sendVideo = new Promise(function(resolve, reject) {
+                if (req.body.videoURL) {
+                  console.log('sending video link...')
+                  sendVideoMessage(sendees[i], user.pageAccessToken, req.body.videoURL)
+                  resolve()
+                } else {
+                  resolve()
+                }
+              })
+
+
+
+              var sendText = new Promise(function(resolve, reject) {
+                if (req.body.text) {
+                  sendTextMessage(sendees[i], user.pageAccessToken, req.body.text)
+                  console.log('sending text message...')
+                  resolve()
+                } else {
+                  resolve()
+                }
+              })
+
+              sendImage.then(() => {
+                sendVideo.then(() => {
+                  sendText
+                })
+              })
+              res.sendStatus(200)
+          }
+        })
+      })
+    })
+  }
+})
+
+affirmationTodayRouter.post('/', (req, res, next) => {
+  var data = req.body
+  // Make sure this is a page subscription
+  if (data.object === 'page') {
+    // Iterate over each entry - there may be multiple if batched
+    console.log('data.entry: ' + JSON.stringify(data.entry))
+    data.entry.forEach(function(entry) {
+      var pageID = entry.id
+      var timeOfEvent = entry.time
+      // Iterate over each messaging event
+      entry.messaging.forEach(function(event) {
+
+        if (event.message) {
+
+          function getUser() {
+            return new Promise(function(resolve, reject) {
+              User.findOne({
+                'pageID': event.recipient.id
+              }, (err, user) => {
+                resolve(user)
+              })
+            })
+          }
+
+          getUser().then((user) => {
+            if (user.messageResponse) {
+              // send it to event.sender.id as a text message
+            } else {
+              sendTextMessage(event.sender.id, user.pageAccessToken, 'Thanks for your message! We will get back to you shortly.')
+            }
+          })
+        } else if (event.postback) {
+
+          if (event.postback.payload === 'GET_STARTED_PAYLOAD') {
+
+            // ENROLLING MEMBERS INTO THE IRRIGATE APP
+            function getUser() {
+              return new Promise(function(resolve, reject) {
+                User.findOne({
+                  'pageID': event.recipient.id
+                }, (err, user) => {
+                  resolve(user)
+                })
+              })
+            }
+
+            function findMember(user) {
+              return new Promise(function(resolve, reject) {
+                Member.findOne({
+                  fbID: event.sender.id
+                }, (err, member) => {
+                  if (err) {
+                    console.error(err)
+                  }
+                  if (member === null) {
+                    request({
+                      uri: 'https://graph.facebook.com/v2.6/' + event.sender.id + '?access_token=' + user.pageAccessToken,
+                      method: 'GET'
+                    }, function(error, response, body) {
+                      if (error) {
+                        return console.error('upload failed:', error)
+                      }
+                      var facebookProfileResponse = JSON.parse(body)
+
+                      // NEED TO FIND ORG NAME AND REPLACE BELOW
+                      var newMember = new Member({
+                        organization: user.organization,
+                        fbID: event.sender.id,
+                        fullName: facebookProfileResponse.first_name + ' ' + facebookProfileResponse.last_name,
+                        photo: facebookProfileResponse.profile_pic,
+                        timezone: facebookProfileResponse.timezone,
+                        createdDate: moment().format('MM-DD-YYYY')
+                      })
+
+                      if (facebookProfileResponse.gender) {
+                        newMember.gender = facebookProfileResponse.gender
+                      }
+
+                      newMember.save((err, member) => {
+                        if (err) return console.error(err)
+                        // sendTextMessage(event.sender.id, user.pageAccessToken, 'Thanks for signing up. More content to come!')
+                        resolve(user)
+                      })
+                    })
+                  } else {
+                    // sendTextMessage(event.sender.id, user.pageAccessToken, 'Welcome back!')
+                    resolve(user)
+                  }
+                })
+              })
+            }
+
+            getUser().then((user) => {
+              findMember(user).then((user) => {
+                let welcomeMsg = new Promise(function(resolve, reject) {
+                  sendTextMessage(event.sender.id, user.pageAccessToken, 'Thanks for messaging Affirmation.Today!')
+                  resolve()
+                })
+
+                let howAreYouMsg = new Promise(function(resolve, reject) {
+                  let messageData = {
+                    "recipient":{
+                      "id": event.sender.id
+                    },
+                    "message":{
+                      "text": "How are you feeling today?",
+                      "quick_replies":[
+                        {
+                          "content_type":"text",
+                          "title":"Awesome!",
+                          "payload":"SEND_RANDOM_AFFIRMATION"
+                        },
+                        {
+                          "content_type":"text",
+                          "title":"Annoyed",
+                          "payload":"SEND_RANDOM_AFFIRMATION"
+                        },
+                        {
+                          "content_type":"text",
+                          "title":"...meh",
+                          "payload":"SEND_RANDOM_AFFIRMATION"
+                        },
+                        {
+                          "content_type":"text",
+                          "title":"Depressed",
+                          "payload":"SEND_RANDOM_AFFIRMATION"
+                        },
+                      ]
+                    }
+                  }
+                  callSendAPI(user.pageAccessToken, messageData)
+                  resolve()
+                })
+
+                welcomeMsg.then(() => {
+                  howAreYouMsg
+                })
+              })
+            })
+          }
+
+          if (event.postback.payload === 'SEND_RANDOM_AFFIRMATION') {
+            sendAffirmationMsg.then(() => {
+              sendStoreMsg
+            })
+          }
+
+          if (event.postback.payload === 'STORE') {
+            sendCategoryMsg
+          }
+
+          if (event.postback.payload === 'ACCESSORIES') {
+            sendAccessoriesMsg
+          }
+
+          if (event.postback.payload === 'CLOTHING') {
+            sendClothingMsg
+          }
+
+          if (event.postback.payload === 'ADD_CART') {
+              sendCartMsg
+          }
+
+          if (event.postback.payload === 'DONE') {
+            sendReciptMsg
           }
         } else {
           console.log("Webhook received unknown event: ", data)
@@ -425,6 +698,8 @@ nightmakersRouter.post('/', (req, res, next) => {
 
   res.sendStatus(200)
 })
+
+
 
 function sendTextMessage(recipientId, accessToken, textMsg) {
   var messageData = {
