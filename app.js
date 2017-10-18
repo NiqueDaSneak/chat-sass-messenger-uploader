@@ -56,6 +56,7 @@ var userSchema = mongoose.Schema({
 var User = mongoose.model('User', userSchema)
 
 // MIDDLEWARE
+app.use('/static', express.static('images'))
 app.use(bodyParser.urlencoded({
   extended: false
 }))
@@ -371,8 +372,290 @@ affirmationTodayRouter.post('/', (req, res, next) => {
               }
 
               if (event.postback.payload === 'STORE') {
-                sendCategoryMsg
+                let messageData = {
+                  "recipient":{
+                    "id": event.sender.id
+                  },
+                  "message":{
+                    "text": "Choose a category:",
+                    "quick_replies":[
+                      {
+                        "content_type":"text",
+                        "title":"Accessories",
+                        "payload":"ACCESSORIES"
+                      },
+                      {
+                        "content_type":"text",
+                        "title":"Clothing",
+                        "payload":"CLOTHING"
+                      }
+                    ]
+                  }
+                }
+                callSendAPI(user.pageAccessToken, messageData)
               }
+
+              if (event.postback.payload === 'ACCESSORIES') {
+                let messageData = {
+                  "recipient":{
+                    "id": event.sender.id
+                  },
+                  "message":{
+                    "attachment":{
+                      "type":"template",
+                      "payload":{
+                        "template_type":"generic",
+                        "elements":[
+                          {
+                            "title":"Beyond Blessed Mug",
+                            "image_url":"https://chat-sass-messenger-uploader.herokuapp.com/static/6.jpg",
+                            "subtitle":"$10",
+                            "buttons":[
+                              {
+                                "type":"postback",
+                                "title":"Add to cart",
+                                "payload":"ADD_CART_ACC"
+                              },
+                              {
+                                "type":"postback",
+                                "title":"Go to clothing",
+                                "payload":"CLOTHING"
+                              },
+                              {
+                                "type":"postback",
+                                "title":"Done Shopping",
+                                "payload":"DONE"
+                              },
+                            ]
+                          },
+                          {
+                            "title":"Never Alone Mug",
+                            "image_url":"https://chat-sass-messenger-uploader.herokuapp.com/static/7.jpg",
+                            "subtitle":"$12",
+                            "buttons":[
+                              {
+                                "type":"postback",
+                                "title":"Add to cart",
+                                "payload":"ADD_CART_ACC"
+                              },
+                              {
+                                "type":"postback",
+                                "title":"Go to clothing",
+                                "payload":"CLOTHING"
+                              },
+                              {
+                                "type":"postback",
+                                "title":"Done Shopping",
+                                "payload":"DONE"
+                              },
+                            ]
+                          },
+                          {
+                            "title":"Affirmation Tokens(14 count)",
+                            "image_url":"https://chat-sass-messenger-uploader.herokuapp.com/static/8.jpg",
+                            "subtitle":"$24",
+                            "buttons":[
+                              {
+                                "type":"postback",
+                                "title":"Add to cart",
+                                "payload":"ADD_CART_ACC"
+                              },
+                              {
+                                "type":"postback",
+                                "title":"Go to clothing",
+                                "payload":"CLOTHING"
+                              },
+                              {
+                                "type":"postback",
+                                "title":"Done Shopping",
+                                "payload":"DONE"
+                              },
+                            ]
+                          },
+                          {
+                            "title":"Blessing Necklace",
+                            "image_url":"https://chat-sass-messenger-uploader.herokuapp.com/static/9.jpg",
+                            "subtitle":"$50",
+                            "buttons":[
+                              {
+                                "type":"postback",
+                                "title":"Add to cart",
+                                "payload":"ADD_CART_ACC"
+                              },
+                              {
+                                "type":"postback",
+                                "title":"Go to clothing",
+                                "payload":"CLOTHING"
+                              },
+                              {
+                                "type":"postback",
+                                "title":"Done Shopping",
+                                "payload":"DONE"
+                              },
+                            ]
+                          },
+                          {
+                            "title":"Be Fearless Pillow",
+                            "image_url":"https://chat-sass-messenger-uploader.herokuapp.com/static/10.jpg",
+                            "subtitle":"$25",
+                            "buttons":[
+                              {
+                                "type":"postback",
+                                "title":"Add to cart",
+                                "payload":"ADD_CART_ACC"
+                              },
+                              {
+                                "type":"postback",
+                                "title":"Go to clothing",
+                                "payload":"CLOTHING"
+                              },
+                              {
+                                "type":"postback",
+                                "title":"Done Shopping",
+                                "payload":"DONE"
+                              },
+                            ]
+                          }
+                        ]
+                      }
+                    }
+                  }
+                }
+                callSendAPI(user.pageAccessToken, messageData)
+              }
+
+              if (event.postback.payload === 'CLOTHING') {
+                let messageData = {
+                  "recipient":{
+                    "id": event.sender.id
+                  },
+                  "message":{
+                    "attachment":{
+                      "type":"template",
+                      "payload":{
+                        "template_type":"generic",
+                        "elements":[
+                          {
+                            "title":"Good Vibes Only",
+                            "image_url":"https://chat-sass-messenger-uploader.herokuapp.com/static/1.jpg",
+                            "subtitle":"$25",
+                            "buttons":[
+                              {
+                                "type":"postback",
+                                "title":"Add to cart",
+                                "payload":"ADD_CART_ACC"
+                              },
+                              {
+                                "type":"postback",
+                                "title":"Go to clothing",
+                                "payload":"CLOTHING"
+                              },
+                              {
+                                "type":"postback",
+                                "title":"Done Shopping",
+                                "payload":"DONE"
+                              },
+                            ]
+                          },
+                          {
+                            "title":"Gorillaz Tee",
+                            "image_url":"https://chat-sass-messenger-uploader.herokuapp.com/static/2.jpg",
+                            "subtitle":"$23",
+                            "buttons":[
+                              {
+                                "type":"postback",
+                                "title":"Add to cart",
+                                "payload":"ADD_CART_ACC"
+                              },
+                              {
+                                "type":"postback",
+                                "title":"Go to clothing",
+                                "payload":"CLOTHING"
+                              },
+                              {
+                                "type":"postback",
+                                "title":"Done Shopping",
+                                "payload":"DONE"
+                              },
+                            ]
+                          },
+                          {
+                            "title":"Richie Benaud White Shirt",
+                            "image_url":"https://chat-sass-messenger-uploader.herokuapp.com/static/3.jpg",
+                            "subtitle":"$18",
+                            "buttons":[
+                              {
+                                "type":"postback",
+                                "title":"Add to cart",
+                                "payload":"ADD_CART_ACC"
+                              },
+                              {
+                                "type":"postback",
+                                "title":"Go to clothing",
+                                "payload":"CLOTHING"
+                              },
+                              {
+                                "type":"postback",
+                                "title":"Done Shopping",
+                                "payload":"DONE"
+                              },
+                            ]
+                          },
+                          {
+                            "title":"Nelson Mandela",
+                            "image_url":"https://chat-sass-messenger-uploader.herokuapp.com/static/4.jpg",
+                            "subtitle":"$44",
+                            "buttons":[
+                              {
+                                "type":"postback",
+                                "title":"Add to cart",
+                                "payload":"ADD_CART_ACC"
+                              },
+                              {
+                                "type":"postback",
+                                "title":"Go to clothing",
+                                "payload":"CLOTHING"
+                              },
+                              {
+                                "type":"postback",
+                                "title":"Done Shopping",
+                                "payload":"DONE"
+                              },
+                            ]
+                          },
+                          {
+                            "title":"Do Not Believe Everything You Think Longsleeve",
+                            "image_url":"https://chat-sass-messenger-uploader.herokuapp.com/static/5.jpg",
+                            "subtitle":"$25",
+                            "buttons":[
+                              {
+                                "type":"postback",
+                                "title":"Add to cart",
+                                "payload":"ADD_CART_ACC"
+                              },
+                              {
+                                "type":"postback",
+                                "title":"Go to clothing",
+                                "payload":"CLOTHING"
+                              },
+                              {
+                                "type":"postback",
+                                "title":"Done Shopping",
+                                "payload":"DONE"
+                              },
+                            ]
+                          }
+                        ]
+                      }
+                    }
+                  }
+                }
+                callSendAPI(user.pageAccessToken, messageData)
+              }
+
+              if (event.postback.payload === 'ADD_CART_ACC') {}
+
+              if (event.postback.payload === 'DONE') {}
 
             } else {
               sendTextMessage(event.sender.id, user.pageAccessToken, 'Thanks for your message! We will get back to you shortly.')
