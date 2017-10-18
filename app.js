@@ -412,7 +412,7 @@ affirmationTodayRouter.post('/', (req, res, next) => {
                           "content_type":"text",
                           "title":"Depressed",
                           "payload":"SEND_RANDOM_AFFIRMATION"
-                        },
+                        }
                       ]
                     }
                   }
@@ -421,7 +421,9 @@ affirmationTodayRouter.post('/', (req, res, next) => {
                 })
 
                 welcomeMsg.then(() => {
-                  howAreYouMsg
+                  setTimeout(() = {
+                    howAreYouMsg
+                  }, 2000)
                 })
               })
             })
