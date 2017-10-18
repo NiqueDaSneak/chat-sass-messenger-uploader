@@ -416,14 +416,14 @@ affirmationTodayRouter.post('/', (req, res, next) => {
                       ]
                     }
                   }
-                  callSendAPI(user.pageAccessToken, messageData)
-                  resolve()
+                  setTimeout(() => {
+                    callSendAPI(user.pageAccessToken, messageData)
+                    resolve()
+                  }, 2000)
                 })
 
                 welcomeMsg.then(() => {
-                  setTimeout(() => {
                     howAreYouMsg
-                  }, 2000)
                 })
               })
             })
