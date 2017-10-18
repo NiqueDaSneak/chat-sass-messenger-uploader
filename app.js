@@ -311,8 +311,65 @@ affirmationTodayRouter.post('/', (req, res, next) => {
           }
 
           getUser().then((user) => {
-            if (user.messageResponse) {
-              // send it to event.sender.id as a text message
+            if (event.message.quick_reply) {
+
+              if (event.message.quick_reply.payload === 'SEND_RANDOM_AFFIRMATION') {
+                let randomAffs = [
+                  "Peace of mind is my natural state. The universe is conspiring in my favor.",
+                  "Fear is an illusion; False Evidence Appearing Real.",
+                  "I can handle what is in front of me; I can, I will, I must."
+                ]
+
+                let msgArray = [
+                  "I have the perfect one for you:",
+                  "...you should like this one then:",
+                  "Check this one out:"
+                ]
+
+                let sendAffirmationMsg = new Promise(function(resolve, reject) {
+                  sendTextMessage(event.sender.id, user.pageAccessToken, msgArray[Math.floor(Math.random() * 3)])
+                  setTimeout(() => {
+                    sendTextMessage(event.sender.id, user.pageAccessToken, randomAffs[Math.floor(Math.random() * 3)])
+                    resolve()
+                  }, 1500)
+                })
+
+                let sendStoreMsg = new Promise(function(resolve, reject) {
+                  let messageData = {
+                    "recipient":{
+                      "id": event.sender.id
+                    },
+                    "message":{
+                      "text": "Are you interested in doing a little shopping with us?",
+                      "quick_replies":[
+                        {
+                          "content_type":"text",
+                          "title":"Sure!",
+                          "payload":"STORE"
+                        },
+                        {
+                          "content_type":"text",
+                          "title":"Not Interested",
+                          "payload":"NO_STORE"
+                        }
+                      ]
+                    }
+                  }
+                  setTimeout(() => {
+                    callSendAPI(user.pageAccessToken, messageData)
+                    resolve()
+                  }, 2000)
+                })
+
+                sendAffirmationMsg.then(() => {
+                  sendStoreMsg
+                })
+              }
+
+              if (event.postback.payload === 'NO_STORE') {
+                sendTextMessage(event.sender.id, user.pageAccessToken, "Thanks for playing! I will talk to you soon!")
+              }
+
             } else {
               sendTextMessage(event.sender.id, user.pageAccessToken, 'Thanks for your message! We will get back to you shortly.')
             }
@@ -427,63 +484,6 @@ affirmationTodayRouter.post('/', (req, res, next) => {
                 })
               })
             })
-          }
-
-          if (event.postback.payload === 'SEND_RANDOM_AFFIRMATION') {
-            let randomAffs = [
-              "Peace of mind is my natural state. The universe is conspiring in my favor.",
-              "Fear is an illusion; False Evidence Appearing Real.",
-              "I can handle what is in front of me; I can, I will, I must."
-            ]
-
-            let msgArray = [
-              "I have the perfect one for you:",
-              "...you should like this one then:",
-              "Check this one out:"
-            ]
-
-            let sendAffirmationMsg = new Promise(function(resolve, reject) {
-              sendTextMessage(event.sender.id, user.pageAccessToken, msgArray[Math.floor(Math.random() * 3)])
-              setTimeout(() => {
-                sendTextMessage(event.sender.id, user.pageAccessToken, randomAffs[Math.floor(Math.random() * 3)])
-                resolve()
-              }, 1500)
-            })
-
-            let sendStoreMsg = new Promise(function(resolve, reject) {
-              let messageData = {
-                "recipient":{
-                  "id": event.sender.id
-                },
-                "message":{
-                  "text": "Are you interested in doing a little shopping with us?",
-                  "quick_replies":[
-                    {
-                      "content_type":"text",
-                      "title":"Sure!",
-                      "payload":"STORE"
-                    },
-                    {
-                      "content_type":"text",
-                      "title":"Not Interested",
-                      "payload":"NO_STORE"
-                    }
-                  ]
-                }
-              }
-              setTimeout(() => {
-                callSendAPI(user.pageAccessToken, messageData)
-                resolve()
-              }, 2000)
-            })
-
-            sendAffirmationMsg.then(() => {
-              sendStoreMsg
-            })
-          }
-
-          if (event.postback.payload === 'NO_STORE') {
-            sendTextMessage(event.sender.id, user.pageAccessToken, "Thanks for playing! I will talk to you soon!")
           }
 
           if (event.postback.payload === 'STORE') {
