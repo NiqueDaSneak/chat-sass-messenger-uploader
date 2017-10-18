@@ -370,6 +370,10 @@ affirmationTodayRouter.post('/', (req, res, next) => {
                 sendTextMessage(event.sender.id, user.pageAccessToken, "Thanks for playing! I will talk to you soon!")
               }
 
+              if (event.postback.payload === 'STORE') {
+                sendCategoryMsg
+              }
+
             } else {
               sendTextMessage(event.sender.id, user.pageAccessToken, 'Thanks for your message! We will get back to you shortly.')
             }
