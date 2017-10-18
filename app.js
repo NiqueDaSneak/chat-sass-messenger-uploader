@@ -421,7 +421,7 @@ affirmationTodayRouter.post('/', (req, res, next) => {
                 })
 
                 welcomeMsg.then(() => {
-                  setTimeout(() = {
+                  setTimeout(() => {
                     howAreYouMsg
                   }, 2000)
                 })
