@@ -10,6 +10,7 @@ var path = require('path')
 // APP DEFINITIONS
 var app = express()
 var nightmakersRouter = express.Router()
+var affirmationTodayRouter = express.Router()
 
 // DATABASE SETUP
 var mongoose = require('mongoose')
