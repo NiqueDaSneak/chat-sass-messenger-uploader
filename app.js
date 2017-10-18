@@ -431,15 +431,15 @@ affirmationTodayRouter.post('/', (req, res, next) => {
 
           if (event.postback.payload === 'SEND_RANDOM_AFFIRMATION') {
             let randomAffs = [
-              "",
-              "",
-              ""
+              "Peace of mind is my natural state. The universe is conspiring in my favor.",
+              "Fear is an illusion; False Evidence Appearing Real.",
+              "I can handle what is in front of me; I can, I will, I must."
             ]
 
             let msgArray = [
-              "",
-              "",
-              ""
+              "I have the perfect one for you:",
+              "...you should like this one then:",
+              "Check this one out:"
             ]
 
             let sendAffirmationMsg = new Promise(function(resolve, reject) {
