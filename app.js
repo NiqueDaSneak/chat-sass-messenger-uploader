@@ -366,7 +366,7 @@ affirmationTodayRouter.post('/', (req, res, next) => {
                 })
               }
 
-              if (event.postback.payload === 'NO_STORE') {
+              if (event.message.quick_reply.payload === 'NO_STORE') {
                 sendTextMessage(event.sender.id, user.pageAccessToken, "Thanks for playing! I will talk to you soon!")
               }
 
