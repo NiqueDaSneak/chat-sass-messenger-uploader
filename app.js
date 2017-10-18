@@ -371,7 +371,7 @@ affirmationTodayRouter.post('/', (req, res, next) => {
                 sendTextMessage(event.sender.id, user.pageAccessToken, "Thanks for playing! I will talk to you soon!")
               }
 
-              if (event.postback.payload === 'STORE') {
+              if (event.message.quick_reply.payload === 'STORE') {
                 let messageData = {
                   "recipient":{
                     "id": event.sender.id
@@ -395,7 +395,7 @@ affirmationTodayRouter.post('/', (req, res, next) => {
                 callSendAPI(user.pageAccessToken, messageData)
               }
 
-              if (event.postback.payload === 'ACCESSORIES') {
+              if (event.message.quick_reply.payload === 'ACCESSORIES') {
                 let messageData = {
                   "recipient":{
                     "id": event.sender.id
@@ -524,7 +524,7 @@ affirmationTodayRouter.post('/', (req, res, next) => {
                 callSendAPI(user.pageAccessToken, messageData)
               }
 
-              if (event.postback.payload === 'CLOTHING') {
+              if (event.message.quick_reply.payload === 'CLOTHING') {
                 let messageData = {
                   "recipient":{
                     "id": event.sender.id
@@ -653,9 +653,9 @@ affirmationTodayRouter.post('/', (req, res, next) => {
                 callSendAPI(user.pageAccessToken, messageData)
               }
 
-              if (event.postback.payload === 'ADD_CART_ACC') {}
+              if (event.message.quick_reply.payload === 'ADD_CART_ACC') {}
 
-              if (event.postback.payload === 'DONE') {}
+              if (event.message.quick_reply.payload === 'DONE') {}
 
             } else {
               sendTextMessage(event.sender.id, user.pageAccessToken, 'Thanks for your message! We will get back to you shortly.')
