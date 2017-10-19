@@ -327,17 +327,17 @@ irrigateRouter.post('/', (req, res, next) => {
                     "quick_replies":[
                       {
                         "content_type":"text",
-                        "title":"How much does Irrigate cost?",
+                        "title":"Irrigate costs?",
                         "payload":"COST",
                       },
                       {
                         "content_type":"text",
-                        "title":"How do you add members to your community?",
+                        "title":"Adding members?",
                         "payload":"ADDING",
                       },
                       {
                         "content_type":"text",
-                        "title":"Why did we start Irrigate?",
+                        "title":"Why did we start?",
                         "payload":"WHY",
                       },
                       {
