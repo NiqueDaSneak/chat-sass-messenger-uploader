@@ -538,7 +538,7 @@ irrigateRouter.post('/', (req, res, next) => {
                 let faqGate = new Promise(function(resolve, reject) {
                   let messageData = {
                     "recipient":{
-                      "id": event.recipient.id
+                      "id": event.sender.id
                     },
                     "message":{
                       "text": "Still wondering how Irrigate can help your business?",
