@@ -320,7 +320,7 @@ irrigateRouter.post('/', (req, res, next) => {
               if (event.message.quick_reply.payload === 'SEND_FAQ') {
                 let messageData = {
                   "recipient": {
-                    "id": event.recipient.id
+                    "id": event.sender.id
                   },
                   "message":{
                     "text": "Check out these frequently asked questions:",
@@ -356,7 +356,7 @@ irrigateRouter.post('/', (req, res, next) => {
                 setTimeout(() => {
                   let messageData = {
                     "recipient": {
-                      "id": event.recipient.id
+                      "id": event.sender.id
                     },
                     "message":{
                       "text": "Need more convincing?",
@@ -383,7 +383,7 @@ irrigateRouter.post('/', (req, res, next) => {
                 setTimeout(() => {
                   let messageData = {
                     "recipient": {
-                      "id": event.recipient.id
+                      "id": event.sender.id
                     },
                     "message":{
                       "text": "Need more convincing?",
@@ -410,7 +410,7 @@ irrigateRouter.post('/', (req, res, next) => {
                 setTimeout(() => {
                   let messageData = {
                     "recipient": {
-                      "id": event.recipient.id
+                      "id": event.sender.id
                     },
                     "message":{
                       "text": "Need more convincing?",
@@ -437,7 +437,7 @@ irrigateRouter.post('/', (req, res, next) => {
                 setTimeout(() => {
                   let messageData = {
                     "recipient": {
-                      "id": event.recipient.id
+                      "id": event.sender.id
                     },
                     "message":{
                       "text": "Need more convincing?",
