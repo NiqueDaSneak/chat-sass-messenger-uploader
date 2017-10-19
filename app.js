@@ -778,11 +778,16 @@ affirmationTodayRouter.post('/', (req, res, next) => {
                 "Love it!",
                 "This one is great!"
               ]
-              sendTextMessage(event.sender.id, user.pageAccessToken, randomResponse[Math.floor(Math.random() * 3)])
-              resolve()
+
+              User.findOne({
+                'pageID': event.recipient.id
+              }, (err, user) => {
+                sendTextMessage(event.sender.id, user.pageAccessToken, randomResponse[Math.floor(Math.random() * 3)])
+                resolve(user)
+              })
             })
 
-            initialResponse.then(() => {
+            initialResponse.then((user) => {
               setTimeout(() => {
                 let messageData = {
                   "recipient":{
@@ -921,11 +926,16 @@ affirmationTodayRouter.post('/', (req, res, next) => {
                 "Love it!",
                 "This one is great!"
               ]
-              sendTextMessage(event.sender.id, user.pageAccessToken, randomResponse[Math.floor(Math.random() * 3)])
-              resolve()
+
+              User.findOne({
+                'pageID': event.recipient.id
+              }, (err, user) => {
+                sendTextMessage(event.sender.id, user.pageAccessToken, randomResponse[Math.floor(Math.random() * 3)])
+                resolve(user)
+              })
             })
 
-            initialResponse.then(() => {
+            initialResponse.then((user) => {
               setTimeout(() => {
                 let messageData = {
                   "recipient":{
@@ -1183,7 +1193,11 @@ affirmationTodayRouter.post('/', (req, res, next) => {
                 }
               }
             }
-            callSendAPI(user.pageAccessToken, messageData)
+            User.findOne({
+              'pageID': event.recipient.id
+            }, (err, user) => {
+              callSendAPI(user.pageAccessToken, messageData)
+            })
           }
 
           if (event.postback.payload === 'CLOTHING') {
@@ -1312,15 +1326,68 @@ affirmationTodayRouter.post('/', (req, res, next) => {
                 }
               }
             }
-            callSendAPI(user.pageAccessToken, messageData)
+            User.findOne({
+              'pageID': event.recipient.id
+            }, (err, user) => {
+              callSendAPI(user.pageAccessToken, messageData)
+            })
           }
 
 
           if (event.postback.payload === 'DONE') {
-            sendReciptMsg
+            var customerName
+            Member.findOne({
+              fbID: event.sender.id
+            }, (err, member) => {
+              if (err) {
+                console.log(err)
+              }
+              customerName = member.fullName
+            })
+            User.findOne({
+              'pageID': event.recipient.id
+            }, (err, user) => {
+              if (err) {
+                console.log(err)
+              }
+              sendTextMessage(event.sender.id, user.pageAccessToken, "Thanks for your order! We used your credit card on file to complete the order. Here is your receipt:")
+
+              let messageData = {
+                "recipient":{
+                  "id": event.sender.id
+                },
+                "message":{
+                  "attachment":{
+                    "type":"template",
+                    "payload":{
+                      "template_type":"receipt",
+                      "recipient_name": customerName,
+                      "order_number":"3647588",
+                      "currency":"USD",
+                      "payment_method":"Visa 9387",
+                      "address":{
+                        "street_1":"213 Mulberry St",
+                        "street_2":"",
+                        "city":"Cincinnati",
+                        "postal_code":"45202",
+                        "state":"OH",
+                        "country":"US"
+                      },
+                      "summary":{
+                        "total_cost": 74.24
+                      },
+                    }
+                  }
+                }
+              }
+              setTimeout(() => {
+                callSendAPI(user.pageAccessToken, messageData)
+              }, 2000)
+              setTimeout(() => {
+                sendTextMessage(event.sender.id, user.pageAccessToken, "We really appreciate your business!")
+              }, 5000)
+            })
           }
-
-
 
         } else {
           console.log("Webhook received unknown event: ", data)
