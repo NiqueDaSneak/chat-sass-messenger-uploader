@@ -56,6 +56,19 @@ var userSchema = mongoose.Schema({
 
 var User = mongoose.model('User', userSchema)
 
+var messageSchema = mongoose.Schema({
+  date: String,
+  time: String,
+  text: String,
+  image: String,
+  videoURL: String,
+  organization: String,
+  groupNames: Array,
+  id: String,
+  createdDate: String
+})
+var Message = mongoose.model('Message', messageSchema)
+
 // MIDDLEWARE
 app.use('/static', express.static('images'))
 app.use(bodyParser.urlencoded({
