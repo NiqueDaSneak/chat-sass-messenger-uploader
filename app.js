@@ -203,90 +203,99 @@ app.post('/', (req, res) => {
       if (err) {
         console.log(err)
       }
+      Message.findOne({ id: req.body.id }, (err, msg) => {
+        if (err) {
+          console.log(err)
+        }
 
-      var sendees = []
-      var getSendees = new Promise(function(resolve, reject) {
-        if (req.body.groupNames) {
-          for (var i = 0; i < req.body.groupNames.length; i++) {
-            Group.findOne({
-              groupName: req.body.groupNames[i],
-              organization: req.body.organization
-            }, (err, group) => {
-              if (err) {
-                return console.error(err)
+        if (msg === null) {
+          console.log('message deleted')
+        } else {
+          var sendees = []
+          var getSendees = new Promise(function(resolve, reject) {
+            if (req.body.groupNames) {
+              for (var i = 0; i < req.body.groupNames.length; i++) {
+                Group.findOne({
+                  groupName: req.body.groupNames[i],
+                  organization: req.body.organization
+                }, (err, group) => {
+                  if (err) {
+                    return console.error(err)
+                  } else {
+                    console.log(group)
+                    for (var i = 0; i < group.groupMembers.length; i++) {
+                      sendees.push(group.groupMembers[i])
+                    }
+                    resolve(sendees)
+                  }
+                })
+              }
+            } else {
+              resolve(sendees)
+            }
+          })
+
+          getSendees.then((sendees) => {
+            let checkSendeeLength = new Promise(function(resolve, reject) {
+              if (sendees.length === 0) {
+                Member.find({organization: req.body.organization}, (err, members) => {
+                  if (err) {
+                    console.log(err)
+                  }
+                  for (var i = 0; i < members.length; i++) {
+                    sendees.push(members[i].fbID)
+                  }
+                  resolve(sendees)
+                })
               } else {
-                console.log(group)
-                for (var i = 0; i < group.groupMembers.length; i++) {
-                  sendees.push(group.groupMembers[i])
-                }
                 resolve(sendees)
               }
             })
-          }
-        } else {
-          resolve(sendees)
-        }
-      })
 
-      getSendees.then((sendees) => {
-        let checkSendeeLength = new Promise(function(resolve, reject) {
-          if (sendees.length === 0) {
-            Member.find({organization: req.body.organization}, (err, members) => {
-              if (err) {
-                console.log(err)
+            checkSendeeLength.then((sendees) => {
+              for (var i = 0; i < sendees.length; i++) {
+                  var sendImage = new Promise(function(resolve, reject) {
+                    if (req.body.image) {
+                      sendImageMessage(sendees[i], user.pageAccessToken, req.body.image)
+                      console.log('sending image message...')
+                      resolve()
+                    } else {
+                      resolve()
+                    }
+                  })
+
+                  var sendVideo = new Promise(function(resolve, reject) {
+                    if (req.body.videoURL) {
+                      console.log('sending video link...')
+                      sendVideoMessage(sendees[i], user.pageAccessToken, req.body.videoURL)
+                      resolve()
+                    } else {
+                      resolve()
+                    }
+                  })
+
+
+
+                  var sendText = new Promise(function(resolve, reject) {
+                    if (req.body.text) {
+                      sendTextMessage(sendees[i], user.pageAccessToken, req.body.text)
+                      console.log('sending text message...')
+                      resolve()
+                    } else {
+                      resolve()
+                    }
+                  })
+
+                  sendImage.then(() => {
+                    sendVideo.then(() => {
+                      sendText
+                    })
+                  })
+                  res.sendStatus(200)
               }
-              for (var i = 0; i < members.length; i++) {
-                sendees.push(members[i].fbID)
-              }
-              resolve(sendees)
             })
-          } else {
-            resolve(sendees)
-          }
-        })
-
-        checkSendeeLength.then((sendees) => {
-          for (var i = 0; i < sendees.length; i++) {
-              var sendImage = new Promise(function(resolve, reject) {
-                if (req.body.image) {
-                  sendImageMessage(sendees[i], user.pageAccessToken, req.body.image)
-                  console.log('sending image message...')
-                  resolve()
-                } else {
-                  resolve()
-                }
-              })
-
-              var sendVideo = new Promise(function(resolve, reject) {
-                if (req.body.videoURL) {
-                  console.log('sending video link...')
-                  sendVideoMessage(sendees[i], user.pageAccessToken, req.body.videoURL)
-                  resolve()
-                } else {
-                  resolve()
-                }
-              })
-
-
-
-              var sendText = new Promise(function(resolve, reject) {
-                if (req.body.text) {
-                  sendTextMessage(sendees[i], user.pageAccessToken, req.body.text)
-                  console.log('sending text message...')
-                  resolve()
-                } else {
-                  resolve()
-                }
-              })
-
-              sendImage.then(() => {
-                sendVideo.then(() => {
-                  sendText
-                })
-              })
-              res.sendStatus(200)
-          }
-        })
+          })
+        }
       })
     })
   }
