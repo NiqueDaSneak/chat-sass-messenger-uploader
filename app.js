@@ -1131,7 +1131,7 @@ affirmationTodayRouter.post('/', (req, res, next) => {
             getUser().then((user) => {
               findMember(user).then((user) => {
                 let welcomeMsg = new Promise(function(resolve, reject) {
-                  sendTextMessage(event.sender.id, user.pageAccessToken, 'Thanks for messaging Affirmation.Today!')
+                  sendTextMessage(event.sender.id, user.pageAccessToken, 'Thanks for messaging Affirmation.Today! Walk through this demo to get a feel for what Irrigate can help create for your business.')
                   resolve()
                 })
 
