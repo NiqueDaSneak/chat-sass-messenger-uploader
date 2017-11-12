@@ -2,6 +2,20 @@
 
 const irrigateRouter = require('express').Router()
 
+var userSchema = mongoose.Schema({
+  email: String,
+  organization: String,
+  onboarded: Boolean,
+  username: String,
+  userID: String,
+  pageID: String,
+  pageAccessToken: String,
+  userAccessToken: String,
+  stripeID: String,
+})
+
+var User = mongoose.model('User', userSchema)
+
 irrigateRouter.post('/', (req, res, next) => {
   var data = req.body
   // Make sure this is a page subscription
