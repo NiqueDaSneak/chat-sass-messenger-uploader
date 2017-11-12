@@ -14,9 +14,11 @@ irrigateRouter.post('/', (req, res, next) => {
       var timeOfEvent = entry.time
       // Iterate over each messaging event
       entry.messaging.forEach(function(event) {
+        console.log('BEFORE EVENT HANDLERS ARE CALLED')
         if (event.message) {
           eventMessageHandler(event)
         } else if (event.postback) {
+          console.log('BEFORE EVENT POSTBACK HANDLER')
           eventPostbackHandler(event)
         } else {
           console.log("Webhook received unknown event: ", data)
@@ -122,6 +124,7 @@ irrigateRouter.post('/', (req, res, next) => {
   }
 
   function eventPostbackHandler(event) {
+    console.log('INSIDE eventPostbackHandler')
     switch (event.postback.payload) {
       case 'GET_STARTED_PAYLOAD':
       // ENROLLING MEMBERS INTO THE IRRIGATE APP
