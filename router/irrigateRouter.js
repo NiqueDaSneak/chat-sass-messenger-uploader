@@ -11,19 +11,19 @@ var affirmationSchema = mongoose.Schema({
   text: String
 })
 
-var userSchema = mongoose.Schema({
-  email: String,
-  organization: String,
-  onboarded: Boolean,
-  username: String,
-  userID: String,
-  pageID: String,
-  pageAccessToken: String,
-  userAccessToken: String,
-  stripeID: String,
-})
-
-var User = mongoose.model('User', userSchema)
+// var userSchema = mongoose.Schema({
+//   email: String,
+//   organization: String,
+//   onboarded: Boolean,
+//   username: String,
+//   userID: String,
+//   pageID: String,
+//   pageAccessToken: String,
+//   userAccessToken: String,
+//   stripeID: String,
+// })
+//
+// var User = mongoose.model('User', userSchema)
 
 irrigateRouter.post('/', (req, res, next) => {
   var data = req.body
