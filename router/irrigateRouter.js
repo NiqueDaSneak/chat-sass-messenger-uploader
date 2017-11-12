@@ -1,29 +1,7 @@
 'use strict'
 
 const irrigateRouter = require('express').Router()
-
-// DATABASE SETUP
-var mongoose = require('mongoose')
-mongoose.connect('mongodb://domclemmer:domclemmerpasswordirrigate@ds153173-a0.mlab.com:53173,ds153173-a1.mlab.com:53173/irrigate?replicaSet=rs-ds153173', {useMongoClient: true})
-var db = mongoose.connection
-db.on('error', console.error.bind(console, 'connection error:'))
-var affirmationSchema = mongoose.Schema({
-  text: String
-})
-
-// var userSchema = mongoose.Schema({
-//   email: String,
-//   organization: String,
-//   onboarded: Boolean,
-//   username: String,
-//   userID: String,
-//   pageID: String,
-//   pageAccessToken: String,
-//   userAccessToken: String,
-//   stripeID: String,
-// })
-//
-// var User = mongoose.model('User', userSchema)
+var User = require('./models/userModel.js')
 
 irrigateRouter.post('/', (req, res, next) => {
   var data = req.body
