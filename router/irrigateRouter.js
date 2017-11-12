@@ -1,7 +1,7 @@
 'use strict'
 
 const irrigateRouter = require('express').Router()
-var User = require('./models/userModel.js')
+var User = require('/models/userModel.js')
 
 irrigateRouter.post('/', (req, res, next) => {
   var data = req.body
