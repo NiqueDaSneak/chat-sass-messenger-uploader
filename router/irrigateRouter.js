@@ -184,7 +184,7 @@ irrigateRouter.post('/', (req, res, next) => {
                 }
               }
 
-              if (event.postback.paylod === "NO_ADMIN") {
+              if (event.postback.payload === "NO_ADMIN") {
 
                 function getUser() {
                   return new Promise(function(resolve, reject) {
@@ -219,10 +219,7 @@ irrigateRouter.post('/', (req, res, next) => {
                       }
                     }
                   }
-
-                  setTimeout(() => {
-                    callSendAPI(user.pageAccessToken, messageData)
-                  }, 2000)
+                  callSendAPI(user.pageAccessToken, messageData)
                 })
 
               }
