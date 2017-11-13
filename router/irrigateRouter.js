@@ -30,6 +30,8 @@ irrigateRouter.post('/', (req, res, next) => {
               console.log(event)
               // ENROLLING MEMBERS INTO THE IRRIGATE APP
               function findMember(user) {
+                console.log('INSIDE FINDMEMBER FUNC')
+                console.log(event.sender.id)
                 return new Promise(function(resolve, reject) {
                   Member.findOne({
                     fbID: event.sender.id
