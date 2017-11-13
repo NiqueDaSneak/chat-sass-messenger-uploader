@@ -1132,11 +1132,11 @@ irrigateRouter.post('/', (req, res, next) => {
                           "currency":"USD",
                           "payment_method":"Visa 9387",
                           "address":{
-                            "street_1":"213 Mulberry St",
+                            "street_1":"47 44th St",
                             "street_2":"",
-                            "city":"Cincinnati",
-                            "postal_code":"45202",
-                            "state":"OH",
+                            "city":"New York",
+                            "postal_code":"11377",
+                            "state":"NY",
                             "country":"US"
                           },
                           "summary":{
