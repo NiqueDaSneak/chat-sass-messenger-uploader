@@ -75,7 +75,7 @@ irrigateRouter.post('/', (req, res, next) => {
                         sendTextMessage(event.sender.id, user.pageAccessToken, 'You are going to learn a lot today...').then(() => {
 
                           setTimeout(() => {
-                            sendTextMessage(event.sender.id, user.pageAccessToken, 'so if you have any questions or need to restart, use the menu below the chat').then(() => {
+                            sendTextMessage(event.sender.id, user.pageAccessToken, '...so if you have any questions or need to restart, use the menu below the chat').then(() => {
 
                               setTimeout(() => {
                                 sendTextMessage(event.sender.id, user.pageAccessToken, 'We know this is a new experience for you so let’s go over some procedures so you can get the most out of your time').then(() => {
@@ -185,7 +185,6 @@ irrigateRouter.post('/', (req, res, next) => {
               }
 
               if (event.postback.paylod === "NO_ADMIN") {
-                console.log(event.postback.payload)
 
                 function getUser() {
                   return new Promise(function(resolve, reject) {
@@ -197,11 +196,38 @@ irrigateRouter.post('/', (req, res, next) => {
                   })
                 }
 
+                getUser().then((user) => {
+
+                  let messageData = {
+                    "recipient":{
+                      "id": event.sender.id
+                    },
+                    "message":{
+                      "attachment":{
+                        "type":"template",
+                        "payload":{
+                          "template_type":"button",
+                          "text":"Don’t worry! We can still show you the power of Irrigate. And will be integrating with Imessage and WhatsApp soon!",
+                          "buttons":[
+                            {
+                              "type":"postback",
+                              "payload":"YES_ADMIN",
+                              "title":"Show me Irrigate"
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  }
+
+                  setTimeout(() => {
+                    callSendAPI(user.pageAccessToken, messageData)
+                  }, 2000)
+                })
 
               }
 
               if (event.postback.paylod === "YES_ADMIN") {
-                console.log(event.postback.payload)
 
                 function getUser() {
                   return new Promise(function(resolve, reject) {
