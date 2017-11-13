@@ -25,6 +25,25 @@ function sendTextMessage(recipientId, accessToken, textMsg) {
   })
 }
 
+function sendImageMessage(recipientId, accessToken,  url) {
+
+  var messageData = {
+    "recipient": {
+      "id": recipientId
+    },
+    "message": {
+      "attachment": {
+        "type": "image",
+        "payload": {
+          "url": url
+        }
+      }
+    }
+  }
+  callSendAPI(accessToken, messageData)
+}
+
+
 function callSendAPI(accessToken, messageData) {
   request({
     "uri": 'https://graph.facebook.com/v2.6/me/messages',
@@ -322,6 +341,11 @@ irrigateRouter.post('/', (req, res, next) => {
                                           "type":"postback",
                                           "payload":"EXAMPLES",
                                           "title":"I want tosee some examples!"
+                                        },
+                                        {
+                                          "type":"postback",
+                                          "payload":"SIGN_UP",
+                                          "title":"Nope! I got it! How do I sign up?"
                                         }
                                       ]
                                     }
@@ -377,11 +401,66 @@ irrigateRouter.post('/', (req, res, next) => {
                 }
 
                 getUser().then((user) => {
+                  sendTextMessage(event.sender.id, user.pageAccessToken, 'Sweet! Check out this gif showing how easy it is to post via Irrigate.').then(() => {
 
+                    setTimeout(() => {
+                      sendImageMessage(event.sender.id, user.pageAccessToken, '../images/how-to-post.gif')
+                      sendTextMessage(event.sender.id, user.pageAccessToken, 'See how easy that was?').then(() => {
+
+                        setTimeout(() => {
+                          let messageData = {
+                            "recipient":{
+                              "id": event.sender.id
+                            },
+                            "message":{
+                              "attachment":{
+                                "type":"template",
+                                "payload":{
+                                  "template_type":"button",
+                                  "text":"Would you like to see some examples of how you could use Irrigate?",
+                                  "buttons":[
+                                    {
+                                      "type":"postback",
+                                      "payload":"EXAMPLES",
+                                      "title":"I want to see some examples!"
+                                    },
+                                    {
+                                      "type":"postback",
+                                      "payload":"SIGN_UP",
+                                      "title":"Nope! I got it! How do I sign up?"
+                                    }
+                                  ]
+                                }
+                              }
+                            }
+                          }
+
+                          callSendAPI(user.pageAccessToken, messageData)
+                        }, 5500)
+                      })
+                    }, 2000)
+                  })
                 })
               }
 
               if (event.postback.payload === "EXAMPLES") {
+
+                function getUser() {
+                  return new Promise(function(resolve, reject) {
+                    User.findOne({
+                      'pageID': event.recipient.id
+                    }, (err, user) => {
+                      resolve(user)
+                    })
+                  })
+                }
+
+                getUser().then((user) => {
+
+                })
+              }
+
+              if (event.postback.payload === "SIGN_UP") {
 
                 function getUser() {
                   return new Promise(function(resolve, reject) {
