@@ -263,7 +263,7 @@ irrigateRouter.post('/', (req, res, next) => {
                                     {
                                       "type":"postback",
                                       "payload":"ECOMM_TRACK",
-                                      "title":"I want to have better conversations with customers"
+                                      "title":"I want to sell things via messenger applications"
                                     }
                                   ]
                                 }
@@ -292,7 +292,7 @@ irrigateRouter.post('/', (req, res, next) => {
                   })
                 }
 
-                getUser().then((user) => {})
+                getUser().then((user) => {
                   sendTextMessage(event.sender.id, user.pageAccessToken, 'Great! Let me show you how Irrigate can help.').then(() => {
 
                     setTimeout(() => {
@@ -337,6 +337,8 @@ irrigateRouter.post('/', (req, res, next) => {
                       })
                     }, 1500)
                   })
+
+                })
 
 
 
