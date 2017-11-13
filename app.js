@@ -25,7 +25,7 @@ var affirmationSchema = mongoose.Schema({
 var Message = require('./models/messageModel.js')
 var Group = require('./models/groupModel.js')
 var User = require('./models/userModel.js')
-var member = require('./models/memberModel.js')
+var Member = require('./models/memberModel.js')
 
 // MIDDLEWARE
 app.use('/static', express.static('images'))
