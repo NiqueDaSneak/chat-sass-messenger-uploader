@@ -236,8 +236,168 @@ irrigateRouter.post('/', (req, res, next) => {
                   })
                 }
 
+                getUser.then((user) => {
+                  sendTextMessage(event.sender.id, user.pageAccessToken, 'Awesome! Let’s get started.').then(() => {
+
+                    setTimeout(() => {
+                      sendTextMessage(event.sender.id, user.pageAccessToken, 'There are many components to a messenger conversations and please be aware that for this demo you will be responding with pre programmed responses.').then(() => {
+
+                        setTimeout(() => {
+
+                          let messageData = {
+                            "recipient":{
+                              "id": event.sender.id
+                            },
+                            "message":{
+                              "attachment":{
+                                "type":"template",
+                                "payload":{
+                                  "template_type":"button",
+                                  "text":"So what statement best describes you?",
+                                  "buttons":[
+                                    {
+                                      "type":"postback",
+                                      "payload":"MARK_TRACK",
+                                      "title":"I want to have better conversations with customers"
+                                    },
+                                    {
+                                      "type":"postback",
+                                      "payload":"ECOMM_TRACK",
+                                      "title":"I want to have better conversations with customers"
+                                    }
+                                  ]
+                                }
+                              }
+                            }
+                          }
+
+                          callSendAPI(user.pageAccessToken, messageData)
+                        }, 5000)
+                      })
+                    }, 1500)
+                  })
+                })
 
               }
+
+              if (event.postback.paylod === "MARK_TRACK") {
+
+                function getUser() {
+                  return new Promise(function(resolve, reject) {
+                    User.findOne({
+                      'pageID': event.recipient.id
+                    }, (err, user) => {
+                      resolve(user)
+                    })
+                  })
+                }
+
+                getUser().then((user) => {})
+                  sendTextMessage(event.sender.id, user.pageAccessToken, 'Great! Let me show you how Irrigate can help.').then(() => {
+
+                    setTimeout(() => {
+                      sendTextMessage(event.sender.id, user.pageAccessToken, 'Irrigate works by allowing you to connect with your customers directly via FB messenger.').then(() => {
+
+                        setTimeout(() => {
+                          sendTextMessage(event.sender.id, user.pageAccessToken, 'Irrigate has almost limitless possibilities to what can be sent.').then(() => {
+
+                            setTimeout(() => {
+                              let messageData = {
+                                "recipient":{
+                                  "id": event.sender.id
+                                },
+                                "message":{
+                                  "attachment":{
+                                    "type":"template",
+                                    "payload":{
+                                      "template_type":"button",
+                                      "text":"Would you like to see Irrigate in action or some examples of what has already been done?",
+                                      "buttons":[
+                                        {
+                                          "type":"postback",
+                                          "payload":"HOW_TO_POST",
+                                          "title":"Show me how to post to Irrigate!"
+                                        },
+                                        {
+                                          "type":"postback",
+                                          "payload":"EXAMPLES",
+                                          "title":"I want tosee some examples!"
+                                        }
+                                      ]
+                                    }
+                                  }
+                                }
+                              }
+
+                              callSendAPI(user.pageAccessToken, messageData)
+
+                            }, 2000)
+                          })
+                        }, 2000)
+                      })
+                    }, 1500)
+                  })
+
+
+
+
+
+
+              }
+
+              if (event.postback.paylod === "ECOMM_TRACK") {
+
+                function getUser() {
+                  return new Promise(function(resolve, reject) {
+                    User.findOne({
+                      'pageID': event.recipient.id
+                    }, (err, user) => {
+                      resolve(user)
+                    })
+                  })
+                }
+
+                getUser().then((user) => {
+
+                })
+              }
+
+              if (event.postback.paylod === "HOW_TO_POST") {
+
+                function getUser() {
+                  return new Promise(function(resolve, reject) {
+                    User.findOne({
+                      'pageID': event.recipient.id
+                    }, (err, user) => {
+                      resolve(user)
+                    })
+                  })
+                }
+
+                getUser().then((user) => {
+
+                })
+              }
+
+              if (event.postback.paylod === "EXAMPLES") {
+
+                function getUser() {
+                  return new Promise(function(resolve, reject) {
+                    User.findOne({
+                      'pageID': event.recipient.id
+                    }, (err, user) => {
+                      resolve(user)
+                    })
+                  })
+                }
+
+                getUser().then((user) => {
+
+                })
+              }
+
+
+
           //     console.log('INSIDE POSTBACK FUNC')
           //     console.log(event)
           //     // ENROLLING MEMBERS INTO THE IRRIGATE APP
