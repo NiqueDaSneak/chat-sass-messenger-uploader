@@ -22,54 +22,10 @@ var affirmationSchema = mongoose.Schema({
   text: String
 })
 
-var memberSchema = mongoose.Schema({
-  organization: String,
-  fbID: Number,
-  fullName: String,
-  timezone: Number,
-  photo: String,
-  gender: String,
-  createdDate: Date
-})
-memberSchema.virtual('firstName').get(() => {
-  return this.fullName.split(' ')[0]
-})
-var Member = mongoose.model('Member', memberSchema)
-
-var groupSchema = mongoose.Schema({
-  groupName: String,
-  groupMembers: Array,
-  organization: String
-})
-var Group = mongoose.model('Group', groupSchema)
-
-var userSchema = mongoose.Schema({
-  email: String,
-  organization: String,
-  onboarded: Boolean,
-  username: String,
-  userID: String,
-  pageID: String,
-  pageAccessToken: String,
-  userAccessToken: String,
-  stripeID: String,
-})
-
-var User = mongoose.model('User', userSchema)
-
-var messageSchema = mongoose.Schema({
-  date: String,
-  time: String,
-  text: String,
-  image: String,
-  videoURL: String,
-  organization: String,
-  groupNames: Array,
-  id: String,
-  createdDate: String
-})
-
-var Message = mongoose.model('Message', messageSchema)
+var Message = require('../models/messageModel.js')
+var Group = require('../models/groupModel.js')
+var User = require('../models/userModel.js')
+var member = require('../models/memberModel.js')
 
 // MIDDLEWARE
 app.use('/static', express.static('images'))

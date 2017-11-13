@@ -1,7 +1,11 @@
 'use strict'
 
 const irrigateRouter = require('express').Router()
+
+var Message = require('../models/messageModel.js')
+var Group = require('../models/groupModel.js')
 var User = require('../models/userModel.js')
+var member = require('../models/memberModel.js')
 
 irrigateRouter.post('/', (req, res, next) => {
   var data = req.body
@@ -125,10 +129,10 @@ irrigateRouter.post('/', (req, res, next) => {
 
   function eventPostbackHandler(event) {
     console.log('INSIDE eventPostbackHandler')
+    console.log(event)
     switch (event.postback.payload) {
       case 'GET_STARTED_PAYLOAD':
       // ENROLLING MEMBERS INTO THE IRRIGATE APP
-
 
       function findMember(user) {
         return new Promise(function(resolve, reject) {
