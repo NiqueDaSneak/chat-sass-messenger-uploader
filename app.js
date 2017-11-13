@@ -1145,7 +1145,9 @@ affirmationTodayRouter.post('/', (req, res, next) => {
               let randomResponse = [
                 "Nice pick up!",
                 "Love it!",
-                "This one is great!"
+                "This one is great!",
+                'Nice!',
+                "I'd get this too!"
               ]
 
               User.findOne({
