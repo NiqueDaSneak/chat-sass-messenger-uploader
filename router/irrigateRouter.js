@@ -119,7 +119,7 @@ irrigateRouter.post('/', (req, res, next) => {
           //       })
           //     })
           //
-          // }
+          }
 
           eventPostbackHandler(event)
         } else {
