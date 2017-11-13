@@ -1281,7 +1281,12 @@ irrigateRouter.post('/', (req, res, next) => {
                             {
                               "type":"postback",
                               "payload":"BLK_FRI",
-                              "title":"Music Festival"
+                              "title":"Black Friday"
+                            },
+                            {
+                              "type":"postback",
+                              "payload":"DONE_EXAMPLES",
+                              "title":"Done"
                             }
                           ]
                         }
@@ -1306,7 +1311,54 @@ irrigateRouter.post('/', (req, res, next) => {
                 }
 
                 getUser().then((user) => {
+                  sendTextMessage(event.sender.id, user.pageAccessToken, 'Hey everyone! UC Department of Communication checking in to make sure you register for classes tomorrow starting at 9am! And if you are still unsure what classes you would like to take, check them out here!').then(() => {
 
+                    setTimeout(() => {
+                      sendTextMessage(event.sender.id, user.pageAccessToken, 'http://www.classes.catalystatuc.org/browse/').then(() => {
+
+                        setTimeout(() => {
+                          let messageData = {
+                            "recipient":{
+                              "id": event.sender.id
+                            },
+                            "message":{
+                              "attachment":{
+                                "type":"template",
+                                "payload":{
+                                  "template_type":"button",
+                                  "text":"Choose another example:",
+                                  "buttons":[
+                                    {
+                                      "type":"postback",
+                                      "payload":"EDU",
+                                      "title":"Higher Ed"
+                                    },
+                                    {
+                                      "type":"postback",
+                                      "payload":"FESTIVAL",
+                                      "title":"Music Festival"
+                                    },
+                                    {
+                                      "type":"postback",
+                                      "payload":"BLK_FRI",
+                                      "title":"Black Friday"
+                                    },
+                                    {
+                                      "type":"postback",
+                                      "payload":"DONE_EXAMPLES",
+                                      "title":"Done"
+                                    }
+                                  ]
+                                }
+                              }
+                            }
+                          }
+
+                          callSendAPI(user.pageAccessToken, messageData)
+                        }, 3000)
+                      })
+                    }, 2000)
+                  })
                 })
               }
 
@@ -1323,11 +1375,121 @@ irrigateRouter.post('/', (req, res, next) => {
                 }
 
                 getUser().then((user) => {
+                  sendImageMessage(event.sender.id, user.pageAccessToken, )
 
+                  setTimeout(() => {
+                    sendTextMessage(event.sender.id, user.pageAccessToken, 'Hey! Saw that Multi-Magic was in your lineup for today. There has been a stage change and we didn’t want you missing out. The show will now start at Sawyer Point at 9pm!').then(() => {
+
+                      setTimeout(() => {
+                        sendTextMessage(event.sender.id, user.pageAccessToken, 'https://goo.gl/maps/bKeEXEiYNs92').then(() => {
+
+                          setTimeout(() => {
+                            let messageData = {
+                              "recipient":{
+                                "id": event.sender.id
+                              },
+                              "message":{
+                                "attachment":{
+                                  "type":"template",
+                                  "payload":{
+                                    "template_type":"button",
+                                    "text":"Choose another example:",
+                                    "buttons":[
+                                      {
+                                        "type":"postback",
+                                        "payload":"EDU",
+                                        "title":"Higher Ed"
+                                      },
+                                      {
+                                        "type":"postback",
+                                        "payload":"FESTIVAL",
+                                        "title":"Music Festival"
+                                      },
+                                      {
+                                        "type":"postback",
+                                        "payload":"BLK_FRI",
+                                        "title":"Black Friday"
+                                      },
+                                      {
+                                        "type":"postback",
+                                        "payload":"DONE_EXAMPLES",
+                                        "title":"Done"
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+
+                            callSendAPI(user.pageAccessToken, messageData)
+                          }, 2500)
+                        })
+                      }, 3500)
+                    })
+                  }, 5000)
                 })
               }
 
               if (event.postback.payload === "BLK_FRI") {
+
+                function getUser() {
+                  return new Promise(function(resolve, reject) {
+                    User.findOne({
+                      'pageID': event.recipient.id
+                    }, (err, user) => {
+                      resolve(user)
+                    })
+                  })
+                }
+
+                getUser().then((user) => {
+                  sendTextMessage(event.sender.id, user.pageAccessToken, 'Thanks for connecting with us on Messenger. All new members receive an additional 30% off all purchases. Just enter the code: 30MSG when checking out!').then(() => {
+
+                    setTimeout(() => {
+                      let messageData = {
+                        "recipient":{
+                          "id": event.sender.id
+                        },
+                        "message":{
+                          "attachment":{
+                            "type":"template",
+                            "payload":{
+                              "template_type":"button",
+                              "text":"Choose another example:",
+                              "buttons":[
+                                {
+                                  "type":"postback",
+                                  "payload":"EDU",
+                                  "title":"Higher Ed"
+                                },
+                                {
+                                  "type":"postback",
+                                  "payload":"FESTIVAL",
+                                  "title":"Music Festival"
+                                },
+                                {
+                                  "type":"postback",
+                                  "payload":"BLK_FRI",
+                                  "title":"Black Friday"
+                                },
+                                {
+                                  "type":"postback",
+                                  "payload":"DONE_EXAMPLES",
+                                  "title":"Done"
+                                }
+                              ]
+                            }
+                          }
+                        }
+                      }
+
+                      callSendAPI(user.pageAccessToken, messageData)
+                    }, 3500)
+                  })
+                })
+              }
+
+              if (event.postback.payload === "DONE_EXAMPLES") {
 
                 function getUser() {
                   return new Promise(function(resolve, reject) {
