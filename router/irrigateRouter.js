@@ -64,8 +64,6 @@ irrigateRouter.post('/', (req, res, next) => {
           function eventPostbackHandler(event) {
               if (event.postback.payload === 'GET_STARTED_PAYLOAD') {
                 console.log('payload: ' + event.postback.payload)
-                function getUser() {
-                  return new Promise(function(resolve, reject) {
                     User.findOne({
                       'pageID': event.recipient.id
                     }, (err, user) => {
@@ -111,8 +109,6 @@ irrigateRouter.post('/', (req, res, next) => {
                         }
                       })
                     })
-                  })
-                }
 
 
               }
