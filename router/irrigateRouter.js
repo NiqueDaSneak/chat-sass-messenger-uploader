@@ -116,12 +116,12 @@ irrigateRouter.post('/', (req, res, next) => {
                                                 {
                                                   "type":"postback",
                                                   "payload":"YES_ADMIN",
-                                                  "title":"Yes, I have a page"
+                                                  "title":"Yes"
                                                 },
                                                 {
                                                   "type":"postback",
                                                   "payload":"NO_ADMIN",
-                                                  "title":"No I'm not"
+                                                  "title":"No"
                                                 }
                                               ]
                                             }
@@ -272,17 +272,17 @@ irrigateRouter.post('/', (req, res, next) => {
                                 "type":"template",
                                 "payload":{
                                   "template_type":"button",
-                                  "text":"So what statement best describes you?",
+                                  "text":"I want to...",
                                   "buttons":[
                                     {
                                       "type":"postback",
                                       "payload":"MARK_TRACK",
-                                      "title":"I want to have better conversations with customers"
+                                      "title":"Communicate Better"
                                     },
                                     {
                                       "type":"postback",
                                       "payload":"ECOMM_TRACK",
-                                      "title":"I want to sell things via messenger applications"
+                                      "title":"Sell Things"
                                     }
                                   ]
                                 }
@@ -335,17 +335,17 @@ irrigateRouter.post('/', (req, res, next) => {
                                         {
                                           "type":"postback",
                                           "payload":"HOW_TO_POST",
-                                          "title":"Show me how to post to Irrigate!"
+                                          "title":"How to post"
                                         },
                                         {
                                           "type":"postback",
                                           "payload":"EXAMPLES",
-                                          "title":"I want tosee some examples!"
+                                          "title":"See examples!"
                                         },
                                         {
                                           "type":"postback",
                                           "payload":"SIGN_UP",
-                                          "title":"Nope! I got it! How do I sign up?"
+                                          "title":"Sign Me Up"
                                         }
                                       ]
                                     }
@@ -1171,12 +1171,12 @@ irrigateRouter.post('/', (req, res, next) => {
                               {
                                 "type":"postback",
                                 "payload":"EXAMPLES",
-                                "title":"I want to see some examples!"
+                                "title":"See examples!"
                               },
                               {
                                 "type":"postback",
                                 "payload":"SIGN_UP",
-                                "title":"Nope! I got it! How do I sign up?"
+                                "title":"SIGN ME UP"
                               }
                             ]
                           }
@@ -1223,12 +1223,12 @@ irrigateRouter.post('/', (req, res, next) => {
                                     {
                                       "type":"postback",
                                       "payload":"EXAMPLES",
-                                      "title":"I want to see some examples!"
+                                      "title":"See examples!"
                                     },
                                     {
                                       "type":"postback",
                                       "payload":"SIGN_UP",
-                                      "title":"Nope! I got it! How do I sign up?"
+                                      "title":"SIGN ME UP"
                                     }
                                   ]
                                 }
@@ -1245,6 +1245,89 @@ irrigateRouter.post('/', (req, res, next) => {
               }
 
               if (event.postback.payload === "EXAMPLES") {
+
+                function getUser() {
+                  return new Promise(function(resolve, reject) {
+                    User.findOne({
+                      'pageID': event.recipient.id
+                    }, (err, user) => {
+                      resolve(user)
+                    })
+                  })
+                }
+
+                getUser().then((user) => {
+                  let messageData = {
+                    "recipient":{
+                      "id": event.sender.id
+                    },
+                    "message":{
+                      "attachment":{
+                        "type":"template",
+                        "payload":{
+                          "template_type":"button",
+                          "text":"Choose an example:",
+                          "buttons":[
+                            {
+                              "type":"postback",
+                              "payload":"EDU",
+                              "title":"Higher Ed"
+                            },
+                            {
+                              "type":"postback",
+                              "payload":"FESTIVAL",
+                              "title":"Music Festival"
+                            },
+                            {
+                              "type":"postback",
+                              "payload":"BLK_FRI",
+                              "title":"Music Festival"
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  }
+
+                  callSendAPI(user.pageAccessToken, messageData)
+                })
+              }
+
+              if (event.postback.payload === "EDU") {
+
+                function getUser() {
+                  return new Promise(function(resolve, reject) {
+                    User.findOne({
+                      'pageID': event.recipient.id
+                    }, (err, user) => {
+                      resolve(user)
+                    })
+                  })
+                }
+
+                getUser().then((user) => {
+
+                })
+              }
+
+              if (event.postback.payload === "FESTIVAL") {
+
+                function getUser() {
+                  return new Promise(function(resolve, reject) {
+                    User.findOne({
+                      'pageID': event.recipient.id
+                    }, (err, user) => {
+                      resolve(user)
+                    })
+                  })
+                }
+
+                getUser().then((user) => {
+
+                })
+              }
+
+              if (event.postback.payload === "BLK_FRI") {
 
                 function getUser() {
                   return new Promise(function(resolve, reject) {
@@ -1444,7 +1527,7 @@ irrigateRouter.post('/', (req, res, next) => {
                 "quick_replies":[
                   {
                     "content_type":"text",
-                    "title":"Nope, sign me up!",
+                    "title":"Nope, ign me up!",
                     "payload":"SIGN_UP",
                   },
                   {
