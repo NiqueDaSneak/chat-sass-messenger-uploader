@@ -1277,100 +1277,6 @@ irrigateRouter.post('/', (req, res, next) => {
                   sendTextMessage(event.sender.id, user.pageAccessToken, 'Go ahead and visit us at www.irrigatemsg.com/pricing to sign up!')
                 })
               }
-
-
-
-          //     console.log('INSIDE POSTBACK FUNC')
-          //     console.log(event)
-          //     // ENROLLING MEMBERS INTO THE IRRIGATE APP
-          //     function findMember(user) {
-          //       console.log('INSIDE FINDMEMBER FUNC')
-          //       console.log(event.sender.id)
-          //       return new Promise(function(resolve, reject) {
-                  // Member.findOne({
-                  //   fbID: event.sender.id
-                  // }, (err, member) => {
-                  //   if (err) {
-                  //     console.error(err)
-                  //   }
-                  //   if (member === null) {
-                  //     request({
-                  //       uri: 'https://graph.facebook.com/v2.6/' + event.sender.id + '?access_token=' + user.pageAccessToken,
-                  //       method: 'GET'
-                  //     }, function(error, response, body) {
-                  //       if (error) {
-                  //         return console.error('upload failed:', error)
-                  //       }
-                  //       var facebookProfileResponse = JSON.parse(body)
-                  //
-                  //       // NEED TO FIND ORG NAME AND REPLACE BELOW
-                  //       var newMember = new Member({
-                  //         organization: user.organization,
-                  //         fbID: event.sender.id,
-                  //         fullName: facebookProfileResponse.first_name + ' ' + facebookProfileResponse.last_name,
-                  //         photo: facebookProfileResponse.profile_pic,
-                  //         timezone: facebookProfileResponse.timezone,
-                  //         createdDate: moment().format('MM-DD-YYYY')
-                  //       })
-                  //
-                  //       if (facebookProfileResponse.gender) {
-                  //         newMember.gender = facebookProfileResponse.gender
-                  //       }
-                  //
-                  //       newMember.save((err, member) => {
-                  //         if (err) return console.error(err)
-                  //         // sendTextMessage(event.sender.id, user.pageAccessToken, 'Thanks for signing up. More content to come!')
-                  //         resolve(user)
-                  //       })
-                  //     })
-                  //   } else {
-                  //     // sendTextMessage(event.sender.id, user.pageAccessToken, 'Welcome back!')
-                  //     resolve(user)
-                  //   }
-                  // })
-                // })
-          //     }
-          //
-          //     getUser().then((user) => {
-          //       findMember(user).then((user) => {
-          //         let welcomeMsg = new Promise(function(resolve, reject) {
-          //           sendTextMessage(event.sender.id, user.pageAccessToken, 'Thanks for your interest in Irrigate Messaging, where small businesses engage and grow!')
-          //           resolve()
-          //         })
-          //
-          //         let faqGate = new Promise(function(resolve, reject) {
-          //           let messageData = {
-          //             "recipient":{
-          //               "id": event.sender.id
-          //             },
-          //             "message":{
-          //               "text": "Still wondering how Irrigate can help your business?",
-          //               "quick_replies":[
-          //                 {
-          //                   "content_type":"text",
-          //                   "title":"Yes I am",
-          //                   "payload":"SEND_FAQ",
-          //                 },
-          //                 {
-          //                   "content_type":"text",
-          //                   "title":"No, sign me up!",
-          //                   "payload":"SIGN_UP",
-          //                 },
-          //               ]
-          //             }
-          //           }
-          //           setTimeout(() => {
-          //             callSendAPI(user.pageAccessToken, messageData)
-          //             resolve()
-          //           }, 2000)
-          //         })
-          //
-          //         welcomeMsg.then(() => {
-          //           faqGate
-          //         })
-          //       })
-          //     })
-          //
           }
 
           eventPostbackHandler(event)
@@ -1479,6 +1385,17 @@ irrigateRouter.post('/', (req, res, next) => {
 
 
   function eventMessageHandler(event) {
+
+    function getUser() {
+      return new Promise(function(resolve, reject) {
+        User.findOne({
+          'pageID': event.recipient.id
+        }, (err, user) => {
+          resolve(user)
+        })
+      })
+    }
+
     getUser().then((user) => {
       if (event.message.quick_reply) {
         if (event.message.quick_reply.payload === 'SEND_FAQ') {
