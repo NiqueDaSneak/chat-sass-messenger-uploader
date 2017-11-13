@@ -128,13 +128,12 @@ irrigateRouter.post('/', (req, res, next) => {
   }
 
   function eventPostbackHandler(event) {
-    console.log('INSIDE eventPostbackHandler')
-    console.log(event)
     switch (event.postback.payload) {
       case 'GET_STARTED_PAYLOAD':
       // ENROLLING MEMBERS INTO THE IRRIGATE APP
-
       function findMember(user) {
+        console.log('INSIDE FINDMEMBER FUNC')
+        console.log(event)
         return new Promise(function(resolve, reject) {
           Member.findOne({
             fbID: event.sender.id
