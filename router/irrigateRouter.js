@@ -10,16 +10,19 @@ var User = require('../models/userModel.js')
 var Member = require('../models/memberModel.js')
 
 function sendTextMessage(recipientId, accessToken, textMsg) {
-  var messageData = {
-    "recipient": {
-      "id": recipientId
-    },
-    "message": {
-      "text": textMsg
+  return new Promise(function(resolve, reject) {
+    var messageData = {
+      "recipient": {
+        "id": recipientId
+      },
+      "message": {
+        "text": textMsg
+      }
     }
-  }
 
-  callSendAPI(accessToken, messageData)
+    callSendAPI(accessToken, messageData)
+    resolve()
+  })
 }
 
 function callSendAPI(accessToken, messageData) {
@@ -57,60 +60,158 @@ irrigateRouter.post('/', (req, res, next) => {
       var timeOfEvent = entry.time
       // Iterate over each messaging event
       entry.messaging.forEach(function(event) {
-        console.log('BEFORE EVENT HANDLERS ARE CALLED')
         if (event.message) {
           eventMessageHandler(event)
         } else if (event.postback) {
-          console.log('BEFORE EVENT POSTBACK HANDLER')
 
           function eventPostbackHandler(event) {
+
               if (event.postback.payload === 'GET_STARTED_PAYLOAD') {
-                console.log('payload: ' + event.postback.payload)
+                getUser().then((user) => {
+                  findMember(user).then((user) => {
+                    sendTextMessage(event.sender.id, user.pageAccessToken, 'Hi! Welcome to the Irrigate Messaging Experience.').then(() => {
+
+                      setTimeout(() => {
+                        sendTextMessage(event.sender.id, user.pageAccessToken, 'You are going to learn a lot today...').then(() => {
+
+                          setTimeout(() => {
+                            sendTextMessage(event.sender.id, user.pageAccessToken, 'so if you have any questions or need to restart, use the menu below the chat').then(() => {
+
+                              setTimeout(() => {
+                                sendTextMessage(event.sender.id, user.pageAccessToken, 'We know this is a new experience for you so let’s go over some procedures so you can get the most out of your time').then(() => {
+
+                                  setTimeout(() => {
+                                    sendTextMessage(event.sender.id, user.pageAccessToken, 'First, in order for irrigate to work, you need to be an admin on a FB page.').then(() => {
+
+                                      let messageData = {
+                                        "recipient":{
+                                          "id": event.sender.id
+                                        },
+                                        "message":{
+                                          "attachment":{
+                                            "type":"template",
+                                            "payload":{
+                                              "template_type":"button",
+                                              "text":"Are you an admin for a page?",
+                                              "buttons":[
+                                                {
+                                                  "type":"postback",
+                                                  "payload":"YES_ADMIN",
+                                                  "title":"Yes, I have a page"
+                                                },
+                                                {
+                                                  "type":"postback",
+                                                  "payload":"NO_ADMIN",
+                                                  "title":"No I'm not"
+                                                }
+                                              ]
+                                            }
+                                          }
+                                        }
+                                      }
+
+                                      setTimeout(() => {
+                                        callSendAPI(user.pageAccessToken, messageData)
+                                      }, 2000)
+                                    })
+                                  }, 3500)
+                                })
+                              }, 2000)
+                            })
+                          }, 1500)
+                        })
+                      }, 1500)
+                    })
+
+                  })
+                })
+
+                function getUser() {
+                  return new Promise(function(resolve, reject) {
                     User.findOne({
                       'pageID': event.recipient.id
                     }, (err, user) => {
-                      Member.findOne({
-                        fbID: event.sender.id
-                      }, (err, member) => {
-                        if (err) {
-                          console.error(err)
-                        }
-                        if (member === null) {
-                          request({
-                            uri: 'https://graph.facebook.com/v2.6/' + event.sender.id + '?access_token=' + user.pageAccessToken,
-                            method: 'GET'
-                          }, function(error, response, body) {
-                            if (error) {
-                              return console.error('upload failed:', error)
-                            }
-                            var facebookProfileResponse = JSON.parse(body)
-
-                            // NEED TO FIND ORG NAME AND REPLACE BELOW
-                            var newMember = new Member({
-                              organization: user.organization,
-                              fbID: event.sender.id,
-                              fullName: facebookProfileResponse.first_name + ' ' + facebookProfileResponse.last_name,
-                              photo: facebookProfileResponse.profile_pic,
-                              timezone: facebookProfileResponse.timezone,
-                              createdDate: moment().format('MM-DD-YYYY')
-                            })
-
-                            if (facebookProfileResponse.gender) {
-                              newMember.gender = facebookProfileResponse.gender
-                            }
-
-                            newMember.save((err, member) => {
-                              if (err) return console.error(err)
-                              sendTextMessage(event.sender.id, user.pageAccessToken, 'Thanks for signing up. More content to come!')
-                              // resolve(user)
-                            })
-                          })
-                        } else {
-                          sendTextMessage(event.sender.id, user.pageAccessToken, 'Welcome back!')
-                          // resolve(user)
-                        }
-                      })
+                      resolve(user)
                     })
+                  })
+                }
+
+                function findMember(user) {
+                  return new Promise(function(resolve, reject) {
+                    Member.findOne({
+                      fbID: event.sender.id
+                    }, (err, member) => {
+                      if (err) {
+                        console.error(err)
+                      }
+                      if (member === null) {
+                        request({
+                          uri: 'https://graph.facebook.com/v2.6/' + event.sender.id + '?access_token=' + user.pageAccessToken,
+                          method: 'GET'
+                        }, function(error, response, body) {
+                          if (error) {
+                            return console.error('upload failed:', error)
+                          }
+                          var facebookProfileResponse = JSON.parse(body)
+
+                          // NEED TO FIND ORG NAME AND REPLACE BELOW
+                          var newMember = new Member({
+                            organization: user.organization,
+                            fbID: event.sender.id,
+                            fullName: facebookProfileResponse.first_name + ' ' + facebookProfileResponse.last_name,
+                            photo: facebookProfileResponse.profile_pic,
+                            timezone: facebookProfileResponse.timezone,
+                            createdDate: moment().format('MM-DD-YYYY')
+                          })
+
+                          if (facebookProfileResponse.gender) {
+                            newMember.gender = facebookProfileResponse.gender
+                          }
+
+                          newMember.save((err, member) => {
+                            if (err) return console.error(err)
+                            // sendTextMessage(event.sender.id, user.pageAccessToken, 'Thanks for signing up. More content to come!')
+                            resolve(user)
+                          })
+                        })
+                      } else {
+                        // sendTextMessage(event.sender.id, user.pageAccessToken, 'Welcome back!')
+                        resolve(user)
+                      }
+                    })
+
+                  })
+                }
+              }
+
+              if (event.postback.paylod === "NO_ADMIN") {
+                console.log(event.postback.payload)
+
+                function getUser() {
+                  return new Promise(function(resolve, reject) {
+                    User.findOne({
+                      'pageID': event.recipient.id
+                    }, (err, user) => {
+                      resolve(user)
+                    })
+                  })
+                }
+
+
+              }
+
+              if (event.postback.paylod === "YES_ADMIN") {
+                console.log(event.postback.payload)
+
+                function getUser() {
+                  return new Promise(function(resolve, reject) {
+                    User.findOne({
+                      'pageID': event.recipient.id
+                    }, (err, user) => {
+                      resolve(user)
+                    })
+                  })
+                }
 
 
               }
