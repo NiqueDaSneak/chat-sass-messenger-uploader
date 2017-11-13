@@ -224,7 +224,7 @@ irrigateRouter.post('/', (req, res, next) => {
 
               }
 
-              if (event.postback.paylod === "YES_ADMIN") {
+              if (event.postback.payload === "YES_ADMIN") {
 
                 function getUser() {
                   return new Promise(function(resolve, reject) {
@@ -280,7 +280,7 @@ irrigateRouter.post('/', (req, res, next) => {
 
               }
 
-              if (event.postback.paylod === "MARK_TRACK") {
+              if (event.postback.payload === "MARK_TRACK") {
 
                 function getUser() {
                   return new Promise(function(resolve, reject) {
@@ -345,7 +345,7 @@ irrigateRouter.post('/', (req, res, next) => {
 
               }
 
-              if (event.postback.paylod === "ECOMM_TRACK") {
+              if (event.postback.payload === "ECOMM_TRACK") {
 
                 function getUser() {
                   return new Promise(function(resolve, reject) {
@@ -362,7 +362,7 @@ irrigateRouter.post('/', (req, res, next) => {
                 })
               }
 
-              if (event.postback.paylod === "HOW_TO_POST") {
+              if (event.postback.payload === "HOW_TO_POST") {
 
                 function getUser() {
                   return new Promise(function(resolve, reject) {
@@ -379,7 +379,7 @@ irrigateRouter.post('/', (req, res, next) => {
                 })
               }
 
-              if (event.postback.paylod === "EXAMPLES") {
+              if (event.postback.payload === "EXAMPLES") {
 
                 function getUser() {
                   return new Promise(function(resolve, reject) {
