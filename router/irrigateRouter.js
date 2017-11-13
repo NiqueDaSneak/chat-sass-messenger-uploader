@@ -236,7 +236,7 @@ irrigateRouter.post('/', (req, res, next) => {
                   })
                 }
 
-                getUser.then((user) => {
+                getUser().then((user) => {
                   sendTextMessage(event.sender.id, user.pageAccessToken, 'Awesome! Let’s get started.').then(() => {
 
                     setTimeout(() => {
