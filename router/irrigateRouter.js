@@ -1283,11 +1283,6 @@ irrigateRouter.post('/', (req, res, next) => {
                               "type":"postback",
                               "payload":"BLK_FRI",
                               "title":"Black Friday"
-                            },
-                            {
-                              "type":"postback",
-                              "payload":"DONE_EXAMPLES",
-                              "title":"Done"
                             }
                           ]
                         }
@@ -1398,11 +1393,6 @@ irrigateRouter.post('/', (req, res, next) => {
                                       },
                                       {
                                         "type":"postback",
-                                        "payload":"FESTIVAL",
-                                        "title":"Music Festival"
-                                      },
-                                      {
-                                        "type":"postback",
                                         "payload":"BLK_FRI",
                                         "title":"Black Friday"
                                       },
@@ -1462,11 +1452,6 @@ irrigateRouter.post('/', (req, res, next) => {
                                   "type":"postback",
                                   "payload":"FESTIVAL",
                                   "title":"Music Festival"
-                                },
-                                {
-                                  "type":"postback",
-                                  "payload":"BLK_FRI",
-                                  "title":"Black Friday"
                                 },
                                 {
                                   "type":"postback",
