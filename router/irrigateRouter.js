@@ -86,6 +86,22 @@ irrigateRouter.post('/', (req, res, next) => {
 
           function eventPostbackHandler(event) {
 
+              if (event.postback.payload === 'CONTACT_US') {
+
+                function getUser() {
+                  return new Promise(function(resolve, reject) {
+                    User.findOne({
+                      'pageID': event.recipient.id
+                    }, (err, user) => {
+                      resolve(user)
+                    })
+                  })
+                }
+                getUser().then((user) => {
+                  sendTextMessage(event.sender.id, user.pageAccessToken, 'Ok great! You can message us right here and we will get back to you ASAP. If you want to use email, reach out to our CEO: dom@irrigatemsg.com')
+                })
+              }
+
               if (event.postback.payload === 'GET_STARTED_PAYLOAD') {
                 getUser().then((user) => {
                   findMember(user).then((user) => {
@@ -364,12 +380,6 @@ irrigateRouter.post('/', (req, res, next) => {
                   })
 
                 })
-
-
-
-
-
-
               }
 
               if (event.postback.payload === "ECOMM_TRACK") {
