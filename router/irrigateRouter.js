@@ -1204,45 +1204,56 @@ irrigateRouter.post('/', (req, res, next) => {
 
                 getUser().then((user) => {
                   sendTextMessage(event.sender.id, user.pageAccessToken, 'Sweet! Check out these screenshots showing how easy it is to post via Irrigate.').then(() => {
+
                     setTimeout(() => {
-                      let imgPromise = new Promise(function(resolve, reject) {
+                      let imgPromise1 = new Promise(function(resolve, reject) {
                         sendImageMessage(event.sender.id, user.pageAccessToken, 'https://chat-sass-messenger-uploader.herokuapp.com/static/send1.png')
-                        sendImageMessage(event.sender.id, user.pageAccessToken, 'https://chat-sass-messenger-uploader.herokuapp.com/static/send2.png')
                         resolve()
                       })
 
-                      imgPromise.then(() => {
-                        sendTextMessage(event.sender.id, user.pageAccessToken, 'See how easy that was?').then(() => {
+                      let imgPromise2 = new Promise(function(resolve, reject) {
+                        setTimeout(() => {
+                          sendImageMessage(event.sender.id, user.pageAccessToken, 'https://chat-sass-messenger-uploader.herokuapp.com/static/send2.png')
+                          resolve()
+                        }, 3500)
+                      })
+
+                      imgPromise1.then(() => {
+                        imgPromise2.then(() => {
                           setTimeout(() => {
-                            let messageData = {
-                              "recipient":{
-                                "id": event.sender.id
-                              },
-                              "message":{
-                                "attachment":{
-                                  "type":"template",
-                                  "payload":{
-                                    "template_type":"button",
-                                    "text":"Would you like to see some examples of how you could use Irrigate?",
-                                    "buttons":[
-                                      {
-                                        "type":"postback",
-                                        "payload":"EXAMPLES",
-                                        "title":"See examples!"
-                                      },
-                                      {
-                                        "type":"postback",
-                                        "payload":"SIGN_UP",
-                                        "title":"SIGN ME UP"
+                            sendTextMessage(event.sender.id, user.pageAccessToken, 'See how easy that was?').then(() => {
+                              setTimeout(() => {
+                                let messageData = {
+                                  "recipient":{
+                                    "id": event.sender.id
+                                  },
+                                  "message":{
+                                    "attachment":{
+                                      "type":"template",
+                                      "payload":{
+                                        "template_type":"button",
+                                        "text":"Would you like to see some examples of how you could use Irrigate?",
+                                        "buttons":[
+                                          {
+                                            "type":"postback",
+                                            "payload":"EXAMPLES",
+                                            "title":"See examples!"
+                                          },
+                                          {
+                                            "type":"postback",
+                                            "payload":"SIGN_UP",
+                                            "title":"SIGN ME UP"
+                                          }
+                                        ]
                                       }
-                                    ]
+                                    }
                                   }
                                 }
-                              }
-                            }
 
-                            callSendAPI(user.pageAccessToken, messageData)
-                          }, 6000)
+                                callSendAPI(user.pageAccessToken, messageData)
+                              }, 6000)
+                            })
+                          }, 2800)
                         })
                       })
                     }, 2000)
