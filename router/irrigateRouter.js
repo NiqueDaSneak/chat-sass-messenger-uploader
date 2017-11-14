@@ -101,7 +101,7 @@ irrigateRouter.post('/', (req, res, next) => {
                                 sendTextMessage(event.sender.id, user.pageAccessToken, 'We know this is a new experience for you so let’s go over some procedures so you can get the most out of your time').then(() => {
 
                                   setTimeout(() => {
-                                    sendTextMessage(event.sender.id, user.pageAccessToken, 'First, in order for irrigate to work, you need to be an admin on a FB page.').then(() => {
+                                    sendTextMessage(event.sender.id, user.pageAccessToken, 'First, in order for Irrigate to work, you need to be an admin on a FB page.').then(() => {
 
                                       let messageData = {
                                         "recipient":{
@@ -1207,7 +1207,7 @@ irrigateRouter.post('/', (req, res, next) => {
 
                     setTimeout(() => {
                       sendImageMessage(event.sender.id, user.pageAccessToken, 'https://chat-sass-messenger-uploader.herokuapp.com/static/send1.png')
-                      sendImageMessage(event.sender.id, user.pageAccessToken, 'https://chat-sass-messenger-uploader.herokuapp.com/static/1.png')
+                      sendImageMessage(event.sender.id, user.pageAccessToken, 'https://chat-sass-messenger-uploader.herokuapp.com/static/send2.png')
 
                       sendTextMessage(event.sender.id, user.pageAccessToken, 'See how easy that was?').then(() => {
 
