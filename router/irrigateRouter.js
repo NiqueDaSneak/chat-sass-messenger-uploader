@@ -1429,44 +1429,49 @@ irrigateRouter.post('/', (req, res, next) => {
                 }
 
                 getUser().then((user) => {
-                  sendTextMessage(event.sender.id, user.pageAccessToken, 'Thanks for connecting with us on Messenger. All new members receive an additional 30% off all purchases. Just enter the code: 30MSG when checking out!').then(() => {
 
-                    setTimeout(() => {
-                      let messageData = {
-                        "recipient":{
-                          "id": event.sender.id
-                        },
-                        "message":{
-                          "attachment":{
-                            "type":"template",
-                            "payload":{
-                              "template_type":"button",
-                              "text":"Choose another example:",
-                              "buttons":[
-                                {
-                                  "type":"postback",
-                                  "payload":"EDU",
-                                  "title":"Higher Ed"
-                                },
-                                {
-                                  "type":"postback",
-                                  "payload":"FESTIVAL",
-                                  "title":"Music Festival"
-                                },
-                                {
-                                  "type":"postback",
-                                  "payload":"DONE_EXAMPLES",
-                                  "title":"Done"
-                                }
-                              ]
+                  sendImageMessage(event.sender.id, user.pageAccessToken, 'https://chat-sass-messenger-uploader.herokuapp.com/static/coupon.png')
+
+                  setTimeout(() => {
+                    sendTextMessage(event.sender.id, user.pageAccessToken, 'Thanks for connecting with us on Messenger. All new members receive an additional 30% off all purchases. Just enter the code: 30MSG when checking out!').then(() => {
+
+                      setTimeout(() => {
+                        let messageData = {
+                          "recipient":{
+                            "id": event.sender.id
+                          },
+                          "message":{
+                            "attachment":{
+                              "type":"template",
+                              "payload":{
+                                "template_type":"button",
+                                "text":"Choose another example:",
+                                "buttons":[
+                                  {
+                                    "type":"postback",
+                                    "payload":"EDU",
+                                    "title":"Higher Ed"
+                                  },
+                                  {
+                                    "type":"postback",
+                                    "payload":"FESTIVAL",
+                                    "title":"Music Festival"
+                                  },
+                                  {
+                                    "type":"postback",
+                                    "payload":"DONE_EXAMPLES",
+                                    "title":"Done"
+                                  }
+                                ]
+                              }
                             }
                           }
                         }
-                      }
 
-                      callSendAPI(user.pageAccessToken, messageData)
-                    }, 3500)
-                  })
+                        callSendAPI(user.pageAccessToken, messageData)
+                      }, 3500)
+                    })
+                  }, 2000)
                 })
               }
 
