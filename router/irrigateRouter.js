@@ -1206,8 +1206,8 @@ irrigateRouter.post('/', (req, res, next) => {
                   sendTextMessage(event.sender.id, user.pageAccessToken, 'Sweet! Check out this gif showing how easy it is to post via Irrigate.').then(() => {
 
                     setTimeout(() => {
-                      sendImageMessage(event.sender.id, user.pageAccessToken, 'https://chat-sass-messenger-uploader.herokuapp.com/static/send1.gif')
-                      sendImageMessage(event.sender.id, user.pageAccessToken, 'https://chat-sass-messenger-uploader.herokuapp.com/static/1.gif')
+                      sendImageMessage(event.sender.id, user.pageAccessToken, 'https://chat-sass-messenger-uploader.herokuapp.com/static/send1.png')
+                      sendImageMessage(event.sender.id, user.pageAccessToken, 'https://chat-sass-messenger-uploader.herokuapp.com/static/1.png')
 
                       sendTextMessage(event.sender.id, user.pageAccessToken, 'See how easy that was?').then(() => {
 
