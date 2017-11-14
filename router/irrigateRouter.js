@@ -1,6 +1,7 @@
 'use strict'
 
 var request = require('request')
+var moment = require('moment')
 
 const irrigateRouter = require('express').Router()
 
@@ -1166,7 +1167,7 @@ irrigateRouter.post('/', (req, res, next) => {
                               {
                                 "type":"postback",
                                 "payload":"HOW_TO_POST",
-                                "title":"Show me how to post to Irrigate!"
+                                "title":"Show me how to post"
                               },
                               {
                                 "type":"postback",
