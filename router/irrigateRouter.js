@@ -1366,7 +1366,7 @@ irrigateRouter.post('/', (req, res, next) => {
                 }
 
                 getUser().then((user) => {
-                  sendImageMessage(event.sender.id, user.pageAccessToken, )
+                  sendImageMessage(event.sender.id, user.pageAccessToken, 'https://www.chat-sass-messenger-uploader.com/static/multimagicphoto.jpg')
 
                   setTimeout(() => {
                     sendTextMessage(event.sender.id, user.pageAccessToken, 'Hey! Saw that Multi-Magic was in your lineup for today. There has been a stage change and we didn’t want you missing out. The show will now start at Sawyer Point at 9pm!').then(() => {
