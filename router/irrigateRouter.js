@@ -1489,8 +1489,82 @@ irrigateRouter.post('/', (req, res, next) => {
 
                 getUser().then((user) => {
 
+                  sendTextMessage(event.sender.id, user.pageAccessToken, 'Pretty cool right?').then(() => {
+
+                    setTimeout(() => {
+                      let messageData = {
+                        "recipient":{
+                          "id": event.sender.id
+                        },
+                        "message":{
+                          "attachment":{
+                            "type":"template",
+                            "payload":{
+                              "template_type":"button",
+                              "text":"Irrigate can really do a lot. Still have questions about Irrigate? Add a customize pitch? Would you like CRM integrations..?",
+                              "buttons":[
+                                {
+                                  "type":"postback",
+                                  "payload":"CUSTOM",
+                                  "title":"Customize?"
+                                },
+                                {
+                                  "type":"postback",
+                                  "payload":"GENERAL",
+                                  "title":"I Have A Question"
+                                },
+                                {
+                                  "type":"postback",
+                                  "payload":"SIGN_UP",
+                                  "title":"Sign Me Up"
+                                }
+                              ]
+                            }
+                          }
+                        }
+                      }
+
+                      callSendAPI(user.pageAccessToken, messageData)
+                    }, 1500)
+                  })
+
                 })
               }
+
+              if (event.postback.payload === "GENERAL") {
+
+                function getUser() {
+                  return new Promise(function(resolve, reject) {
+                    User.findOne({
+                      'pageID': event.recipient.id
+                    }, (err, user) => {
+                      resolve(user)
+                    })
+                  })
+                }
+
+                getUser().then((user) => {
+                  sendTextMessage(event.sender.id, user.pageAccessToken, 'Ok great! You can message any additional ideas right here and we will get back to you ASAP.')
+                })
+              }
+
+              if (event.postback.payload === "CUSTOM") {
+
+                function getUser() {
+                  return new Promise(function(resolve, reject) {
+                    User.findOne({
+                      'pageID': event.recipient.id
+                    }, (err, user) => {
+                      resolve(user)
+                    })
+                  })
+                }
+
+                getUser().then((user) => {
+                  sendTextMessage(event.sender.id, user.pageAccessToken, 'Ok great! You can message any additional ideas right here and we will get back to you ASAP.')
+                })
+              }
+
 
               if (event.postback.payload === "SIGN_UP") {
 
