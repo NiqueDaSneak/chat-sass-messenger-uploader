@@ -89,7 +89,7 @@ irrigateRouter.post('/', (req, res, next) => {
               if (event.postback.payload === 'GET_STARTED_PAYLOAD') {
                 getUser().then((user) => {
                   findMember(user).then((user) => {
-                    sendTextMessage(event.sender.id, user.pageAccessToken, 'Hi! Welcome to the Irrigate Messaging Experience.').then(() => {
+                    sendTextMessage(event.sender.id, user.pageAccessToken, 'Hi! Welcome to the Irrigate Messaging Messenger Experience. Irrigate transforms Facebook Messenger into a Conversational Marketing tool so you can connect, send quick replies automatically, sell your products in Messenger and more.').then(() => {
 
                       setTimeout(() => {
                         sendTextMessage(event.sender.id, user.pageAccessToken, 'You are going to learn a lot today...').then(() => {
@@ -1206,7 +1206,9 @@ irrigateRouter.post('/', (req, res, next) => {
                   sendTextMessage(event.sender.id, user.pageAccessToken, 'Sweet! Check out this gif showing how easy it is to post via Irrigate.').then(() => {
 
                     setTimeout(() => {
-                      sendImageMessage(event.sender.id, user.pageAccessToken, 'https://chat-sass-messenger-uploader.herokuapp.com/static/how-to-post.gif')
+                      sendImageMessage(event.sender.id, user.pageAccessToken, 'https://chat-sass-messenger-uploader.herokuapp.com/static/send1.gif')
+                      sendImageMessage(event.sender.id, user.pageAccessToken, 'https://chat-sass-messenger-uploader.herokuapp.com/static/1.gif')
+
                       sendTextMessage(event.sender.id, user.pageAccessToken, 'See how easy that was?').then(() => {
 
                         setTimeout(() => {
@@ -1501,7 +1503,7 @@ irrigateRouter.post('/', (req, res, next) => {
                             "type":"template",
                             "payload":{
                               "template_type":"button",
-                              "text":"Irrigate can really do a lot. Still have questions about Irrigate? Add a customize pitch? Would you like CRM integrations..?",
+                              "text":"Irrigate can really do a lot. Still have questions about Irrigate? Would you like CRM integrations..?",
                               "buttons":[
                                 {
                                   "type":"postback",
