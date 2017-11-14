@@ -1330,11 +1330,6 @@ irrigateRouter.post('/', (req, res, next) => {
                                   "buttons":[
                                     {
                                       "type":"postback",
-                                      "payload":"EDU",
-                                      "title":"Higher Ed"
-                                    },
-                                    {
-                                      "type":"postback",
                                       "payload":"FESTIVAL",
                                       "title":"Music Festival"
                                     },
