@@ -148,15 +148,15 @@ irrigateRouter.post('/', (req, res, next) => {
 
                                       setTimeout(() => {
                                         callSendAPI(user.pageAccessToken, messageData)
-                                      }, 2000)
+                                      }, 4000)
                                     })
-                                  }, 3500)
+                                  }, 7000)
                                 })
-                              }, 2000)
+                              }, 4000)
                             })
-                          }, 1500)
+                          }, 3000)
                         })
-                      }, 1500)
+                      }, 3000)
                     })
 
                   })
