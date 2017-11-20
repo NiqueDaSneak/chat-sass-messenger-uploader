@@ -1154,7 +1154,10 @@ affirmationTodayRouter.post('/', (req, res, next) => {
                       ]
                     }
                   }
-                  callSendAPI(user.pageAccessToken, messageData)
+                  
+                  setTimeout(() => {
+                    callSendAPI(user.pageAccessToken, messageData)
+                  }, 3000)
 
                 })
               })
