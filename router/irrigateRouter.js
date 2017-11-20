@@ -111,7 +111,7 @@ irrigateRouter.post('/', (req, res, next) => {
                         sendTextMessage(event.sender.id, user.pageAccessToken, 'You are going to learn a lot today...').then(() => {
 
                           setTimeout(() => {
-                            sendTextMessage(event.sender.id, user.pageAccessToken, '...so if you have any questions or need to restart, use the menu below the chat.').then(() => {
+                            sendTextMessage(event.sender.id, user.pageAccessToken, '...so if you have any questions or need to restart, use the menu below the chat, or visit us at www.irrigatemsg.com.').then(() => {
 
                               setTimeout(() => {
                                 sendTextMessage(event.sender.id, user.pageAccessToken, 'We know this is a new experience for you so let’s go over some procedures so you can get the most out of your time.').then(() => {
@@ -152,7 +152,7 @@ irrigateRouter.post('/', (req, res, next) => {
                                     })
                                   }, 7000)
                                 })
-                              }, 4000)
+                              }, 5000)
                             })
                           }, 3000)
                         })
