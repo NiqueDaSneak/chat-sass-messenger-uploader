@@ -117,7 +117,7 @@ irrigateRouter.post('/', (req, res, next) => {
                                 sendTextMessage(event.sender.id, user.pageAccessToken, 'We know this is a new experience for you so let’s go over some procedures so you can get the most out of your time.').then(() => {
 
                                   setTimeout(() => {
-                                    sendTextMessage(event.sender.id, user.pageAccessToken, 'First, in order for Irrigate to work, you need to be an admin on a FB page.').then(() => {
+                                    sendTextMessage(event.sender.id, user.pageAccessToken, 'This demo focuses on Facebook Messenger, although Irrigate will soon be available on other messaging apps. For now, you must be an admin of a Facebook page to use Irrigate, but anyone, Admin or not, can view this demo. ').then(() => {
 
                                       let messageData = {
                                         "recipient":{
