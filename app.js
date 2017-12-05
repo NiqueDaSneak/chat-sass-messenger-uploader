@@ -91,7 +91,11 @@ app.post('/', (req, res) => {
             if (user.messageResponse) {
               // send it to event.sender.id as a text message
             } else {
-              sendTextMessage(event.sender.id, user.pageAccessToken, 'Thanks for your message! We will get back to you shortly.')
+              if (event.recipient.id === '311591712359140') {
+                console.log('RailHouse got a message')
+              } else {
+                sendTextMessage(event.sender.id, user.pageAccessToken, 'Thanks for your message! We will get back to you shortly.')
+              }
             }
           })
         } else if (event.postback) {
@@ -168,6 +172,8 @@ app.post('/', (req, res) => {
     })
     res.sendStatus(200)
   } else {
+
+
 
     // SENDING A SCHEDULED MESSAGE
     User.findOne({
@@ -669,7 +675,7 @@ affirmationTodayRouter.post('/', (req, res, next) => {
       entry.messaging.forEach(function(event) {
 
         if (event.message) {
-          
+
           function getUser() {
             return new Promise(function(resolve, reject) {
               User.findOne({
@@ -1792,7 +1798,7 @@ affirmationTodayRouter.post('/', (req, res, next) => {
     })
     res.sendStatus(200)
   } else {
-
+    console.log('sending message')
     // SENDING A SCHEDULED MESSAGE
     User.findOne({
       'organization': req.body.organization
