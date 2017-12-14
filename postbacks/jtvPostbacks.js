@@ -2,6 +2,11 @@
 
 var db = require('../data/jtvData.js')
 
+var Message = require('../models/messageModel.js')
+var Group = require('../models/groupModel.js')
+var User = require('../models/userModel.js')
+var Member = require('../models/memberModel.js')
+
 module.exports = (event) => {
   if (event.postback.payload === "GET_STARTED_PAYLOAD") {
     // ENROLLING MEMBERS INTO THE IRRIGATE APP
