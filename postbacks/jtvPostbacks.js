@@ -8,6 +8,7 @@ var User = require('../models/userModel.js')
 var Member = require('../models/memberModel.js')
 
 var request = require('request')
+var moment = require('moment')
 
 
 module.exports = (event) => {
