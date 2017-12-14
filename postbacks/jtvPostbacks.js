@@ -7,6 +7,9 @@ var Group = require('../models/groupModel.js')
 var User = require('../models/userModel.js')
 var Member = require('../models/memberModel.js')
 
+var request = require('request')
+
+
 module.exports = (event) => {
   if (event.postback.payload === "GET_STARTED_PAYLOAD") {
     // ENROLLING MEMBERS INTO THE IRRIGATE APP
