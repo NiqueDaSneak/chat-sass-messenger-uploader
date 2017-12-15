@@ -279,22 +279,25 @@ module.exports = (event) => {
         elements.push(obj)
       }
 
-      let messageData = {
-        "recipient":{
-          "id": event.sender.id
-        },
-        "message":{
-          "attachment":{
-            "type":"template",
-            "payload":{
-              "template_type":"generic",
-              "sharable": true,
-              "elements": elements
+      getUser().then((user) => {
+        let messageData = {
+          "recipient":{
+            "id": event.sender.id
+          },
+          "message":{
+            "attachment":{
+              "type":"template",
+              "payload":{
+                "template_type":"generic",
+                "sharable": true,
+                "elements": elements
+              }
             }
           }
         }
-      }
-      callSendAPI(user.pageAccessToken, messageData)
+        callSendAPI(user.pageAccessToken, messageData)
+      })
+
       // send carosel of rings in db.rings
       // item
         // buttons
