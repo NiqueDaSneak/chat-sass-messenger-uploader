@@ -317,14 +317,14 @@ module.exports = (event) => {
           console.log('none')
           let newUser = {
             id: event.sender.id,
-            cart: [ event.postback.payload.split('_')[2] ]
+            cart: [ event.postback.payload.split('_')[3] ]
           }
           db.users.save(newUser)
           console.log(db.users.find({ id: event.sender.id }))
         } else {
 
           let cart = db.users.find({ 'id': event.sender.id })[0].cart
-          cart.push(event.postback.payload.split('_')[2])
+          cart.push(event.postback.payload.split('_')[3])
 
           var query = {
             id: event.sender.id
