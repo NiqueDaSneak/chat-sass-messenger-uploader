@@ -261,7 +261,7 @@ module.exports = (event) => {
         obj.buttons = [
           {
             "type":"postback",
-            "title":"Browse Rings",
+            "title":"Add to Cart",
             "payload":"ADD_CART_RINGS_" + db.rings.find()[i].id
           },
           {
