@@ -59,12 +59,10 @@ module.exports = (event) => {
               newMember.save((err, member) => {
                 if (err) return console.error(err)
                 sendTextMessage(event.sender.id, user.pageAccessToken, 'This is some great intro copy to explain the experience!')
-                setTimeout(() => {
                   sendVideoMessage(event.sender.id, user.pageAccessToken, 'https://chat-sass-messenger-uploader.herokuapp.com/data/jtv.mp4')
-                }, 3000)
                 setTimeout(() => {
                   sendTextMessage(event.sender.id, user.pageAccessToken, "Tap the 'Start Shopping' button below to begin.")
-                }, 7000)
+                }, 8000)
                 resolve()
               })
             })
