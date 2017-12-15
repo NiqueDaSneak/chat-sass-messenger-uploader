@@ -251,6 +251,50 @@ module.exports = (event) => {
     }
 
     if (event.postback.payload.split('_')[2] === "RINGS") {
+
+      var elements = []
+      for (var i = 0; i < db.rings.find().length; i++) {
+        let obj = {}
+        obj.title = db.rings.find()[i].title
+        obj.image_url = db.rings.find()[i].imageURL
+        obj.subtitle = db.rings.find()[i].price
+        obj.buttons = [
+          {
+            "type":"postback",
+            "title":"Browse Rings",
+            "payload":"ADD_CART_RINGS_" + db.rings.find()[i].id
+          },
+          {
+            "title":"View Details",
+            "type":"web_url",
+            "url": db.rings.find()[i].siteURL,
+            "webview_height_ratio":"full"
+          },
+          {
+            "type":"postback",
+            "title":"Show Categories",
+            "payload":"SHOW_CATS"
+          }
+        ]
+        elements.push(obj)
+      }
+
+      let messageData = {
+        "recipient":{
+          "id": event.sender.id
+        },
+        "message":{
+          "attachment":{
+            "type":"template",
+            "payload":{
+              "template_type":"generic",
+              "sharable": true,
+              "elements": elements
+            }
+          }
+        }
+      }
+      callSendAPI(user.pageAccessToken, messageData)
       // send carosel of rings in db.rings
       // item
         // buttons
