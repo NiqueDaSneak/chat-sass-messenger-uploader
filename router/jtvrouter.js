@@ -25,6 +25,7 @@ jtvRouter.post('/', (req, res, next) => {
           // eventMessageHandler(event)
         } else if (event.postback) {
           eventPostbackHandler(event)
+          res.sendStatus(200)
         }
       })
     })
