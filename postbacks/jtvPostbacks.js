@@ -113,6 +113,7 @@ module.exports = (event) => {
                   "image_url": "http://via.placeholder.com/350x350",
                   "buttons": [
                     {
+                      "title": "Search Jewelry Type",
                       "type": "postback",
                       "payload": "CAT_TYPE_JEWEL"
                     }
@@ -124,6 +125,7 @@ module.exports = (event) => {
                   "image_url": "http://via.placeholder.com/350x350",
                   "buttons": [
                     {
+                      "title": "Search Gem Type",
                       "type": "postback",
                       "payload": "CAT_TYPE_GEM"
                     }
