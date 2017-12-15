@@ -10,69 +10,68 @@ var Member = require('../models/memberModel.js')
 var request = require('request')
 var moment = require('moment')
 
-function getUser() {
-  return new Promise(function(resolve, reject) {
-    User.findOne({
-      'pageID': event.recipient.id
-    }, (err, user) => {
-      resolve(user)
+module.exports = (event) => {
+
+  function getUser() {
+    return new Promise(function(resolve, reject) {
+      User.findOne({
+        'pageID': event.recipient.id
+      }, (err, user) => {
+        resolve(user)
+      })
     })
-  })
-}
+  }
 
-function findMember(user) {
-  return new Promise(function(resolve, reject) {
-    Member.findOne({
-      fbID: event.sender.id
-    }, (err, member) => {
-      if (err) {
-        console.error(err)
-      }
-      if (member === null) {
-        request({
-          uri: 'https://graph.facebook.com/v2.6/' + event.sender.id + '?access_token=' + user.pageAccessToken,
-          method: 'GET'
-        }, function(error, response, body) {
-          if (error) {
-            return console.error('upload failed:', error)
-          }
-          var facebookProfileResponse = JSON.parse(body)
+  function findMember(user) {
+    return new Promise(function(resolve, reject) {
+      Member.findOne({
+        fbID: event.sender.id
+      }, (err, member) => {
+        if (err) {
+          console.error(err)
+        }
+        if (member === null) {
+          request({
+            uri: 'https://graph.facebook.com/v2.6/' + event.sender.id + '?access_token=' + user.pageAccessToken,
+            method: 'GET'
+          }, function(error, response, body) {
+            if (error) {
+              return console.error('upload failed:', error)
+            }
+            var facebookProfileResponse = JSON.parse(body)
 
-          // NEED TO FIND ORG NAME AND REPLACE BELOW
-          var newMember = new Member({
-            organization: user.organization,
-            fbID: event.sender.id,
-            fullName: facebookProfileResponse.first_name + ' ' + facebookProfileResponse.last_name,
-            photo: facebookProfileResponse.profile_pic,
-            timezone: facebookProfileResponse.timezone,
-            createdDate: moment().format('MM-DD-YYYY')
-          })
+            // NEED TO FIND ORG NAME AND REPLACE BELOW
+            var newMember = new Member({
+              organization: user.organization,
+              fbID: event.sender.id,
+              fullName: facebookProfileResponse.first_name + ' ' + facebookProfileResponse.last_name,
+              photo: facebookProfileResponse.profile_pic,
+              timezone: facebookProfileResponse.timezone,
+              createdDate: moment().format('MM-DD-YYYY')
+            })
 
-          if (facebookProfileResponse.gender) {
-            newMember.gender = facebookProfileResponse.gender
-          }
+            if (facebookProfileResponse.gender) {
+              newMember.gender = facebookProfileResponse.gender
+            }
 
-          newMember.save((err, member) => {
-            if (err) return console.error(err)
-            sendTextMessage(event.sender.id, user.pageAccessToken, 'This is some great intro copy to explain the experience!')
+            newMember.save((err, member) => {
+              if (err) return console.error(err)
+              sendTextMessage(event.sender.id, user.pageAccessToken, 'This is some great intro copy to explain the experience!')
               sendVideoMessage(event.sender.id, user.pageAccessToken, 'https://chat-sass-messenger-uploader.herokuapp.com/data/jtv.mp4')
               setTimeout(() => {
                 sendTextMessage(event.sender.id, user.pageAccessToken, 'Welcome back to Gem & Jewels TV!')
               }, 8000)
-            resolve()
+              resolve()
+            })
           })
-        })
-      } else {
-        sendTextMessage(event.sender.id, user.pageAccessToken, "Tap the 'Shop Now' button below to begin.")
-        resolve()
-      }
+        } else {
+          sendTextMessage(event.sender.id, user.pageAccessToken, "Tap the 'Shop Now' button below to begin.")
+          resolve()
+        }
+      })
     })
-  })
-}
+  }
 
-
-
-module.exports = (event) => {
   if (event.postback.payload === "GET_STARTED_PAYLOAD") {
 
     // ENROLLING MEMBERS INTO THE IRRIGATE APP
