@@ -67,7 +67,7 @@ module.exports = (event) => {
               })
             })
           } else {
-            sendTextMessage(event.sender.id, user.pageAccessToken, 'Welcome back to Gem & Jewels TV!')
+            // sendTextMessage(event.sender.id, user.pageAccessToken, 'Welcome back to Gem & Jewels TV!')
             resolve()
           }
         })
