@@ -311,6 +311,38 @@ module.exports = (event) => {
   }
 
   if (event.postback.payload.split('_')[0] === "ADD" && event.postback.payload.split('_')[1] === "CART") {
+
+      if (event.postback.payload.split('_')[2] === "RINGS") {
+        if (db.users.find({ id: event.sender.id }).length === 0) {
+          console.log('none')
+          let newUser = {
+            id: event.sender.id,
+            cart: [event.postback.payload.split('_')[2]]
+          }
+          db.users.save(newUser)
+          console.log(db.user.find({ id: event.sender.id }).cart)
+        } else {
+
+          let cart = db.users.find({ 'id': event.sender.id })[0].cart
+          cart.push(event.postback.payload.split('_')[2])
+
+          var query = {
+            id: event.sender.id
+          }
+
+          var dataToBeUpdate = {
+            cart : cart
+          }
+
+          var options = {
+            multi: false,
+            upsert: false
+          }
+
+          db.users.update(query, dataToBeUpdate, options)
+          console.log(db.user.find({ id: event.sender.id }).cart)
+        }
+      }
       // use event.postback.payload.split('_')[2] to find item in DB
       // check db for user => event.sender.id
       // if no user
