@@ -61,7 +61,7 @@ module.exports = (event) => {
                 sendTextMessage(event.sender.id, user.pageAccessToken, 'This is some great intro copy to explain the experience!')
                   sendVideoMessage(event.sender.id, user.pageAccessToken, 'https://chat-sass-messenger-uploader.herokuapp.com/data/jtv.mp4')
                 setTimeout(() => {
-                  sendTextMessage(event.sender.id, user.pageAccessToken, "Tap the 'Start Shopping' button below to begin.")
+                  sendTextMessage(event.sender.id, user.pageAccessToken, "Tap the 'Shop Now' button below to begin.")
                 }, 8000)
                 resolve()
               })
@@ -83,6 +83,78 @@ module.exports = (event) => {
   }
 
   if (event.postback.payload === "SHOW_CATS") {
+
+    let messageData = {
+      "recipient":{
+        "id": event.sender.id
+      },
+      "message": {
+        "attachment": {
+          "type": "template",
+          "payload": {
+            "template_type": "list",
+            "top_element_style": "LARGE",
+            "elements": [
+              {
+                "title": "Classic T-Shirt Collection",
+                "subtitle": "See all our colors",
+                "image_url": "https://peterssendreceiveapp.ngrok.io/img/collection.png",
+                "buttons": [
+                  {
+                    "title": "View",
+                    "type": "web_url",
+                    "url": "https://peterssendreceiveapp.ngrok.io/collection",
+                    "messenger_extensions": true,
+                    "webview_height_ratio": "tall",
+                    "fallback_url": "https://peterssendreceiveapp.ngrok.io/"
+                  }
+                ]
+              },
+              {
+                "title": "Classic White T-Shirt",
+                "subtitle": "See all our colors",
+                "default_action": {
+                  "type": "web_url",
+                  "url": "https://peterssendreceiveapp.ngrok.io/view?item=100",
+                  "messenger_extensions": false,
+                  "webview_height_ratio": "tall"
+                }
+              },
+              {
+                "title": "Classic Blue T-Shirt",
+                "image_url": "https://peterssendreceiveapp.ngrok.io/img/blue-t-shirt.png",
+                "subtitle": "100% Cotton, 200% Comfortable",
+                "default_action": {
+                  "type": "web_url",
+                  "url": "https://peterssendreceiveapp.ngrok.io/view?item=101",
+                  "messenger_extensions": true,
+                  "webview_height_ratio": "tall",
+                  "fallback_url": "https://peterssendreceiveapp.ngrok.io/"
+                },
+                "buttons": [
+                  {
+                    "title": "Shop Now",
+                    "type": "web_url",
+                    "url": "https://peterssendreceiveapp.ngrok.io/shop?item=101",
+                    "messenger_extensions": true,
+                    "webview_height_ratio": "tall",
+                    "fallback_url": "https://peterssendreceiveapp.ngrok.io/"
+                  }
+                ]
+              }
+            ],
+            "buttons": [
+              {
+                "title": "View More",
+                "type": "postback",
+                "payload": "payload"
+              }
+            ]
+          }
+        }
+      }
+    }
+    callSendAPI(user.pageAccessToken, messageData)
     // send list template
       // 'search jewlery type'
         // postback === 'CAT_TYPE_JEWEL'
@@ -108,6 +180,15 @@ module.exports = (event) => {
         // Stored
           // 'STORED_' + cart.id
         // 'CHARGE_' + cart.id
+  }
+
+  if (event.postback.payload === "CALL_NOW") {
+  }
+
+  if (event.postback.payload === "VIEW_SITE") {
+  }
+
+  if (event.postback.payload === "GEMOPEDIA") {
   }
 
   if (event.postback.payload.split('_')[0] === "STORED") {
