@@ -317,10 +317,10 @@ module.exports = (event) => {
           console.log('none')
           let newUser = {
             id: event.sender.id,
-            cart: [event.postback.payload.split('_')[2]]
+            cart: [ event.postback.payload.split('_')[2] ]
           }
           db.users.save(newUser)
-          console.log(db.user.find({ id: event.sender.id }).cart)
+          console.log(db.users.find({ id: event.sender.id }).cart)
         } else {
 
           let cart = db.users.find({ 'id': event.sender.id })[0].cart
@@ -340,7 +340,7 @@ module.exports = (event) => {
           }
 
           db.users.update(query, dataToBeUpdate, options)
-          console.log(db.user.find({ id: event.sender.id }).cart)
+          console.log(db.users.find({ id: event.sender.id }).cart)
         }
       }
       // use event.postback.payload.split('_')[2] to find item in DB
