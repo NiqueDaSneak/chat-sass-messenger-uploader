@@ -10,6 +10,16 @@ var Member = require('../models/memberModel.js')
 var request = require('request')
 var moment = require('moment')
 
+function getUser() {
+  return new Promise(function(resolve, reject) {
+    User.findOne({
+      'pageID': event.recipient.id
+    }, (err, user) => {
+      resolve(user)
+    })
+  })
+}
+
 
 module.exports = (event) => {
   if (event.postback.payload === "GET_STARTED_PAYLOAD") {
@@ -85,16 +95,6 @@ module.exports = (event) => {
 
   if (event.postback.payload === "SHOW_CATS") {
 
-    function getUser() {
-      return new Promise(function(resolve, reject) {
-        User.findOne({
-          'pageID': event.recipient.id
-        }, (err, user) => {
-          resolve(user)
-        })
-      })
-    }
-
     getUser().then((user) => {
       let messageData = {
         "recipient":{
@@ -150,13 +150,6 @@ module.exports = (event) => {
       }
       callSendAPI(user.pageAccessToken, messageData)
     })
-    // send list template
-      // 'search jewlery type'
-        // postback === 'CAT_TYPE_JEWEL'
-      // 'search gem type'
-        // postback === 'CAT_TYPE_GEM'
-      // 'jewel school'
-        // postback === 'CAT_TYPE_SCHOOL'
   }
 
   if (event.postback.payload === "DONE") {
@@ -201,6 +194,7 @@ module.exports = (event) => {
   if (event.postback.payload.split('_')[0] === "CAT" && event.postback.payload.split('_')[1] === "TYPE") {
 
     if (event.postback.payload.split('_')[2] === "JEWEL") {
+
       // show carosel of categories
         // rings
           // postback === 'CAT_TYPE_RINGS'
