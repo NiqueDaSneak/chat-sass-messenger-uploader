@@ -130,6 +130,18 @@ module.exports = (event) => {
                       "payload": "CAT_TYPE_GEM"
                     }
                   ]
+                },
+                {
+                  "title": "As Seen On TV",
+                  "subtitle": "See all our colors",
+                  "image_url": "http://via.placeholder.com/350x350",
+                  "buttons": [
+                    {
+                      "title": "As Seen On Tv",
+                      "type": "postback",
+                      "payload": "CAT_TYPE_TV"
+                    }
+                  ]
                 }
               ]
             }
@@ -197,7 +209,7 @@ module.exports = (event) => {
     if (event.postback.payload.split('_')[2] === "GEM") {
     }
 
-    if (event.postback.payload.split('_')[2] === "SCHOOL") {
+    if (event.postback.payload.split('_')[2] === "TV") {
     }
 
     if (event.postback.payload.split('_')[2] === "RINGS") {
