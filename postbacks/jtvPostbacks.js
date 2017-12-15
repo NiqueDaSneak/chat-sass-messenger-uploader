@@ -20,77 +20,65 @@ function getUser() {
   })
 }
 
+function findMember(user) {
+  return new Promise(function(resolve, reject) {
+    Member.findOne({
+      fbID: event.sender.id
+    }, (err, member) => {
+      if (err) {
+        console.error(err)
+      }
+      if (member === null) {
+        request({
+          uri: 'https://graph.facebook.com/v2.6/' + event.sender.id + '?access_token=' + user.pageAccessToken,
+          method: 'GET'
+        }, function(error, response, body) {
+          if (error) {
+            return console.error('upload failed:', error)
+          }
+          var facebookProfileResponse = JSON.parse(body)
+
+          // NEED TO FIND ORG NAME AND REPLACE BELOW
+          var newMember = new Member({
+            organization: user.organization,
+            fbID: event.sender.id,
+            fullName: facebookProfileResponse.first_name + ' ' + facebookProfileResponse.last_name,
+            photo: facebookProfileResponse.profile_pic,
+            timezone: facebookProfileResponse.timezone,
+            createdDate: moment().format('MM-DD-YYYY')
+          })
+
+          if (facebookProfileResponse.gender) {
+            newMember.gender = facebookProfileResponse.gender
+          }
+
+          newMember.save((err, member) => {
+            if (err) return console.error(err)
+            sendTextMessage(event.sender.id, user.pageAccessToken, 'This is some great intro copy to explain the experience!')
+              sendVideoMessage(event.sender.id, user.pageAccessToken, 'https://chat-sass-messenger-uploader.herokuapp.com/data/jtv.mp4')
+              setTimeout(() => {
+                sendTextMessage(event.sender.id, user.pageAccessToken, 'Welcome back to Gem & Jewels TV!')
+              }, 8000)
+            resolve()
+          })
+        })
+      } else {
+        sendTextMessage(event.sender.id, user.pageAccessToken, "Tap the 'Shop Now' button below to begin.")
+        resolve()
+      }
+    })
+  })
+}
+
+
 
 module.exports = (event) => {
   if (event.postback.payload === "GET_STARTED_PAYLOAD") {
+
     // ENROLLING MEMBERS INTO THE IRRIGATE APP
-    function getUser() {
-      return new Promise(function(resolve, reject) {
-        User.findOne({
-          'pageID': event.recipient.id
-        }, (err, user) => {
-          resolve(user)
-        })
-      })
-    }
-
-    function findMember(user) {
-      return new Promise(function(resolve, reject) {
-        Member.findOne({
-          fbID: event.sender.id
-        }, (err, member) => {
-          if (err) {
-            console.error(err)
-          }
-          if (member === null) {
-            request({
-              uri: 'https://graph.facebook.com/v2.6/' + event.sender.id + '?access_token=' + user.pageAccessToken,
-              method: 'GET'
-            }, function(error, response, body) {
-              if (error) {
-                return console.error('upload failed:', error)
-              }
-              var facebookProfileResponse = JSON.parse(body)
-
-              // NEED TO FIND ORG NAME AND REPLACE BELOW
-              var newMember = new Member({
-                organization: user.organization,
-                fbID: event.sender.id,
-                fullName: facebookProfileResponse.first_name + ' ' + facebookProfileResponse.last_name,
-                photo: facebookProfileResponse.profile_pic,
-                timezone: facebookProfileResponse.timezone,
-                createdDate: moment().format('MM-DD-YYYY')
-              })
-
-              if (facebookProfileResponse.gender) {
-                newMember.gender = facebookProfileResponse.gender
-              }
-
-              newMember.save((err, member) => {
-                if (err) return console.error(err)
-                sendTextMessage(event.sender.id, user.pageAccessToken, 'This is some great intro copy to explain the experience!')
-                  sendVideoMessage(event.sender.id, user.pageAccessToken, 'https://chat-sass-messenger-uploader.herokuapp.com/data/jtv.mp4')
-                // setTimeout(() => {
-                //
-                // }, 8000)
-                resolve()
-              })
-            })
-          } else {
-            // sendTextMessage(event.sender.id, user.pageAccessToken, 'Welcome back to Gem & Jewels TV!')
-            sendTextMessage(event.sender.id, user.pageAccessToken, "Tap the 'Shop Now' button below to begin.")
-            resolve()
-          }
-        })
-      })
-    }
-
     getUser().then((user) => {
       findMember(user)
     })
-    // send intro copy
-    // send inital video msg
-    // send menu description msg
   }
 
   if (event.postback.payload === "SHOW_CATS") {
