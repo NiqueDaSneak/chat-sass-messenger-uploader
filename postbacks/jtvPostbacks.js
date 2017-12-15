@@ -59,13 +59,13 @@ module.exports = (event) => {
               sendTextMessage(event.sender.id, user.pageAccessToken, 'This is some great intro copy to explain the experience!')
               sendVideoMessage(event.sender.id, user.pageAccessToken, 'https://chat-sass-messenger-uploader.herokuapp.com/data/jtv.mp4')
               setTimeout(() => {
-                sendTextMessage(event.sender.id, user.pageAccessToken, 'Welcome back to Gem & Jewels TV!')
+                sendTextMessage(event.sender.id, user.pageAccessToken, "Tap the 'Shop Now' button below to begin.")
               }, 8000)
               resolve()
             })
           })
         } else {
-          sendTextMessage(event.sender.id, user.pageAccessToken, "Tap the 'Shop Now' button below to begin.")
+          sendTextMessage(event.sender.id, user.pageAccessToken, 'Welcome back to Gem & Jewels TV!')
           resolve()
         }
       })
