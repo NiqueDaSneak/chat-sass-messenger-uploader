@@ -83,6 +83,17 @@ module.exports = (event) => {
   }
 
   if (event.postback.payload === "SHOW_CATS") {
+
+    function getUser() {
+      return new Promise(function(resolve, reject) {
+        User.findOne({
+          'pageID': event.recipient.id
+        }, (err, user) => {
+          resolve(user)
+        })
+      })
+    }
+    
     getUser().then((user) => {
       let messageData = {
         "recipient":{
