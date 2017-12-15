@@ -1,6 +1,8 @@
 'use strict'
 
-var db = require('../data/jtvData.js')
+// var db = require('../data/jtvData.js')
+var db = require('diskdb')
+db = db.connect('data', ['rings', 'earring', 'bracelets', 'users'])
 
 var Message = require('../models/messageModel.js')
 var Group = require('../models/groupModel.js')
@@ -182,6 +184,61 @@ module.exports = (event) => {
 
     if (event.postback.payload.split('_')[2] === "JEWEL") {
 
+      getUser().then((user) => {
+        let messageData = {
+          "recipient":{
+            "id": event.sender.id
+          },
+          "message":{
+            "attachment":{
+              "type":"template",
+              "payload":{
+                "template_type":"generic",
+                "sharable": true,
+                "elements":[
+                  {
+                    "title":"Rings",
+                    "image_url":"http://via.placeholder.com/350x350",
+                    "subtitle":"We'\''ve got the right hat for everyone.",
+                    "buttons":[
+                      {
+                        "type":"postback",
+                        "title":"Browse Rings",
+                        "payload":"CAT_TYPE_RINGS"
+                      }
+                    ]
+                  },
+                  {
+                    "title":"Rings",
+                    "image_url":"http://via.placeholder.com/350x350",
+                    "subtitle":"We'\''ve got the right hat for everyone.",
+                    "buttons":[
+                      {
+                        "type":"postback",
+                        "title":"Browse Rings",
+                        "payload":"CAT_TYPE_RINGS"
+                      }
+                    ]
+                  },
+                  {
+                    "title":"Rings",
+                    "image_url":"http://via.placeholder.com/350x350",
+                    "subtitle":"We'\''ve got the right hat for everyone.",
+                    "buttons":[
+                      {
+                        "type":"postback",
+                        "title":"Browse Rings",
+                        "payload":"CAT_TYPE_RINGS"
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          }
+        }
+        callSendAPI(user.pageAccessToken, messageData)
+      })
       // show carosel of categories
         // rings
           // postback === 'CAT_TYPE_RINGS'
