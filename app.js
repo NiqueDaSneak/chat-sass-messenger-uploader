@@ -9,9 +9,7 @@ var path = require('path')
 
 // APP DEFINITIONS
 var app = express()
-var nightmakersRouter = express.Router()
 var affirmationTodayRouter = express.Router()
-// var irrigateRouter = express.Router()
 
 // DATABASE SETUP
 var mongoose = require('mongoose')
@@ -33,8 +31,6 @@ app.use(bodyParser.urlencoded({
   extended: false
 }))
 app.use(bodyParser.json())
-// var nightmakers = require('./router/nightmakers.js')
-app.use('/nightmakers', nightmakersRouter)
 app.use('/affirmation-today', affirmationTodayRouter)
 
 var jtvRouter = require('./router/jtvrouter.js')
