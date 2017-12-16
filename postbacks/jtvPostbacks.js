@@ -314,18 +314,16 @@ module.exports = (event) => {
 
       if (event.postback.payload.split('_')[2] === "RINGS") {
         if (db.users.find({ id: event.sender.id }).length === 0) {
-          console.log('none')
-          console.log('postback: ' + event.postback.payload.split('*'[1]))
           let newUser = {
             id: event.sender.id,
-            cart: [ event.postback.payload.split('_')[3] ]
+            cart: [ event.postback.payload.split('*'[1]) ]
           }
           db.users.save(newUser)
           console.log(db.users.find({ id: event.sender.id }))
         } else {
 
           let cart = db.users.find({ 'id': event.sender.id })[0].cart
-          cart.push(event.postback.payload.split('_')[3])
+          cart.push(event.postback.payload.split('*'[1]))
 
           var query = {
             id: event.sender.id
