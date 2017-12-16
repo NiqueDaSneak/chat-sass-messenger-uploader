@@ -209,7 +209,7 @@ module.exports = (event) => {
                     ]
                   },
                   {
-                    "title":"Rings",
+                    "title":"Earrings",
                     "image_url":"http://via.placeholder.com/350x350",
                     "subtitle":"We'\''ve got the right hat for everyone.",
                     "buttons":[
@@ -373,7 +373,6 @@ module.exports = (event) => {
 
   if (event.postback.payload.split('_')[0] === "ADD" && event.postback.payload.split('_')[1] === "CART") {
 
-      if (event.postback.payload.split('_')[2] === "RINGS") {
         if (db.users.find({ id: event.sender.id }).length === 0) {
           console.log()
           let newUser = {
@@ -407,7 +406,6 @@ module.exports = (event) => {
             sendTextMessage(event.sender.id, user.pageAccessToken, "Item added to cart. Continue shopping above or tap 'Done Shopping' below.")
           })
         }
-      }
       // use event.postback.payload.split('_')[2] to find item in DB
       // check db for user => event.sender.id
       // if no user
