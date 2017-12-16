@@ -2,7 +2,7 @@
 
 // var db = require('../data/jtvData.js')
 var db = require('diskdb')
-db = db.connect('data', ['rings', 'earring', 'bracelets', 'users'])
+db = db.connect('data', ['rings', 'earrings', 'bracelets', 'users'])
 
 var Message = require('../models/messageModel.js')
 var Group = require('../models/groupModel.js')
@@ -215,8 +215,8 @@ module.exports = (event) => {
                     "buttons":[
                       {
                         "type":"postback",
-                        "title":"Browse Rings",
-                        "payload":"CAT_TYPE_RINGS"
+                        "title":"Browse Earrings",
+                        "payload":"CAT_TYPE_EARRINGS"
                       }
                     ]
                   },
@@ -308,6 +308,66 @@ module.exports = (event) => {
             // SHOW_CATS
 
     }
+
+    if (event.postback.payload.split('_')[2] === "EARRINGS") {
+
+      var elements = []
+      for (var i = 0; i < db.earrings.find().length; i++) {
+        let obj = {}
+        obj.title = db.earrings.find()[i].title
+        obj.image_url = db.earrings.find()[i].imageURL
+        obj.subtitle = db.earrings.find()[i].price
+        obj.buttons = [
+          {
+            "type":"postback",
+            "title":"Add to Cart",
+            "payload":"ADD_CART_EARRINGS_" + db.earrings.find()[i].id
+          },
+          {
+            "title":"View Details",
+            "type":"web_url",
+            "url": db.earrings.find()[i].siteURL,
+            "webview_height_ratio":"full"
+          },
+          {
+            "type":"postback",
+            "title":"Show Categories",
+            "payload":"SHOW_CATS"
+          }
+        ]
+        elements.push(obj)
+      }
+
+      getUser().then((user) => {
+        let messageData = {
+          "recipient":{
+            "id": event.sender.id
+          },
+          "message":{
+            "attachment":{
+              "type":"template",
+              "payload":{
+                "template_type":"generic",
+                "sharable": true,
+                // "image_aspect_ratio": "square",
+                "elements": elements
+              }
+            }
+          }
+        }
+        callSendAPI(user.pageAccessToken, messageData)
+      })
+
+      // send carosel of rings in db.rings
+      // item
+        // buttons
+          // postbacks
+            // 'ADD_CART_' + db.rings.id
+            // 'DETAILS_' + db.rings.url
+            // SHOW_CATS
+
+    }
+
 
   }
 
