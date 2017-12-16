@@ -221,14 +221,38 @@ module.exports = (event) => {
                     ]
                   },
                   {
-                    "title":"Rings",
+                    "title":"Bracelets",
                     "image_url":"http://via.placeholder.com/350x350",
                     "subtitle":"We'\''ve got the right hat for everyone.",
                     "buttons":[
                       {
                         "type":"postback",
-                        "title":"Browse Rings",
-                        "payload":"CAT_TYPE_RINGS"
+                        "title":"Browse Bracelets",
+                        "payload":"CAT_TYPE_BRACELETS"
+                      }
+                    ]
+                  },
+                  {
+                    "title":"Necklaces",
+                    "image_url":"http://via.placeholder.com/350x350",
+                    "subtitle":"We'\''ve got the right hat for everyone.",
+                    "buttons":[
+                      {
+                        "type":"postback",
+                        "title":"Browse Necklaces",
+                        "payload":"CAT_TYPE_NECKLACES"
+                      }
+                    ]
+                  },
+                  {
+                    "title":"Watches",
+                    "image_url":"http://via.placeholder.com/350x350",
+                    "subtitle":"We'\''ve got the right hat for everyone.",
+                    "buttons":[
+                      {
+                        "type":"postback",
+                        "title":"Browse Watches",
+                        "payload":"CAT_TYPE_WATCHES"
                       }
                     ]
                   }
@@ -374,7 +398,6 @@ module.exports = (event) => {
   if (event.postback.payload.split('_')[0] === "ADD" && event.postback.payload.split('_')[1] === "CART") {
 
         if (db.users.find({ id: event.sender.id }).length === 0) {
-          console.log()
           let newUser = {
             id: event.sender.id,
             cart: [ event.postback.payload.split('*')[1] ]
