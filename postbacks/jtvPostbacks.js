@@ -343,7 +343,9 @@ module.exports = (event) => {
 
           db.users.update(query, dataToBeUpdate, options)
           console.log(db.users.find({ id: event.sender.id }))
-          sendTextMessage(event.sender.id, user.pageAccessToken, "Item added to cart. Continue shopping above or tap 'Done Shopping' below.")
+          getUser().then((user) => {
+            sendTextMessage(event.sender.id, user.pageAccessToken, "Item added to cart. Continue shopping above or tap 'Done Shopping' below.")
+          })
         }
       }
       // use event.postback.payload.split('_')[2] to find item in DB
