@@ -2,7 +2,7 @@
 
 // var db = require('../data/jtvData.js')
 var db = require('diskdb')
-db = db.connect('data', ['rings', 'earrings', 'bracelets', 'users'])
+db = db.connect('data', ['rings', 'earrings', 'bracelets', 'necklaces', 'watches', 'users'])
 
 var Message = require('../models/messageModel.js')
 var Group = require('../models/groupModel.js')
@@ -351,6 +351,183 @@ module.exports = (event) => {
             "title":"View Details",
             "type":"web_url",
             "url": db.earrings.find()[i].siteURL,
+            "webview_height_ratio":"full"
+          },
+          {
+            "type":"postback",
+            "title":"Show Categories",
+            "payload":"SHOW_CATS"
+          }
+        ]
+        elements.push(obj)
+      }
+
+      getUser().then((user) => {
+        let messageData = {
+          "recipient":{
+            "id": event.sender.id
+          },
+          "message":{
+            "attachment":{
+              "type":"template",
+              "payload":{
+                "template_type":"generic",
+                "sharable": true,
+                // "image_aspect_ratio": "square",
+                "elements": elements
+              }
+            }
+          }
+        }
+        callSendAPI(user.pageAccessToken, messageData)
+      })
+
+      // send carosel of rings in db.rings
+      // item
+        // buttons
+          // postbacks
+            // 'ADD_CART_' + db.rings.id
+            // 'DETAILS_' + db.rings.url
+            // SHOW_CATS
+
+    }
+
+    if (event.postback.payload.split('_')[2] === "BRACELETS") {
+
+      var elements = []
+      for (var i = 0; i < db.bracelets.find().length; i++) {
+        let obj = {}
+        obj.title = db.bracelets.find()[i].title
+        obj.image_url = db.bracelets.find()[i].imageURL
+        obj.subtitle = db.bracelets.find()[i].price
+        obj.buttons = [
+          {
+            "type":"postback",
+            "title":"Add to Cart",
+            "payload":"ADD_CART_BRACELETS_" + db.bracelets.find()[i].id
+          },
+          {
+            "title":"View Details",
+            "type":"web_url",
+            "url": db.bracelets.find()[i].siteURL,
+            "webview_height_ratio":"full"
+          },
+          {
+            "type":"postback",
+            "title":"Show Categories",
+            "payload":"SHOW_CATS"
+          }
+        ]
+        elements.push(obj)
+      }
+
+      getUser().then((user) => {
+        let messageData = {
+          "recipient":{
+            "id": event.sender.id
+          },
+          "message":{
+            "attachment":{
+              "type":"template",
+              "payload":{
+                "template_type":"generic",
+                "sharable": true,
+                // "image_aspect_ratio": "square",
+                "elements": elements
+              }
+            }
+          }
+        }
+        callSendAPI(user.pageAccessToken, messageData)
+      })
+
+      // send carosel of rings in db.rings
+      // item
+        // buttons
+          // postbacks
+            // 'ADD_CART_' + db.rings.id
+            // 'DETAILS_' + db.rings.url
+            // SHOW_CATS
+
+    }
+
+    if (event.postback.payload.split('_')[2] === "NECKLACES") {
+
+      var elements = []
+      for (var i = 0; i < db.necklaces.find().length; i++) {
+        let obj = {}
+        obj.title = db.necklaces.find()[i].title
+        obj.image_url = db.necklaces.find()[i].imageURL
+        obj.subtitle = db.necklaces.find()[i].price
+        obj.buttons = [
+          {
+            "type":"postback",
+            "title":"Add to Cart",
+            "payload":"ADD_CART_NECKLACES_" + db.necklaces.find()[i].id
+          },
+          {
+            "title":"View Details",
+            "type":"web_url",
+            "url": db.necklaces.find()[i].siteURL,
+            "webview_height_ratio":"full"
+          },
+          {
+            "type":"postback",
+            "title":"Show Categories",
+            "payload":"SHOW_CATS"
+          }
+        ]
+        elements.push(obj)
+      }
+
+      getUser().then((user) => {
+        let messageData = {
+          "recipient":{
+            "id": event.sender.id
+          },
+          "message":{
+            "attachment":{
+              "type":"template",
+              "payload":{
+                "template_type":"generic",
+                "sharable": true,
+                // "image_aspect_ratio": "square",
+                "elements": elements
+              }
+            }
+          }
+        }
+        callSendAPI(user.pageAccessToken, messageData)
+      })
+
+      // send carosel of rings in db.rings
+      // item
+        // buttons
+          // postbacks
+            // 'ADD_CART_' + db.rings.id
+            // 'DETAILS_' + db.rings.url
+            // SHOW_CATS
+
+    }
+
+    if (event.postback.payload.split('_')[2] === "WATCHES") {
+
+      var elements = []
+      for (var i = 0; i < db.watches.find().length; i++) {
+        let obj = {}
+        obj.title = db.watches.find()[i].title
+        obj.image_url = db.watches.find()[i].imageURL
+        obj.subtitle = db.watches.find()[i].price
+        obj.buttons = [
+          {
+            "type":"postback",
+            "title":"Add to Cart",
+            "payload":"ADD_CART_WATCHES_" + db.watches.find()[i].id
+          },
+          {
+            "title":"View Details",
+            "type":"web_url",
+            "url": db.watches.find()[i].siteURL,
             "webview_height_ratio":"full"
           },
           {
