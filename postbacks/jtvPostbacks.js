@@ -315,7 +315,7 @@ module.exports = (event) => {
       if (event.postback.payload.split('_')[2] === "RINGS") {
         if (db.users.find({ id: event.sender.id }).length === 0) {
           console.log('none')
-          console.log('postback: ' + event.postback.payload)
+          console.log('postback: ' + event.postback.payload.split('*'[1]))
           let newUser = {
             id: event.sender.id,
             cart: [ event.postback.payload.split('_')[3] ]
