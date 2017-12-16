@@ -290,6 +290,7 @@ module.exports = (event) => {
               "payload":{
                 "template_type":"generic",
                 "sharable": true,
+                "image_aspect_ratio": "square",
                 "elements": elements
               }
             }
