@@ -244,6 +244,7 @@ module.exports = (event) => {
         case "watches":
         console.log(typeof db.watches.find({ 'id': '*' + itemID }).price)
         console.log('in watches: ' + db.watches.find({ 'id': '*' + itemID }).price)
+        console.log('itemID: ' + itemID)
         cost = cost + Number(db.watches.find({ 'id': '*' + itemID }).price)
         obj.title = db.watches.find({ 'id': '*' + itemID }).title
         obj.image_url = db.watches.find({ 'id': '*' + itemID }).imageURL
