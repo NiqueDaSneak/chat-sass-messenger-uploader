@@ -247,15 +247,16 @@ module.exports = (event) => {
         // break;
 
         case "watches":
-        cost = cost + Number(db.watches.find({ id: itemID })[0].price)
+        cost = cost + db.watches.find({ id: itemID })[0].price
+        console.log('cost: ' + cost)
         obj.title = db.watches.find({ id: itemID })[0].title
         obj.image_url = db.watches.find({ id: itemID })[0].imageURL
         obj.subtitle = db.watches.find({ id: itemID })[0].price
         obj.buttons = [
           {
-            "title":"View Details",
             "type":"web_url",
             "url": db.watches.find({ id: itemID })[0].siteURL,
+            "title":"View Details",
             "webview_height_ratio":"tall"
           },
           {
@@ -271,7 +272,6 @@ module.exports = (event) => {
     }
 
     getUser().then((user) => {
-      console.log('elements' + elements)
       let messageData = {
         "recipient":{
           "id": event.sender.id
