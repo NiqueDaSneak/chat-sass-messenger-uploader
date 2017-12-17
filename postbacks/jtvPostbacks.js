@@ -144,11 +144,14 @@ module.exports = (event) => {
   if (event.postback.payload === "DONE") {
 
     var elements = []
+
     for (var i = 0; i < db.users.find({ 'id': event.sender.id })[0].cart.length; i++) {
 
       let obj = {}
-      console.log(db.users.find({ 'id': event.sender.id })[0].cart[i])
-    }
+      // console.log(db.users.find({ 'id': event.sender.id })[0].cart[i])
+      let itemID = db.users.find({ 'id': event.sender.id })[0].cart[i]
+      let category = itemID.split('_')[0]
+      console.log(db.category.find({ 'id': itemID }))
 
     //   obj.title = db.rings.find()[i].title
     //   obj.image_url = db.rings.find()[i].imageURL
@@ -174,6 +177,7 @@ module.exports = (event) => {
     //   elements.push(obj)
     // }
     //
+  }
     // getUser().then((user) => {
     //   let messageData = {
     //     "recipient":{
