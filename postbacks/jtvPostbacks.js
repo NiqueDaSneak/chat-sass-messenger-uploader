@@ -213,7 +213,7 @@ module.exports = (event) => {
           {
             "type":"postback",
             "title":"Remove From Cart",
-            "payload":"REMOVE_CART_" itemID
+            "payload":"REMOVE_CART_" + itemID
           }
         ]
         elements.push(obj)
