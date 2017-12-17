@@ -151,8 +151,26 @@ module.exports = (event) => {
       // console.log(db.users.find({ 'id': event.sender.id })[0].cart[i])
       let itemID = db.users.find({ 'id': event.sender.id })[0].cart[i]
       let category = itemID.split('_')[0]
-      console.log(db.category.find({ 'id': itemID }))
+      // console.log(db.category.find({ 'id': itemID }))
+      switch (category) {
+        case "bracelets":
+        console.log(db.bracelets.find({ 'id': itemID }))
+        break;
+        case "earrings":
+        console.log(db.earrings.find({ 'id': itemID }))
+        break;
+        case "necklaces":
+        console.log(db.necklaces.find({ 'id': itemID }))
+        break;
+        case "rings":
+        console.log(db.rings.find({ 'id': itemID }))
+        break;
+        case "watches":
+        console.log(db.watches.find({ 'id': itemID }))
+        break;
+        default:
 
+      }
     //   obj.title = db.rings.find()[i].title
     //   obj.image_url = db.rings.find()[i].imageURL
     //   obj.subtitle = db.rings.find()[i].price
