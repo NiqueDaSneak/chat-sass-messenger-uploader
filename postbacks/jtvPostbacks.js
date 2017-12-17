@@ -147,7 +147,7 @@ module.exports = (event) => {
     for (var i = 0; i < db.users.find({ 'id': event.sender.id })[0].cart.length; i++) {
 
       let obj = {}
-      console.log(db.users.find({ 'id': event.sender.id })[0].cart[i]
+      console.log(db.users.find({ 'id': event.sender.id })[0].cart[i])
     }
 
     //   obj.title = db.rings.find()[i].title
