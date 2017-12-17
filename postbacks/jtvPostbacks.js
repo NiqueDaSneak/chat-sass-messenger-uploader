@@ -151,7 +151,7 @@ module.exports = (event) => {
 
       var itemID = "*" + db.users.find({ 'id': event.sender.id })[0].cart[i]
       var category = itemID.split('_')[0]
-
+      console.log('category: ' + category)
       // console.log('itemID: ' + itemID)
       // console.log(db.watches.find({ id: itemID })[0])
       // console.log(typeof db.watches.find({ id: itemID }).price)
