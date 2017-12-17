@@ -299,7 +299,7 @@ module.exports = (event) => {
               "type":"template",
               "payload":{
                 "template_type":"button",
-                "text":"Your total is $" + cost + ". Would you like to pay now, or keep shopping?" ,
+                "text":"Your total is $" + cost.toFixed(2) + ". Would you like to pay now, or keep shopping?" ,
                 "buttons":[
                   {
                     "type":"postback",
