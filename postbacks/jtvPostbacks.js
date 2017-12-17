@@ -255,25 +255,27 @@ module.exports = (event) => {
         break;
         default:
       }
+      console.log('cost: $' + cost)
     }
 
     getUser().then((user) => {
-      let messageData = {
-        "recipient":{
-          "id": event.sender.id
-        },
-        "message":{
-          "attachment":{
-            "type":"template",
-            "payload":{
-              "template_type":"generic",
-              "sharable": true,
-              "elements": elements
-            }
-          }
-        }
-      }
-      callSendAPI(user.pageAccessToken, messageData)
+      console.log('elements' + elements)
+      // let messageData = {
+      //   "recipient":{
+      //     "id": event.sender.id
+      //   },
+      //   "message":{
+      //     "attachment":{
+      //       "type":"template",
+      //       "payload":{
+      //         "template_type":"generic",
+      //         "sharable": true,
+      //         "elements": elements
+      //       }
+      //     }
+      //   }
+      // }
+      // callSendAPI(user.pageAccessToken, messageData)
 
       setTimeout(() => {
         let messageData = {
