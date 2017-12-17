@@ -256,7 +256,6 @@ module.exports = (event) => {
         default:
       }
     }
-  }
 
     getUser().then((user) => {
       let messageData = {
