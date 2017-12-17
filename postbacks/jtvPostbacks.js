@@ -149,102 +149,103 @@ module.exports = (event) => {
 
       let obj = {}
 
-      let itemID = "*" + db.users.find({ 'id': event.sender.id })[0].cart[i]
-      let category = itemID.split('_')[0]
+      var itemID = "*" + db.users.find({ 'id': event.sender.id })[0].cart[i]
+      var category = itemID.split('_')[0]
+
+      console.log('itemID: ' + itemID)
+      console.log(typeof db.watches.find({ 'id': itemID }).price)
+      console.log('watch price: ' + db.watches.find({ 'id': itemID }).price)
 
       switch (category) {
-        case "bracelets":
-        console.log()
-        cost = cost + Number(db.bracelets.find({ itemID }).price)
-        obj.title = db.bracelets.find({ itemID }).title
-        obj.image_url = db.bracelets.find({ itemID }).imageURL
-        obj.subtitle = db.bracelets.find({ itemID }).price
-        obj.buttons = [
-          {
-            "title":"View Details",
-            "type":"web_url",
-            "url": db.bracelets.find({ itemID }).siteURL,
-            "webview_height_ratio":"tall"
-          },
-          {
-            "type":"postback",
-            "title":"Remove From Cart",
-            "payload":"REMOVE_CART_" + itemID
-          }
-        ]
-        elements.push(obj)
-        break;
-
-        case "earrings":
-        console.log()
-        cost = cost + Number(db.earrings.find({ 'id': itemID }).price)
-        obj.title = db.earrings.find({ 'id': itemID }).title
-        obj.image_url = db.earrings.find({ 'id': itemID }).imageURL
-        obj.subtitle = db.earrings.find({ 'id': itemID }).price
-        obj.buttons = [
-          {
-            "title":"View Details",
-            "type":"web_url",
-            "url": db.earrings.find({ 'id': itemID }).siteURL,
-            "webview_height_ratio":"tall"
-          },
-          {
-            "type":"postback",
-            "title":"Remove From Cart",
-            "payload":"REMOVE_CART_" + itemID
-          }
-        ]
-        elements.push(obj)
-        break;
-
-        case "necklaces":
-        console.log()
-        cost = cost + Number(db.necklaces.find({ 'id': itemID }).price)
-        obj.title = db.necklaces.find({ 'id': itemID }).title
-        obj.image_url = db.necklaces.find({ 'id': itemID }).imageURL
-        obj.subtitle = db.necklaces.find({ 'id': itemID }).price
-        obj.buttons = [
-          {
-            "title":"View Details",
-            "type":"web_url",
-            "url": db.necklaces.find({ 'id': itemID }).siteURL,
-            "webview_height_ratio":"tall"
-          },
-          {
-            "type":"postback",
-            "title":"Remove From Cart",
-            "payload":"REMOVE_CART_" + itemID
-          }
-        ]
-        elements.push(obj)
-        break;
-
-        case "rings":
-        console.log()
-        cost = cost + Number(db.rings.find({ 'id': itemID }).price)
-        obj.title = db.rings.find({ 'id': itemID }).title
-        obj.image_url = db.rings.find({ 'id': itemID }).imageURL
-        obj.subtitle = db.rings.find({ 'id': itemID }).price
-        obj.buttons = [
-          {
-            "title":"View Details",
-            "type":"web_url",
-            "url": db.rings.find({ 'id': itemID }).siteURL,
-            "webview_height_ratio":"tall"
-          },
-          {
-            "type":"postback",
-            "title":"Remove From Cart",
-            "payload":"REMOVE_CART_" + itemID
-          }
-        ]
-        elements.push(obj)
-        break;
+        // case "bracelets":
+        // console.log()
+        // cost = cost + Number(db.bracelets.find({ itemID }).price)
+        // obj.title = db.bracelets.find({ itemID }).title
+        // obj.image_url = db.bracelets.find({ itemID }).imageURL
+        // obj.subtitle = db.bracelets.find({ itemID }).price
+        // obj.buttons = [
+        //   {
+        //     "title":"View Details",
+        //     "type":"web_url",
+        //     "url": db.bracelets.find({ itemID }).siteURL,
+        //     "webview_height_ratio":"tall"
+        //   },
+        //   {
+        //     "type":"postback",
+        //     "title":"Remove From Cart",
+        //     "payload":"REMOVE_CART_" + itemID
+        //   }
+        // ]
+        // elements.push(obj)
+        // break;
+        //
+        // case "earrings":
+        // console.log()
+        // cost = cost + Number(db.earrings.find({ 'id': itemID }).price)
+        // obj.title = db.earrings.find({ 'id': itemID }).title
+        // obj.image_url = db.earrings.find({ 'id': itemID }).imageURL
+        // obj.subtitle = db.earrings.find({ 'id': itemID }).price
+        // obj.buttons = [
+        //   {
+        //     "title":"View Details",
+        //     "type":"web_url",
+        //     "url": db.earrings.find({ 'id': itemID }).siteURL,
+        //     "webview_height_ratio":"tall"
+        //   },
+        //   {
+        //     "type":"postback",
+        //     "title":"Remove From Cart",
+        //     "payload":"REMOVE_CART_" + itemID
+        //   }
+        // ]
+        // elements.push(obj)
+        // break;
+        //
+        // case "necklaces":
+        // console.log()
+        // cost = cost + Number(db.necklaces.find({ 'id': itemID }).price)
+        // obj.title = db.necklaces.find({ 'id': itemID }).title
+        // obj.image_url = db.necklaces.find({ 'id': itemID }).imageURL
+        // obj.subtitle = db.necklaces.find({ 'id': itemID }).price
+        // obj.buttons = [
+        //   {
+        //     "title":"View Details",
+        //     "type":"web_url",
+        //     "url": db.necklaces.find({ 'id': itemID }).siteURL,
+        //     "webview_height_ratio":"tall"
+        //   },
+        //   {
+        //     "type":"postback",
+        //     "title":"Remove From Cart",
+        //     "payload":"REMOVE_CART_" + itemID
+        //   }
+        // ]
+        // elements.push(obj)
+        // break;
+        //
+        // case "rings":
+        // console.log()
+        // cost = cost + Number(db.rings.find({ 'id': itemID }).price)
+        // obj.title = db.rings.find({ 'id': itemID }).title
+        // obj.image_url = db.rings.find({ 'id': itemID }).imageURL
+        // obj.subtitle = db.rings.find({ 'id': itemID }).price
+        // obj.buttons = [
+        //   {
+        //     "title":"View Details",
+        //     "type":"web_url",
+        //     "url": db.rings.find({ 'id': itemID }).siteURL,
+        //     "webview_height_ratio":"tall"
+        //   },
+        //   {
+        //     "type":"postback",
+        //     "title":"Remove From Cart",
+        //     "payload":"REMOVE_CART_" + itemID
+        //   }
+        // ]
+        // elements.push(obj)
+        // break;
 
         case "watches":
-        console.log(typeof db.watches.find({ 'id': itemID }).price)
-        console.log('in watches: ' + db.watches.find({ 'id': itemID }).price)
-        console.log('itemID: ' + itemID)
         cost = cost + Number(db.watches.find({ 'id': itemID }).price)
         obj.title = db.watches.find({ 'id': itemID }).title
         obj.image_url = db.watches.find({ 'id': itemID }).imageURL
@@ -266,11 +267,10 @@ module.exports = (event) => {
         break;
         default:
       }
-      console.log('cost: $' + cost)
     }
 
     getUser().then((user) => {
-      console.log('elements' + elements)
+      // console.log('elements' + elements)
       // let messageData = {
       //   "recipient":{
       //     "id": event.sender.id
