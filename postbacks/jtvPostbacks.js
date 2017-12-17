@@ -147,7 +147,7 @@ module.exports = (event) => {
     var cost = 0
     for (var i = 0; i < db.users.find({ 'id': event.sender.id })[0].cart.length; i++) {
 
-      let obj = {}
+      var obj = {}
 
       var itemID = "*" + db.users.find({ 'id': event.sender.id })[0].cart[i]
       var category = itemID.split('_')[0]
@@ -249,6 +249,7 @@ module.exports = (event) => {
         case "watches":
         cost = cost + db.watches.find({ id: itemID })[0].price
         console.log('cost: ' + cost)
+        console.log('price: ' + db.watches.find({ id: itemID })[0].price)
         obj.title = db.watches.find({ id: itemID })[0].title
         obj.image_url = db.watches.find({ id: itemID })[0].imageURL
         obj.subtitle = db.watches.find({ id: itemID })[0].price
@@ -272,22 +273,22 @@ module.exports = (event) => {
     }
 
     getUser().then((user) => {
-      let messageData = {
-        "recipient":{
-          "id": event.sender.id
-        },
-        "message":{
-          "attachment":{
-            "type":"template",
-            "payload":{
-              "template_type":"generic",
-              "sharable": true,
-              "elements": elements
-            }
-          }
-        }
-      }
-      callSendAPI(user.pageAccessToken, messageData)
+      // let messageData = {
+      //   "recipient":{
+      //     "id": event.sender.id
+      //   },
+      //   "message":{
+      //     "attachment":{
+      //       "type":"template",
+      //       "payload":{
+      //         "template_type":"generic",
+      //         "sharable": true,
+      //         "elements": elements
+      //       }
+      //     }
+      //   }
+      // }
+      // callSendAPI(user.pageAccessToken, messageData)
 
       setTimeout(() => {
         let messageData = {
