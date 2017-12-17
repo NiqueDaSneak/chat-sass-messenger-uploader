@@ -246,7 +246,7 @@ module.exports = (event) => {
         // elements.push(obj)
         // break;
 
-        case "watches":
+        case "*watches":
         cost = cost + db.watches.find({ id: itemID })[0].price
         console.log('cost: ' + cost)
         console.log('price: ' + db.watches.find({ id: itemID })[0].price)
