@@ -143,7 +143,56 @@ module.exports = (event) => {
 
   if (event.postback.payload === "DONE") {
 
-    console.log('cart: ' + db.users.find({ 'id': event.sender.id })[0].cart)
+    var elements = []
+    for (var i = 0; i < db.users.find({ 'id': event.sender.id })[0].cart.length; i++) {
+
+      let obj = {}
+      console.log(db.users.find({ 'id': event.sender.id })[0].cart[i]
+    }
+
+    //   obj.title = db.rings.find()[i].title
+    //   obj.image_url = db.rings.find()[i].imageURL
+    //   obj.subtitle = db.rings.find()[i].price
+    //   obj.buttons = [
+    //     {
+    //       "type":"postback",
+    //       "title":"Add to Cart",
+    //       "payload":"ADD_CART_RINGS_" + db.rings.find()[i].id
+    //     },
+    //     {
+    //       "title":"View Details",
+    //       "type":"web_url",
+    //       "url": db.rings.find()[i].siteURL,
+    //       "webview_height_ratio":"full"
+    //     },
+    //     {
+    //       "type":"postback",
+    //       "title":"Show Categories",
+    //       "payload":"SHOW_CATS"
+    //     }
+    //   ]
+    //   elements.push(obj)
+    // }
+    //
+    // getUser().then((user) => {
+    //   let messageData = {
+    //     "recipient":{
+    //       "id": event.sender.id
+    //     },
+    //     "message":{
+    //       "attachment":{
+    //         "type":"template",
+    //         "payload":{
+    //           "template_type":"generic",
+    //           "sharable": true,
+    //           // "image_aspect_ratio": "square",
+    //           "elements": elements
+    //         }
+    //       }
+    //     }
+    //   }
+    //   callSendAPI(user.pageAccessToken, messageData)
+    // })
 
     // use event.sender.id => get cart id => get cart array
     // send cart array as carosel
