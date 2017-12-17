@@ -144,78 +144,168 @@ module.exports = (event) => {
   if (event.postback.payload === "DONE") {
 
     var elements = []
-
+    var cost = 0
     for (var i = 0; i < db.users.find({ 'id': event.sender.id })[0].cart.length; i++) {
 
       let obj = {}
-      // console.log(db.users.find({ 'id': event.sender.id })[0].cart[i])
+
       let itemID = db.users.find({ 'id': event.sender.id })[0].cart[i]
       let category = itemID.split('_')[0]
-      console.log('itemID: ' + itemID)
-      console.log('category: ' + category)
+
       switch (category) {
         case "bracelets":
-        console.log(db.bracelets.find({ 'id': '*' + itemID }))
+        cost = cost + db.bracelets.find({ 'id': '*' + itemID }).price
+        obj.title = db.bracelets.find({ 'id': '*' + itemID }).title
+        obj.image_url = db.bracelets.find({ 'id': '*' + itemID }).imageURL
+        obj.subtitle = db.bracelets.find({ 'id': '*' + itemID }).price
+        obj.buttons = [
+          {
+            "title":"View Details",
+            "type":"web_url",
+            "url": db.bracelets.find({ 'id': '*' + itemID }).siteURL,
+            "webview_height_ratio":"tall"
+          },
+          {
+            "type":"postback",
+            "title":"Remove From Cart",
+            "payload":"REMOVE_CART_" + '*' + itemID
+          }
+        ]
+        elements.push(obj)
         break;
         case "earrings":
-        console.log(db.earrings.find({ 'id': '*' + itemID }))
+        cost = cost + db.earrings.find({ 'id': '*' + itemID }).price
+        obj.title = db.earrings.find({ 'id': '*' + itemID }).title
+        obj.image_url = db.earrings.find({ 'id': '*' + itemID }).imageURL
+        obj.subtitle = db.earrings.find({ 'id': '*' + itemID }).price
+        obj.buttons = [
+          {
+            "title":"View Details",
+            "type":"web_url",
+            "url": db.earrings.find({ 'id': '*' + itemID }).siteURL,
+            "webview_height_ratio":"tall"
+          },
+          {
+            "type":"postback",
+            "title":"Remove From Cart",
+            "payload":"REMOVE_CART_" + '*' + itemID
+          }
+        ]
+        elements.push(obj)
         break;
         case "necklaces":
-        console.log(db.necklaces.find({ 'id': '*' + itemID }))
+        cost = cost + db.necklaces.find({ 'id': '*' + itemID }).price
+        obj.title = db.necklaces.find({ 'id': '*' + itemID }).title
+        obj.image_url = db.necklaces.find({ 'id': '*' + itemID }).imageURL
+        obj.subtitle = db.necklaces.find({ 'id': '*' + itemID }).price
+        obj.buttons = [
+          {
+            "title":"View Details",
+            "type":"web_url",
+            "url": db.necklaces.find({ 'id': '*' + itemID }).siteURL,
+            "webview_height_ratio":"tall"
+          },
+          {
+            "type":"postback",
+            "title":"Remove From Cart",
+            "payload":"REMOVE_CART_" + '*' + itemID
+          }
+        ]
+        elements.push(obj)
         break;
         case "rings":
-        console.log(db.rings.find({ 'id': '*' + itemID }))
+        cost = cost + db.rings.find({ 'id': '*' + itemID }).price
+        obj.title = db.rings.find({ 'id': '*' + itemID }).title
+        obj.image_url = db.rings.find({ 'id': '*' + itemID }).imageURL
+        obj.subtitle = db.rings.find({ 'id': '*' + itemID }).price
+        obj.buttons = [
+          {
+            "title":"View Details",
+            "type":"web_url",
+            "url": db.rings.find({ 'id': '*' + itemID }).siteURL,
+            "webview_height_ratio":"tall"
+          },
+          {
+            "type":"postback",
+            "title":"Remove From Cart",
+            "payload":"REMOVE_CART_" + '*' + itemID
+          }
+        ]
+        elements.push(obj)
         break;
         case "watches":
-        console.log(db.watches.find({ 'id': '*' + itemID }))
+        cost = cost + db.watches.find({ 'id': '*' + itemID }).price
+        obj.title = db.watches.find({ 'id': '*' + itemID }).title
+        obj.image_url = db.watches.find({ 'id': '*' + itemID }).imageURL
+        obj.subtitle = db.watches.find({ 'id': '*' + itemID }).price
+        obj.buttons = [
+          {
+            "title":"View Details",
+            "type":"web_url",
+            "url": db.watches.find({ 'id': '*' + itemID }).siteURL,
+            "webview_height_ratio":"tall"
+          },
+          {
+            "type":"postback",
+            "title":"Remove From Cart",
+            "payload":"REMOVE_CART_" + '*' + itemID
+          }
+        ]
+        elements.push(obj)
         break;
         default:
-
       }
-    //   obj.title = db.rings.find()[i].title
-    //   obj.image_url = db.rings.find()[i].imageURL
-    //   obj.subtitle = db.rings.find()[i].price
-    //   obj.buttons = [
-    //     {
-    //       "type":"postback",
-    //       "title":"Add to Cart",
-    //       "payload":"ADD_CART_RINGS_" + db.rings.find()[i].id
-    //     },
-    //     {
-    //       "title":"View Details",
-    //       "type":"web_url",
-    //       "url": db.rings.find()[i].siteURL,
-    //       "webview_height_ratio":"full"
-    //     },
-    //     {
-    //       "type":"postback",
-    //       "title":"Show Categories",
-    //       "payload":"SHOW_CATS"
-    //     }
-    //   ]
-    //   elements.push(obj)
-    // }
-    //
+    }
   }
-    // getUser().then((user) => {
-    //   let messageData = {
-    //     "recipient":{
-    //       "id": event.sender.id
-    //     },
-    //     "message":{
-    //       "attachment":{
-    //         "type":"template",
-    //         "payload":{
-    //           "template_type":"generic",
-    //           "sharable": true,
-    //           // "image_aspect_ratio": "square",
-    //           "elements": elements
-    //         }
-    //       }
-    //     }
-    //   }
-    //   callSendAPI(user.pageAccessToken, messageData)
-    // })
+
+    getUser().then((user) => {
+      let messageData = {
+        "recipient":{
+          "id": event.sender.id
+        },
+        "message":{
+          "attachment":{
+            "type":"template",
+            "payload":{
+              "template_type":"generic",
+              "sharable": true,
+              "elements": elements
+            }
+          }
+        }
+      }
+      callSendAPI(user.pageAccessToken, messageData)
+
+      setTimeout(() => {
+        let messageData = {
+          "recipient":{
+            "id": event.sender.id
+          },
+          "message":{
+            "attachment":{
+              "type":"template",
+              "payload":{
+                "template_type":"button",
+                "text":"Your total is $" + cost + ". Would you like to pay now, or keep shopping?" ,
+                "buttons":[
+                  {
+                    "type":"postback",
+                    "payload":"SHOW_CATS",
+                    "title":"Keep Shopping"
+                  },
+                  {
+                    "type":"postback",
+                    "payload":"PAY",
+                    "title":"Pay Now"
+                  }
+                ]
+              }
+            }
+          }
+        }
+        callSendAPI(user.pageAccessToken, messageData)
+      }, 3000)
+    })
 
     // use event.sender.id => get cart id => get cart array
     // send cart array as carosel
