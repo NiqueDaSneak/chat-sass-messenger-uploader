@@ -154,7 +154,7 @@ module.exports = (event) => {
 
       switch (category) {
         case "bracelets":
-        cost = cost + Number(db.bracelets.find({ 'id': '*' + itemID }).price)
+        cost = cost + Number(db.bracelets.find({ 'id': '*' + itemID })[0].price)
         obj.title = db.bracelets.find({ 'id': '*' + itemID }).title
         obj.image_url = db.bracelets.find({ 'id': '*' + itemID }).imageURL
         obj.subtitle = db.bracelets.find({ 'id': '*' + itemID }).price
@@ -175,7 +175,7 @@ module.exports = (event) => {
         break;
 
         case "earrings":
-        cost = cost + Number(db.bracelets.find({ 'id': '*' + itemID }).price)
+        cost = cost + Number(db.bracelets.find({ 'id': '*' + itemID })[0].price)
         obj.title = db.earrings.find({ 'id': '*' + itemID }).title
         obj.image_url = db.earrings.find({ 'id': '*' + itemID }).imageURL
         obj.subtitle = db.earrings.find({ 'id': '*' + itemID }).price
@@ -196,7 +196,7 @@ module.exports = (event) => {
         break;
 
         case "necklaces":
-        cost = cost + Number(db.bracelets.find({ 'id': '*' + itemID }).price)
+        cost = cost + Number(db.bracelets.find({ 'id': '*' + itemID })[0].price)
         obj.title = db.necklaces.find({ 'id': '*' + itemID }).title
         obj.image_url = db.necklaces.find({ 'id': '*' + itemID }).imageURL
         obj.subtitle = db.necklaces.find({ 'id': '*' + itemID }).price
@@ -217,7 +217,7 @@ module.exports = (event) => {
         break;
 
         case "rings":
-        cost = cost + Number(db.bracelets.find({ 'id': '*' + itemID }).price)
+        cost = cost + Number(db.bracelets.find({ 'id': '*' + itemID })[0].price)
         obj.title = db.rings.find({ 'id': '*' + itemID }).title
         obj.image_url = db.rings.find({ 'id': '*' + itemID }).imageURL
         obj.subtitle = db.rings.find({ 'id': '*' + itemID }).price
@@ -238,7 +238,7 @@ module.exports = (event) => {
         break;
 
         case "watches":
-        cost = cost + Number(db.bracelets.find({ 'id': '*' + itemID }).price)
+        cost = cost + Number(db.bracelets.find({ 'id': '*' + itemID })[0].price)
         obj.title = db.watches.find({ 'id': '*' + itemID }).title
         obj.image_url = db.watches.find({ 'id': '*' + itemID }).imageURL
         obj.subtitle = db.watches.find({ 'id': '*' + itemID }).price
