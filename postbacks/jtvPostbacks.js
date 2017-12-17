@@ -142,6 +142,8 @@ module.exports = (event) => {
   }
 
   if (event.postback.payload === "DONE") {
+
+    console.log('cart: ' + db.users.find({id : event.sender.id}).cart)
     // use event.sender.id => get cart id => get cart array
     // send cart array as carosel
       // item
