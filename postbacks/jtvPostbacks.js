@@ -151,7 +151,8 @@ module.exports = (event) => {
       // console.log(db.users.find({ 'id': event.sender.id })[0].cart[i])
       let itemID = db.users.find({ 'id': event.sender.id })[0].cart[i]
       let category = itemID.split('_')[0]
-      // console.log(db.category.find({ 'id': itemID }))
+      console.log('itemID: ' + itemID)
+      console.log('category: ' + category)
       switch (category) {
         case "bracelets":
         console.log(db.bracelets.find({ 'id': itemID }))
