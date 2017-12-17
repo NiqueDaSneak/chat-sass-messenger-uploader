@@ -152,8 +152,8 @@ module.exports = (event) => {
       var itemID = "*" + db.users.find({ 'id': event.sender.id })[0].cart[i]
       var category = itemID.split('_')[0]
 
-      console.log('itemID: ' + itemID)
-      console.log(db.watches.find({ id: itemID })[0])
+      // console.log('itemID: ' + itemID)
+      // console.log(db.watches.find({ id: itemID })[0])
       // console.log(typeof db.watches.find({ id: itemID }).price)
       // console.log('watch price: ' + db.watches.find({ 'id': itemID }).price)
 
@@ -247,15 +247,15 @@ module.exports = (event) => {
         // break;
 
         case "watches":
-        cost = cost + Number(db.watches.find({ 'id': itemID }).price)
-        obj.title = db.watches.find({ 'id': itemID }).title
-        obj.image_url = db.watches.find({ 'id': itemID }).imageURL
-        obj.subtitle = db.watches.find({ 'id': itemID }).price
+        cost = cost + Number(db.watches.find({ id: itemID })[0].price)
+        obj.title = db.watches.find({ id: itemID })[0].title
+        obj.image_url = db.watches.find({ id: itemID })[0].imageURL
+        obj.subtitle = db.watches.find({ id: itemID })[0].price
         obj.buttons = [
           {
             "title":"View Details",
             "type":"web_url",
-            "url": db.watches.find({ 'id': itemID }).siteURL,
+            "url": db.watches.find({ id: itemID })[0].siteURL,
             "webview_height_ratio":"tall"
           },
           {
@@ -271,23 +271,23 @@ module.exports = (event) => {
     }
 
     getUser().then((user) => {
-      // console.log('elements' + elements)
-      // let messageData = {
-      //   "recipient":{
-      //     "id": event.sender.id
-      //   },
-      //   "message":{
-      //     "attachment":{
-      //       "type":"template",
-      //       "payload":{
-      //         "template_type":"generic",
-      //         "sharable": true,
-      //         "elements": elements
-      //       }
-      //     }
-      //   }
-      // }
-      // callSendAPI(user.pageAccessToken, messageData)
+      console.log('elements' + elements)
+      let messageData = {
+        "recipient":{
+          "id": event.sender.id
+        },
+        "message":{
+          "attachment":{
+            "type":"template",
+            "payload":{
+              "template_type":"generic",
+              "sharable": true,
+              "elements": elements
+            }
+          }
+        }
+      }
+      callSendAPI(user.pageAccessToken, messageData)
 
       setTimeout(() => {
         let messageData = {
