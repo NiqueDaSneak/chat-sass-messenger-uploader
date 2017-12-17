@@ -153,7 +153,7 @@ module.exports = (event) => {
       var category = itemID.split('_')[0]
 
       console.log('itemID: ' + itemID)
-      console.log(db.watches.find({ id: itemID }))
+      console.log(db.watches.find({ id: itemID })[0])
       // console.log(typeof db.watches.find({ id: itemID }).price)
       // console.log('watch price: ' + db.watches.find({ 'id': itemID }).price)
 
