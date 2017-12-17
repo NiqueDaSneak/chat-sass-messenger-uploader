@@ -155,19 +155,19 @@ module.exports = (event) => {
       console.log('category: ' + category)
       switch (category) {
         case "bracelets":
-        console.log(db.bracelets.find({ 'id': itemID }))
+        console.log(db.bracelets.find({ 'id': '*' + itemID }))
         break;
         case "earrings":
-        console.log(db.earrings.find({ 'id': itemID }))
+        console.log(db.earrings.find({ 'id': '*' + itemID }))
         break;
         case "necklaces":
-        console.log(db.necklaces.find({ 'id': itemID }))
+        console.log(db.necklaces.find({ 'id': '*' + itemID }))
         break;
         case "rings":
-        console.log(db.rings.find({ 'id': itemID }))
+        console.log(db.rings.find({ 'id': '*' + itemID }))
         break;
         case "watches":
-        console.log(db.watches.find({ 'id': itemID }))
+        console.log(db.watches.find({ 'id': '*' + itemID }))
         break;
         default:
 
