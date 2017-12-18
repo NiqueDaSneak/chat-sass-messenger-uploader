@@ -58,16 +58,16 @@ module.exports = (event) => {
 
             newMember.save((err, member) => {
               if (err) return console.error(err)
-              sendTextMessage(event.sender.id, user.pageAccessToken, 'Welcome to our Messenger Experience! Watch the video below to learn how to shop with us now!')
+              sendTextMessage(event.sender.id, user.pageAccessToken, 'Hey there! I’m Gemma, and I’m here to help you find something special to make you sparkle. Take a peek at this short video to see how to shop and save.')
               sendVideoMessage(event.sender.id, user.pageAccessToken, 'https://chat-sass-messenger-uploader.herokuapp.com/data/jtv.mp4')
               setTimeout(() => {
-                sendTextMessage(event.sender.id, user.pageAccessToken, "Tap the 'Shop Now' button in the menu below to begin.")
+                sendTextMessage(event.sender.id, user.pageAccessToken, "Ready? Let’s go shopping! Just tap 'Shop Now' in the menu below to start browsing.")
               }, 8000)
               resolve()
             })
           })
         } else {
-          sendTextMessage(event.sender.id, user.pageAccessToken, 'Welcome back to Gem & Jewels TV!')
+          sendTextMessage(event.sender.id, user.pageAccessToken, "Welcome back! Let’s go shopping! Just tap 'Shop Now' below to start browsing.")
           resolve()
         }
       })
@@ -829,7 +829,7 @@ module.exports = (event) => {
                   {
                     "title":"Rings",
                     "image_url":"https://i5.jtv.com/loadimage.aspx?btype=.jpg&cgid=3341153&img=1&h=300&w=400",
-                    "subtitle":"We'\''ve got the right hat for everyone.",
+                    "subtitle":"Hundreds of styles you’ll love for years to come.",
                     "buttons":[
                       {
                         "type":"postback",
@@ -841,7 +841,7 @@ module.exports = (event) => {
                   {
                     "title":"Earrings",
                     "image_url":"https://i5.jtv.com/loadimage.aspx?btype=.jpg&cgid=3390679&img=1&h=300&w=400",
-                    "subtitle":"We'\''ve got the right hat for everyone.",
+                    "subtitle":"From elegant to everyday dangle, diamond & more.",
                     "buttons":[
                       {
                         "type":"postback",
@@ -853,7 +853,7 @@ module.exports = (event) => {
                   {
                     "title":"Bracelets",
                     "image_url":"https://i5.jtv.com/loadimage.aspx?btype=.jpg&cgid=3354063&img=1&h=300&w=400",
-                    "subtitle":"We'\''ve got the right hat for everyone.",
+                    "subtitle":"Mix, match and stack for a look all your own.",
                     "buttons":[
                       {
                         "type":"postback",
@@ -865,7 +865,7 @@ module.exports = (event) => {
                   {
                     "title":"Necklaces",
                     "image_url":"https://i5.jtv.com/loadimage.aspx?btype=.jpg&cgid=3384142&img=1&h=300&w=400",
-                    "subtitle":"We'\''ve got the right hat for everyone.",
+                    "subtitle": "Sparkle with diamonds, gemstones, pearls & more.",
                     "buttons":[
                       {
                         "type":"postback",
@@ -877,7 +877,7 @@ module.exports = (event) => {
                   {
                     "title":"Watches",
                     "image_url":"https://i5.jtv.com/loadimage.aspx?btype=.jpg&cgid=3280749&img=1&h=300&w=400",
-                    "subtitle":"We'\''ve got the right hat for everyone.",
+                    "subtitle":"Brand name watches range from laid-back to luxury.",
                     "buttons":[
                       {
                         "type":"postback",
