@@ -344,6 +344,8 @@ module.exports = (event) => {
 
     let cart = db.users.find({ 'id': event.sender.id })[0].cart
     // cart.push(event.postback.payload.split('*')[1])
+    console.log('cart: ' + cart)
+    console.log('*' + event.postback.payload.split('*')[1])
     cart.remove('*' + event.postback.payload.split('*')[1])
 
     var query = {
