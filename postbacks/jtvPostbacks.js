@@ -605,7 +605,7 @@ module.exports = (event) => {
   }
 
   if (event.postback.payload === "STORED") {
-
+    var elements = []
     var cost = 0
     for (var i = 0; i < db.users.find({ 'id': event.sender.id })[0].cart.length; i++) {
 
