@@ -58,10 +58,10 @@ module.exports = (event) => {
 
             newMember.save((err, member) => {
               if (err) return console.error(err)
-              sendTextMessage(event.sender.id, user.pageAccessToken, 'This is some great intro copy to explain the experience!')
+              sendTextMessage(event.sender.id, user.pageAccessToken, 'Welcome to our Messenger Experience! Watch the video below to learn how to shop with us now!')
               sendVideoMessage(event.sender.id, user.pageAccessToken, 'https://chat-sass-messenger-uploader.herokuapp.com/data/jtv.mp4')
               setTimeout(() => {
-                sendTextMessage(event.sender.id, user.pageAccessToken, "Tap the 'Shop Now' button below to begin.")
+                sendTextMessage(event.sender.id, user.pageAccessToken, "Tap the 'Shop Now' button in the menu below to begin.")
               }, 8000)
               resolve()
             })
@@ -99,31 +99,31 @@ module.exports = (event) => {
                 {
                   "title": "SEARCH JEWELRY TYPE",
                   "subtitle": "Choose from thousands of sparkling styles",
-                  "image_url": "http://via.placeholder.com/350x350",
+                  "image_url": "https://n6-img-fp.akamaized.net/free-vector/jewelry-flat-icons-set-of-necklace-tiara-earrings-isolated-vector-illustration_1284-2382.jpg?size=338&ext=jpg",
                   "buttons": [
                     {
-                      "title": "Search Jewelry Type",
+                      "title": "Tap For Jewelry",
                       "type": "postback",
                       "payload": "CAT_TYPE_JEWEL"
                     }
                   ]
                 },
-                {
-                  "title": "SEARCH GEM TYPE",
-                  "subtitle": "We have eye-catching treasures that are a must have for your collection",
-                  "image_url": "http://via.placeholder.com/350x350",
-                  "buttons": [
-                    {
-                      "title": "Search Gem Type",
-                      "type": "postback",
-                      "payload": "CAT_TYPE_GEM"
-                    }
-                  ]
-                },
+                // {
+                //   "title": "SEARCH GEM TYPE",
+                //   "subtitle": "We have eye-catching treasures that are a must have for your collection",
+                //   "image_url": "http://via.placeholder.com/350x350",
+                //   "buttons": [
+                //     {
+                //       "title": "Search Gem Type",
+                //       "type": "postback",
+                //       "payload": "CAT_TYPE_GEM"
+                //     }
+                //   ]
+                // },
                 {
                   "title": "AS SEEN ON TV",
                   "subtitle": "...currently on air",
-                  "image_url": "http://via.placeholder.com/350x350",
+                  "image_url": "https://previews.123rf.com/images/roxanabalint/roxanabalint1405/roxanabalint140500418/28609789-as-seen-on-tv-grunge-rubber-stamp-on-white-vector-illustration-Stock-Vector.jpg",
                   "buttons": [
                     {
                       "title": "SHOP LIVE",
