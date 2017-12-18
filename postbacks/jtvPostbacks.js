@@ -684,7 +684,7 @@ module.exports = (event) => {
 
       let messageData = {
         "recipient":{
-          "id":"<PSID>"
+          "id": event.sender.id
         },
         "message":{
           "attachment":{
