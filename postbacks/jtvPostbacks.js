@@ -769,7 +769,7 @@ module.exports = (event) => {
                 "elements":[
                   {
                     "title":"Rings",
-                    "image_url":"http://via.placeholder.com/350x350",
+                    "image_url":"https://i5.jtv.com/loadimage.aspx?btype=.jpg&cgid=3341153&img=1&h=300&w=400",
                     "subtitle":"We'\''ve got the right hat for everyone.",
                     "buttons":[
                       {
@@ -781,7 +781,7 @@ module.exports = (event) => {
                   },
                   {
                     "title":"Earrings",
-                    "image_url":"http://via.placeholder.com/350x350",
+                    "image_url":"https://i5.jtv.com/loadimage.aspx?btype=.jpg&cgid=3390679&img=1&h=300&w=400",
                     "subtitle":"We'\''ve got the right hat for everyone.",
                     "buttons":[
                       {
@@ -793,7 +793,7 @@ module.exports = (event) => {
                   },
                   {
                     "title":"Bracelets",
-                    "image_url":"http://via.placeholder.com/350x350",
+                    "image_url":"https://i5.jtv.com/loadimage.aspx?btype=.jpg&cgid=3354063&img=1&h=300&w=400",
                     "subtitle":"We'\''ve got the right hat for everyone.",
                     "buttons":[
                       {
@@ -805,7 +805,7 @@ module.exports = (event) => {
                   },
                   {
                     "title":"Necklaces",
-                    "image_url":"http://via.placeholder.com/350x350",
+                    "image_url":"https://i5.jtv.com/loadimage.aspx?btype=.jpg&cgid=3384142&img=1&h=300&w=400",
                     "subtitle":"We'\''ve got the right hat for everyone.",
                     "buttons":[
                       {
@@ -817,7 +817,7 @@ module.exports = (event) => {
                   },
                   {
                     "title":"Watches",
-                    "image_url":"http://via.placeholder.com/350x350",
+                    "image_url":"https://i5.jtv.com/loadimage.aspx?btype=.jpg&cgid=3280749&img=1&h=300&w=400",
                     "subtitle":"We'\''ve got the right hat for everyone.",
                     "buttons":[
                       {
