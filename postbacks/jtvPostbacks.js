@@ -367,6 +367,191 @@ module.exports = (event) => {
       sendTextMessage(event.sender.id, user.pageAccessToken, "Item removed from cart.")
       console.log(db.users.find({ 'id': event.sender.id })[0].cart)
     })
+
+    var elements = []
+    var cost = 0
+    for (var i = 0; i < db.users.find({ 'id': event.sender.id })[0].cart.length; i++) {
+
+      var obj = {}
+
+      var itemID = "*" + db.users.find({ 'id': event.sender.id })[0].cart[i]
+      var category = itemID.split('_')[0]
+
+      switch (category) {
+        case "*bracelets":
+        cost = cost + db.bracelets.find({ id: itemID })[0].price
+        console.log('cost: ' + cost)
+        console.log('price: ' + db.bracelets.find({ id: itemID })[0].price)
+        obj.title = db.bracelets.find({ id: itemID })[0].title
+        obj.image_url = db.bracelets.find({ id: itemID })[0].imageURL
+        obj.subtitle = db.bracelets.find({ id: itemID })[0].price
+        obj.buttons = [
+          {
+            "type":"web_url",
+            "url": db.bracelets.find({ id: itemID })[0].siteURL,
+            "title":"View Details",
+            "webview_height_ratio":"tall"
+          },
+          {
+            "type":"postback",
+            "title":"Remove From Cart",
+            "payload":"REMOVE_CART_" + itemID
+          }
+        ]
+        elements.push(obj)
+        break;
+
+        case "*earrings":
+        cost = cost + db.earrings.find({ id: itemID })[0].price
+        console.log('cost: ' + cost)
+        console.log('price: ' + db.earrings.find({ id: itemID })[0].price)
+        obj.title = db.earrings.find({ id: itemID })[0].title
+        obj.image_url = db.earrings.find({ id: itemID })[0].imageURL
+        obj.subtitle = db.earrings.find({ id: itemID })[0].price
+        obj.buttons = [
+          {
+            "type":"web_url",
+            "url": db.earrings.find({ id: itemID })[0].siteURL,
+            "title":"View Details",
+            "webview_height_ratio":"tall"
+          },
+          {
+            "type":"postback",
+            "title":"Remove From Cart",
+            "payload":"REMOVE_CART_" + itemID
+          }
+        ]
+        elements.push(obj)
+        break;
+
+        case "*necklaces":
+        cost = cost + db.necklaces.find({ id: itemID })[0].price
+        console.log('cost: ' + cost)
+        console.log('price: ' + db.necklaces.find({ id: itemID })[0].price)
+        obj.title = db.necklaces.find({ id: itemID })[0].title
+        obj.image_url = db.necklaces.find({ id: itemID })[0].imageURL
+        obj.subtitle = db.necklaces.find({ id: itemID })[0].price
+        obj.buttons = [
+          {
+            "type":"web_url",
+            "url": db.necklaces.find({ id: itemID })[0].siteURL,
+            "title":"View Details",
+            "webview_height_ratio":"tall"
+          },
+          {
+            "type":"postback",
+            "title":"Remove From Cart",
+            "payload":"REMOVE_CART_" + itemID
+          }
+        ]
+        elements.push(obj)
+        break;
+
+        case "*rings":
+        cost = cost + db.rings.find({ id: itemID })[0].price
+        // console.log('cost: ' + cost)
+        // console.log('price: ' + db.rings.find({ id: itemID })[0].price)
+        obj.title = db.rings.find({ id: itemID })[0].title
+        obj.image_url = db.rings.find({ id: itemID })[0].imageURL
+        obj.subtitle = db.rings.find({ id: itemID })[0].price
+        obj.buttons = [
+          {
+            "type":"web_url",
+            "url": db.rings.find({ id: itemID })[0].siteURL,
+            "title":"View Details",
+            "webview_height_ratio":"tall"
+          },
+          {
+            "type":"postback",
+            "title":"Remove From Cart",
+            "payload":"REMOVE_CART_" + itemID
+          }
+        ]
+        elements.push(obj)
+        break;
+
+        case "*watches":
+        cost = cost + db.watches.find({ id: itemID })[0].price
+        console.log('cost: ' + cost)
+        console.log('price: ' + db.watches.find({ id: itemID })[0].price)
+        obj.title = db.watches.find({ id: itemID })[0].title
+        obj.image_url = db.watches.find({ id: itemID })[0].imageURL
+        obj.subtitle = db.watches.find({ id: itemID })[0].price
+        obj.buttons = [
+          {
+            "type":"web_url",
+            "url": db.watches.find({ id: itemID })[0].siteURL,
+            "title":"View Details",
+            "webview_height_ratio":"tall"
+          },
+          {
+            "type":"postback",
+            "title":"Remove From Cart",
+            "payload":"REMOVE_CART_" + itemID
+          }
+        ]
+        elements.push(obj)
+        break;
+        default:
+      }
+    }
+
+    getUser().then((user) => {
+      let messageData = {
+        "recipient":{
+          "id": event.sender.id
+        },
+        "message":{
+          "attachment":{
+            "type":"template",
+            "payload":{
+              "template_type":"generic",
+              "sharable": true,
+              "elements": elements
+            }
+          }
+        }
+      }
+      callSendAPI(user.pageAccessToken, messageData)
+
+      setTimeout(() => {
+        let messageData = {
+          "recipient":{
+            "id": event.sender.id
+          },
+          "message":{
+            "attachment":{
+              "type":"template",
+              "payload":{
+                "template_type":"button",
+                "text":"Your total is $" + cost.toFixed(2) + ". Would you like to pay now, or keep shopping?" ,
+                "buttons":[
+                  {
+                    "type":"postback",
+                    "payload":"SHOW_CATS",
+                    "title":"Keep Shopping"
+                  },
+                  {
+                    "type":"postback",
+                    "payload":"PAY",
+                    "title":"Pay Now"
+                  }
+                ]
+              }
+            }
+          }
+        }
+        callSendAPI(user.pageAccessToken, messageData)
+      }, 3000)
+    })
+
+    // use event.sender.id => get cart id => get cart array
+    // send cart array as carosel
+      // item
+        // 'REMOVE_' + item.id
+        // PAY
+    // add up each item.price into variable
+    // send textMsg => 'Your total is $' + items totaled up
   }
 
 
