@@ -798,13 +798,13 @@ module.exports = (event) => {
     }
 
     if (event.postback.payload.split('_')[1] === "12") {
-      getUser().then(() => {
+      getUser().then((user) => {
         sendTextMessage(event.sender.id, user.pageAccessToken, 'We will send you a reminder before the show begins!')
       })
     }
 
     if (event.postback.payload.split('_')[1] === "14") {
-      getUser().then(() => {
+      getUser().then((user) => {
         sendTextMessage(event.sender.id, user.pageAccessToken, 'We will send you a reminder before the show begins!')
       })
     }
