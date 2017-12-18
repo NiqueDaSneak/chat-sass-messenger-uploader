@@ -556,6 +556,35 @@ module.exports = (event) => {
 
 
   if (event.postback.payload === "PAY") {
+
+    let messageData = {
+      "recipient":{
+        "id": event.sender.id
+      },
+      "message":{
+        "attachment":{
+          "type":"template",
+          "payload":{
+            "template_type":"button",
+            "text":"Do you want to use a stored credit card, or a new one?" ,
+            "buttons":[
+              {
+                "type":"postback",
+                "payload":"STORED",
+                "title":"Stored Card"
+              },
+              {
+                "type":"postback",
+                "payload":"CHARGE",
+                "title":"Pay Now"
+              }
+            ]
+          }
+        }
+      }
+    }
+    callSendAPI(user.pageAccessToken, messageData)
+
     // send button template => 'Do you want to use stored credit card, or add one?'
       // buttons
         // Stored
@@ -572,12 +601,124 @@ module.exports = (event) => {
   if (event.postback.payload === "GEMOPEDIA") {
   }
 
-  if (event.postback.payload.split('_')[0] === "STORED") {
+  if (event.postback.payload === "STORED") {
+
+    var cost = 0
+    for (var i = 0; i < db.users.find({ 'id': event.sender.id })[0].cart.length; i++) {
+
+      var obj = {}
+
+      var itemID = "*" + db.users.find({ 'id': event.sender.id })[0].cart[i]
+      var category = itemID.split('_')[0]
+
+      switch (category) {
+        case "*bracelets":
+        cost = cost + db.bracelets.find({ id: itemID })[0].price
+        console.log('cost: ' + cost)
+        console.log('price: ' + db.bracelets.find({ id: itemID })[0].price)
+        obj.title = db.bracelets.find({ id: itemID })[0].title
+        obj.image_url = db.bracelets.find({ id: itemID })[0].imageURL
+        obj.price = db.bracelets.find({ id: itemID })[0].price
+        obj.currency = "USD"
+        obj.quantity = 1
+
+        elements.push(obj)
+        break;
+
+        case "*earrings":
+        cost = cost + db.earrings.find({ id: itemID })[0].price
+        console.log('cost: ' + cost)
+        console.log('price: ' + db.earrings.find({ id: itemID })[0].price)
+        obj.title = db.earrings.find({ id: itemID })[0].title
+        obj.image_url = db.earrings.find({ id: itemID })[0].imageURL
+        obj.price = db.earrings.find({ id: itemID })[0].price
+        obj.currency = "USD"
+        obj.quantity = 1
+        elements.push(obj)
+        break;
+
+        case "*necklaces":
+        cost = cost + db.necklaces.find({ id: itemID })[0].price
+        console.log('cost: ' + cost)
+        console.log('price: ' + db.necklaces.find({ id: itemID })[0].price)
+        obj.title = db.necklaces.find({ id: itemID })[0].title
+        obj.image_url = db.necklaces.find({ id: itemID })[0].imageURL
+        obj.price = db.necklaces.find({ id: itemID })[0].price
+        obj.currency = "USD"
+        obj.quantity = 1
+        elements.push(obj)
+        break;
+
+        case "*rings":
+        cost = cost + db.rings.find({ id: itemID })[0].price
+        // console.log('cost: ' + cost)
+        // console.log('price: ' + db.rings.find({ id: itemID })[0].price)
+        obj.title = db.rings.find({ id: itemID })[0].title
+        obj.image_url = db.rings.find({ id: itemID })[0].imageURL
+        obj.price = db.rings.find({ id: itemID })[0].price
+        obj.currency = "USD"
+        obj.quantity = 1
+        elements.push(obj)
+        break;
+
+        case "*watches":
+        cost = cost + db.watches.find({ id: itemID })[0].price
+        console.log('cost: ' + cost)
+        console.log('price: ' + db.watches.find({ id: itemID })[0].price)
+        obj.title = db.watches.find({ id: itemID })[0].title
+        obj.image_url = db.watches.find({ id: itemID })[0].imageURL
+        obj.price = db.watches.find({ id: itemID })[0].price
+        obj.currency = "USD"
+        obj.quantity = 1
+        elements.push(obj)
+        break;
+        default:
+      }
+    }
+
+
+    getUser().then((user) => {
+
+      let messageData = {
+        "recipient":{
+          "id":"<PSID>"
+        },
+        "message":{
+          "attachment":{
+            "type":"template",
+            "payload":{
+              "template_type": "receipt",
+              "recipient_name": "",
+              "order_number": "12345678902",
+              "currency": "USD",
+              "payment_method": "Visa 2345",
+              // "address":{
+              //   "street_1":"1 Hacker Way",
+              //   "street_2":"",
+              //   "city":"Menlo Park",
+              //   "postal_code":"94025",
+              //   "state":"CA",
+              //   "country":"US"
+              // },
+              "summary":{
+                "subtotal": cost,
+                "shipping_cost":10.95,
+                "total_tax":16.19,
+                "total_cost": cost + 10.95 + 16.19
+              },
+              "elements": elements
+            }
+          }
+        }
+      }
+      callSendAPI(user.pageAccessToken, messageData)
+    })
+
     // event.postback.payload.split('_')[1] => find cart
     // use cart info to send receipt
   }
 
-  if (event.postback.payload.split('_')[0] === "CHARGE") {
+  if (event.postback.payload === "CHARGE") {
     // event.postback.payload.split('_')[1] => find cart
     // render webview and send cart information to webview
     // wait 20 seconds and send reciept
