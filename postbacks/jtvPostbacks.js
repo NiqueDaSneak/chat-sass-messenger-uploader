@@ -691,7 +691,7 @@ module.exports = (event) => {
             "type":"template",
             "payload":{
               "template_type": "receipt",
-              "recipient_name": "",
+              "recipient_name": "Gems & Jewels TV Customer",
               "order_number": "12345678902",
               "currency": "USD",
               "payment_method": "Visa 2345",
