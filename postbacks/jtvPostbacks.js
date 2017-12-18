@@ -715,6 +715,29 @@ module.exports = (event) => {
         }
       }
       callSendAPI(user.pageAccessToken, messageData)
+
+      setTimeout(() => {
+        let cart = []
+
+        var query = {
+          id: event.sender.id
+        }
+
+        var dataToBeUpdate = {
+          cart : cart
+        }
+
+        var options = {
+          multi: false,
+          upsert: false
+        }
+
+        db.users.update(query, dataToBeUpdate, options)
+        console.log(db.users.find({ id: event.sender.id }))
+        getUser().then((user) => {
+          sendTextMessage(event.sender.id, user.pageAccessToken, "Thank you for your purchase!")
+        })
+      }, 3500)
     })
 
     // event.postback.payload.split('_')[1] => find cart
