@@ -750,6 +750,65 @@ module.exports = (event) => {
     // wait 20 seconds and send reciept
   }
 
+  if (event.postback.payload.split('_')[0] === "TV") {
+
+    if (event.postback.payload.split('_')[1] === "10") {
+      getUser().then((user) => {
+        let messageData = {
+          "recipient":{
+            "id": event.sender.id
+          },
+          "message":{
+            "attachment":{
+              "type":"template",
+              "payload":{
+                "template_type":"generic",
+                "sharable": true,
+                "elements":[
+                  {
+                    "title":"Spin-n-bead Jr with Quick Change Trays",
+                    "image_url":"https://i5.jtv.com/loadimage.aspx?btype=.jpg&cgid=3305343&img=1&h=300&w=400",
+                    "subtitle":"21.79",
+                    "buttons":[
+                      {
+                        "type":"postback",
+                        "title":"Add to Cart",
+                        "payload":"ADD_CART_RINGS_" + "*bracelets_11"
+                      },
+                      {
+                        "title":"View Details",
+                        "type":"web_url",
+                        "url": "https://www.jtv.com/spin-n-bead-jr-with-quick-change-trays/1829459.html",
+                        "webview_height_ratio":"tall"
+                      },
+                      {
+                        "type":"postback",
+                        "title":"Show Categories",
+                        "payload":"SHOW_CATS"
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          }
+        }
+        callSendAPI(user.pageAccessToken, messageData)
+      })
+    }
+
+    if (event.postback.payload.split('_')[1] === "12") {
+      getUser().then(() => {
+        sendTextMessage(event.sender.id, user.pageAccessToken, 'We will send you a reminder before the show begins!')
+      })
+    }
+
+    if (event.postback.payload.split('_')[1] === "14") {
+      getUser().then(() => {
+        sendTextMessage(event.sender.id, user.pageAccessToken, 'We will send you a reminder before the show begins!')
+      })
+    }
+  }
 
   if (event.postback.payload.split('_')[0] === "CAT" && event.postback.payload.split('_')[1] === "TYPE") {
 
@@ -843,6 +902,68 @@ module.exports = (event) => {
     }
 
     if (event.postback.payload.split('_')[2] === "TV") {
+
+      getUser().then((user) => {
+        let messageData = {
+          "recipient":{
+            "id": event.sender.id
+          },
+          "message": {
+            "attachment": {
+              "type": "template",
+              "payload": {
+                "template_type": "list",
+                "top_element_style": "LARGE",
+                "elements": [
+                  {
+                    "title": "Jewel School with Sheree",
+                    "subtitle": "@ 10am - 12pm",
+                    "image_url": "https://n6-img-fp.akamaized.net/free-vector/jewelry-flat-icons-set-of-necklace-tiara-earrings-isolated-vector-illustration_1284-2382.jpg?size=338&ext=jpg",
+                    "buttons": [
+                      {
+                        "title": "Tap Here",
+                        "type": "postback",
+                        "payload": "TV_10"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Precious World Of Pearls Gifts With Mandy & Mark",
+                    "subtitle": "@ 12pm - 2pm",
+                    "image_url": "http://demandware.edgesuite.net/aaby_prd/on/demandware.static/-/Sites-jtv-Library/default/dwe4953c40/page%20images/About%20Us/2015/mandy1.jpg",
+                    "buttons": [
+                      {
+                        "title": "Tap Here",
+                        "type": "postback",
+                        "payload": "TV_12"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Color & Karat With Scott And Mandy",
+                    "subtitle": "@ 2pm - 4pm",
+                    "image_url": "https://scontent.fluk1-1.fna.fbcdn.net/v/t1.0-9/23559717_1596843407005785_1600285693681764677_n.jpg?oh=b57f9e85a0e351b4ded3d12059a8de5f&oe=5AB9FBC8",
+                    "buttons": [
+                      {
+                        "title": "Tap Here",
+                        "type": "postback",
+                        "payload": "TV_14"
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          }
+        }
+        callSendAPI(user.pageAccessToken, messageData)
+      })
+
+      // show list template of show times
+        // TV_10
+        // TV_12
+        // TV_14
+
     }
 
     if (event.postback.payload.split('_')[2] === "RINGS") {
