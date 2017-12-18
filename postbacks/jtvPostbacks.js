@@ -557,33 +557,36 @@ module.exports = (event) => {
 
   if (event.postback.payload === "PAY") {
 
-    let messageData = {
-      "recipient":{
-        "id": event.sender.id
-      },
-      "message":{
-        "attachment":{
-          "type":"template",
-          "payload":{
-            "template_type":"button",
-            "text":"Do you want to use a stored credit card, or a new one?" ,
-            "buttons":[
-              {
-                "type":"postback",
-                "payload":"STORED",
-                "title":"Stored Card"
-              },
-              {
-                "type":"postback",
-                "payload":"CHARGE",
-                "title":"Pay Now"
-              }
-            ]
+    getUser().then(() => {
+
+      let messageData = {
+        "recipient":{
+          "id": event.sender.id
+        },
+        "message":{
+          "attachment":{
+            "type":"template",
+            "payload":{
+              "template_type":"button",
+              "text":"Do you want to use a stored credit card, or a new one?" ,
+              "buttons":[
+                {
+                  "type":"postback",
+                  "payload":"STORED",
+                  "title":"Stored Card"
+                },
+                {
+                  "type":"postback",
+                  "payload":"CHARGE",
+                  "title":"Pay Now"
+                }
+              ]
+            }
           }
         }
       }
-    }
-    callSendAPI(user.pageAccessToken, messageData)
+      callSendAPI(user.pageAccessToken, messageData)
+    })
 
     // send button template => 'Do you want to use stored credit card, or add one?'
       // buttons
