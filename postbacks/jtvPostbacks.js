@@ -224,8 +224,8 @@ module.exports = (event) => {
 
         case "*rings":
         cost = cost + db.rings.find({ id: itemID })[0].price
-        console.log('cost: ' + cost)
-        console.log('price: ' + db.rings.find({ id: itemID })[0].price)
+        // console.log('cost: ' + cost)
+        // console.log('price: ' + db.rings.find({ id: itemID })[0].price)
         obj.title = db.rings.find({ id: itemID })[0].title
         obj.image_url = db.rings.find({ id: itemID })[0].imageURL
         obj.subtitle = db.rings.find({ id: itemID })[0].price
@@ -328,6 +328,44 @@ module.exports = (event) => {
     // add up each item.price into variable
     // send textMsg => 'Your total is $' + items totaled up
   }
+
+  if (event.postback.payload.split('_')[0] === "REMOVE" && event.postback.payload.split('_')[1] === "CART") {
+
+    Array.prototype.remove = function() {
+      var what, a = arguments, L = a.length, ax;
+      while (L && this.length) {
+        what = a[--L];
+        while ((ax = this.indexOf(what)) !== -1) {
+          this.splice(ax, 1);
+        }
+      }
+      return this;
+    }
+
+    let cart = db.users.find({ 'id': event.sender.id })[0].cart
+    // cart.push(event.postback.payload.split('*')[1])
+    cart.remove('*' + event.postback.payload.split('*')[1])
+
+    var query = {
+      id: event.sender.id
+    }
+
+    var dataToBeUpdate = {
+      cart : cart
+    }
+
+    var options = {
+      multi: false,
+      upsert: false
+    }
+
+    db.users.update(query, dataToBeUpdate, options)
+    console.log(db.users.find({ id: event.sender.id }))
+    getUser().then((user) => {
+      sendTextMessage(event.sender.id, user.pageAccessToken, "Item removed from cart.")
+    })
+  }
+
 
   if (event.postback.payload === "PAY") {
     // send button template => 'Do you want to use stored credit card, or add one?'
