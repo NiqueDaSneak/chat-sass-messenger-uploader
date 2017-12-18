@@ -568,17 +568,12 @@ module.exports = (event) => {
             "type":"template",
             "payload":{
               "template_type":"button",
-              "text":"Do you want to use a stored credit card, or a new one?" ,
+              "text":"We are going to use your stored card to make this purchase. Confirm?" ,
               "buttons":[
                 {
                   "type":"postback",
                   "payload":"STORED",
-                  "title":"Stored Card"
-                },
-                {
-                  "type":"postback",
-                  "payload":"CHARGE",
-                  "title":"Pay Now"
+                  "title":"Confirm"
                 }
               ]
             }
