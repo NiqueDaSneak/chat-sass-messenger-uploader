@@ -363,6 +363,7 @@ module.exports = (event) => {
     console.log(db.users.find({ id: event.sender.id }))
     getUser().then((user) => {
       sendTextMessage(event.sender.id, user.pageAccessToken, "Item removed from cart.")
+      console.log(db.users.find({ 'id': event.sender.id })[0].cart)
     })
   }
 
