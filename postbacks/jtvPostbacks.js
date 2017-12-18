@@ -557,7 +557,7 @@ module.exports = (event) => {
 
   if (event.postback.payload === "PAY") {
 
-    getUser().then(() => {
+    getUser().then((user) => {
 
       let messageData = {
         "recipient":{
