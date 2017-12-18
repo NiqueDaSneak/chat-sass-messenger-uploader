@@ -97,8 +97,8 @@ module.exports = (event) => {
               "top_element_style": "compact",
               "elements": [
                 {
-                  "title": "Search Jewelry Type",
-                  "subtitle": "See all our colors",
+                  "title": "SEARCH JEWELRY TYPE",
+                  "subtitle": "Choose from thousands of sparkling styles",
                   "image_url": "http://via.placeholder.com/350x350",
                   "buttons": [
                     {
@@ -109,8 +109,8 @@ module.exports = (event) => {
                   ]
                 },
                 {
-                  "title": "Search Gem Type",
-                  "subtitle": "See all our colors",
+                  "title": "SEARCH GEM TYPE",
+                  "subtitle": "We have eye-catching treasures that are a must have for your collection",
                   "image_url": "http://via.placeholder.com/350x350",
                   "buttons": [
                     {
@@ -121,12 +121,12 @@ module.exports = (event) => {
                   ]
                 },
                 {
-                  "title": "As Seen On TV",
-                  "subtitle": "See all our colors",
+                  "title": "AS SEEN ON TV",
+                  "subtitle": "...currently on air",
                   "image_url": "http://via.placeholder.com/350x350",
                   "buttons": [
                     {
-                      "title": "As Seen On Tv",
+                      "title": "SHOP LIVE",
                       "type": "postback",
                       "payload": "CAT_TYPE_TV"
                     }
