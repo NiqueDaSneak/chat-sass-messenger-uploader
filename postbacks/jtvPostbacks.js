@@ -2,7 +2,7 @@
 
 // var db = require('../data/jtvData.js')
 var db = require('diskdb')
-db = db.connect('data', ['rings', 'earrings', 'bracelets', 'necklaces', 'watches', 'users'])
+db.connect('data', ['rings', 'earrings', 'bracelets', 'necklaces', 'watches', 'users'])
 
 var Message = require('../models/messageModel.js')
 var Group = require('../models/groupModel.js')
