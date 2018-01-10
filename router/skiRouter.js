@@ -22,10 +22,10 @@ skiRouter.post('/', (req, res, next) => {
       // Iterate over each messaging event
       entry.messaging.forEach(function(event) {
           eventPostbackHandler(event)
+          res.sendStatus(200)
         // if (event.message) {
         //   // eventMessageHandler(event)
         // } else if (event.postback) {
-        //   res.sendStatus(200)
         // }
       })
     })
