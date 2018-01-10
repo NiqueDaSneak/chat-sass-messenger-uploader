@@ -72,90 +72,97 @@ module.exports = (event) => {
     })
   }
 
-  if (event.postback.payload === "GET_STARTED_PAYLOAD") {
-
-    // ENROLLING MEMBERS INTO THE IRRIGATE APP
-    getUser().then((user) => {
-      findMember(user)
-    })
+  if (event.message.quick_reply) {
+    if (event.message.quick_reply.payload.split('_')[1] === 'UNKNOWN') {
+      console.log('testing this working => unknown')
+    }
   }
 
-  if (event.postback.payload === "RESERVE") {
+  if (event.postback) {
 
-    getUser().then((user) => {
+    if (event.postback.payload === "GET_STARTED_PAYLOAD") {
+      // ENROLLING MEMBERS INTO THE IRRIGATE APP
+      getUser().then((user) => {
+        findMember(user)
+      })
+    }
 
-      let messageData = {
-        "recipient":{
-          "id": event.sender.id
-        },
-        "message":{
-          "text": "Where are you staying or skiing?",
-          "quick_replies":[
-            {
-              "content_type":"text",
-              "title":"Just Skiing/Not Sure",
-              "payload":"LOCATION_UNKNOWN"
-            },
-            {
-              "content_type":"text",
-              "title":"Alta & Snowbird",
-              "payload":"LOCATION_ALTA"
-            },
-            {
-              "content_type":"text",
-              "title":"Brighton & Solitude",
-              "payload":"LOCATION_BRIGHTON"
-            },
-            {
-              "content_type":"text",
-              "title":"Deer Valley",
-              "payload":"LOCATION_DEER"
-            },
-            {
-              "content_type":"text",
-              "title":"Park City",
-              "payload":"LOCATION_PARK"
-            },
-            {
-              "content_type":"text",
-              "title":"Snowbasin & Powder Mtn",
-              "payload":"LOCATION_SNOWBASIN"
-            },
-          ]
+    if (event.postback.payload === "RESERVE") {
+
+      getUser().then((user) => {
+
+        let messageData = {
+          "recipient":{
+            "id": event.sender.id
+          },
+          "message":{
+            "text": "Where are you staying or skiing?",
+            "quick_replies":[
+              {
+                "content_type":"text",
+                "title":"Just Skiing/Not Sure",
+                "payload":"LOCATION_UNKNOWN"
+              },
+              {
+                "content_type":"text",
+                "title":"Alta & Snowbird",
+                "payload":"LOCATION_ALTA"
+              },
+              {
+                "content_type":"text",
+                "title":"Brighton & Solitude",
+                "payload":"LOCATION_BRIGHTON"
+              },
+              {
+                "content_type":"text",
+                "title":"Deer Valley",
+                "payload":"LOCATION_DEER"
+              },
+              {
+                "content_type":"text",
+                "title":"Park City",
+                "payload":"LOCATION_PARK"
+              },
+              {
+                "content_type":"text",
+                "title":"Snowbasin/Powder Mt",
+                "payload":"LOCATION_SNOWBASIN"
+              },
+            ]
+          }
         }
-      }
-      callSendAPI(user.pageAccessToken, messageData)
-    })
-  }
+        callSendAPI(user.pageAccessToken, messageData)
+      })
+    }
 
-  if (event.postback.payload === "CALL") {
-    getUser().then((user) => {
+    if (event.postback.payload === "CALL") {
+      getUser().then((user) => {
 
-      let messageData = {
-        "recipient":{
-          "id": event.sender.id
-        },
-        "message":{
-          "attachment":{
-            "type":"template",
-            "payload":{
-              "template_type":"button",
-              "text":"Need further assistance? Talk to a representative",
-              "buttons":[
-                {
-                  "type":"phone_number",
-                  "title":"Call Representative",
-                  "payload":"800-722-3685"
-                }
-              ]
+        let messageData = {
+          "recipient":{
+            "id": event.sender.id
+          },
+          "message":{
+            "attachment":{
+              "type":"template",
+              "payload":{
+                "template_type":"button",
+                "text":"Need further assistance? Talk to a representative",
+                "buttons":[
+                  {
+                    "type":"phone_number",
+                    "title":"Call Representative",
+                    "payload":"800-722-3685"
+                  }
+                ]
+              }
             }
           }
         }
-      }
-      callSendAPI(user.pageAccessToken, messageData)
-    })
+        callSendAPI(user.pageAccessToken, messageData)
+      })
+    }
   }
-
 
 }
 
