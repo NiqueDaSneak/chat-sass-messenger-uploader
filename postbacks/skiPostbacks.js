@@ -139,7 +139,7 @@ module.exports = (event) => {
             }
 
             let messageData = {
-              
+
               "recipient":{
                 "id": event.sender.id
               },
@@ -149,7 +149,7 @@ module.exports = (event) => {
               }
             }
             callSendAPI(user.pageAccessToken, messageData)
-          }, 2500)
+          }, 3000)
         })
       }
 
