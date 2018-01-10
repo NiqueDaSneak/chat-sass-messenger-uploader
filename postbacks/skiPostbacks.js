@@ -123,39 +123,33 @@ module.exports = (event) => {
         var locations = JSON.parse("[" + event.message.quick_reply.payload.split('_')[1] + "]")
 
         getUser().then((user) => {
-          var imagePromise = new Promise(function(resolve, reject) {
-            sendImageMessage(event.sender.id, user.pageAccessToken, 'https://www.skinsee.com/resources/images/mapRates3-all.jpg')
-            resolve()
-          })
-          
-           imagePromise.then(() => {
+          sendImageMessage(event.sender.id, user.pageAccessToken, 'https://www.skinsee.com/resources/images/mapRates3-all.jpg')
 
-             // setTimeout(() => {
-               let quickReplies = []
-               for (var i = 0; i < locations.length; i++) {
+          setTimeout(() => {
+            let quickReplies = []
+            for (var i = 0; i < locations.length; i++) {
 
-                 let btn = {
-                   "content_type":"text",
-                   "title": locations[i],
-                   "payload":"CHOOSE_DATE"
-                 }
+              let btn = {
+                "content_type":"text",
+                "title": locations[i],
+                "payload":"CHOOSE_DATE"
+              }
 
-                 quickReplies.push(btn)
-               }
+              quickReplies.push(btn)
+            }
 
-               let messageData = {
+            let messageData = {
 
-                 "recipient":{
-                   "id": event.sender.id
-                 },
-                 "message":{
-                   "text": "Select your pickup location:",
-                   "quick_replies": quickReplies
-                 }
-               }
-               callSendAPI(user.pageAccessToken, messageData)
-             // }, 3000)
-           })
+              "recipient":{
+                "id": event.sender.id
+              },
+              "message":{
+                "text": "Select your pickup location:",
+                "quick_replies": quickReplies
+              }
+            }
+            callSendAPI(user.pageAccessToken, messageData)
+          }, 6000)
         })
       }
 
