@@ -86,7 +86,7 @@ module.exports = (event) => {
 
       let messageData = {
         "recipient":{
-          "id":"<PSID>"
+          "id": event.sender.id
         },
         "message":{
           "text": "Where are you staying or skiing?",
