@@ -82,6 +82,50 @@ module.exports = (event) => {
 
   if (event.postback.payload === "RESERVE") {
 
+    getUser().then((user) => {
+
+      let messageData = {
+        "recipient":{
+          "id":"<PSID>"
+        },
+        "message":{
+          "text": "Where are you staying or skiing?",
+          "quick_replies":[
+            {
+              "content_type":"text",
+              "title":"Just Skiing/Not Sure",
+              "payload":"LOCATION_UNKNOWN"
+            },
+            {
+              "content_type":"text",
+              "title":"Alta & Snowbird",
+              "payload":"LOCATION_ALTA"
+            },
+            {
+              "content_type":"text",
+              "title":"Brighton & Solitude",
+              "payload":"LOCATION_BRIGHTON"
+            },
+            {
+              "content_type":"text",
+              "title":"Deer Valley",
+              "payload":"LOCATION_DEER"
+            },
+            {
+              "content_type":"text",
+              "title":"Park City",
+              "payload":"LOCATION_PARK"
+            },
+            {
+              "content_type":"text",
+              "title":"Snowbasin & Powder Mtn",
+              "payload":"LOCATION_SNOWBASIN"
+            },
+          ]
+        }
+      }
+      callSendAPI(user.pageAccessToken, messageData)
+    })
   }
 
   if (event.postback.payload === "CALL") {
