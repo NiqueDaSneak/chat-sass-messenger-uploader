@@ -72,7 +72,7 @@ module.exports = (event) => {
     })
   }
 
-  if (event.message.quick_reply) {
+  if (event.message) {
     if (event.message.quick_reply.payload.split('_')[1] === 'UNKNOWN') {
       console.log('testing this working => unknown')
     }
