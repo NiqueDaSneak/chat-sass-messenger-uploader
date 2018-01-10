@@ -123,11 +123,12 @@ module.exports = (event) => {
         var locations = JSON.parse("[" + event.message.quick_reply.payload.split('_')[1] + "]")
 
         getUser().then((user) => {
-          let imagePromise = new Promise(function(resolve, reject) {
+          var imagePromise = new Promise(function(resolve, reject) {
             sendImageMessage(event.sender.id, user.pageAccessToken, 'https://www.skinsee.com/resources/images/mapRates3-all.jpg')
             resolve()
           })
-           imagePromise().then(() => {
+          
+           imagePromise.then(() => {
 
              // setTimeout(() => {
                let quickReplies = []
