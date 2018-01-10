@@ -124,9 +124,9 @@ module.exports = (event) => {
         console.log(locations)
       }
 
-      if (event.message.quick_reply.payload.split('_')[1] === 'UNKNOWN') {}
+      // if (event.message.quick_reply.payload.split('_')[1] === 'UNKNOWN') {}
 
-      if (event.message.quick_reply.payload.split('_')[1] === 'UNKNOWN') {}
+      // if (event.message.quick_reply.payload.split('_')[1] === 'UNKNOWN') {}
 
     }
 
