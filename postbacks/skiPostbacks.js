@@ -123,18 +123,18 @@ module.exports = (event) => {
         var locations = JSON.parse("[" + event.message.quick_reply.payload.split('_')[1] + "]")
 
         getUser().then((user) => {
-          sendImageMessage(event.sender.id, user.pageAccessToken, 'https://www.skinsee.com/resources/images/mapRates3-all.jpg')
+          // sendImageMessage(event.sender.id, user.pageAccessToken, 'https://www.skinsee.com/resources/images/mapRates3-all.jpg')
 
-          setTimeout(() => {
-            let quickReplies = []
+          // setTimeout(() => {
+            var quickReplies = []
             for (var i = 0; i < locations.length; i++) {
 
               let btn = {
-                  "content_type":"text",
-                  "title": locations[i],
-                  "payload":"CHOOSE_DATE"
-                }
-                
+                "content_type":"text",
+                "title": locations[i],
+                "payload":"CHOOSE_DATE"
+              }
+
               quickReplies.push(btn)
             }
 
@@ -143,12 +143,23 @@ module.exports = (event) => {
                 "id": event.sender.id
               },
               "message":{
-                "text": "Select your pickup location:",
-                "quick_replies": quickReplies
+                "attachment":{
+                  "type":"template",
+                  "payload":{
+                    "template_type":"generic",
+                    "elements":[
+                      {
+                        "title":"Select your pickup location:",
+                        "image_url":"https://www.skinsee.com/resources/images/mapRates3-all.jpg",
+                        "quick_replies": quickReplies
+                      }
+                    ]
+                  }
+                }
               }
             }
             callSendAPI(user.pageAccessToken, messageData)
-          }, 2500)
+          // }, 2500)
         })
       }
 
