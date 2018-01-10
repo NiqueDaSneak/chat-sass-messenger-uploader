@@ -73,9 +73,63 @@ module.exports = (event) => {
   }
 
   if (event.message) {
-    if (event.message.quick_reply.payload.split('_')[1] === 'UNKNOWN') {
-      console.log('testing this working => unknown')
+    if (event.message.quick_reply.payload.split('_')[0] === 'LOCATION') {
+      if (event.message.quick_reply.payload.split('_')[1] === 'UNKNOWN') {
+        getUser().then((user) => {
+
+          let messageData = {
+            "recipient":{
+              "id": event.sender.id
+            },
+            "message":{
+              "text": "Choose your area:",
+              "quick_replies":[
+                {
+                  "content_type":"text",
+                  "title":"Deer Valley",
+                  "payload":"LOCATION_1,8,13,14"
+                },
+                {
+                  "content_type":"text",
+                  "title":"Midvale",
+                  "payload":"LOCATION_3,5,6,7,8"
+                },
+                {
+                  "content_type":"text",
+                  "title":"Ogden",
+                  "payload":"LOCATION_1,4"
+                },
+                {
+                  "content_type":"text",
+                  "title":"Park City",
+                  "payload":"LOCATION_1,9,10,11,12"
+                },
+                {
+                  "content_type":"text",
+                  "title":"Sandy",
+                  "payload":"LOCATION_2,3,5,6,7"
+                },
+                {
+                  "content_type":"text",
+                  "title":"Salt Lake City",
+                  "payload":"LOCATION_1,8,9,10,11"
+                },
+              ]
+            }
+          }
+          callSendAPI(user.pageAccessToken, messageData)
+        })
+      } else {
+        var locations = JSON.parse("[" + event.message.quick_reply.payload.split('_')[1] + "]")
+        console.log(locations)
+      }
+
+      if (event.message.quick_reply.payload.split('_')[1] === 'UNKNOWN') {}
+
+      if (event.message.quick_reply.payload.split('_')[1] === 'UNKNOWN') {}
+
     }
+
   }
 
   if (event.postback) {
@@ -106,28 +160,28 @@ module.exports = (event) => {
               {
                 "content_type":"text",
                 "title":"Alta & Snowbird",
-                "payload":"LOCATION_ALTA"
+                "payload":"LOCATION_2,3,5,6,7"
               },
               {
                 "content_type":"text",
                 "title":"Brighton & Solitude",
-                "payload":"LOCATION_BRIGHTON"
+                "payload":"LOCATION_3,5,6,7,8"
               },
               {
                 "content_type":"text",
                 "title":"Deer Valley",
-                "payload":"LOCATION_DEER"
+                "payload":"LOCATION_1,8,13,14"
               },
               {
                 "content_type":"text",
                 "title":"Park City",
-                "payload":"LOCATION_PARK"
+                "payload":"LOCATION_1,8,9,10,11"
               },
               {
                 "content_type":"text",
                 "title":"Snowbasin/Powder Mt",
-                "payload":"LOCATION_SNOWBASIN"
-              },
+                "payload":"LOCATION_1,4"
+              }
             ]
           }
         }
