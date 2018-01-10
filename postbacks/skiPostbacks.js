@@ -80,6 +80,36 @@ module.exports = (event) => {
     })
   }
 
+  if (event.postback.payload === "RESERVE") {
+
+  }
+
+  if (event.postback.payload === "CALL") {
+    let messageData = {
+      "recipient":{
+        "id": event.sender.id
+      },
+      "message":{
+        "attachment":{
+          "type":"template",
+          "payload":{
+            "template_type":"button",
+            "text":"Need further assistance? Talk to a representative",
+            "buttons":[
+              {
+                "type":"phone_number",
+                "title":"Call Representative",
+                "payload":"800-722-3685"
+              }
+            ]
+          }
+        }
+      }
+    }
+    callSendAPI(user.pageAccessToken, messageData)
+  }
+
+
 }
 
 function sendTextMessage(recipientId, accessToken, textMsg) {
