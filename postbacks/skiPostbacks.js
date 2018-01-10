@@ -73,6 +73,7 @@ module.exports = (event) => {
   }
 
   if (event.message) {
+
     if (event.message.quick_reply.payload.split('_')[0] === 'LOCATION') {
       if (event.message.quick_reply.payload.split('_')[1] === 'UNKNOWN') {
         getUser().then((user) => {
@@ -139,7 +140,6 @@ module.exports = (event) => {
             }
 
             let messageData = {
-
               "recipient":{
                 "id": event.sender.id
               },
@@ -158,6 +158,71 @@ module.exports = (event) => {
       // if (event.message.quick_reply.payload.split('_')[1] === 'UNKNOWN') {}
 
     }
+
+    if (event.message.quick_reply.payload === 'CHOOSE_DATE') {
+      let messageData = {
+        "recipient":{
+          "id": event.sender.id
+        },
+        "message":{
+          "text": "Select your pickup location:",
+          "quick_replies": [
+            {
+              "content_type":"text",
+              "title": '2/1/18',
+              "payload":"CHOOSE_DATE"
+            },
+            {
+              "content_type":"text",
+              "title": '2/2/18',
+              "payload":"CHOOSE_DATE"
+            },
+            {
+              "content_type":"text",
+              "title": '2/3/18',
+              "payload":"CHOOSE_DATE"
+            },
+            {
+              "content_type":"text",
+              "title": '2/4/18',
+              "payload":"CHOOSE_DATE"
+            },
+            {
+              "content_type":"text",
+              "title": '2/5/18',
+              "payload":"CHOOSE_DATE"
+            },
+            {
+              "content_type":"text",
+              "title": '2/6/18',
+              "payload":"CHOOSE_DATE"
+            },
+            {
+              "content_type":"text",
+              "title": '2/7/18',
+              "payload":"CHOOSE_DATE"
+            },
+            {
+              "content_type":"text",
+              "title": '2/8/18',
+              "payload":"CHOOSE_DATE"
+            },
+            {
+              "content_type":"text",
+              "title": '2/9/18',
+              "payload":"CHOOSE_DATE"
+            },
+            {
+              "content_type":"text",
+              "title": '2/10/18',
+              "payload":"CHOOSE_DATE"
+            }
+          ]
+        }
+      }
+      callSendAPI(user.pageAccessToken, messageData)
+    }
+
 
   }
 
