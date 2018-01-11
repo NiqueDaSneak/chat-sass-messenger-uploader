@@ -403,7 +403,7 @@ module.exports = (event) => {
       for (var i = 0; i < db.users.find({ 'id': event.sender.id })[0].cart.length; i++) {
 
         var itemID = "*" + db.users.find({ 'id': event.sender.id })[0].cart[i]
-        cost = cost + Number(db.bracelets.find({ id: itemID })[0].price)
+        cost = cost + Number(db.ski.find({ id: itemID })[0].price)
       }
       console.log(cost)
     }
