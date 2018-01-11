@@ -458,8 +458,7 @@ module.exports = (event) => {
                   "payment_method": "Visa 4242",
                   "summary":{
                     "subtotal": cost,
-                    "total_tax": 16.19,
-                    "total_cost": cost + 10.95 + 16.19
+                    "total_cost": cost
                   },
                 }
               }
