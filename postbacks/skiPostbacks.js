@@ -407,7 +407,7 @@ module.exports = (event) => {
       }
       console.log(cost)
       getUser().then((user) => {
-        
+
         let messageData = {
           "recipient":{
             "id": event.sender.id
@@ -423,7 +423,7 @@ module.exports = (event) => {
                     "buttons":[
                       {
                         "type":"web_url",
-                        "url": 'https://irrigatemsg.com',
+                        "url": 'https://www.irrigatemsg.com',
                         "title":"Pay Now",
                         "webview_height_ratio":"tall"
                       }
