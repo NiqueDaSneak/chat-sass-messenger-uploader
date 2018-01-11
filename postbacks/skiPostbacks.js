@@ -273,6 +273,45 @@ module.exports = (event) => {
 
   if (event.postback) {
 
+    if (event.postback.payload.split('_')[0] === "CART") {
+      if (db.users.find({ id: event.sender.id }).length === 0) {
+        let newUser = {
+          id: event.sender.id,
+          cart: [ event.postback.payload.split('_')[1] ]
+        }
+        db.users.save(newUser)
+        console.log(db.users.find({ id: event.sender.id }))
+        getUser().then((user) => {
+          sendTextMessage(event.sender.id, user.pageAccessToken, "Thanks for starting a cart with us! Continue shopping above or tap 'Done Shopping' below.")
+        })
+      } else {
+
+        let cart = db.users.find({ 'id': event.sender.id })[0].cart
+        cart.push(event.postback.payload.split('_')[1])
+
+        var query = {
+          id: event.sender.id
+        }
+
+        var dataToBeUpdate = {
+          cart : cart
+        }
+
+        var options = {
+          multi: false,
+          upsert: false
+        }
+
+        db.users.update(query, dataToBeUpdate, options)
+        console.log(db.users.find({ id: event.sender.id }))
+        getUser().then((user) => {
+          sendTextMessage(event.sender.id, user.pageAccessToken, "Item added to cart.")
+        })
+      }
+
+    }
+
+
     if (event.postback.payload === "GET_STARTED_PAYLOAD") {
       // ENROLLING MEMBERS INTO THE IRRIGATE APP
       getUser().then((user) => {
