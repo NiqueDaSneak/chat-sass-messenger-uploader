@@ -423,7 +423,7 @@ module.exports = (event) => {
                     "buttons":[
                       {
                         "type":"web_url",
-                        "url": 'https://www.irrigatemsg.com',
+                        "url": 'https://www.irrigatemsg.com/webview-checkout?price=' + cost + '&biz=SeeNSki',
                         "title":"Pay Now",
                         "webview_height_ratio":"tall"
                       }
@@ -436,6 +436,36 @@ module.exports = (event) => {
         }
         callSendAPI(user.pageAccessToken, messageData)
       })
+
+      setTimeout(() => {
+        getUser().then((user) => {
+
+          let messageData = {
+            "recipient":{
+              "id": event.sender.id
+            },
+            "message":{
+              "attachment":{
+                "type":"template",
+                "payload":{
+                  "template_type": "receipt",
+                  "recipient_name": "See N Ski",
+                  "order_number": "12345678902",
+                  "currency": "USD",
+                  "payment_method": "Visa 4242",
+                  "summary":{
+                    "subtotal": cost,
+                    "total_tax": 16.19,
+                    "total_cost": cost + 10.95 + 16.19
+                  },
+                }
+              }
+            }
+          }
+          callSendAPI(user.pageAccessToken, messageData)
+        })
+
+      }, 3000)
     }
 
     if (event.postback.payload === "GET_STARTED_PAYLOAD") {
