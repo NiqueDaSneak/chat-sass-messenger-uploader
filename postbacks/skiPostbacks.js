@@ -399,7 +399,7 @@ module.exports = (event) => {
     }
 
     if (event.postback.payload === "DONE") {
-      cost = 0
+      var cost = 0
       for (var i = 0; i < db.users.find({ 'id': event.sender.id })[0].cart.length; i++) {
 
         var itemID = "*" + db.users.find({ 'id': event.sender.id })[0].cart[i]
