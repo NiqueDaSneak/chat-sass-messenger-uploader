@@ -517,7 +517,7 @@ module.exports = (event) => {
             "quick_replies":[
               {
                 "content_type":"text",
-                "title":"Just Skiing/Not Sure",
+                "title":"Not Sure",
                 "payload":"LOCATION_UNKNOWN"
               },
               {
