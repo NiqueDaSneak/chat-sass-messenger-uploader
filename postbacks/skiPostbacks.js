@@ -412,7 +412,7 @@ module.exports = (event) => {
       function round(value, decimals) {
         return Number(Math.round(value+'e'+decimals)+'e-'+decimals);
       }
-      
+
       cost = round(cost, 2)
       getUser().then((user) => {
 
@@ -471,7 +471,7 @@ module.exports = (event) => {
           }
           callSendAPI(user.pageAccessToken, messageData)
         })
-      }, 20000)
+      }, 23000)
 
       setTimeout(() => {
         let cart = []
