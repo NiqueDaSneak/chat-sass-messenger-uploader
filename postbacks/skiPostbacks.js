@@ -408,8 +408,12 @@ module.exports = (event) => {
         var itemID = "*" + db.users.find({ 'id': event.sender.id })[0].cart[i]
         cost = cost + Number(db.ski.find({ id: itemID })[0].price)
       }
-      cost = cost.toFixed(2)
-      console.log(cost.toFixed(2))
+
+      function round(value, decimals) {
+        return Number(Math.round(value+'e'+decimals)+'e-'+decimals);
+      }
+      
+      cost = round(cost, 2)
       getUser().then((user) => {
 
         let messageData = {
