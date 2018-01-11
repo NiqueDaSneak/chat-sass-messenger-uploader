@@ -293,7 +293,7 @@ module.exports = (event) => {
                   "template_type":"generic",
                   "elements":[
                     {
-                      "title":"Thanks for starting a cart with us! Continue shopping below or tap 'Done Shopping'.",
+                      "title":"Thanks for starting a cart with us! Continue shopping or tap 'Done Shopping'.",
                       "buttons":[
                         {
                           "type":"postback",
@@ -398,6 +398,15 @@ module.exports = (event) => {
       })
     }
 
+    if (event.postback.payload === "DONE") {
+      cost = 0
+      for (var i = 0; i < db.users.find({ 'id': event.sender.id })[0].cart.length; i++) {
+
+        var itemID = "*" + db.users.find({ 'id': event.sender.id })[0].cart[i]
+        cost = cost + Number(db.bracelets.find({ id: itemID })[0].price)
+      }
+      console.log(cost)
+    }
 
     if (event.postback.payload === "GET_STARTED_PAYLOAD") {
       // ENROLLING MEMBERS INTO THE IRRIGATE APP
