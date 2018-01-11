@@ -247,6 +247,9 @@ module.exports = (event) => {
       }
 
       getUser().then((user) => {
+
+        sendTextMessage(event.sender.id, user.pageAccessToken, "Wonderful. Choose from our available rentals during your visit:")
+
         let messageData = {
           "recipient":{
             "id": event.sender.id
@@ -465,7 +468,7 @@ module.exports = (event) => {
           callSendAPI(user.pageAccessToken, messageData)
         })
 
-      }, 3000)
+      }, 10000)
     }
 
     if (event.postback.payload === "GET_STARTED_PAYLOAD") {
