@@ -282,7 +282,33 @@ module.exports = (event) => {
         db.users.save(newUser)
         console.log(db.users.find({ id: event.sender.id }))
         getUser().then((user) => {
-          sendTextMessage(event.sender.id, user.pageAccessToken, "Thanks for starting a cart with us! Continue shopping above or tap 'Done Shopping' below.")
+          let messageData = {
+            "recipient":{
+              "id": event.sender.id
+            },
+            "message":{
+              "attachment":{
+                "type":"template",
+                "payload":{
+                  "template_type":"generic",
+                  "elements":[
+                    {
+                      "title":"Thanks for starting a cart with us! Continue shopping below or tap 'Done Shopping'.",
+                      "buttons":[
+                        {
+                          "type":"postback",
+                          "title":"Done Shopping",
+                          "payload":"DONE"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          }
+          callSendAPI(user.pageAccessToken, messageData)
+          // sendTextMessage(event.sender.id, user.pageAccessToken, "Thanks for starting a cart with us! Continue shopping below or tap 'Done Shopping' below.")
         })
       } else {
 
@@ -305,10 +331,71 @@ module.exports = (event) => {
         db.users.update(query, dataToBeUpdate, options)
         console.log(db.users.find({ id: event.sender.id }))
         getUser().then((user) => {
-          sendTextMessage(event.sender.id, user.pageAccessToken, "Item added to cart.")
+          let messageData = {
+            "recipient":{
+              "id": event.sender.id
+            },
+            "message":{
+              "attachment":{
+                "type":"template",
+                "payload":{
+                  "template_type":"generic",
+                  "elements":[
+                    {
+                      "title":"Added to cart!",
+                      "buttons":[
+                        {
+                          "type":"postback",
+                          "title":"Done Shopping",
+                          "payload":"DONE"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          }
+          callSendAPI(user.pageAccessToken, messageData)
+          // sendTextMessage(event.sender.id, user.pageAccessToken, "Item added to cart.")
         })
       }
+      // SHOW OPTIONS AGAIN
+      var elements = []
+      for (var i = 0; i < db.ski.find().length; i++) {
+        let obj = {}
+        obj.title = db.ski.find()[i].name
+        obj.image_url = db.ski.find()[i].url
+        obj.subtitle = db.ski.find()[i].description
+        obj.buttons = [
+          {
+            "type":"postback",
+            "title":"Reserve: $" + db.ski.find()[i].price,
+            "payload":"CART_" + db.ski.find()[i].id
+          },
+        ]
+        elements.push(obj)
+      }
 
+      getUser().then((user) => {
+        let messageData = {
+          "recipient":{
+            "id": event.sender.id
+          },
+          "message":{
+            "attachment":{
+              "type":"template",
+              "payload":{
+                "template_type":"generic",
+                "sharable": true,
+                // "image_aspect_ratio": "square",
+                "elements": elements
+              }
+            }
+          }
+        }
+        callSendAPI(user.pageAccessToken, messageData)
+      })
     }
 
 
