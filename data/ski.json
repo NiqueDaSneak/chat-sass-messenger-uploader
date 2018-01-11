@@ -1,0 +1,44 @@
+[
+  {
+    "id": "*ski_1",
+    "name": "Demo Ski Pkg",
+    "description": "Brand New Skis for All Skiers",
+    "price": "39.99",
+    "url": "https://www.skinsee.com/Rates-Page-9-10-13/packages/1718skis-enforcer-soul-rtm-bonafide-pearl2.jpg"
+  },
+  {
+    "id": "*ski_2",
+    "name": "Preferred Ski Pkg",
+    "description": "Most Popular Ski Rental",
+    "price": "31.99 ",
+    "url": "https://www.skinsee.com/Rates-Page-9-10-13/packages/1718skis-salomon-xdr-82-cfa-bindingMercury11.jpg"
+  },
+  {
+    "id": "*ski_3",
+    "name": "Demo Snowboard Pkg",
+    "description": "K2, Burton, Lib Tech",
+    "price": "32.79",
+    "url": "https://www.skinsee.com/Rates-Page-9-10-13/packages/1718boards-burton-lib-k2.jpg"
+  },
+  {
+    "id": "*ski_4",
+    "name": "Adult Snowboard Pkg",
+    "description": "Burton Progression Boards",
+    "price": "25.99",
+    "url": "https://www.skinsee.com/Rates-Page-9-10-13/packages/8_ad-board.jpg"
+  },
+  {
+    "id": "*ski_5",
+    "name": "Snowboard Boots",
+    "description": "K2 or Burton - Sizes 2-13",
+    "price": "9.60",
+    "url": "https://www.skinsee.com/Rates-Page-9-10-13/packages/8_board-boots.jpg"
+  },
+  {
+    "id": "*ski_6",
+    "name": "Helmet",
+    "description": "XS - XL",
+    "price": "8.39",
+    "url": "https://www.skinsee.com/Rates-Page-9-10-13/packages/8_helmet.jpg"
+  }
+]

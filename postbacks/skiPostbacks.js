@@ -1,7 +1,7 @@
 'use strict'
 
 var db = require('diskdb')
-// db = db.connect('data', [])
+db = db.connect('data', ['ski'])
 
 var Message = require('../models/messageModel.js')
 var Group = require('../models/groupModel.js')
@@ -168,57 +168,57 @@ module.exports = (event) => {
             "id": event.sender.id
           },
           "message":{
-            "text": "Select your pickup location:",
+            "text": "Select a date:",
             "quick_replies": [
               {
                 "content_type":"text",
                 "title": '2/1/18',
-                "payload":"CHOOSE_DATE"
+                "payload":"PRODUCTS"
               },
               {
                 "content_type":"text",
                 "title": '2/2/18',
-                "payload":"CHOOSE_DATE"
+                "payload":"PRODUCTS"
               },
               {
                 "content_type":"text",
                 "title": '2/3/18',
-                "payload":"CHOOSE_DATE"
+                "payload":"PRODUCTS"
               },
               {
                 "content_type":"text",
                 "title": '2/4/18',
-                "payload":"CHOOSE_DATE"
+                "payload":"PRODUCTS"
               },
               {
                 "content_type":"text",
                 "title": '2/5/18',
-                "payload":"CHOOSE_DATE"
+                "payload":"PRODUCTS"
               },
               {
                 "content_type":"text",
                 "title": '2/6/18',
-                "payload":"CHOOSE_DATE"
+                "payload":"PRODUCTS"
               },
               {
                 "content_type":"text",
                 "title": '2/7/18',
-                "payload":"CHOOSE_DATE"
+                "payload":"PRODUCTS"
               },
               {
                 "content_type":"text",
                 "title": '2/8/18',
-                "payload":"CHOOSE_DATE"
+                "payload":"PRODUCTS"
               },
               {
                 "content_type":"text",
                 "title": '2/9/18',
-                "payload":"CHOOSE_DATE"
+                "payload":"PRODUCTS"
               },
               {
                 "content_type":"text",
                 "title": '2/10/18',
-                "payload":"CHOOSE_DATE"
+                "payload":"PRODUCTS"
               }
             ]
           }
@@ -227,6 +227,46 @@ module.exports = (event) => {
       })
 
     }
+
+    if (event.message.quick_reply.payload === 'PRODUCTS') {
+
+      var elements = []
+      for (var i = 0; i < db.ski.find().length; i++) {
+        let obj = {}
+        obj.title = db.ski.find()[i].name
+        obj.image_url = db.ski.find()[i].url
+        obj.subtitle = db.ski.find()[i].description
+        obj.buttons = [
+          {
+            "type":"postback",
+            "title":"Reserve: $" + db.ski.find()[i].price,
+            "payload":"CART_" + db.ski.find()[i].id
+          },
+        ]
+        elements.push(obj)
+      }
+
+      getUser().then((user) => {
+        let messageData = {
+          "recipient":{
+            "id": event.sender.id
+          },
+          "message":{
+            "attachment":{
+              "type":"template",
+              "payload":{
+                "template_type":"generic",
+                "sharable": true,
+                // "image_aspect_ratio": "square",
+                "elements": elements
+              }
+            }
+          }
+        }
+        callSendAPI(user.pageAccessToken, messageData)
+      })
+    }
+
 
 
   }
