@@ -471,7 +471,7 @@ module.exports = (event) => {
           }
           callSendAPI(user.pageAccessToken, messageData)
         })
-      }, 23000)
+      }, 35000)
 
       setTimeout(() => {
         let cart = []
