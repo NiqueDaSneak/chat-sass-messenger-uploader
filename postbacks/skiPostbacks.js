@@ -406,33 +406,36 @@ module.exports = (event) => {
         cost = cost + Number(db.ski.find({ id: itemID })[0].price)
       }
       console.log(cost)
-      let messageData = {
-        "recipient":{
-          "id": event.sender.id
-        },
-        "message":{
-          "attachment":{
-            "type":"template",
-            "payload":{
-              "template_type":"generic",
-              "elements":[
-                {
-                  "title":"Thanks for shopping. Your total is " + cost + ". Tap below to pay with credit card.",
-                  "buttons":[
-                    {
-                      "type":"web_url",
-                      "url": 'https://irrigatemsg.com',
-                      "title":"Pay Now",
-                      "webview_height_ratio":"tall"
-                    }
-                  ]
-                }
-              ]
+      getUser().then((user) => {
+        
+        let messageData = {
+          "recipient":{
+            "id": event.sender.id
+          },
+          "message":{
+            "attachment":{
+              "type":"template",
+              "payload":{
+                "template_type":"generic",
+                "elements":[
+                  {
+                    "title":"Thanks for shopping. Your total is " + cost + ". Tap below to pay with credit card.",
+                    "buttons":[
+                      {
+                        "type":"web_url",
+                        "url": 'https://irrigatemsg.com',
+                        "title":"Pay Now",
+                        "webview_height_ratio":"tall"
+                      }
+                    ]
+                  }
+                ]
+              }
             }
           }
         }
-      }
-      callSendAPI(user.pageAccessToken, messageData)
+        callSendAPI(user.pageAccessToken, messageData)
+      })
     }
 
     if (event.postback.payload === "GET_STARTED_PAYLOAD") {
