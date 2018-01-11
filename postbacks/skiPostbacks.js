@@ -277,7 +277,7 @@ module.exports = (event) => {
       if (db.users.find({ id: event.sender.id }).length === 0) {
         let newUser = {
           id: event.sender.id,
-          cart: [ event.postback.payload.split('_')[1] ]
+          cart: [ event.postback.payload.split('*')[1] ]
         }
         db.users.save(newUser)
         console.log(db.users.find({ id: event.sender.id }))
@@ -287,7 +287,7 @@ module.exports = (event) => {
       } else {
 
         let cart = db.users.find({ 'id': event.sender.id })[0].cart
-        cart.push(event.postback.payload.split('_')[1])
+        cart.push(event.postback.payload.split('*')[1])
 
         var query = {
           id: event.sender.id
