@@ -90,7 +90,11 @@ module.exports = (event) => {
       })
     }
 
-    if (event.postback.payload === "") {}
+    if (event.postback.payload === "SEARCH") {}
+
+    if (event.postback.payload === "SCHEDULE") {}
+
+    if (event.postback.payload === "TRADE") {}
 
   }
 
