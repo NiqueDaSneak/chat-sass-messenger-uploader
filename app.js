@@ -43,6 +43,10 @@ app.use('/irrigate', irrigateRouter)
 var skiRouter = require('./router/skiRouter.js')
 app.use('/skinsee', skiRouter)
 
+var autoRouter = require('./router/autoRouter.js')
+app.use('/autorouter', autoRouter)
+
+
 app.use('/data', express.static(path.join(__dirname, 'data')))
 
 
@@ -85,6 +89,9 @@ app.post('/', (req, res) => {
           return res.redirect(307, '/jtv-router')
         }
 
+        if (event.recipient.id === '119839342156941') {
+          return res.redirect(307, '/autorouter')
+        }
 
         if (event.message) {
 
