@@ -105,7 +105,14 @@ module.exports = (event) => {
   }
 
   if (event.message) {
-    console.log(event.message)
+    console.log(event.message.text.length)
+    if (event.message.text) {
+      if (event.message.text.length === 17) {
+        sendTextMessage(event.sender.id, user.pageAccessToken, "VIN number recieved")
+      } else {
+        sendTextMessage(event.sender.id, user.pageAccessToken, "If you just sent a VIN number, its not enough numbers. VIN numbers are 17 numbers long.")
+      }
+    }
     // if (event.message.attachments[0].type === 'image') {
     //   getUser().then((user) => {
     //     console.log('type: ' + event.message.attachments[0].type)
@@ -160,7 +167,7 @@ module.exports = (event) => {
         getUser().then((user) => {
           sendTextMessage(event.sender.id, user.pageAccessToken, "Awesome! Let's see how much your vehicle is worth.")
           setTimeout(() => {
-            sendTextMessage(event.sender.id, user.pageAccessToken, "All you have to do is send a picture of your VIN and I can get started.")
+            sendTextMessage(event.sender.id, user.pageAccessToken, "All you have to do is send us a message with your VIN number and I can get started.")
           }, 4000)
         })
       }
@@ -187,7 +194,7 @@ module.exports = (event) => {
       getUser().then((user) => {
         sendTextMessage(event.sender.id, user.pageAccessToken, "Awesome! Let's see how much your vehicle is worth.")
         setTimeout(() => {
-          sendTextMessage(event.sender.id, user.pageAccessToken, "All you have to do is send a picture of your VIN and I can get started.")
+          sendTextMessage(event.sender.id, user.pageAccessToken, "All you have to do is send us a message with your VIN number and I can get started.")
         }, 4000)
       })
     }
