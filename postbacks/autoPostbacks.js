@@ -106,44 +106,47 @@ module.exports = (event) => {
   }
 
   if (event.message) {
-    // if (event.message.attachments) {
-    //   getUser().then((user) => {
-    //     sendTextMessage(event.sender.id, user.pageAccessToken, "Vehicle Information: 2008 Lexus IS 250, BLCK, 72,367 miles, manual 6-Spd, RWD, located in 45202.")
-    //     setTimeout(() => {
-    //       let messageData = {
-    //         "recipient":{
-    //           "id": event.sender.id
-    //         },
-    //         "message":{
-    //           "text": "What condition is it in?",
-    //           "quick_replies":[
-    //             {
-    //               "content_type":"text",
-    //               "title":"Excellent",
-    //               "payload":"SEND_VALUE"
-    //             },
-    //             {
-    //               "content_type":"text",
-    //               "title":"Very Good",
-    //               "payload":"SEND_VALUE"
-    //             },
-    //             {
-    //               "content_type":"text",
-    //               "title":"Good",
-    //               "payload":"SEND_VALUE"
-    //             },
-    //             {
-    //               "content_type":"text",
-    //               "title":"Fair",
-    //               "payload":"SEND_VALUE"
-    //             }
-    //           ]
-    //         }
-    //       }
-    //       callSendAPI(user.pageAccessToken, messageData)
-    //     }, 4000)
-    //   })
-    // }
+    if (event.message.attachments) {
+      if (event.message.attachments[0].type === "image") {
+          getUser().then((user) => {
+            sendTextMessage(event.sender.id, user.pageAccessToken, "Vehicle Information: 2008 Lexus IS 250, BLCK, 72,367 miles, manual 6-Spd, RWD, located in 45202.")
+            setTimeout(() => {
+              let messageData = {
+                "recipient":{
+                  "id": event.sender.id
+                },
+                "message":{
+                  "text": "What condition is it in?",
+                  "quick_replies":[
+                    {
+                      "content_type":"text",
+                      "title":"Excellent",
+                      "payload":"SEND_VALUE"
+                    },
+                    {
+                      "content_type":"text",
+                      "title":"Very Good",
+                      "payload":"SEND_VALUE"
+                    },
+                    {
+                      "content_type":"text",
+                      "title":"Good",
+                      "payload":"SEND_VALUE"
+                    },
+                    {
+                      "content_type":"text",
+                      "title":"Fair",
+                      "payload":"SEND_VALUE"
+                    }
+                  ]
+                }
+              }
+              callSendAPI(user.pageAccessToken, messageData)
+            }, 4000)
+          })
+
+      }
+    }
 
     if (event.message.quick_reply.payload === "SEARCH") {}
 
