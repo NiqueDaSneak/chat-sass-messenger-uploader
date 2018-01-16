@@ -107,11 +107,13 @@ module.exports = (event) => {
   if (event.message) {
     console.log(event.message.text.length)
     if (event.message.text) {
-      if (event.message.text.length === 17) {
-        sendTextMessage(event.sender.id, user.pageAccessToken, "VIN number recieved")
-      } else {
-        sendTextMessage(event.sender.id, user.pageAccessToken, "If you just sent a VIN number, its not enough numbers. VIN numbers are 17 numbers long.")
-      }
+      getUser().then((user) => {
+        if (event.message.text.length === 17) {
+          sendTextMessage(event.sender.id, user.pageAccessToken, "VIN number recieved")
+        } else {
+          sendTextMessage(event.sender.id, user.pageAccessToken, "If you just sent a VIN number, its not enough numbers. VIN numbers are 17 numbers long.")
+        }
+      })
     }
     // if (event.message.attachments[0].type === 'image') {
     //   getUser().then((user) => {
