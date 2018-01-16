@@ -105,8 +105,12 @@ module.exports = (event) => {
   }
 
   if (event.message) {
-    console.log('type: ' + event.message.attachments[0].type)
-    // if (event.message.attachments) {
+    if (event.message.attachments[0].type === 'image') {
+      getUser().then((user) => {
+        console.log('type: ' + event.message.attachments[0].type)
+        sendTextMessage(event.sender.id, user.pageAccessToken, "Image recieved")
+      })
+    }
     //   getUser().then((user) => {
     //     sendTextMessage(event.sender.id, user.pageAccessToken, "Vehicle Information: 2008 Lexus IS 250, BLCK, 72,367 miles, manual 6-Spd, RWD, located in 45202.")
     //     setTimeout(() => {
@@ -159,8 +163,10 @@ module.exports = (event) => {
     }
 
     if (event.message.quick_reply.payload === "SEND_VALUE") {
-      sendTextMessage(event.sender.id, user.pageAccessToken, "We should say something about the image here")
-      sendImageMessage(event.sender.id, user.pageAccessToken, 'https://www.skinsee.com/resources/images/mapRates3-all.jpg')
+      getUser().then((user) => {
+        sendTextMessage(event.sender.id, user.pageAccessToken, "We should say something about the image here")
+        sendImageMessage(event.sender.id, user.pageAccessToken, 'https://www.skinsee.com/resources/images/mapRates3-all.jpg')
+      })
     }
   }
 
