@@ -149,20 +149,186 @@ module.exports = (event) => {
         }
       })
     }
-    // if (event.message.attachments[0].type === 'image') {
-    //   getUser().then((user) => {
-    //     console.log('type: ' + event.message.attachments[0].type)
-    //     sendTextMessage(event.sender.id, user.pageAccessToken, "Image recieved")
-    //     res.sendStatus(200)
-    //   })
-    // }
-
-    // }
 
     if (event.message.quick_reply) {
       if (event.message.quick_reply.payload === "SEARCH") {}
 
-      if (event.message.quick_reply.payload === "SCHEDULE") {}
+      if (event.message.quick_reply.payload === "SCHEDULE") {
+        getUser().then((user) => {
+          let messageData = {
+            "recipient":{
+              "id": event.sender.id
+            },
+            "message":{
+              "text": "What would you like to schedule for your 2008 IS 250?",
+              "quick_replies":[
+                {
+                  "content_type":"text",
+                  "title":"Oil Change",
+                  "payload":"UPSELL_ASK"
+                },
+                {
+                  "content_type":"text",
+                  "title":"Alignment",
+                  "payload":"UPSELL_ASK"
+                },
+                {
+                  "content_type":"text",
+                  "title":"Battery Service",
+                  "payload":"UPSELL_ASK"
+                },
+                {
+                  "content_type":"text",
+                  "title":"Brakes",
+                  "payload":"UPSELL_ASK"
+                },
+                {
+                  "content_type":"text",
+                  "title":"Other Concern",
+                  "payload":"UPSELL_ASK"
+                }
+              ]
+            }
+          }
+          callSendAPI(user.pageAccessToken, messageData)
+        })
+      }
+
+      if (event.message.quick_reply.payload.split("_")[0] === "UPSELL") {
+        if (event.message.quick_reply.payload.split("_")[1] === "ASK") {
+          getUser().then((user) => {
+            let messageData = {
+              "recipient":{
+                "id": event.sender.id
+              },
+              "message":{
+                "text": "With your car at 72,367 miles, we strongly suggest a 70,000 Mile Service. Would you like to schedule that today?",
+                "quick_replies":[
+                  {
+                    "content_type":"text",
+                    "title":"Yes",
+                    "payload":"UPSELL_YES"
+                  },
+                  {
+                    "content_type":"text",
+                    "title":"No",
+                    "payload":"UPSELL_NO"
+                  }
+                ]
+              }
+            }
+            callSendAPI(user.pageAccessToken, messageData)
+          })
+        }
+
+        if (event.message.quick_reply.payload.split("_")[1] === "YES") {
+          getUser().then((user) => {
+            sendTextMessage(event.sender.id, user.pageAccessToken, "Smart choice. I will add that to your appointment.")
+            setTimeout(() => {
+              let messageData = {
+                "recipient":{
+                  "id": event.sender.id
+                },
+                "message":{
+                  "text": "Choose a date and time for your appointment:",
+                  "quick_replies":[
+                    {
+                      "content_type":"text",
+                      "title":"2/1 @ 3pm",
+                      "payload":"CONFIRM_APPT"
+                    },
+                    {
+                      "content_type":"text",
+                      "title":"2/1 @ 5pm",
+                      "payload":"CONFIRM_APPT"
+                    },
+                    {
+                      "content_type":"text",
+                      "title":"2/3 @ 11am",
+                      "payload":"CONFIRM_APPT"
+                    },
+                    {
+                      "content_type":"text",
+                      "title":"2/3 @ 12pm",
+                      "payload":"CONFIRM_APPT"
+                    },
+                    {
+                      "content_type":"text",
+                      "title":"2/4 @ 10am",
+                      "payload":"CONFIRM_APPT"
+                    },
+                    {
+                      "content_type":"text",
+                      "title":"2/4 @ 9am",
+                      "payload":"CONFIRM_APPT"
+                    }
+                  ]
+                }
+              }
+              callSendAPI(user.pageAccessToken, messageData)
+            }, 3000)
+          })
+        }
+
+        if (event.message.quick_reply.payload.split("_")[1] === "NO") {
+          getUser().then((user) => {
+            sendTextMessage(event.sender.id, user.pageAccessToken, "No problem. Let us know if you change your mind.")
+            setTimeout(() => {
+              let messageData = {
+                "recipient":{
+                  "id": event.sender.id
+                },
+                "message":{
+                  "text": "Choose a date and time for your appointment:",
+                  "quick_replies":[
+                    {
+                      "content_type":"text",
+                      "title":"2/1 @ 3pm",
+                      "payload":"CONFIRM_APPT"
+                    },
+                    {
+                      "content_type":"text",
+                      "title":"2/1 @ 5pm",
+                      "payload":"CONFIRM_APPT"
+                    },
+                    {
+                      "content_type":"text",
+                      "title":"2/3 @ 11am",
+                      "payload":"CONFIRM_APPT"
+                    },
+                    {
+                      "content_type":"text",
+                      "title":"2/3 @ 12pm",
+                      "payload":"CONFIRM_APPT"
+                    },
+                    {
+                      "content_type":"text",
+                      "title":"2/4 @ 10am",
+                      "payload":"CONFIRM_APPT"
+                    },
+                    {
+                      "content_type":"text",
+                      "title":"2/4 @ 9am",
+                      "payload":"CONFIRM_APPT"
+                    }
+                  ]
+                }
+              }
+              callSendAPI(user.pageAccessToken, messageData)
+            }, 3000)
+          })
+        }
+      }
+
+      if (event.message.quick_reply.payload === "CONFIRM_APPT") {
+        getUser().then((user) => {
+          sendTextMessage(event.sender.id, user.pageAccessToken, "Awesome! I have that available. John will be your service advisor. Your appointment time is confirmed.")
+          setTimeout(() => {
+            sendTextMessage(event.sender.id, user.pageAccessToken, "See you then!")
+          }, 4000)
+        })
+      }
+
 
       if (event.message.quick_reply.payload === "TRADE") {
         getUser().then((user) => {
