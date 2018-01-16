@@ -112,7 +112,7 @@ module.exports = (event) => {
     //     sendTextMessage(event.sender.id, user.pageAccessToken, "Image recieved")
     //     res.sendStatus(200)
     //   })
-    }
+    // }
     //   getUser().then((user) => {
     //     sendTextMessage(event.sender.id, user.pageAccessToken, "Vehicle Information: 2008 Lexus IS 250, BLCK, 72,367 miles, manual 6-Spd, RWD, located in 45202.")
     //     setTimeout(() => {
