@@ -13,8 +13,7 @@ var request = require('request')
 var moment = require('moment')
 
 module.exports = (event) => {
-  console.log(event.message.attachments)
-  console.log(event)
+
   function getUser() {
     return new Promise(function(resolve, reject) {
       User.findOne({
@@ -106,47 +105,44 @@ module.exports = (event) => {
   }
 
   if (event.message) {
-    if (event.message.attachments) {
-      if (event.message.attachments[0].type === "image") {
-          getUser().then((user) => {
-            sendTextMessage(event.sender.id, user.pageAccessToken, "Vehicle Information: 2008 Lexus IS 250, BLCK, 72,367 miles, manual 6-Spd, RWD, located in 45202.")
-            setTimeout(() => {
-              let messageData = {
-                "recipient":{
-                  "id": event.sender.id
-                },
-                "message":{
-                  "text": "What condition is it in?",
-                  "quick_replies":[
-                    {
-                      "content_type":"text",
-                      "title":"Excellent",
-                      "payload":"SEND_VALUE"
-                    },
-                    {
-                      "content_type":"text",
-                      "title":"Very Good",
-                      "payload":"SEND_VALUE"
-                    },
-                    {
-                      "content_type":"text",
-                      "title":"Good",
-                      "payload":"SEND_VALUE"
-                    },
-                    {
-                      "content_type":"text",
-                      "title":"Fair",
-                      "payload":"SEND_VALUE"
-                    }
-                  ]
-                }
-              }
-              callSendAPI(user.pageAccessToken, messageData)
-            }, 4000)
-          })
-        }
-      }
-    }
+    // if (event.message.attachments) {
+    //   getUser().then((user) => {
+    //     sendTextMessage(event.sender.id, user.pageAccessToken, "Vehicle Information: 2008 Lexus IS 250, BLCK, 72,367 miles, manual 6-Spd, RWD, located in 45202.")
+    //     setTimeout(() => {
+    //       let messageData = {
+    //         "recipient":{
+    //           "id": event.sender.id
+    //         },
+    //         "message":{
+    //           "text": "What condition is it in?",
+    //           "quick_replies":[
+    //             {
+    //               "content_type":"text",
+    //               "title":"Excellent",
+    //               "payload":"SEND_VALUE"
+    //             },
+    //             {
+    //               "content_type":"text",
+    //               "title":"Very Good",
+    //               "payload":"SEND_VALUE"
+    //             },
+    //             {
+    //               "content_type":"text",
+    //               "title":"Good",
+    //               "payload":"SEND_VALUE"
+    //             },
+    //             {
+    //               "content_type":"text",
+    //               "title":"Fair",
+    //               "payload":"SEND_VALUE"
+    //             }
+    //           ]
+    //         }
+    //       }
+    //       callSendAPI(user.pageAccessToken, messageData)
+    //     }, 4000)
+    //   })
+    // }
 
     if (event.message.quick_reply.payload === "SEARCH") {}
 
@@ -162,11 +158,9 @@ module.exports = (event) => {
     }
 
     if (event.message.quick_reply.payload === "SEND_VALUE") {
-      sendTextMessage(event.sender.id, user.pageAccessToken, "We should say something about the image here.")
+      sendTextMessage(event.sender.id, user.pageAccessToken, "We should say something about the image here")
       sendImageMessage(event.sender.id, user.pageAccessToken, 'https://www.skinsee.com/resources/images/mapRates3-all.jpg')
     }
-
-
   }
 
   if (event.postback) {
@@ -178,7 +172,7 @@ module.exports = (event) => {
       })
     }
 
-    if (event.postback.payload ===  "TRADE") {
+    if (event.postback.payload === "TRADE") {
       getUser().then((user) => {
         sendTextMessage(event.sender.id, user.pageAccessToken, "Awesome! Let's see how much your vehicle is worth.")
         setTimeout(() => {
@@ -188,9 +182,49 @@ module.exports = (event) => {
     }
 
   }
-
-
 }
+
+// if (event.message.attachments) {
+//   if (event.message.attachments[0].type === "image") {
+//       getUser().then((user) => {
+//         sendTextMessage(event.sender.id, user.pageAccessToken, "Vehicle Information: 2008 Lexus IS 250, BLCK, 72,367 miles, manual 6-Spd, RWD, located in 45202.")
+//         setTimeout(() => {
+//           let messageData = {
+//             "recipient":{
+//               "id": event.sender.id
+//             },
+//             "message":{
+//               "text": "What condition is it in?",
+//               "quick_replies":[
+//                 {
+//                   "content_type":"text",
+//                   "title":"Excellent",
+//                   "payload":"SEND_VALUE"
+//                 },
+//                 {
+//                   "content_type":"text",
+//                   "title":"Very Good",
+//                   "payload":"SEND_VALUE"
+//                 },
+//                 {
+//                   "content_type":"text",
+//                   "title":"Good",
+//                   "payload":"SEND_VALUE"
+//                 },
+//                 {
+//                   "content_type":"text",
+//                   "title":"Fair",
+//                   "payload":"SEND_VALUE"
+//                 }
+//               ]
+//             }
+//           }
+//           callSendAPI(user.pageAccessToken, messageData)
+//         }, 4000)
+//       })
+//
+//   }
+// }
 
 function sendTextMessage(recipientId, accessToken, textMsg) {
   var messageData = {
