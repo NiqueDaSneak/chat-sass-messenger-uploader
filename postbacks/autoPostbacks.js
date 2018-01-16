@@ -366,6 +366,48 @@ module.exports = (event) => {
       })
     }
 
+    if (event.postback.payload === "SCHEDULE") {
+      getUser().then((user) => {
+        let messageData = {
+          "recipient":{
+            "id": event.sender.id
+          },
+          "message":{
+            "text": "What would you like to schedule for your 2008 IS 250?",
+            "quick_replies":[
+              {
+                "content_type":"text",
+                "title":"Oil Change",
+                "payload":"UPSELL_ASK"
+              },
+              {
+                "content_type":"text",
+                "title":"Alignment",
+                "payload":"UPSELL_ASK"
+              },
+              {
+                "content_type":"text",
+                "title":"Battery Service",
+                "payload":"UPSELL_ASK"
+              },
+              {
+                "content_type":"text",
+                "title":"Brakes",
+                "payload":"UPSELL_ASK"
+              },
+              {
+                "content_type":"text",
+                "title":"Other Concern",
+                "payload":"UPSELL_ASK"
+              }
+            ]
+          }
+        }
+        callSendAPI(user.pageAccessToken, messageData)
+      })
+    }
+
+
   }
 }
 
