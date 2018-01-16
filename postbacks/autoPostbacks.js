@@ -105,12 +105,13 @@ module.exports = (event) => {
   }
 
   if (event.message) {
-    if (event.message.attachments[0].type === 'image') {
-      getUser().then((user) => {
-        console.log('type: ' + event.message.attachments[0].type)
-        sendTextMessage(event.sender.id, user.pageAccessToken, "Image recieved")
-        res.sendStatus(200)
-      })
+    console.log(event.message)
+    // if (event.message.attachments[0].type === 'image') {
+    //   getUser().then((user) => {
+    //     console.log('type: ' + event.message.attachments[0].type)
+    //     sendTextMessage(event.sender.id, user.pageAccessToken, "Image recieved")
+    //     res.sendStatus(200)
+    //   })
     }
     //   getUser().then((user) => {
     //     sendTextMessage(event.sender.id, user.pageAccessToken, "Vehicle Information: 2008 Lexus IS 250, BLCK, 72,367 miles, manual 6-Spd, RWD, located in 45202.")
