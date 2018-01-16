@@ -109,6 +109,7 @@ module.exports = (event) => {
       getUser().then((user) => {
         console.log('type: ' + event.message.attachments[0].type)
         sendTextMessage(event.sender.id, user.pageAccessToken, "Image recieved")
+        res.sendStatus(200)
       })
     }
     //   getUser().then((user) => {
@@ -149,24 +150,26 @@ module.exports = (event) => {
     //   })
     // }
 
-    if (event.message.quick_reply.payload === "SEARCH") {}
+    if (event.message.quick_reply) {
+      if (event.message.quick_reply.payload === "SEARCH") {}
 
-    if (event.message.quick_reply.payload === "SCHEDULE") {}
+      if (event.message.quick_reply.payload === "SCHEDULE") {}
 
-    if (event.message.quick_reply.payload === "TRADE") {
-      getUser().then((user) => {
-        sendTextMessage(event.sender.id, user.pageAccessToken, "Awesome! Let's see how much your vehicle is worth.")
-        setTimeout(() => {
-          sendTextMessage(event.sender.id, user.pageAccessToken, "All you have to do is send a picture of your VIN and I can get started.")
-        }, 4000)
-      })
-    }
+      if (event.message.quick_reply.payload === "TRADE") {
+        getUser().then((user) => {
+          sendTextMessage(event.sender.id, user.pageAccessToken, "Awesome! Let's see how much your vehicle is worth.")
+          setTimeout(() => {
+            sendTextMessage(event.sender.id, user.pageAccessToken, "All you have to do is send a picture of your VIN and I can get started.")
+          }, 4000)
+        })
+      }
 
-    if (event.message.quick_reply.payload === "SEND_VALUE") {
-      getUser().then((user) => {
-        sendTextMessage(event.sender.id, user.pageAccessToken, "We should say something about the image here")
-        sendImageMessage(event.sender.id, user.pageAccessToken, 'https://www.skinsee.com/resources/images/mapRates3-all.jpg')
-      })
+      if (event.message.quick_reply.payload === "SEND_VALUE") {
+        getUser().then((user) => {
+          sendTextMessage(event.sender.id, user.pageAccessToken, "We should say something about the image here")
+          sendImageMessage(event.sender.id, user.pageAccessToken, 'https://www.skinsee.com/resources/images/mapRates3-all.jpg')
+        })
+      }
     }
   }
 
