@@ -105,7 +105,7 @@ module.exports = (event) => {
   }
 
   if (event.message) {
-    console.log(event.message)
+    console.log('type: ' + event.message.attachments[0].type)
     // if (event.message.attachments) {
     //   getUser().then((user) => {
     //     sendTextMessage(event.sender.id, user.pageAccessToken, "Vehicle Information: 2008 Lexus IS 250, BLCK, 72,367 miles, manual 6-Spd, RWD, located in 45202.")
