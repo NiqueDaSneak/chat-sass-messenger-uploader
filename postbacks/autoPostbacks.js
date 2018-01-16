@@ -146,8 +146,6 @@ module.exports = (event) => {
             }
             callSendAPI(user.pageAccessToken, messageData)
           }, 8000)
-        } else {
-          sendTextMessage(event.sender.id, user.pageAccessToken, "If you just sent a VIN number, its not enough numbers. VIN numbers are 17 numbers long.")
         }
       })
     }
@@ -204,48 +202,6 @@ module.exports = (event) => {
 
   }
 }
-
-// if (event.message.attachments) {
-//   if (event.message.attachments[0].type === "image") {
-//       getUser().then((user) => {
-//         sendTextMessage(event.sender.id, user.pageAccessToken, "Vehicle Information: 2008 Lexus IS 250, BLCK, 72,367 miles, manual 6-Spd, RWD, located in 45202.")
-//         setTimeout(() => {
-//           let messageData = {
-//             "recipient":{
-//               "id": event.sender.id
-//             },
-//             "message":{
-//               "text": "What condition is it in?",
-//               "quick_replies":[
-//                 {
-//                   "content_type":"text",
-//                   "title":"Excellent",
-//                   "payload":"SEND_VALUE"
-//                 },
-//                 {
-//                   "content_type":"text",
-//                   "title":"Very Good",
-//                   "payload":"SEND_VALUE"
-//                 },
-//                 {
-//                   "content_type":"text",
-//                   "title":"Good",
-//                   "payload":"SEND_VALUE"
-//                 },
-//                 {
-//                   "content_type":"text",
-//                   "title":"Fair",
-//                   "payload":"SEND_VALUE"
-//                 }
-//               ]
-//             }
-//           }
-//           callSendAPI(user.pageAccessToken, messageData)
-//         }, 4000)
-//       })
-//
-//   }
-// }
 
 function sendTextMessage(recipientId, accessToken, textMsg) {
   var messageData = {
