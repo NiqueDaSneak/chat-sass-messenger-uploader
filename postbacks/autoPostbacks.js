@@ -144,7 +144,7 @@ module.exports = (event) => {
               callSendAPI(user.pageAccessToken, messageData)
             }, 4000)
           })
-
+        }
       }
     }
 
