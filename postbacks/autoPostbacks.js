@@ -345,6 +345,288 @@ module.exports = (event) => {
           sendImageMessage(event.sender.id, user.pageAccessToken, 'https://www.skinsee.com/resources/images/mapRates3-all.jpg')
         })
       }
+
+      if (event.message.quick_reply.payload === "PREOWNED") {
+        getUser().then((user) => {
+          let messageData = {
+            "recipient":{
+              "id": event.sender.id
+            },
+            "message":{
+              "attachment":{
+                "type":"template",
+                "payload":{
+                  "template_type":"generic",
+                  "elements":[
+                    {
+                      "title":"2016 Lexus ES 300h",
+                      "image_url":"http://inventory-dmg.assets-cdk.com/5/4/9/15861776945x640.jpg",
+                      "subtitle":"$29977",
+                      "buttons":[
+                        {
+                          "type":"web_url",
+                          "url":"http://www.performancelexusrivercenter.com/VehicleDetails/certified-2016-Lexus-ES_300h-300h-Covington-KY/3107579063",
+                          "title":"View Details"
+                        },{
+                          "type":"postback",
+                          "title":"Value Your Trade",
+                          "payload":"TRADE"
+                        }
+                      ]
+                    },
+                    {
+                      "title":"2015 Lexus GX 460",
+                      "subtitle":"$42777",
+                      "image_url":"http://inventory-dmg.assets-cdk.com/6/5/3/16137961356x640.jpg",
+                      "buttons":[
+                        {
+                          "type":"web_url",
+                          "url":"http://www.performancelexusrivercenter.com/VehicleDetails/used-2015-Lexus-GX_460-460-Covington-KY/3134160133",
+                          "title":"View Details"
+                        },{
+                          "type":"postback",
+                          "title":"Value Your Trade",
+                          "payload":"TRADE"
+                        }
+                      ]
+                    },
+                    {
+                      "title":"2017 Lexus NX Turbo",
+                      "subtitle":"$40977",
+                      "image_url":"http://inventory-dmg.assets-cdk.com/0/1/7/16102843710x640.jpg",
+                      "buttons":[
+                        {
+                          "type":"web_url",
+                          "url":"http://www.performancelexusrivercenter.com/VehicleDetails/certified-2017-Lexus-NX_Turbo-200t_F_Sport-Covington-KY/3133171313",
+                          "title":"View Details"
+                        },{
+                          "type":"postback",
+                          "title":"Value Your Trade",
+                          "payload":"TRADE"
+                        }
+                      ]
+                    },
+                    {
+                      "title":"2015 Lexus RX 350",
+                      "subtitle":"$34977",
+                      "image_url":"http://inventory-dmg.assets-cdk.com/2/4/6/15940680642x640.jpg",
+                      "buttons":[
+                        {
+                          "type":"web_url",
+                          "url":"http://www.performancelexusrivercenter.com/VehicleDetails/certified-2015-Lexus-RX_350-350-Covington-KY/3112521313",
+                          "title":"View Details"
+                        },{
+                          "type":"postback",
+                          "title":"Value Your Trade",
+                          "payload":"TRADE"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          }
+          callSendAPI(user.pageAccessToken, messageData)
+        })
+      }
+
+      if (event.message.quick_reply.payload === "NEW_CARS") {
+        getUser().then((user) => {
+            let messageData = {
+              "recipient":{
+                "id": event.sender.id
+              },
+              "message":{
+                "text": "Gas or Hybrid?",
+                "quick_replies":[
+                  {
+                    "content_type":"text",
+                    "title":"Gas",
+                    "payload":"GAS"
+                  },
+                  {
+                    "content_type":"text",
+                    "title":"Hybrid",
+                    "payload":"HYBRID"
+                  }
+                ]
+              }
+            }
+            callSendAPI(user.pageAccessToken, messageData)
+        })
+      }
+
+      if (event.message.quick_reply.payload === "GAS") {
+        getUser().then((user) => {
+          let messageData = {
+            "recipient":{
+              "id": event.sender.id
+            },
+            "message":{
+              "attachment":{
+                "type":"template",
+                "payload":{
+                  "template_type":"generic",
+                  "elements":[
+                    {
+                      "title":"2018 ES 350",
+                      "image_url":"http://inventory-dmg.assets-cdk.com/5/4/9/15861776945x640.jpg",
+                      "subtitle":"$47917",
+                      "buttons":[
+                        {
+                          "type":"web_url",
+                          "url":"http://www.performancelexusrivercenter.com/VehicleDetails/new-2018-Lexus-ES_350--Covington-KY/3073080953",
+                          "title":"View Details"
+                        },{
+                          "type":"postback",
+                          "title":"Value Your Trade",
+                          "payload":"TRADE"
+                        }
+                      ]
+                    },
+                    {
+                      "title":"2018 GS 350",
+                      "subtitle":"$57108",
+                      "image_url":"http://inventory-dmg.assets-cdk.com/9/3/9/15940678939x640.jpg",
+                      "buttons":[
+                        {
+                          "type":"web_url",
+                          "url":"http://www.performancelexusrivercenter.com/VehicleDetails/new-2018-Lexus-GS_350--Covington-KY/3090000853",
+                          "title":"View Details"
+                        },{
+                          "type":"postback",
+                          "title":"Value Your Trade",
+                          "payload":"TRADE"
+                        }
+                      ]
+                    },
+                    {
+                      "title":"2018 GX 460",
+                      "subtitle":"$61073",
+                      "image_url":"http://inventory-dmg.assets-cdk.com/efc/LEX/1005726/1003309/Exterior/1/3256_2936_JPG/72c1d85x640.jpg",
+                      "buttons":[
+                        {
+                          "type":"web_url",
+                          "url":"http://www.performancelexusrivercenter.com/VehicleDetails/new-2018-Lexus-GX_460-Premium-Covington-KY/3130631083",
+                          "title":"View Details"
+                        },{
+                          "type":"postback",
+                          "title":"Value Your Trade",
+                          "payload":"TRADE"
+                        }
+                      ]
+                    },
+                    {
+                      "title":"2018 IS 300",
+                      "subtitle":"$48227",
+                      "image_url":"http://inventory-dmg.assets-cdk.com/efc/LEX/1005726/1002429/Exterior/1/3256_2936_JPG/79236d5x640.jpg",
+                      "buttons":[
+                        {
+                          "type":"web_url",
+                          "url":"http://www.performancelexusrivercenter.com/VehicleDetails/new-2018-Lexus-IS_300-F_SPORT-Covington-KY/3123646243",
+                          "title":"View Details"
+                        },{
+                          "type":"postback",
+                          "title":"Value Your Trade",
+                          "payload":"TRADE"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          }
+          callSendAPI(user.pageAccessToken, messageData)
+        })
+      }
+
+      if (event.message.quick_reply.payload === "HYBRID") {
+        getUser().then((user) => {
+          let messageData = {
+            "recipient":{
+              "id": event.sender.id
+            },
+            "message":{
+              "attachment":{
+                "type":"template",
+                "payload":{
+                  "template_type":"generic",
+                  "elements":[
+                    {
+                      "title":"2018 ES 300h",
+                      "image_url":"http://inventory-dmg.assets-cdk.com/efc/LEX/1005726/1003304/Exterior/1/3256_2936_JPG/425717ex640.jpg",
+                      "subtitle":"$50148",
+                      "buttons":[
+                        {
+                          "type":"web_url",
+                          "url":"http://www.performancelexusrivercenter.com/VehicleDetails/new-2018-Lexus-ES_300h--Covington-KY/3101078543",
+                          "title":"View Details"
+                        },{
+                          "type":"postback",
+                          "title":"Value Your Trade",
+                          "payload":"TRADE"
+                        }
+                      ]
+                    },
+                    {
+                      "title":"2015 Lexus GX 460",
+                      "subtitle":"$42777",
+                      "image_url":"http://inventory-dmg.assets-cdk.com/6/5/3/16137961356x640.jpg",
+                      "buttons":[
+                        {
+                          "type":"web_url",
+                          "url":"http://www.performancelexusrivercenter.com/VehicleDetails/used-2015-Lexus-GX_460-460-Covington-KY/3134160133",
+                          "title":"View Details"
+                        },{
+                          "type":"postback",
+                          "title":"Value Your Trade",
+                          "payload":"TRADE"
+                        }
+                      ]
+                    },
+                    {
+                      "title":"2018 LC 500h",
+                      "subtitle":"$108665",
+                      "image_url":"http://inventory-dmg.assets-cdk.com/efc/LEX/1005726/1005728/Exterior/1/3256_2936_JPG/f4f9273x640.jpg",
+                      "buttons":[
+                        {
+                          "type":"web_url",
+                          "url":"http://www.performancelexusrivercenter.com/VehicleDetails/new-2018-Lexus-LC_500h--Covington-KY/3074241093",
+                          "title":"View Details"
+                        },{
+                          "type":"postback",
+                          "title":"Value Your Trade",
+                          "payload":"TRADE"
+                        }
+                      ]
+                    },
+                    {
+                      "title":"2018 NX 300h",
+                      "subtitle":"$49641",
+                      "image_url":"http://inventory-dmg.assets-cdk.com/efc/LEX/1005726/1003312/Exterior/1/3256_2936_JPG/10f24e2x640.jpg",
+                      "buttons":[
+                        {
+                          "type":"web_url",
+                          "url":"http://www.performancelexusrivercenter.com/VehicleDetails/new-2018-Lexus-NX_300h--Covington-KY/3136344183",
+                          "title":"View Details"
+                        },{
+                          "type":"postback",
+                          "title":"Value Your Trade",
+                          "payload":"TRADE"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          }
+          callSendAPI(user.pageAccessToken, messageData)
+        })
+      }
+
     }
   }
 
@@ -365,6 +647,33 @@ module.exports = (event) => {
         }, 4000)
       })
     }
+
+    if (event.postback.payload === "SEARCH") {
+      getUser().then((user) => {
+          let messageData = {
+            "recipient":{
+              "id": event.sender.id
+            },
+            "message":{
+              "text": "New or Preowned?",
+              "quick_replies":[
+                {
+                  "content_type":"text",
+                  "title":"New",
+                  "payload":"NEW_CARS"
+                },
+                {
+                  "content_type":"text",
+                  "title":"Preowned",
+                  "payload":"PREOWNED"
+                }
+              ]
+            }
+          }
+          callSendAPI(user.pageAccessToken, messageData)
+      })
+    }
+
 
     if (event.postback.payload === "SCHEDULE") {
       getUser().then((user) => {
