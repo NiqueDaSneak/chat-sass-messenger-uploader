@@ -13,7 +13,7 @@ var request = require('request')
 var moment = require('moment')
 
 module.exports = (event) => {
-
+  console.log(event)
   function getUser() {
     return new Promise(function(resolve, reject) {
       User.findOne({
@@ -66,7 +66,32 @@ module.exports = (event) => {
                 sendTextMessage(event.sender.id, user.pageAccessToken, "At any point you can tap on the menu to start over.")
               }, 8000)
               setTimeout(() => {
-                sendTextMessage(event.sender.id, user.pageAccessToken, "At any point you can tap on the menu to start over.")
+                let messageData = {
+                  "recipient":{
+                    "id": event.sender.id
+                  },
+                  "message":{
+                    "text": "Choose an action:",
+                    "quick_replies":[
+                      {
+                        "content_type":"text",
+                        "title":"Inventory Search",
+                        "payload":"SEARCH"
+                      },
+                      {
+                        "content_type":"text",
+                        "title":"Schedule Service",
+                        "payload":"SCHEDULE"
+                      },
+                      {
+                        "content_type":"text",
+                        "title":"Value Trade-In",
+                        "payload":"TRADE"
+                      }
+                    ]
+                  }
+                }
+                callSendAPI(user.pageAccessToken, messageData)
               }, 16000)
               resolve()
             })
@@ -79,7 +104,21 @@ module.exports = (event) => {
     })
   }
 
-  if (event.message) {}
+  if (event.message) {
+    if (event.message.quick_reply.payload === "SEARCH") {}
+
+    if (event.message.quick_reply.payload === "SCHEDULE") {}
+
+    if (event.message.quick_reply.payload === "TRADE") {
+      getUser().then((user) => {
+        sendTextMessage(event.sender.id, user.pageAccessToken, "Awesome! Let's see how much your vehicle is worth.")
+        setTimeout(() => {
+          sendTextMessage(event.sender.id, user.pageAccessToken, "All you have to do is send a picture of your VIN and I can get started.")
+        }, 4000)
+      })
+    }
+
+  }
 
   if (event.postback) {
     if (event.postback.payload === "GET_STARTED_PAYLOAD") {
@@ -90,11 +129,6 @@ module.exports = (event) => {
       })
     }
 
-    if (event.postback.payload === "SEARCH") {}
-
-    if (event.postback.payload === "SCHEDULE") {}
-
-    if (event.postback.payload === "TRADE") {}
 
   }
 
