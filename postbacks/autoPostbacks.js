@@ -124,22 +124,22 @@ module.exports = (event) => {
                   {
                     "content_type":"text",
                     "title":"Excellent",
-                    "payload":"SEND_VALUE"
+                    "payload":"SEND_VALUE*4"
                   },
                   {
                     "content_type":"text",
                     "title":"Very Good",
-                    "payload":"SEND_VALUE"
+                    "payload":"SEND_VALUE*3"
                   },
                   {
                     "content_type":"text",
                     "title":"Good",
-                    "payload":"SEND_VALUE"
+                    "payload":"SEND_VALUE*2"
                   },
                   {
                     "content_type":"text",
                     "title":"Fair",
-                    "payload":"SEND_VALUE"
+                    "payload":"SEND_VALUE*1"
                   }
                 ]
               }
@@ -339,10 +339,28 @@ module.exports = (event) => {
         })
       }
 
-      if (event.message.quick_reply.payload === "SEND_VALUE") {
+      if (event.message.quick_reply.payload.split('*')[0] === "SEND_VALUE") {
         getUser().then((user) => {
-          sendTextMessage(event.sender.id, user.pageAccessToken, "We should say something about the image here")
-          sendImageMessage(event.sender.id, user.pageAccessToken, 'https://www.skinsee.com/resources/images/mapRates3-all.jpg')
+          switch (event.message.quick_reply.payload.split('*')[1]) {
+            case '1':
+            sendTextMessage(event.sender.id, user.pageAccessToken, "That is 18% of cars that we value.")
+            sendImageMessage(event.sender.id, user.pageAccessToken, 'https://chat-sass-messenger-uploader.herokuapp.com/static/kelly1.jpg')
+              break;
+            case '2':
+            sendTextMessage(event.sender.id, user.pageAccessToken, "That is 54% of cars that we value.")
+            sendImageMessage(event.sender.id, user.pageAccessToken, 'https://chat-sass-messenger-uploader.herokuapp.com/static/kelly2.jpg')
+              break;
+            case '3':
+            sendTextMessage(event.sender.id, user.pageAccessToken, "That is 23% of cars that we value.")
+            sendImageMessage(event.sender.id, user.pageAccessToken, 'https://chat-sass-messenger-uploader.herokuapp.com/static/kelly3.jpg')
+              break;
+            case '4':
+            sendTextMessage(event.sender.id, user.pageAccessToken, "That is 3% of cars that we value.")
+            sendImageMessage(event.sender.id, user.pageAccessToken, 'https://chat-sass-messenger-uploader.herokuapp.com/static/kelly4.jpg')
+              break;
+            default:
+
+          }
         })
       }
 
