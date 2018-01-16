@@ -174,6 +174,14 @@ module.exports = (event) => {
       })
     }
 
+    if (event.postback.payload ===  "TRADE") {
+      getUser().then((user) => {
+        sendTextMessage(event.sender.id, user.pageAccessToken, "Awesome! Let's see how much your vehicle is worth.")
+        setTimeout(() => {
+          sendTextMessage(event.sender.id, user.pageAccessToken, "All you have to do is send a picture of your VIN and I can get started.")
+        }, 4000)
+      })
+    }
 
   }
 
