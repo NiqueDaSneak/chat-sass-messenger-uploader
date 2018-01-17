@@ -406,6 +406,7 @@ module.exports = (event) => {
                       "buttons":[
                         {
                           "type":"web_url",
+                          "webview_height_ratio": "tall",
                           "url":"http://www.performancelexusrivercenter.com/VehicleDetails/certified-2016-Lexus-ES_300h-300h-Covington-KY/3107579063",
                           "title":"View Details"
                         },{
@@ -422,6 +423,7 @@ module.exports = (event) => {
                       "buttons":[
                         {
                           "type":"web_url",
+                          "webview_height_ratio": "tall",
                           "url":"http://www.performancelexusrivercenter.com/VehicleDetails/used-2015-Lexus-GX_460-460-Covington-KY/3134160133",
                           "title":"View Details"
                         },{
@@ -438,6 +440,7 @@ module.exports = (event) => {
                       "buttons":[
                         {
                           "type":"web_url",
+                          "webview_height_ratio": "tall",
                           "url":"http://www.performancelexusrivercenter.com/VehicleDetails/certified-2017-Lexus-NX_Turbo-200t_F_Sport-Covington-KY/3133171313",
                           "title":"View Details"
                         },{
@@ -454,6 +457,7 @@ module.exports = (event) => {
                       "buttons":[
                         {
                           "type":"web_url",
+                          "webview_height_ratio": "tall",
                           "url":"http://www.performancelexusrivercenter.com/VehicleDetails/certified-2015-Lexus-RX_350-350-Covington-KY/3112521313",
                           "title":"View Details"
                         },{
@@ -517,6 +521,7 @@ module.exports = (event) => {
                       "buttons":[
                         {
                           "type":"web_url",
+                          "webview_height_ratio": "tall",
                           "url":"http://www.performancelexusrivercenter.com/VehicleDetails/new-2018-Lexus-ES_350--Covington-KY/3073080953",
                           "title":"View Details"
                         },{
@@ -533,6 +538,7 @@ module.exports = (event) => {
                       "buttons":[
                         {
                           "type":"web_url",
+                          "webview_height_ratio": "tall",
                           "url":"http://www.performancelexusrivercenter.com/VehicleDetails/new-2018-Lexus-GS_350--Covington-KY/3090000853",
                           "title":"View Details"
                         },{
@@ -549,6 +555,7 @@ module.exports = (event) => {
                       "buttons":[
                         {
                           "type":"web_url",
+                          "webview_height_ratio": "tall",
                           "url":"http://www.performancelexusrivercenter.com/VehicleDetails/new-2018-Lexus-GX_460-Premium-Covington-KY/3130631083",
                           "title":"View Details"
                         },{
@@ -565,6 +572,7 @@ module.exports = (event) => {
                       "buttons":[
                         {
                           "type":"web_url",
+                          "webview_height_ratio": "tall",
                           "url":"http://www.performancelexusrivercenter.com/VehicleDetails/new-2018-Lexus-IS_300-F_SPORT-Covington-KY/3123646243",
                           "title":"View Details"
                         },{
@@ -602,6 +610,7 @@ module.exports = (event) => {
                       "buttons":[
                         {
                           "type":"web_url",
+                          "webview_height_ratio": "tall",
                           "url":"http://www.performancelexusrivercenter.com/VehicleDetails/new-2018-Lexus-ES_300h--Covington-KY/3101078543",
                           "title":"View Details"
                         },{
@@ -618,6 +627,7 @@ module.exports = (event) => {
                       "buttons":[
                         {
                           "type":"web_url",
+                          "webview_height_ratio": "tall",
                           "url":"http://www.performancelexusrivercenter.com/VehicleDetails/used-2015-Lexus-GX_460-460-Covington-KY/3134160133",
                           "title":"View Details"
                         },{
@@ -634,6 +644,7 @@ module.exports = (event) => {
                       "buttons":[
                         {
                           "type":"web_url",
+                          "webview_height_ratio": "tall",
                           "url":"http://www.performancelexusrivercenter.com/VehicleDetails/new-2018-Lexus-LC_500h--Covington-KY/3074241093",
                           "title":"View Details"
                         },{
@@ -650,6 +661,7 @@ module.exports = (event) => {
                       "buttons":[
                         {
                           "type":"web_url",
+                          "webview_height_ratio": "tall",
                           "url":"http://www.performancelexusrivercenter.com/VehicleDetails/new-2018-Lexus-NX_300h--Covington-KY/3136344183",
                           "title":"View Details"
                         },{
