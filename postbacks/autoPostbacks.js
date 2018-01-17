@@ -105,7 +105,6 @@ module.exports = (event) => {
   }
 
   if (event.message) {
-    console.log(event.message.text.length)
     if (event.message.text) {
       getUser().then((user) => {
         if (event.message.text.length === 17) {
@@ -151,7 +150,31 @@ module.exports = (event) => {
     }
 
     if (event.message.quick_reply) {
-      if (event.message.quick_reply.payload === "SEARCH") {}
+      if (event.message.quick_reply.payload === "SEARCH") {
+        getUser().then((user) => {
+          let messageData = {
+            "recipient":{
+              "id": event.sender.id
+            },
+            "message":{
+              "text": "New or Preowned?",
+              "quick_replies":[
+                {
+                  "content_type":"text",
+                  "title":"New",
+                  "payload":"NEW_CARS"
+                },
+                {
+                  "content_type":"text",
+                  "title":"Preowned",
+                  "payload":"PREOWNED"
+                }
+              ]
+            }
+          }
+          callSendAPI(user.pageAccessToken, messageData)
+        })
+      }
 
       if (event.message.quick_reply.payload === "SCHEDULE") {
         getUser().then((user) => {
