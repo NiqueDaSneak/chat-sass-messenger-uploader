@@ -105,10 +105,10 @@ module.exports = (event) => {
   }
 
   if (event.message) {
-    if (event.message.attachments === 'image') {
+    if (event.message.attachments) {
       if (event.message.attachments[0].type === 'image') {
         console.log('image working')
-        
+
       }
     }
     if (event.message.text) {
