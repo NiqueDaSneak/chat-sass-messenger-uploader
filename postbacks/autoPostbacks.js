@@ -105,12 +105,11 @@ module.exports = (event) => {
   }
 
   if (event.message) {
+    if (event.message.attachments[0].type === 'image') {
+      console.log('image working')
+    }
     if (event.message.text) {
       getUser().then((user) => {
-        console.log('before image detect')
-        if (event.message.attachments[0].type === 'image') {
-          console.log('image working')
-        }
         if (event.message.text.length === 17) {
           sendTextMessage(event.sender.id, user.pageAccessToken, "VIN number recieved")
           setTimeout(() => {
