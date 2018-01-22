@@ -108,7 +108,6 @@ module.exports = (event) => {
     if (event.message.attachments) {
       if (event.message.attachments[0].type === 'image') {
         getUser().then((user) => {
-          if (event.message.text.length === 17) {
             sendTextMessage(event.sender.id, user.pageAccessToken, "VIN number recieved")
             setTimeout(() => {
               sendTextMessage(event.sender.id, user.pageAccessToken, "Vehicle Information: 2008 Lexus IS 250, BLCK, 72,367 miles, manual 6-Spd, RWD, located in 45202.")
@@ -146,7 +145,6 @@ module.exports = (event) => {
               }
               callSendAPI(user.pageAccessToken, messageData)
             }, 8000)
-          }
         })
       }
     }
