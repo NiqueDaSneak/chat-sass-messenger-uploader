@@ -696,7 +696,7 @@ module.exports = (event) => {
       getUser().then((user) => {
         sendTextMessage(event.sender.id, user.pageAccessToken, "Awesome! Let's see how much your vehicle is worth.")
         setTimeout(() => {
-          sendTextMessage(event.sender.id, user.pageAccessToken, "All you have to do is send us a message with your VIN number and I can get started.")
+          sendTextMessage(event.sender.id, user.pageAccessToken, "All you have to do is take a picture of your VIN and I can get started.")
         }, 4000)
       })
     }
