@@ -107,52 +107,48 @@ module.exports = (event) => {
   if (event.message) {
     if (event.message.attachments) {
       if (event.message.attachments[0].type === 'image') {
-        console.log('image working')
-
-      }
-    }
-    if (event.message.text) {
-      getUser().then((user) => {
-        if (event.message.text.length === 17) {
-          sendTextMessage(event.sender.id, user.pageAccessToken, "VIN number recieved")
-          setTimeout(() => {
-            sendTextMessage(event.sender.id, user.pageAccessToken, "Vehicle Information: 2008 Lexus IS 250, BLCK, 72,367 miles, manual 6-Spd, RWD, located in 45202.")
-          }, 4000)
-          setTimeout(() => {
-            let messageData = {
-              "recipient":{
-                "id": event.sender.id
-              },
-              "message":{
-                "text": "What condition is it in?",
-                "quick_replies":[
-                  {
-                    "content_type":"text",
-                    "title":"Excellent",
-                    "payload":"SEND_VALUE*4"
-                  },
-                  {
-                    "content_type":"text",
-                    "title":"Very Good",
-                    "payload":"SEND_VALUE*3"
-                  },
-                  {
-                    "content_type":"text",
-                    "title":"Good",
-                    "payload":"SEND_VALUE*2"
-                  },
-                  {
-                    "content_type":"text",
-                    "title":"Fair",
-                    "payload":"SEND_VALUE*1"
-                  }
-                ]
+        getUser().then((user) => {
+          if (event.message.text.length === 17) {
+            sendTextMessage(event.sender.id, user.pageAccessToken, "VIN number recieved")
+            setTimeout(() => {
+              sendTextMessage(event.sender.id, user.pageAccessToken, "Vehicle Information: 2008 Lexus IS 250, BLCK, 72,367 miles, manual 6-Spd, RWD, located in 45202.")
+            }, 4000)
+            setTimeout(() => {
+              let messageData = {
+                "recipient":{
+                  "id": event.sender.id
+                },
+                "message":{
+                  "text": "What condition is it in?",
+                  "quick_replies":[
+                    {
+                      "content_type":"text",
+                      "title":"Excellent",
+                      "payload":"SEND_VALUE*4"
+                    },
+                    {
+                      "content_type":"text",
+                      "title":"Very Good",
+                      "payload":"SEND_VALUE*3"
+                    },
+                    {
+                      "content_type":"text",
+                      "title":"Good",
+                      "payload":"SEND_VALUE*2"
+                    },
+                    {
+                      "content_type":"text",
+                      "title":"Fair",
+                      "payload":"SEND_VALUE*1"
+                    }
+                  ]
+                }
               }
-            }
-            callSendAPI(user.pageAccessToken, messageData)
-          }, 8000)
-        }
-      })
+              callSendAPI(user.pageAccessToken, messageData)
+            }, 8000)
+          }
+        })
+      }
     }
 
     if (event.message.quick_reply) {
