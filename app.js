@@ -46,8 +46,8 @@ app.use('/skinsee', skiRouter)
 var autoRouter = require('./router/autoRouter.js')
 app.use('/autorouter', autoRouter)
 
-var autoRouter = require('./router/uncRouter.js')
-app.use('/autorouter', autoRouter)
+var uncRouter = require('./router/uncRouter.js')
+app.use('/uncrouter', uncRouter)
 
 
 app.use('/data', express.static(path.join(__dirname, 'data')))
@@ -97,7 +97,7 @@ app.post('/', (req, res) => {
         }
 
         if (event.recipient.id === '1996388557245811') {
-          return res.redirect(307, '/autorouter')
+          return res.redirect(307, '/uncrouter')
         }
 
         if (event.message) {
