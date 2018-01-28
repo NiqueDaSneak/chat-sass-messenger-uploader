@@ -475,12 +475,15 @@ module.exports = (event) => {
     }
 
     if (event.postback.payload === "FEEDBACK") {
-      getUser().then((user) => {})
+      getUser().then((user) => {
+        sendTextMessage(event.sender.id, user.pageAccessToken, "As we continue to build upon this experience, your feedback is invaluable. So at any point, go ahead and type out a message. Whether it is a new idea, issue, or just a thought...")
+      })
 
     }
   }
 
   if (event.message) {
+    console.log('event.message: ' + event.message)
     if (event.message.quick_reply.payload === 'SEARCH') {
       getUser().then((user) => {
         sendTextMessage(event.sender.id, user.pageAccessToken, "Scroll or swipe to browse internships.")
@@ -843,7 +846,9 @@ module.exports = (event) => {
     }
 
     if (event.message.quick_reply.payload === 'FEEDBACK') {
-
+      getUser().then((user) => {
+        sendTextMessage(event.sender.id, user.pageAccessToken, "As we continue to build upon this experience, your feedback is invaluable. So at any point, go ahead and type out a message. Whether it is a new idea, issue, or just a thought...")
+      })
     }
   }
 }
