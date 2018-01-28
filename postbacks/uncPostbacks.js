@@ -56,11 +56,45 @@ module.exports = (event) => {
 
             newMember.save((err, member) => {
               if (err) return console.error(err)
-              sendTextMessage(event.sender.id, user.pageAccessToken, 'Hey there! Welcome to the See N Ski Messenger Experience!')
+              sendTextMessage(event.sender.id, user.pageAccessToken, 'Welcome to the UNC Shuford Program Messenger Experience.')
               setTimeout(() => {
-                sendTextMessage(event.sender.id, user.pageAccessToken, "Instructions: Click 'Reserve Now' in the menu below to make a purchase.")
-              }, 8000)
-              resolve()
+                sendTextMessage(event.sender.id, user.pageAccessToken, 'The Shuford Program in Entrepreneurship is for students from all backgrounds that are pursuing any major across campus.')
+                setTimeout(() => {
+                  sendTextMessage(event.sender.id, user.pageAccessToken, 'The program was founded on the understanding that there is a common process for the realization of new ventures, whether those ventures are startups, non-profits, artistic endeavors or even growth within existing enterprises.')
+                  setTimeout(() => {
+                    sendTextMessage(event.sender.id, user.pageAccessToken, 'We partnered with a startup from a former UNC Student in the minor, Irrigate, to bring you internship information in a smarter and more engaging way through Messenger.')
+                    setTimeout(() => {
+                      let messageData = {
+                        "recipient":{
+                          "id": event.sender.id
+                        },
+                        "message":{
+                          "text": "What would you like to do:",
+                          "quick_replies":[
+                            {
+                              "content_type":"text",
+                              "title":"Search Internships",
+                              "payload":"SEARCH"
+                            },
+                            {
+                              "content_type":"text",
+                              "title":"Browse Tracks",
+                              "payload":"BROWSE"
+                            },
+                            {
+                              "content_type":"text",
+                              "title":"Leave Feedback",
+                              "payload":"FEEDBACK"
+                            },
+                          ]
+                        }
+                      }
+                      callSendAPI(user.pageAccessToken, messageData)
+                      resolve()
+                    }, 6000)
+                  }, 7000)
+                }, 2500)
+              }, 2000)
             })
           })
         } else {
@@ -72,12 +106,344 @@ module.exports = (event) => {
   }
 
   if (event.postback) {
-    if (event.postback.payload === "GET_STARTED_PAYLOAD") {}
+    if (event.postback.payload === "GET_STARTED_PAYLOAD") {
+      // ENROLLING MEMBERS INTO THE IRRIGATE APP
+      getUser().then((user) => {
+        findMember(user)
+      })
+    }
 
+    if (event.postback.payload === "SEARCH") {
+      getUser().then((user) => {
+        sendTextMessage(event.sender.id, user.pageAccessToken, "Scroll or swipe to browse internships.")
+        setTimeout(() => {
+          let messageData = {
+            "recipient":{
+              "id": event.sender.id
+            },
+            "message":{
+              "attachment":{
+                "type":"template",
+                "payload":{
+                  "template_type":"generic",
+                  "elements":[
+                    {
+                      "title":"Irrigate Messaging",
+                      "subtitle":"Blog Intern",
+                      "image_url":"https://www.irrigatemsg.com/imgs/new-logo.png",
+                      "buttons":[
+                        {
+                          "type": "web_url",
+                          "url": "https://www.irrigatemsg.com/commerce",
+                          "webview_height_ratio": "tall",
+                          "title":"Explore Company"
+                        },
+                        {
+                          "type":"web_url",
+                          "url":"https://petersfancybrownhats.com",
+                          "webview_height_ratio": "tall",
+                          "title":"Job Description"
+                        }
+                      ]
+                    },
+                    {
+                      "title":"Irrigate Messaging",
+                      "subtitle":"White Paper Intern",
+                      "image_url":"https://www.irrigatemsg.com/imgs/new-logo.png",
+                      "buttons":[
+                        {
+                          "type": "web_url",
+                          "url": "https://www.irrigatemsg.com/commerce",
+                          "webview_height_ratio": "tall",
+                          "title":"Explore Company"
+                        },
+                        {
+                          "type":"web_url",
+                          "url":"https://petersfancybrownhats.com",
+                          "webview_height_ratio": "tall",
+                          "title":"Job Description"
+                        }
+                      ]
+                    },
+                    {
+                      "title":"Irrigate Messaging",
+                      "subtitle":"Social Media Intern",
+                      "image_url":"https://www.irrigatemsg.com/imgs/new-logo.png",
+                      "buttons":[
+                        {
+                          "type": "web_url",
+                          "url": "https://www.irrigatemsg.com/commerce",
+                          "webview_height_ratio": "tall",
+                          "title":"Explore Company"
+                        },
+                        {
+                          "type":"web_url",
+                          "url":"https://petersfancybrownhats.com",
+                          "webview_height_ratio": "tall",
+                          "title":"Job Description"
+                        }
+                      ]
+                    },
+                    {
+                      "title":"Irrigate Messaging",
+                      "subtitle":"Business Development Intern",
+                      "image_url":"https://www.irrigatemsg.com/imgs/new-logo.png",
+                      "buttons":[
+                        {
+                          "type": "web_url",
+                          "url": "https://www.irrigatemsg.com/commerce",
+                          "webview_height_ratio": "tall",
+                          "title":"Explore Company"
+                        },
+                        {
+                          "type":"web_url",
+                          "url":"https://petersfancybrownhats.com",
+                          "webview_height_ratio": "tall",
+                          "title":"Job Description"
+                        }
+                      ]
+                    },
+                    {
+                      "title":"Irrigate Messaging",
+                      "subtitle":"Web Designer- Front End Intern",
+                      "image_url":"https://www.irrigatemsg.com/imgs/new-logo.png",
+                      "buttons":[
+                        {
+                          "type": "web_url",
+                          "url": "https://www.irrigatemsg.com/commerce",
+                          "webview_height_ratio": "tall",
+                          "title":"Explore Company"
+                        },
+                        {
+                          "type":"web_url",
+                          "url":"https://petersfancybrownhats.com",
+                          "webview_height_ratio": "tall",
+                          "title":"Job Description"
+                        }
+                      ]
+                    },
+                    {
+                      "title":"Irrigate Messaging",
+                      "subtitle":"Back End Developer Intern",
+                      "image_url":"https://www.irrigatemsg.com/imgs/new-logo.png",
+                      "buttons":[
+                        {
+                          "type": "web_url",
+                          "url": "https://www.irrigatemsg.com/commerce",
+                          "webview_height_ratio": "tall",
+                          "title":"Explore Company"
+                        },
+                        {
+                          "type":"web_url",
+                          "url":"https://petersfancybrownhats.com",
+                          "webview_height_ratio": "tall",
+                          "title":"Job Description"
+                        }
+                      ]
+                    },
+                    {
+                      "title":"Irrigate Messaging",
+                      "subtitle":"Customer Experience Intern",
+                      "image_url":"https://www.irrigatemsg.com/imgs/new-logo.png",
+                      "buttons":[
+                        {
+                          "type": "web_url",
+                          "url": "https://www.irrigatemsg.com/commerce",
+                          "webview_height_ratio": "tall",
+                          "title":"Explore Company"
+                        },
+                        {
+                          "type":"web_url",
+                          "url":"https://petersfancybrownhats.com",
+                          "webview_height_ratio": "tall",
+                          "title":"Job Description"
+                        }
+                      ]
+                    },
+                  ]
+                }
+              }
+            }
+          }
+          callSendAPI(user.pageAccessToken, messageData)
+        }, 2500)
+      })
+    }
+
+    if (event.postback.payload === "BROWSE") {
+
+    }
+
+    if (event.postback.payload === "FEEDBACK") {
+
+    }
   }
 
   if (event.message) {
-    if (event.message.quick_reply.payload === '') {}
+    if (event.message.quick_reply.payload === 'SEARCH') {
+      getUser().then((user) => {
+        sendTextMessage(event.sender.id, user.pageAccessToken, "Scroll or swipe to browse internships.")
+        setTimeout(() => {
+          let messageData = {
+            "recipient":{
+              "id": event.sender.id
+            },
+            "message":{
+              "attachment":{
+                "type":"template",
+                "payload":{
+                  "template_type":"generic",
+                  "elements":[
+                    {
+                      "title":"Irrigate Messaging",
+                      "subtitle":"Blog Intern",
+                      "image_url":"https://www.irrigatemsg.com/imgs/new-logo.png",
+                      "buttons":[
+                        {
+                          "type": "web_url",
+                          "url": "https://www.irrigatemsg.com/commerce",
+                          "webview_height_ratio": "tall",
+                          "title":"Explore Company"
+                        },
+                        {
+                          "type":"web_url",
+                          "url":"https://petersfancybrownhats.com",
+                          "webview_height_ratio": "tall",
+                          "title":"Job Description"
+                        }
+                      ]
+                    },
+                    {
+                      "title":"Irrigate Messaging",
+                      "subtitle":"White Paper Intern",
+                      "image_url":"https://www.irrigatemsg.com/imgs/new-logo.png",
+                      "buttons":[
+                        {
+                          "type": "web_url",
+                          "url": "https://www.irrigatemsg.com/commerce",
+                          "webview_height_ratio": "tall",
+                          "title":"Explore Company"
+                        },
+                        {
+                          "type":"web_url",
+                          "url":"https://petersfancybrownhats.com",
+                          "webview_height_ratio": "tall",
+                          "title":"Job Description"
+                        }
+                      ]
+                    },
+                    {
+                      "title":"Irrigate Messaging",
+                      "subtitle":"Social Media Intern",
+                      "image_url":"https://www.irrigatemsg.com/imgs/new-logo.png",
+                      "buttons":[
+                        {
+                          "type": "web_url",
+                          "url": "https://www.irrigatemsg.com/commerce",
+                          "webview_height_ratio": "tall",
+                          "title":"Explore Company"
+                        },
+                        {
+                          "type":"web_url",
+                          "url":"https://petersfancybrownhats.com",
+                          "webview_height_ratio": "tall",
+                          "title":"Job Description"
+                        }
+                      ]
+                    },
+                    {
+                      "title":"Irrigate Messaging",
+                      "subtitle":"Business Development Intern",
+                      "image_url":"https://www.irrigatemsg.com/imgs/new-logo.png",
+                      "buttons":[
+                        {
+                          "type": "web_url",
+                          "url": "https://www.irrigatemsg.com/commerce",
+                          "webview_height_ratio": "tall",
+                          "title":"Explore Company"
+                        },
+                        {
+                          "type":"web_url",
+                          "url":"https://petersfancybrownhats.com",
+                          "webview_height_ratio": "tall",
+                          "title":"Job Description"
+                        }
+                      ]
+                    },
+                    {
+                      "title":"Irrigate Messaging",
+                      "subtitle":"Web Designer- Front End Intern",
+                      "image_url":"https://www.irrigatemsg.com/imgs/new-logo.png",
+                      "buttons":[
+                        {
+                          "type": "web_url",
+                          "url": "https://www.irrigatemsg.com/commerce",
+                          "webview_height_ratio": "tall",
+                          "title":"Explore Company"
+                        },
+                        {
+                          "type":"web_url",
+                          "url":"https://petersfancybrownhats.com",
+                          "webview_height_ratio": "tall",
+                          "title":"Job Description"
+                        }
+                      ]
+                    },
+                    {
+                      "title":"Irrigate Messaging",
+                      "subtitle":"Back End Developer Intern",
+                      "image_url":"https://www.irrigatemsg.com/imgs/new-logo.png",
+                      "buttons":[
+                        {
+                          "type": "web_url",
+                          "url": "https://www.irrigatemsg.com/commerce",
+                          "webview_height_ratio": "tall",
+                          "title":"Explore Company"
+                        },
+                        {
+                          "type":"web_url",
+                          "url":"https://petersfancybrownhats.com",
+                          "webview_height_ratio": "tall",
+                          "title":"Job Description"
+                        }
+                      ]
+                    },
+                    {
+                      "title":"Irrigate Messaging",
+                      "subtitle":"Customer Experience Intern",
+                      "image_url":"https://www.irrigatemsg.com/imgs/new-logo.png",
+                      "buttons":[
+                        {
+                          "type": "web_url",
+                          "url": "https://www.irrigatemsg.com/commerce",
+                          "webview_height_ratio": "tall",
+                          "title":"Explore Company"
+                        },
+                        {
+                          "type":"web_url",
+                          "url":"https://petersfancybrownhats.com",
+                          "webview_height_ratio": "tall",
+                          "title":"Job Description"
+                        }
+                      ]
+                    },
+                  ]
+                }
+              }
+            }
+          }
+          callSendAPI(user.pageAccessToken, messageData)
+        }, 2500)
+      })
+    }
+
+    if (event.message.quick_reply.payload === 'BROWSE') {
+
+    }
+
+    if (event.message.quick_reply.payload === 'FEEDBACK') {
+
+    }
   }
 }
 
