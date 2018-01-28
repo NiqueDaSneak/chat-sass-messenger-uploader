@@ -483,7 +483,7 @@ module.exports = (event) => {
   }
 
   if (event.message) {
-    console.log('event.message: ' + event.message)
+    console.log('event.message: ' + JSON.parse(event.message))
     if (event.message.quick_reply.payload === 'SEARCH') {
       getUser().then((user) => {
         sendTextMessage(event.sender.id, user.pageAccessToken, "Scroll or swipe to browse internships.")
