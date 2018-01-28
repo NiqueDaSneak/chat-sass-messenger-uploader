@@ -135,13 +135,13 @@ module.exports = (event) => {
                         {
                           "type": "web_url",
                           "url": "https://www.irrigatemsg.com/commerce",
-                          "webview_height_ratio": "tall",
+                          "webview_height_ratio": "full",
                           "title":"Explore Company"
                         },
                         {
                           "type":"web_url",
                           "url":"https://petersfancybrownhats.com",
-                          "webview_height_ratio": "tall",
+                          "webview_height_ratio": "full",
                           "title":"Job Description"
                         }
                       ]
@@ -154,13 +154,13 @@ module.exports = (event) => {
                         {
                           "type": "web_url",
                           "url": "https://www.irrigatemsg.com/commerce",
-                          "webview_height_ratio": "tall",
+                          "webview_height_ratio": "full",
                           "title":"Explore Company"
                         },
                         {
                           "type":"web_url",
                           "url":"https://petersfancybrownhats.com",
-                          "webview_height_ratio": "tall",
+                          "webview_height_ratio": "full",
                           "title":"Job Description"
                         }
                       ]
@@ -173,13 +173,13 @@ module.exports = (event) => {
                         {
                           "type": "web_url",
                           "url": "https://www.irrigatemsg.com/commerce",
-                          "webview_height_ratio": "tall",
+                          "webview_height_ratio": "full",
                           "title":"Explore Company"
                         },
                         {
                           "type":"web_url",
                           "url":"https://petersfancybrownhats.com",
-                          "webview_height_ratio": "tall",
+                          "webview_height_ratio": "full",
                           "title":"Job Description"
                         }
                       ]
@@ -192,13 +192,13 @@ module.exports = (event) => {
                         {
                           "type": "web_url",
                           "url": "https://www.irrigatemsg.com/commerce",
-                          "webview_height_ratio": "tall",
+                          "webview_height_ratio": "full",
                           "title":"Explore Company"
                         },
                         {
                           "type":"web_url",
                           "url":"https://petersfancybrownhats.com",
-                          "webview_height_ratio": "tall",
+                          "webview_height_ratio": "full",
                           "title":"Job Description"
                         }
                       ]
@@ -211,13 +211,13 @@ module.exports = (event) => {
                         {
                           "type": "web_url",
                           "url": "https://www.irrigatemsg.com/commerce",
-                          "webview_height_ratio": "tall",
+                          "webview_height_ratio": "full",
                           "title":"Explore Company"
                         },
                         {
                           "type":"web_url",
                           "url":"https://petersfancybrownhats.com",
-                          "webview_height_ratio": "tall",
+                          "webview_height_ratio": "full",
                           "title":"Job Description"
                         }
                       ]
@@ -230,13 +230,13 @@ module.exports = (event) => {
                         {
                           "type": "web_url",
                           "url": "https://www.irrigatemsg.com/commerce",
-                          "webview_height_ratio": "tall",
+                          "webview_height_ratio": "full",
                           "title":"Explore Company"
                         },
                         {
                           "type":"web_url",
                           "url":"https://petersfancybrownhats.com",
-                          "webview_height_ratio": "tall",
+                          "webview_height_ratio": "full",
                           "title":"Job Description"
                         }
                       ]
@@ -249,13 +249,13 @@ module.exports = (event) => {
                         {
                           "type": "web_url",
                           "url": "https://www.irrigatemsg.com/commerce",
-                          "webview_height_ratio": "tall",
+                          "webview_height_ratio": "full",
                           "title":"Explore Company"
                         },
                         {
                           "type":"web_url",
                           "url":"https://petersfancybrownhats.com",
-                          "webview_height_ratio": "tall",
+                          "webview_height_ratio": "full",
                           "title":"Job Description"
                         }
                       ]
@@ -302,13 +302,13 @@ module.exports = (event) => {
                         {
                           "type": "web_url",
                           "url": "https://www.irrigatemsg.com/commerce",
-                          "webview_height_ratio": "tall",
+                          "webview_height_ratio": "full",
                           "title":"Explore Company"
                         },
                         {
                           "type":"web_url",
                           "url":"https://petersfancybrownhats.com",
-                          "webview_height_ratio": "tall",
+                          "webview_height_ratio": "full",
                           "title":"Job Description"
                         }
                       ]
@@ -321,13 +321,13 @@ module.exports = (event) => {
                         {
                           "type": "web_url",
                           "url": "https://www.irrigatemsg.com/commerce",
-                          "webview_height_ratio": "tall",
+                          "webview_height_ratio": "full",
                           "title":"Explore Company"
                         },
                         {
                           "type":"web_url",
                           "url":"https://petersfancybrownhats.com",
-                          "webview_height_ratio": "tall",
+                          "webview_height_ratio": "full",
                           "title":"Job Description"
                         }
                       ]
@@ -340,13 +340,13 @@ module.exports = (event) => {
                         {
                           "type": "web_url",
                           "url": "https://www.irrigatemsg.com/commerce",
-                          "webview_height_ratio": "tall",
+                          "webview_height_ratio": "full",
                           "title":"Explore Company"
                         },
                         {
                           "type":"web_url",
                           "url":"https://petersfancybrownhats.com",
-                          "webview_height_ratio": "tall",
+                          "webview_height_ratio": "full",
                           "title":"Job Description"
                         }
                       ]
@@ -359,13 +359,13 @@ module.exports = (event) => {
                         {
                           "type": "web_url",
                           "url": "https://www.irrigatemsg.com/commerce",
-                          "webview_height_ratio": "tall",
+                          "webview_height_ratio": "full",
                           "title":"Explore Company"
                         },
                         {
                           "type":"web_url",
                           "url":"https://petersfancybrownhats.com",
-                          "webview_height_ratio": "tall",
+                          "webview_height_ratio": "full",
                           "title":"Job Description"
                         }
                       ]
@@ -378,13 +378,13 @@ module.exports = (event) => {
                         {
                           "type": "web_url",
                           "url": "https://www.irrigatemsg.com/commerce",
-                          "webview_height_ratio": "tall",
+                          "webview_height_ratio": "full",
                           "title":"Explore Company"
                         },
                         {
                           "type":"web_url",
                           "url":"https://petersfancybrownhats.com",
-                          "webview_height_ratio": "tall",
+                          "webview_height_ratio": "full",
                           "title":"Job Description"
                         }
                       ]
@@ -397,13 +397,13 @@ module.exports = (event) => {
                         {
                           "type": "web_url",
                           "url": "https://www.irrigatemsg.com/commerce",
-                          "webview_height_ratio": "tall",
+                          "webview_height_ratio": "full",
                           "title":"Explore Company"
                         },
                         {
                           "type":"web_url",
                           "url":"https://petersfancybrownhats.com",
-                          "webview_height_ratio": "tall",
+                          "webview_height_ratio": "full",
                           "title":"Job Description"
                         }
                       ]
@@ -416,13 +416,13 @@ module.exports = (event) => {
                         {
                           "type": "web_url",
                           "url": "https://www.irrigatemsg.com/commerce",
-                          "webview_height_ratio": "tall",
+                          "webview_height_ratio": "full",
                           "title":"Explore Company"
                         },
                         {
                           "type":"web_url",
                           "url":"https://petersfancybrownhats.com",
-                          "webview_height_ratio": "tall",
+                          "webview_height_ratio": "full",
                           "title":"Job Description"
                         }
                       ]
