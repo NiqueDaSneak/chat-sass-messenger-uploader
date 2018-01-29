@@ -74,8 +74,99 @@ module.exports = (event) => {
 
   if (event.message) {
 
-    if (event.message.quick_reply.payload.split('_')[0] === 'LOCATION') {
-      if (event.message.quick_reply.payload.split('_')[1] === 'UNKNOWN') {
+    if (event.message.text) {
+      getUser().then((user) => {
+        sendTextMessage(event.sender.id, user.pageAccessToken, "Thanks for the message. Go ahead and use the menu buttons to start the interaction.")
+      })
+    } else {
+
+      if (event.message.quick_reply.payload.split('_')[0] === 'LOCATION') {
+        if (event.message.quick_reply.payload.split('_')[1] === 'UNKNOWN') {
+          getUser().then((user) => {
+
+            let messageData = {
+              "recipient":{
+                "id": event.sender.id
+              },
+              "message":{
+                "text": "Choose your area:",
+                "quick_replies":[
+                  {
+                    "content_type":"text",
+                    "title":"Deer Valley",
+                    "payload":"LOCATION_1,8,13,14"
+                  },
+                  {
+                    "content_type":"text",
+                    "title":"Midvale",
+                    "payload":"LOCATION_3,5,6,7,8"
+                  },
+                  {
+                    "content_type":"text",
+                    "title":"Ogden",
+                    "payload":"LOCATION_1,4"
+                  },
+                  {
+                    "content_type":"text",
+                    "title":"Park City",
+                    "payload":"LOCATION_1,9,10,11,12"
+                  },
+                  {
+                    "content_type":"text",
+                    "title":"Sandy",
+                    "payload":"LOCATION_2,3,5,6,7"
+                  },
+                  {
+                    "content_type":"text",
+                    "title":"Salt Lake City",
+                    "payload":"LOCATION_1,8,9,10,11"
+                  },
+                ]
+              }
+            }
+            callSendAPI(user.pageAccessToken, messageData)
+          })
+        } else {
+          var locations = JSON.parse("[" + event.message.quick_reply.payload.split('_')[1] + "]")
+
+          getUser().then((user) => {
+            sendImageMessage(event.sender.id, user.pageAccessToken, 'https://www.skinsee.com/resources/images/mapRates3-all.jpg')
+
+            setTimeout(() => {
+              let quickReplies = []
+              for (var i = 0; i < locations.length; i++) {
+
+                let btn = {
+                  "content_type":"text",
+                  "title": locations[i],
+                  "payload":"CHOOSE_DATE"
+                }
+
+                quickReplies.push(btn)
+              }
+
+              let messageData = {
+                "recipient":{
+                  "id": event.sender.id
+                },
+                "message":{
+                  "text": "Select your pickup location:",
+                  "quick_replies": quickReplies
+                }
+              }
+              callSendAPI(user.pageAccessToken, messageData)
+            }, 6000)
+          })
+        }
+
+        // if (event.message.quick_reply.payload.split('_')[1] === 'UNKNOWN') {}
+
+        // if (event.message.quick_reply.payload.split('_')[1] === 'UNKNOWN') {}
+
+      }
+
+      if (event.message.quick_reply.payload === 'CHOOSE_DATE') {
+
         getUser().then((user) => {
 
           let messageData = {
@@ -83,192 +174,109 @@ module.exports = (event) => {
               "id": event.sender.id
             },
             "message":{
-              "text": "Choose your area:",
-              "quick_replies":[
+              "text": "Select a date:",
+              "quick_replies": [
                 {
                   "content_type":"text",
-                  "title":"Deer Valley",
-                  "payload":"LOCATION_1,8,13,14"
+                  "title": '2/1/18',
+                  "payload":"PRODUCTS"
                 },
                 {
                   "content_type":"text",
-                  "title":"Midvale",
-                  "payload":"LOCATION_3,5,6,7,8"
+                  "title": '2/2/18',
+                  "payload":"PRODUCTS"
                 },
                 {
                   "content_type":"text",
-                  "title":"Ogden",
-                  "payload":"LOCATION_1,4"
+                  "title": '2/3/18',
+                  "payload":"PRODUCTS"
                 },
                 {
                   "content_type":"text",
-                  "title":"Park City",
-                  "payload":"LOCATION_1,9,10,11,12"
+                  "title": '2/4/18',
+                  "payload":"PRODUCTS"
                 },
                 {
                   "content_type":"text",
-                  "title":"Sandy",
-                  "payload":"LOCATION_2,3,5,6,7"
+                  "title": '2/5/18',
+                  "payload":"PRODUCTS"
                 },
                 {
                   "content_type":"text",
-                  "title":"Salt Lake City",
-                  "payload":"LOCATION_1,8,9,10,11"
+                  "title": '2/6/18',
+                  "payload":"PRODUCTS"
                 },
+                {
+                  "content_type":"text",
+                  "title": '2/7/18',
+                  "payload":"PRODUCTS"
+                },
+                {
+                  "content_type":"text",
+                  "title": '2/8/18',
+                  "payload":"PRODUCTS"
+                },
+                {
+                  "content_type":"text",
+                  "title": '2/9/18',
+                  "payload":"PRODUCTS"
+                },
+                {
+                  "content_type":"text",
+                  "title": '2/10/18',
+                  "payload":"PRODUCTS"
+                }
               ]
             }
           }
           callSendAPI(user.pageAccessToken, messageData)
         })
-      } else {
-        var locations = JSON.parse("[" + event.message.quick_reply.payload.split('_')[1] + "]")
+
+      }
+
+      if (event.message.quick_reply.payload === 'PRODUCTS') {
+
+        var elements = []
+        for (var i = 0; i < db.ski.find().length; i++) {
+          let obj = {}
+          obj.title = db.ski.find()[i].name
+          obj.image_url = db.ski.find()[i].url
+          obj.subtitle = db.ski.find()[i].description
+          obj.buttons = [
+            {
+              "type":"postback",
+              "title":"Reserve: $" + db.ski.find()[i].price,
+              "payload":"CART_" + db.ski.find()[i].id
+            },
+          ]
+          elements.push(obj)
+        }
 
         getUser().then((user) => {
-          sendImageMessage(event.sender.id, user.pageAccessToken, 'https://www.skinsee.com/resources/images/mapRates3-all.jpg')
 
-          setTimeout(() => {
-            let quickReplies = []
-            for (var i = 0; i < locations.length; i++) {
+          sendTextMessage(event.sender.id, user.pageAccessToken, "Wonderful. Choose from our available rentals during your visit:")
 
-              let btn = {
-                "content_type":"text",
-                "title": locations[i],
-                "payload":"CHOOSE_DATE"
-              }
-
-              quickReplies.push(btn)
-            }
-
-            let messageData = {
-              "recipient":{
-                "id": event.sender.id
-              },
-              "message":{
-                "text": "Select your pickup location:",
-                "quick_replies": quickReplies
+          let messageData = {
+            "recipient":{
+              "id": event.sender.id
+            },
+            "message":{
+              "attachment":{
+                "type":"template",
+                "payload":{
+                  "template_type":"generic",
+                  "sharable": true,
+                  // "image_aspect_ratio": "square",
+                  "elements": elements
+                }
               }
             }
-            callSendAPI(user.pageAccessToken, messageData)
-          }, 6000)
+          }
+          callSendAPI(user.pageAccessToken, messageData)
         })
       }
-
-      // if (event.message.quick_reply.payload.split('_')[1] === 'UNKNOWN') {}
-
-      // if (event.message.quick_reply.payload.split('_')[1] === 'UNKNOWN') {}
-
     }
 
-    if (event.message.quick_reply.payload === 'CHOOSE_DATE') {
-
-      getUser().then((user) => {
-
-        let messageData = {
-          "recipient":{
-            "id": event.sender.id
-          },
-          "message":{
-            "text": "Select a date:",
-            "quick_replies": [
-              {
-                "content_type":"text",
-                "title": '2/1/18',
-                "payload":"PRODUCTS"
-              },
-              {
-                "content_type":"text",
-                "title": '2/2/18',
-                "payload":"PRODUCTS"
-              },
-              {
-                "content_type":"text",
-                "title": '2/3/18',
-                "payload":"PRODUCTS"
-              },
-              {
-                "content_type":"text",
-                "title": '2/4/18',
-                "payload":"PRODUCTS"
-              },
-              {
-                "content_type":"text",
-                "title": '2/5/18',
-                "payload":"PRODUCTS"
-              },
-              {
-                "content_type":"text",
-                "title": '2/6/18',
-                "payload":"PRODUCTS"
-              },
-              {
-                "content_type":"text",
-                "title": '2/7/18',
-                "payload":"PRODUCTS"
-              },
-              {
-                "content_type":"text",
-                "title": '2/8/18',
-                "payload":"PRODUCTS"
-              },
-              {
-                "content_type":"text",
-                "title": '2/9/18',
-                "payload":"PRODUCTS"
-              },
-              {
-                "content_type":"text",
-                "title": '2/10/18',
-                "payload":"PRODUCTS"
-              }
-            ]
-          }
-        }
-        callSendAPI(user.pageAccessToken, messageData)
-      })
-
-    }
-
-    if (event.message.quick_reply.payload === 'PRODUCTS') {
-
-      var elements = []
-      for (var i = 0; i < db.ski.find().length; i++) {
-        let obj = {}
-        obj.title = db.ski.find()[i].name
-        obj.image_url = db.ski.find()[i].url
-        obj.subtitle = db.ski.find()[i].description
-        obj.buttons = [
-          {
-            "type":"postback",
-            "title":"Reserve: $" + db.ski.find()[i].price,
-            "payload":"CART_" + db.ski.find()[i].id
-          },
-        ]
-        elements.push(obj)
-      }
-
-      getUser().then((user) => {
-
-        sendTextMessage(event.sender.id, user.pageAccessToken, "Wonderful. Choose from our available rentals during your visit:")
-
-        let messageData = {
-          "recipient":{
-            "id": event.sender.id
-          },
-          "message":{
-            "attachment":{
-              "type":"template",
-              "payload":{
-                "template_type":"generic",
-                "sharable": true,
-                // "image_aspect_ratio": "square",
-                "elements": elements
-              }
-            }
-          }
-        }
-        callSendAPI(user.pageAccessToken, messageData)
-      })
-    }
 
 
 
