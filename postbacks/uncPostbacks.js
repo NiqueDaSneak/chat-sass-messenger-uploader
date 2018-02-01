@@ -483,11 +483,7 @@ module.exports = (event) => {
   }
 
   if (event.message) {
-    if (event.message.text) {
-      getUser().then((user) => {
-        sendTextMessage(event.sender.id, user.pageAccessToken, "Thank you for your feedback! It is very valuable to us!")
-      })
-    } else {
+    if (event.message.quick_reply) {
       if (event.message.quick_reply.payload === 'SEARCH') {
         getUser().then((user) => {
           sendTextMessage(event.sender.id, user.pageAccessToken, "Scroll or swipe to browse internships.")
@@ -854,7 +850,10 @@ module.exports = (event) => {
           sendTextMessage(event.sender.id, user.pageAccessToken, "As we continue to build upon this experience, your feedback is invaluable. So at any point, go ahead and type out a message. Whether it is a new idea, issue, or just a thought...")
         })
       }
-
+    } else {
+      getUser().then((user) => {
+        sendTextMessage(event.sender.id, user.pageAccessToken, "Thank you for your feedback! It is very valuable to us!")
+      })
     }
   }
 }
