@@ -49,6 +49,9 @@ app.use('/autorouter', autoRouter)
 var uncRouter = require('./router/uncRouter.js')
 app.use('/uncrouter', uncRouter)
 
+var tedxRouter = require('./router/tedXRouter.js')
+app.use('/tedxrouter', tedxRouter)
+
 
 app.use('/data', express.static(path.join(__dirname, 'data')))
 
@@ -98,6 +101,10 @@ app.post('/', (req, res) => {
 
         if (event.recipient.id === '1996388557245811') {
           return res.redirect(307, '/uncrouter')
+        }
+
+        if (event.recipient.id === '534877406890866') {
+          return res.redirect(307, '/tedxrouter')
         }
 
         if (event.message) {
