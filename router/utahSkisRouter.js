@@ -1,6 +1,6 @@
 'use strict'
 
-const uncRouter = require('express').Router()
+const utahSkisRouter = require('express').Router()
 
 var Message = require('../models/messageModel.js')
 var Group = require('../models/groupModel.js')
@@ -9,7 +9,7 @@ var Member = require('../models/memberModel.js')
 
 var eventPostbackHandler = require('../postbacks/utahSkisPostbacks.js')
 
-uncRouter.post('/', (req, res, next) => {
+utahSkisRouter.post('/', (req, res, next) => {
 
   var data = req.body
   // Make sure this is a page subscription
@@ -32,4 +32,4 @@ uncRouter.post('/', (req, res, next) => {
   }
 })
 
-module.exports = uncRouter
+module.exports = utahSkisRouter
