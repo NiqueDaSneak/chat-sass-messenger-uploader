@@ -367,6 +367,22 @@ function sendVideoMessage(recipientId, accessToken, url) {
   callSendAPI(accessToken, messageData)
 }
 
+// const csv = require('csvtojson')
+// csv({
+//   noheader: true,
+//   delimiter: 'auto',
+//   headers: ['Unique ID', 'Title', 'Description', 'Category', 'Product URL', 'Image URL', 'Condition', 'Availability', 'Current Price', 'Brand', 'Size', 'Color', 'Original Price', 'Ship Weight', 'Shipping Cost', 'Google Product Category', 'GTIN', 'Connexity Product ID', 'AGE_GROUP', 'GENDER', 'Coupon Code']
+// })
+// .fromFile('data/utahSkisProducts.csv')
+// .on('json',(jsonObj) => {
+//   // console.log(jsonObj)
+//     // combine csv header row and csv line to a json object
+//     // jsonObj.a ==> 1 or 4
+// })
+// .on('done',(error)=>{
+//     console.log('end')
+// })
+
 // SERVER LISTENING
 var port = process.env.PORT || 5000;
 app.listen(port, function() {
