@@ -240,13 +240,13 @@ module.exports = (event) => {
                             "webview_height_ratio":"tall"
                           },
                           {
-                            "content_type":"text",
+                            "content_type":"postback",
                             "title":"Purchase Tickets",
                             "payload":"PURCHASE"
                           },
                           {
-                            "content_type":"text",
-                            "title":"DONATE",
+                            "content_type":"postback",
+                            "title":"Donate",
                             "payload":"DONATE"
                           }
                         ]
@@ -263,13 +263,13 @@ module.exports = (event) => {
                             "webview_height_ratio":"tall"
                           },
                           {
-                            "content_type":"text",
+                            "type":"postback",
                             "title":"Purchase Tickets",
                             "payload":"PURCHASE"
                           },
                           {
-                            "content_type":"text",
-                            "title":"DONATE",
+                            "type":"postback",
+                            "title":"Donate",
                             "payload":"DONATE"
                           }
                         ]
@@ -286,13 +286,13 @@ module.exports = (event) => {
                             "webview_height_ratio":"tall"
                           },
                           {
-                            "content_type":"text",
+                            "type":"postback",
                             "title":"Purchase Tickets",
                             "payload":"PURCHASE"
                           },
                           {
-                            "content_type":"text",
-                            "title":"DONATE",
+                            "type":"postback",
+                            "title":"Donate",
                             "payload":"DONATE"
                           }
                         ]
@@ -326,13 +326,13 @@ module.exports = (event) => {
                             "webview_height_ratio":"tall"
                           },
                           {
-                            "content_type":"text",
+                            "type":"postback",
                             "title":"Purchase Tickets",
                             "payload":"PURCHASE"
                           },
                           {
-                            "content_type":"text",
-                            "title":"DONATE",
+                            "type":"postback",
+                            "title":"Donate",
                             "payload":"DONATE"
                           }
                         ]
@@ -349,13 +349,13 @@ module.exports = (event) => {
                             "webview_height_ratio":"tall"
                           },
                           {
-                            "content_type":"text",
+                            "type":"postback",
                             "title":"Purchase Tickets",
                             "payload":"PURCHASE"
                           },
                           {
-                            "content_type":"text",
-                            "title":"DONATE",
+                            "type":"postback",
+                            "title":"Donate",
                             "payload":"DONATE"
                           }
                         ]
@@ -372,13 +372,13 @@ module.exports = (event) => {
                             "webview_height_ratio":"tall"
                           },
                           {
-                            "content_type":"text",
+                            "type":"postback",
                             "title":"Purchase Tickets",
                             "payload":"PURCHASE"
                           },
                           {
-                            "content_type":"text",
-                            "title":"DONATE",
+                            "type":"postback",
+                            "title":"Donate",
                             "payload":"DONATE"
                           }
                         ]
@@ -395,13 +395,13 @@ module.exports = (event) => {
                             "webview_height_ratio":"tall"
                           },
                           {
-                            "content_type":"text",
+                            "type":"postback",
                             "title":"Purchase Tickets",
                             "payload":"PURCHASE"
                           },
                           {
-                            "content_type":"text",
-                            "title":"DONATE",
+                            "type":"postback",
+                            "title":"Donate",
                             "payload":"DONATE"
                           }
                         ]
@@ -418,13 +418,13 @@ module.exports = (event) => {
                             "webview_height_ratio":"tall"
                           },
                           {
-                            "content_type":"text",
+                            "type":"postback",
                             "title":"Purchase Tickets",
                             "payload":"PURCHASE"
                           },
                           {
-                            "content_type":"text",
-                            "title":"DONATE",
+                            "type":"postback",
+                            "title":"Donate",
                             "payload":"DONATE"
                           }
                         ]
@@ -441,13 +441,13 @@ module.exports = (event) => {
                             "webview_height_ratio":"tall"
                           },
                           {
-                            "content_type":"text",
+                            "type":"postback",
                             "title":"Purchase Tickets",
                             "payload":"PURCHASE"
                           },
                           {
-                            "content_type":"text",
-                            "title":"DONATE",
+                            "type":"postback",
+                            "title":"Donate",
                             "payload":"DONATE"
                           }
                         ]
@@ -464,13 +464,13 @@ module.exports = (event) => {
                             "webview_height_ratio":"tall"
                           },
                           {
-                            "content_type":"text",
+                            "type":"postback",
                             "title":"Purchase Tickets",
                             "payload":"PURCHASE"
                           },
                           {
-                            "content_type":"text",
-                            "title":"DONATE",
+                            "type":"postback",
+                            "title":"Donate",
                             "payload":"DONATE"
                           }
                         ]
@@ -487,13 +487,13 @@ module.exports = (event) => {
                             "webview_height_ratio":"tall"
                           },
                           {
-                            "content_type":"text",
+                            "type":"postback",
                             "title":"Purchase Tickets",
                             "payload":"PURCHASE"
                           },
                           {
-                            "content_type":"text",
-                            "title":"DONATE",
+                            "type":"postback",
+                            "title":"Donate",
                             "payload":"DONATE"
                           }
                         ]
