@@ -240,12 +240,12 @@ module.exports = (event) => {
                             "webview_height_ratio":"tall"
                           },
                           {
-                            "content_type":"postback",
+                            "type":"postback",
                             "title":"Purchase Tickets",
                             "payload":"PURCHASE"
                           },
                           {
-                            "content_type":"postback",
+                            "type":"postback",
                             "title":"Donate",
                             "payload":"DONATE"
                           }
