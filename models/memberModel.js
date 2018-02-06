@@ -10,7 +10,8 @@ var memberSchema = mongoose.Schema({
   timezone: Number,
   photo: String,
   gender: String,
-  createdDate: Date
+  createdDate: Date,
+  enrolled: Boolean
 })
 memberSchema.virtual('firstName').get(() => {
   return this.fullName.split(' ')[0]
