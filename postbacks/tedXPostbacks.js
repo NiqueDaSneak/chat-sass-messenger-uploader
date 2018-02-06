@@ -117,7 +117,7 @@ module.exports = (event) => {
                   "template_type":"generic",
                   "elements":[
                     {
-                      "title":"...do you want to do a single donation, or are you interested in a corporate sponsorship?",
+                      "title":"Single donation, or are you interested in a corporate sponsorship?",
                       "buttons":[
                         {
                           "type":"postback",
@@ -589,7 +589,7 @@ module.exports = (event) => {
                     "template_type":"generic",
                     "elements":[
                       {
-                        "title":"...do you want to do a single donation, or are you interested in a corporate sponsorship?",
+                        "title":"Single donation, or are you interested in a corporate sponsorship?",
                         "buttons":[
                           {
                             "type":"postback",
