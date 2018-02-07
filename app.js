@@ -52,6 +52,8 @@ app.use('/uncrouter', uncRouter)
 var tedxRouter = require('./router/tedXRouter.js')
 app.use('/tedxrouter', tedxRouter)
 
+var utahSkisRouter = require('./router/utahSkisRouter.js')
+app.use('/utahkisrouter', utahSkisRouter)
 
 app.use('/data', express.static(path.join(__dirname, 'data')))
 
@@ -105,6 +107,10 @@ app.post('/', (req, res) => {
 
         if (event.recipient.id === '534877406890866') {
           return res.redirect(307, '/tedxrouter')
+        }
+
+        if (event.recipient.id === '176271182985693') {
+          return res.redirect(307, '/utahskisrouter')
         }
 
         if (event.message) {
@@ -382,7 +388,9 @@ function sendVideoMessage(recipientId, accessToken, url) {
 // })
 // .fromFile('data/utahSkisProducts.csv')
 // .on('json',(jsonObj) => {
-//   // console.log(jsonObj)
+//   if (jsonObj['Brand'].toLowerCase() === 'dakine') {
+//     console.log(jsonObj)
+//   }
 //     // combine csv header row and csv line to a json object
 //     // jsonObj.a ==> 1 or 4
 // })
