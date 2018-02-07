@@ -59,33 +59,36 @@ module.exports = (event) => {
               // SEND WELCOME MESSAGES, THEN SEND PROMPT TO REQUEST ENROLLMENT
               sendTextMessage(event.sender.id, user.pageAccessToken, 'Welcome to the TEDxCincinnati Experience! Powered by Irrigate Messaging!')
               setTimeout(() => {
-                sendTextMessage(event.sender.id, user.pageAccessToken, 'Here you will receive exclusive content, curated just for you. You can also purchase tickets to the event and browse past talks!')
+                sendTextMessage(event.sender.id, user.pageAccessToken, 'Treat yourself and a friend to tickets for TEDxCincinnati Main Stage on May 12, 2018 at Memorial Hall. We have created a special promo code just for you!')
                 setTimeout(() => {
-                  sendTextMessage(event.sender.id, user.pageAccessToken, 'First, are you interested in becoming a TEDxCincinnati Insider. You will hear everything here first...including lineup announcement, deals, and exclusive content. You will also be entered to win free tickets to the event!')
+                  sendTextMessage(event.sender.id, user.pageAccessToken, "Click the buy tickets now or go to TEDxCincinnati.com and use 'valentine' in the promo code and get $10.00 off a single ticket or bundle. This is our way of saying thank you.  This promo will expire on 2-14-18 at 11:30 pm. Can't wait to see you at Main Stage.")
                   setTimeout(() => {
-                    let messageData = {
-                      "recipient":{
-                        "id": event.sender.id
-                      },
-                      "message":{
-                        "text": "Interested?",
-                        "quick_replies":[
-                          {
-                            "content_type":"text",
-                            "title":"Not Interested",
-                            "payload":"ENROLL_NO"
-                          },
-                          {
-                            "content_type":"text",
-                            "title":"Sure",
-                            "payload":"ENROLL_YES"
-                          }
-                        ]
+                    sendTextMessage(event.sender.id, user.pageAccessToken, 'Question...are you interested in becoming a TEDxCincinnati Insider. You will hear everything here first...including lineup announcement, deals, and exclusive content. You will also be entered to win free tickets to the event!')
+                    setTimeout(() => {
+                      let messageData = {
+                        "recipient":{
+                          "id": event.sender.id
+                        },
+                        "message":{
+                          "text": "Interested?",
+                          "quick_replies":[
+                            {
+                              "content_type":"text",
+                              "title":"Not Interested",
+                              "payload":"ENROLL_NO"
+                            },
+                            {
+                              "content_type":"text",
+                              "title":"Sure",
+                              "payload":"ENROLL_YES"
+                            }
+                          ]
+                        }
                       }
-                    }
-                    callSendAPI(user.pageAccessToken, messageData)
-                  }, 7000)
-                }, 5000)
+                      callSendAPI(user.pageAccessToken, messageData)
+                    }, 7000)
+                  }, 5000)
+                }, 6000)
               }, 2500)
             })
           })
