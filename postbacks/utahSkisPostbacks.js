@@ -601,7 +601,8 @@ module.exports = (event) => {
                     let itemCarosel = []
 
                     for (var i = 0; i <= 10; i++) {
-                      console.log(matchedItems[i])
+                      // console.log(matchedItems[i]['Title'])
+                      console.log(matchedItems[i].Title)
                       // itemCarosel.push(
                       //   {
                       //     "title": matchedItems[i]['Title'],
@@ -619,21 +620,21 @@ module.exports = (event) => {
                       // )
                     }
 
-                    let messageData = {
-                      "recipient":{
-                        "id": event.sender.id
-                      },
-                      "message":{
-                        "attachment":{
-                          "type":"template",
-                          "payload":{
-                            "template_type":"generic",
-                            "elements": itemCarosel
-                          }
-                        }
-                      }
-                    }
-                    callSendAPI(user.pageAccessToken, messageData)
+                    // let messageData = {
+                    //   "recipient":{
+                    //     "id": event.sender.id
+                    //   },
+                    //   "message":{
+                    //     "attachment":{
+                    //       "type":"template",
+                    //       "payload":{
+                    //         "template_type":"generic",
+                    //         "elements": itemCarosel
+                    //       }
+                    //     }
+                    //   }
+                    // }
+                    // callSendAPI(user.pageAccessToken, messageData)
               })
             }
 
