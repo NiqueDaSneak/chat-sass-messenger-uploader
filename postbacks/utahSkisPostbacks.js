@@ -597,7 +597,9 @@ module.exports = (event) => {
                     let itemCarosel = []
 
                     for (var i = 0; i < matchedItems[i].length; i++) {
-                      if (itemCarosel.length < 10) {
+                      if (itemCarosel.length >= 10) {
+                        console.log('LIMIT REACHED')
+                      } else {
                         itemCarosel.push(
                           {
                             "title": matchedItems[i].Title,
@@ -678,8 +680,10 @@ module.exports = (event) => {
 
                     let itemCarosel = []
 
-                    for (var i = 0; matchedItems[i].length; i++) {
-                      if (itemCarosel.length < 10) {
+                    for (var i = 0; i < matchedItems[i].length; i++) {
+                      if (itemCarosel.length >= 10) {
+                        console.log('LIMIT REACHED')
+                      } else {
                         itemCarosel.push(
                           {
                             "title": matchedItems[i].Title,
