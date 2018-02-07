@@ -552,13 +552,48 @@ module.exports = (event) => {
       }
 
       if (event.postback.payload.split('_')[0] === 'SHOWPRODUCTS') {
+        const csv = require('csvtojson')
+
         var category = event.postback.payload.split('_')[1]
         var gender = event.postback.payload.split('_')[2]
         var searchParams
           getUser().then((user) => {
-
             if (category === 'SKIS') {
               searchParams = 'skis'
+
+              if (gender === 'MENS') {
+                gender = 'male'
+              } else if (gender === 'WOMENS') {
+                gender = 'female'
+              } else {
+                gender = 'kids'
+              }
+
+              csv({
+                noheader: true,
+                delimiter: 'auto',
+                headers: ['Unique ID', 'Title', 'Description', 'Category', 'Product URL', 'Image URL', 'Condition', 'Availability', 'Current Price', 'Brand', 'Size', 'Color', 'Original Price', 'Ship Weight', 'Shipping Cost', 'Google Product Category', 'GTIN', 'Connexity Product ID', 'AGE_GROUP', 'GENDER', 'Coupon Code']
+              })
+              .fromFile('data/utahSkisProducts.csv')
+              .on('json',(jsonObj) => {
+                if (jsonObj['Category'].toLowerCase() === searchParams) {
+                  if (gender === 'kids') {
+                    if (jsonObj['AGE_GROUP'].toLowerCase() === gender) {
+                      console.log(jsonObj)
+                    }
+                  } else {
+                    if (jsonObj['GENDER'].toLowerCase() === gender) {
+                      console.log(jsonObj)
+                    }
+                  }
+
+                }
+                  // combine csv header row and csv line to a json object
+                  // jsonObj.a ==> 1 or 4
+              })
+              .on('done',(error)=>{
+                  console.log('end')
+              })
             }
 
             // SKIS
@@ -586,23 +621,7 @@ module.exports = (event) => {
             // BAGS
             // AVALANCHE
             // AUDIO
-            const csv = require('csvtojson')
-            csv({
-              noheader: true,
-              delimiter: 'auto',
-              headers: ['Unique ID', 'Title', 'Description', 'Category', 'Product URL', 'Image URL', 'Condition', 'Availability', 'Current Price', 'Brand', 'Size', 'Color', 'Original Price', 'Ship Weight', 'Shipping Cost', 'Google Product Category', 'GTIN', 'Connexity Product ID', 'AGE_GROUP', 'GENDER', 'Coupon Code']
-            })
-            .fromFile('data/utahSkisProducts.csv')
-            .on('json',(jsonObj) => {
-              if (jsonObj['Category'].toLowerCase() === searchParams) {
-                console.log(jsonObj)
-              }
-                // combine csv header row and csv line to a json object
-                // jsonObj.a ==> 1 or 4
-            })
-            .on('done',(error)=>{
-                console.log('end')
-            })
+
 
             // find list of products in category
             // check length
