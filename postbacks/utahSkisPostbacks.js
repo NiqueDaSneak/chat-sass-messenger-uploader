@@ -580,12 +580,12 @@ module.exports = (event) => {
                 if (jsonObj['Category'].toLowerCase() === searchParams) {
                   if (gender === 'kids') {
                     if (jsonObj['AGE_GROUP'].toLowerCase() === gender) {
-                      console.log(jsonObj)
+                      // console.log(jsonObj)
                       matchedItems.push(jsonObj)
                     }
                   } else {
                     if (jsonObj['GENDER'].toLowerCase() === gender) {
-                      console.log(jsonObj)
+                      // console.log(jsonObj)
                       matchedItems.push(jsonObj)
                     }
                   }
@@ -594,12 +594,46 @@ module.exports = (event) => {
                   // combine csv header row and csv line to a json object
                   // jsonObj.a ==> 1 or 4
               })
-              .on('done',(error)=>{
+              .on('done',(error) => {
                   // console.log('end')
-                  console.log(matchedItems)
-                  console.log(matchedItems.length)
-              })
+                  // console.log(matchedItems)
+                  // console.log(matchedItems.length)
+                    let itemCarosel = []
 
+                    for (var i = 0; i <= 10; i++) {
+                      itemCarosel.push(
+                        {
+                          "title": matchedItems[i]['Title'],
+                          "subtitle": matchedItems[i]['Description'],
+                          "image_url": matchedItems[i]['Image URL'],
+                          "buttons":[
+                            {
+                              "type":"web_url",
+                              "url": matchedItems[i]['Product URL'],
+                              "title":"Purchase",
+                              "webview_height_ratio":"tall"
+                            }
+                          ]
+                        }
+                      )
+                    }
+
+                    let messageData = {
+                      "recipient":{
+                        "id": event.sender.id
+                      },
+                      "message":{
+                        "attachment":{
+                          "type":"template",
+                          "payload":{
+                            "template_type":"generic",
+                            "elements": itemCarosel
+                          }
+                        }
+                      }
+                    }
+                    callSendAPI(user.pageAccessToken, messageData)
+              })
             }
 
             // SKIS
