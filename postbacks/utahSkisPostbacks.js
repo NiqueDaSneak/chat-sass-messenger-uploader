@@ -259,7 +259,7 @@ module.exports = (event) => {
                   ]
                 },
                 {
-                  "title":"Snowboard Bindings",
+                  "title":"Snowboard Boots",
                   "buttons":[
                     {
                       "type":"postback",
@@ -300,16 +300,6 @@ module.exports = (event) => {
                       "type":"postback",
                       "title":"Shop",
                       "payload":"SHOWPRODUCTS_BIBSANDSUSPENDERS_" + gender
-                    }
-                  ]
-                },
-                {
-                  "title":"Snowboard Bindings",
-                  "buttons":[
-                    {
-                      "type":"postback",
-                      "title":"Shop",
-                      "payload":"SHOWPRODUCTS_SNOWBOARDBOOTS_" + gender
                     }
                   ]
                 }
@@ -435,32 +425,22 @@ module.exports = (event) => {
                   ]
                 },
                 {
-                  "title":"Thermals",
+                  "title":"Avalanche Gear",
                   "buttons":[
                     {
                       "type":"postback",
                       "title":"Shop",
-                      "payload":"SHOWPRODUCTS_AVALANCE_" + gender
+                      "payload":"SHOWPRODUCTS_AVALANCHE_" + gender
                     }
                   ]
                 },
                 {
-                  "title":"T-Shirts",
+                  "title":"Audio",
                   "buttons":[
                     {
                       "type":"postback",
                       "title":"Shop",
-                      "payload":"SHOWPRODUCTS_TSHIRTS_" + gender
-                    }
-                  ]
-                },
-                {
-                  "title":"Socks",
-                  "buttons":[
-                    {
-                      "type":"postback",
-                      "title":"Shop",
-                      "payload":"SHOWPRODUCTS_SOCKS_" + gender
+                      "payload":"SHOWPRODUCTS_AUDIO_" + gender
                     }
                   ]
                 }
@@ -492,7 +472,7 @@ module.exports = (event) => {
               // OUTER
                 // JACKETS, SKI PANTS, BIBS
               // CLOTH
-                // FLEECE, HOODIES, SWEATERS, TURUTLENECKS, THERMALS, TSHIRTS, SHOCKS
+                // FLEECE, HOODIES, SWEATERS, TURUTLENECKS, THERMALS, TSHIRTS, SOCKS
               // ACCESS
                 // GLOVES, GOGGLES, HELMETS, BAGS, AVALANCE, AUDIO
           })
@@ -574,7 +554,56 @@ module.exports = (event) => {
       if (event.postback.payload.split('_')[0] === 'SHOWPRODUCTS') {
         var category = event.postback.payload.split('_')[1]
         var gender = event.postback.payload.split('_')[2]
+        var searchParams
           getUser().then((user) => {
+
+            if (category === 'SKIS') {
+              searchParams = 'skis'
+            }
+
+            // SKIS
+            // DEMOSKIS
+            // SKIBOOTS
+            // SKIBINDINGS
+            // SKIPOLES
+            // SNOWBOARDS
+            // DEMOSNOWBOARDS
+            // SNOWBOARDBINDINGS
+            // SNOWBOARDBOOTS
+            // SKIJACKETS
+            // SKIPANTS
+            // BIBSANDSUSPENDERS
+            // FLEECE
+            // HOODIES
+            // SWEATERS
+            // TURTLENECKS
+            // THERMALS
+            // TSHIRTS
+            // SOCKS
+            // GLOVES
+            // GOGGLES
+            // HELMETS
+            // BAGS
+            // AVALANCHE
+            // AUDIO
+            const csv = require('csvtojson')
+            csv({
+              noheader: true,
+              delimiter: 'auto',
+              headers: ['Unique ID', 'Title', 'Description', 'Category', 'Product URL', 'Image URL', 'Condition', 'Availability', 'Current Price', 'Brand', 'Size', 'Color', 'Original Price', 'Ship Weight', 'Shipping Cost', 'Google Product Category', 'GTIN', 'Connexity Product ID', 'AGE_GROUP', 'GENDER', 'Coupon Code']
+            })
+            .fromFile('data/utahSkisProducts.csv')
+            .on('json',(jsonObj) => {
+              if (jsonObj['Category'].toLowerCase() === searchParams) {
+                console.log(jsonObj)
+              }
+                // combine csv header row and csv line to a json object
+                // jsonObj.a ==> 1 or 4
+            })
+            .on('done',(error)=>{
+                console.log('end')
+            })
+
             // find list of products in category
             // check length
               // if under 10, then make carosel
