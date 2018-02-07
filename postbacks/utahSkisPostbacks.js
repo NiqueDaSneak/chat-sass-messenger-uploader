@@ -580,12 +580,12 @@ module.exports = (event) => {
                 if (jsonObj['Category'].toLowerCase() === searchParams) {
                   if (gender === 'kids') {
                     if (jsonObj['AGE_GROUP'].toLowerCase() === gender) {
-                      // console.log(jsonObj)
+                      console.log(jsonObj)
                       matchedItems.push(jsonObj)
                     }
                   } else {
                     if (jsonObj['GENDER'].toLowerCase() === gender) {
-                      // console.log(jsonObj)
+                      console.log(jsonObj)
                       matchedItems.push(jsonObj)
                     }
                   }
@@ -596,10 +596,10 @@ module.exports = (event) => {
               })
               .on('done',(error)=>{
                   // console.log('end')
+                  console.log(matchedItems)
+                  console.log(matchedItems.length)
               })
 
-              console.log(matchedItems)
-              console.log(matchedItems.length)
             }
 
             // SKIS
