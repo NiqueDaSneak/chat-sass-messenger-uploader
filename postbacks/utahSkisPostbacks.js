@@ -602,39 +602,39 @@ module.exports = (event) => {
 
                     for (var i = 0; i <= matchedItems.length; i++) {
                       // console.log(matchedItems[i]['Title'])
-                      // console.log(matchedItems[i].Title)
-                      itemCarosel.push(
-                        {
-                          "title": matchedItems[i].Title,
-                          "subtitle": matchedItems[i].Description,
-                          "image_url": matchedItems[i]['Image URL'],
-                          "buttons":[
-                            {
-                              "type":"web_url",
-                              "url": matchedItems[i]['Product URL'],
-                              "title":"Purchase",
-                              "webview_height_ratio":"tall"
-                            }
-                          ]
-                        }
-                      )
+                      console.log(matchedItems[i].Title)
+                      // itemCarosel.push(
+                      //   {
+                      //     "title": matchedItems[i].Title,
+                      //     "subtitle": matchedItems[i].Description,
+                      //     "image_url": matchedItems[i]['Image URL'],
+                      //     "buttons":[
+                      //       {
+                      //         "type":"web_url",
+                      //         "url": matchedItems[i]['Product URL'],
+                      //         "title":"Purchase",
+                      //         "webview_height_ratio":"tall"
+                      //       }
+                      //     ]
+                      //   }
+                      // )
                     }
 
-                    let messageData = {
-                      "recipient":{
-                        "id": event.sender.id
-                      },
-                      "message":{
-                        "attachment":{
-                          "type":"template",
-                          "payload":{
-                            "template_type":"generic",
-                            "elements": itemCarosel
-                          }
-                        }
-                      }
-                    }
-                    callSendAPI(user.pageAccessToken, messageData)
+                    // let messageData = {
+                    //   "recipient":{
+                    //     "id": event.sender.id
+                    //   },
+                    //   "message":{
+                    //     "attachment":{
+                    //       "type":"template",
+                    //       "payload":{
+                    //         "template_type":"generic",
+                    //         "elements": itemCarosel
+                    //       }
+                    //     }
+                    //   }
+                    // }
+                    // callSendAPI(user.pageAccessToken, messageData)
               })
             }
 
