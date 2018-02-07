@@ -596,8 +596,8 @@ module.exports = (event) => {
 
     if (event.message) {
       if (event.message.quick_reply) {
-        if (event.message.quick_reply.payload.split[0] === 'ENROLL') {
-          if (event.message.quick_reply.payload.split[1] === 'YES') {
+        if (event.message.quick_reply.payload.split('_')[0] === 'ENROLL') {
+          if (event.message.quick_reply.payload.split('_')[1] === 'YES') {
             getUser().then((user) => {
               // send affirmative gif
             })
