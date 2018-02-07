@@ -596,28 +596,30 @@ module.exports = (event) => {
 
                     let itemCarosel = []
 
-                    for (var i = 0; i < 10; i++) {
-                      itemCarosel.push(
-                        {
-                          "title": matchedItems[i].Title,
-                          "subtitle": '$' + Math.round(matchedItems[i]['Current Price'] * 100)/100,
-                          "image_url": matchedItems[i]['Image URL'],
-                          "buttons":[
-                            {
-                              "type":"web_url",
-                              "url": matchedItems[i]['Product URL'],
-                              "title":"Purchase",
-                              "webview_height_ratio":"tall"
-                            },
-                            {
-                              "type":"web_url",
-                              "url": matchedItems[i]['Product URL'],
-                              "title":"View Details",
-                              "webview_height_ratio":"tall"
-                            }
-                          ]
-                        }
-                      )
+                    for (var i = 0; i < matchedItems[i].length; i++) {
+                      if (itemCarosel.length < 10) {
+                        itemCarosel.push(
+                          {
+                            "title": matchedItems[i].Title,
+                            "subtitle": '$' + Math.round(matchedItems[i]['Current Price'] * 100)/100,
+                            "image_url": matchedItems[i]['Image URL'],
+                            "buttons":[
+                              {
+                                "type":"web_url",
+                                "url": matchedItems[i]['Product URL'],
+                                "title":"Purchase",
+                                "webview_height_ratio":"tall"
+                              },
+                              {
+                                "type":"web_url",
+                                "url": matchedItems[i]['Product URL'],
+                                "title":"View Details",
+                                "webview_height_ratio":"tall"
+                              }
+                            ]
+                          }
+                        )
+                      }
                     }
 
                     let messageData = {
@@ -676,28 +678,31 @@ module.exports = (event) => {
 
                     let itemCarosel = []
 
-                    for (var i = 0; i < 10; i++) {
-                      itemCarosel.push(
-                        {
-                          "title": matchedItems[i].Title,
-                          "subtitle": '$' + Math.round(matchedItems[i]['Current Price'] * 100)/100,
-                          "image_url": matchedItems[i]['Image URL'],
-                          "buttons":[
-                            {
-                              "type":"web_url",
-                              "url": matchedItems[i]['Product URL'],
-                              "title":"Purchase",
-                              "webview_height_ratio":"tall"
-                            },
-                            {
-                              "type":"web_url",
-                              "url": matchedItems[i]['Product URL'],
-                              "title":"View Details",
-                              "webview_height_ratio":"tall"
-                            }
-                          ]
-                        }
-                      )
+                    for (var i = 0; matchedItems[i].length; i++) {
+                      if (itemCarosel.length < 10) {
+                        itemCarosel.push(
+                          {
+                            "title": matchedItems[i].Title,
+                            "subtitle": '$' + Math.round(matchedItems[i]['Current Price'] * 100)/100,
+                            "image_url": matchedItems[i]['Image URL'],
+                            "buttons":[
+                              {
+                                "type":"web_url",
+                                "url": matchedItems[i]['Product URL'],
+                                "title":"Purchase",
+                                "webview_height_ratio":"tall"
+                              },
+                              {
+                                "type":"web_url",
+                                "url": matchedItems[i]['Product URL'],
+                                "title":"View Details",
+                                "webview_height_ratio":"tall"
+                              }
+                            ]
+                          }
+                        )
+                      }
+
                     }
 
                     let messageData = {
