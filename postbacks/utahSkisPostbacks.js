@@ -597,48 +597,68 @@ module.exports = (event) => {
                     let itemCarosel = []
 
                     for (var i = 0; i < matchedItems[i].length; i++) {
-                      if (itemCarosel.length >= 10) {
-                        console.log('LIMIT REACHED')
-                      } else {
-                        itemCarosel.push(
-                          {
-                            "title": matchedItems[i].Title,
-                            "subtitle": '$' + Math.round(matchedItems[i]['Current Price'] * 100)/100,
-                            "image_url": matchedItems[i]['Image URL'],
-                            "buttons":[
-                              {
-                                "type":"web_url",
-                                "url": matchedItems[i]['Product URL'],
-                                "title":"Purchase",
-                                "webview_height_ratio":"tall"
-                              },
-                              {
-                                "type":"web_url",
-                                "url": matchedItems[i]['Product URL'],
-                                "title":"View Details",
-                                "webview_height_ratio":"tall"
-                              }
-                            ]
-                          }
-                        )
-                      }
+                      itemCarosel.push(
+                        {
+                          "title": matchedItems[i].Title,
+                          "subtitle": '$' + Math.round(matchedItems[i]['Current Price'] * 100)/100,
+                          "image_url": matchedItems[i]['Image URL'],
+                          "buttons":[
+                            {
+                              "type":"web_url",
+                              "url": matchedItems[i]['Product URL'],
+                              "title":"Purchase",
+                              "webview_height_ratio":"tall"
+                            },
+                            {
+                              "type":"web_url",
+                              "url": matchedItems[i]['Product URL'],
+                              "title":"View Details",
+                              "webview_height_ratio":"tall"
+                            }
+                          ]
+                        }
+                      )
                     }
 
-                    let messageData = {
-                      "recipient":{
-                        "id": event.sender.id
-                      },
-                      "message":{
-                        "attachment":{
-                          "type":"template",
-                          "payload":{
-                            "template_type":"generic",
-                            "elements": itemCarosel
+                    if (itemCarosel > 10) {
+                      let newCarosel = []
+                      for (var i = 0; i < 10; i++) {
+                        newCarosel.push(itemCarosel[i])
+                      }
+
+                      let messageData = {
+                        "recipient":{
+                          "id": event.sender.id
+                        },
+                        "message":{
+                          "attachment":{
+                            "type":"template",
+                            "payload":{
+                              "template_type":"generic",
+                              "elements": itemCarosel
+                            }
                           }
                         }
                       }
+                      callSendAPI(user.pageAccessToken, messageData)
+                    } else {
+                      let messageData = {
+                        "recipient":{
+                          "id": event.sender.id
+                        },
+                        "message":{
+                          "attachment":{
+                            "type":"template",
+                            "payload":{
+                              "template_type":"generic",
+                              "elements": itemCarosel
+                            }
+                          }
+                        }
+                      }
+                      callSendAPI(user.pageAccessToken, messageData)
                     }
-                    callSendAPI(user.pageAccessToken, messageData)
+
               })
             }
 
@@ -681,9 +701,6 @@ module.exports = (event) => {
                     let itemCarosel = []
 
                     for (var i = 0; i < matchedItems[i].length; i++) {
-                      if (itemCarosel.length >= 10) {
-                        console.log('LIMIT REACHED')
-                      } else {
                         itemCarosel.push(
                           {
                             "title": matchedItems[i].Title,
@@ -705,25 +722,46 @@ module.exports = (event) => {
                             ]
                           }
                         )
-                      }
-
                     }
 
-                    let messageData = {
-                      "recipient":{
-                        "id": event.sender.id
-                      },
-                      "message":{
-                        "attachment":{
-                          "type":"template",
-                          "payload":{
-                            "template_type":"generic",
-                            "elements": itemCarosel
+                    if (itemCarosel > 10) {
+                      let newCarosel = []
+                      for (var i = 0; i < 10; i++) {
+                        newCarosel.push(itemCarosel[i])
+                      }
+
+                      let messageData = {
+                        "recipient":{
+                          "id": event.sender.id
+                        },
+                        "message":{
+                          "attachment":{
+                            "type":"template",
+                            "payload":{
+                              "template_type":"generic",
+                              "elements": itemCarosel
+                            }
                           }
                         }
                       }
+                      callSendAPI(user.pageAccessToken, messageData)
+                    } else {
+                      let messageData = {
+                        "recipient":{
+                          "id": event.sender.id
+                        },
+                        "message":{
+                          "attachment":{
+                            "type":"template",
+                            "payload":{
+                              "template_type":"generic",
+                              "elements": itemCarosel
+                            }
+                          }
+                        }
+                      }
+                      callSendAPI(user.pageAccessToken, messageData)
                     }
-                    callSendAPI(user.pageAccessToken, messageData)
               })
             }
 
