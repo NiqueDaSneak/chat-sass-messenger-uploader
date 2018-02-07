@@ -595,9 +595,8 @@ module.exports = (event) => {
               .on('done',(error) => {
 
                     var itemCarosel = []
-                    console.log('matchedItems: ' + matchedItems)
 
-                    for (var i = 0; i < matchedItems[i].length; i++) {
+                    for (var i = 0; i < matchedItems.length; i++) {
                       itemCarosel.push(
                         {
                           "title": matchedItems[i].Title,
@@ -620,8 +619,6 @@ module.exports = (event) => {
                         }
                       )
                     }
-
-                    console.log('itemCarosel: ' + itemCarosel)
 
                     if (itemCarosel > 10) {
                       let newCarosel = []
@@ -702,7 +699,7 @@ module.exports = (event) => {
 
                     var itemCarosel = []
 
-                    for (var i = 0; i < matchedItems[i].length; i++) {
+                    for (var i = 0; i < matchedItems.length; i++) {
                         itemCarosel.push(
                           {
                             "title": matchedItems[i].Title,
