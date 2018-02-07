@@ -53,7 +53,7 @@ var tedxRouter = require('./router/tedXRouter.js')
 app.use('/tedxrouter', tedxRouter)
 
 var utahSkisRouter = require('./router/utahSkisRouter.js')
-app.use('/utahkisrouter', utahSkisRouter)
+app.use('/utahskisrouter', utahSkisRouter)
 
 app.use('/data', express.static(path.join(__dirname, 'data')))
 
