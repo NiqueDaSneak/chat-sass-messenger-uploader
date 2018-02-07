@@ -200,7 +200,7 @@ module.exports = (event) => {
                       "buttons":[
                         {
                           "type":"web_url",
-                          "url": 'https://google.com',
+                          "url": 'https://tedxcincinnati.eventbrite.com?discount=valentine',
                           "title":"Pay Now",
                           "webview_height_ratio":"tall"
                         }
@@ -672,7 +672,7 @@ module.exports = (event) => {
                         "buttons":[
                           {
                             "type":"web_url",
-                            "url": 'https://google.com',
+                            "url": 'https://tedxcincinnati.eventbrite.com?discount=valentine',
                             "title":"Pay Now",
                             "webview_height_ratio":"tall"
                           }
