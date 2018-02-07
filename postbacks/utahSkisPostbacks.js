@@ -595,6 +595,7 @@ module.exports = (event) => {
               .on('done',(error) => {
 
                     var itemCarosel = []
+                    console.log('matchedItems: ' + matchedItems)
 
                     for (var i = 0; i < matchedItems[i].length; i++) {
                       itemCarosel.push(
