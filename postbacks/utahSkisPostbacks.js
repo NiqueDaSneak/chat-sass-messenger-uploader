@@ -600,7 +600,7 @@ module.exports = (event) => {
                   // console.log(matchedItems.length)
                     let itemCarosel = []
 
-                    for (var i = 0; i <= 10; i++) {
+                    for (var i = 0; i <= matchedItems.length; i++) {
                       // console.log(matchedItems[i]['Title'])
                       // console.log(matchedItems[i].Title)
                       itemCarosel.push(
