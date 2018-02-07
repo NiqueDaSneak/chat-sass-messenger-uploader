@@ -594,7 +594,7 @@ module.exports = (event) => {
               })
               .on('done',(error) => {
 
-                    let itemCarosel = []
+                    var itemCarosel = []
 
                     for (var i = 0; i < matchedItems[i].length; i++) {
                       itemCarosel.push(
@@ -620,6 +620,8 @@ module.exports = (event) => {
                       )
                     }
 
+                    console.log('itemCarosel: ' + itemCarosel)
+
                     if (itemCarosel > 10) {
                       let newCarosel = []
                       for (var i = 0; i < 10; i++) {
@@ -635,7 +637,7 @@ module.exports = (event) => {
                             "type":"template",
                             "payload":{
                               "template_type":"generic",
-                              "elements": itemCarosel
+                              "elements": newCarosel
                             }
                           }
                         }
@@ -658,7 +660,6 @@ module.exports = (event) => {
                       }
                       callSendAPI(user.pageAccessToken, messageData)
                     }
-
               })
             }
 
@@ -698,7 +699,7 @@ module.exports = (event) => {
               })
               .on('done',(error) => {
 
-                    let itemCarosel = []
+                    var itemCarosel = []
 
                     for (var i = 0; i < matchedItems[i].length; i++) {
                         itemCarosel.push(
