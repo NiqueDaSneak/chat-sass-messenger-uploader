@@ -98,7 +98,7 @@ module.exports = (event) => {
     if (event.postback) {
       if (event.postback.payload === 'GET_STARTED_PAYLOAD') {
         getUser().then((user) => {
-
+          findMember(user)
         })
       }
 
