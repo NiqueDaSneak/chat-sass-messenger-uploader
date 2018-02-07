@@ -606,7 +606,7 @@ module.exports = (event) => {
                       itemCarosel.push(
                         {
                           "title": matchedItems[i].Title,
-                          "subtitle": matchedItems[i]['Current Price'],
+                          "subtitle": '$' + matchedItems[i]['Current Price'].toFixed(2),
                           "image_url": matchedItems[i]['Image URL'],
                           "buttons":[
                             {
