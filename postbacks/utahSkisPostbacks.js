@@ -602,17 +602,23 @@ module.exports = (event) => {
 
                     for (var i = 0; i < 10; i++) {
                       // console.log(matchedItems[i]['Title'])
-                      console.log(matchedItems[i].Title)
+                      // console.log(matchedItems[i].Title)
                       itemCarosel.push(
                         {
                           "title": matchedItems[i].Title,
-                          "subtitle": matchedItems[i].Description,
+                          "subtitle": matchedItems[i]['Current Price'],
                           "image_url": matchedItems[i]['Image URL'],
                           "buttons":[
                             {
                               "type":"web_url",
                               "url": matchedItems[i]['Product URL'],
                               "title":"Purchase",
+                              "webview_height_ratio":"tall"
+                            },
+                            {
+                              "type":"web_url",
+                              "url": matchedItems[i]['Product URL'],
+                              "title":"View Details",
                               "webview_height_ratio":"tall"
                             }
                           ]
