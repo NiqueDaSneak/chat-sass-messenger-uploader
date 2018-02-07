@@ -601,21 +601,22 @@ module.exports = (event) => {
                     let itemCarosel = []
 
                     for (var i = 0; i <= 10; i++) {
-                      itemCarosel.push(
-                        {
-                          "title": matchedItems[i]['Title'],
-                          "subtitle": matchedItems[i]['Description'],
-                          "image_url": matchedItems[i]['Image URL'],
-                          "buttons":[
-                            {
-                              "type":"web_url",
-                              "url": matchedItems[i]['Product URL'],
-                              "title":"Purchase",
-                              "webview_height_ratio":"tall"
-                            }
-                          ]
-                        }
-                      )
+                      console.log(matchedItems[i])
+                      // itemCarosel.push(
+                      //   {
+                      //     "title": matchedItems[i]['Title'],
+                      //     "subtitle": matchedItems[i]['Description'],
+                      //     "image_url": matchedItems[i]['Image URL'],
+                      //     "buttons":[
+                      //       {
+                      //         "type":"web_url",
+                      //         "url": matchedItems[i]['Product URL'],
+                      //         "title":"Purchase",
+                      //         "webview_height_ratio":"tall"
+                      //       }
+                      //     ]
+                      //   }
+                      // )
                     }
 
                     let messageData = {
