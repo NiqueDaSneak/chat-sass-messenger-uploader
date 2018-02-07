@@ -656,7 +656,7 @@ module.exports = (event) => {
               })
               .fromFile('data/utahSkisProducts.csv')
               .on('json',(jsonObj) => {
-                console.log(jsonObj)
+                // console.log(jsonObj)
                 if (jsonObj['Category'].toLowerCase() === searchParams) {
                   if (gender === 'kids') {
                     if (jsonObj['AGE_GROUP'].toLowerCase() === gender) {
