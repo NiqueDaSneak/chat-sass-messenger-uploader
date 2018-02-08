@@ -289,41 +289,77 @@ module.exports = (event) => {
               "id": event.sender.id
             },
             "message":{
-              "attachment":{
-                "type":"template",
-                "payload":{
-                  "template_type":"generic",
-                  "elements":[
-                    {
-                      "title":"Single donation, or are you interested in a corporate sponsorship?",
-                      "buttons":[
-                        {
-                          "type":"postback",
-                          "title":"Single Donation",
-                          "payload":"SINGLEDONATE"
-                        },
-                        // {
-                        //   "type":"web_url",
-                        //   "url": 'https://google.com',
-                        //   "title":"Single Donation",
-                        //   "webview_height_ratio":"tall"
-                        // },
-                        {
-                          "type":"web_url",
-                          "url": 'https://google.com',
-                          "title":"Sponsorship",
-                          "webview_height_ratio":"tall"
-                        }
-                      ]
-                    }
-                  ]
+              "text": "How many tickets do you want to donate?",
+              "quick_replies":[
+                {
+                  "content_type":"text",
+                  "title":"1: $25",
+                  "payload":"DONATETIX_1"
+                },
+                {
+                  "content_type":"text",
+                  "title":"2: $50",
+                  "payload":"DONATETIX_2"
+                },
+                {
+                  "content_type":"text",
+                  "title":"4: $100",
+                  "payload":"DONATETIX_3"
                 }
-              }
+              ]
             }
           }
           callSendAPI(user.pageAccessToken, messageData)
         })
       }
+
+      if (event.postback.payload.split('_')[0] === 'DONATETIX') {
+        var button
+        if (event.postback.payload.split('_')[1] === '1') {
+          button = {
+            "type":"web_url",
+            "url": '',
+            "title":"Send Donation",
+            "webview_height_ratio":"tall"
+          }
+        } else if (event.postback.payload.split('_')[1] === '2') {
+          button = {
+            "type":"web_url",
+            "url": '',
+            "title":"Send Donation",
+            "webview_height_ratio":"tall"
+          }
+        } else {
+          button = {
+            "type":"web_url",
+            "url": '',
+            "title":"Send Donation",
+            "webview_height_ratio":"tall"
+          }
+        }
+        let messageData = {
+          "recipient":{
+            "id": event.sender.id
+          },
+          "message":{
+            "attachment":{
+              "type":"template",
+              "payload":{
+                "template_type":"generic",
+                "elements":[
+                  {
+                    "title":"Tap below to send your donation:",
+                    "buttons":[button]
+                  }
+                ]
+              }
+            }
+          }
+        }
+        callSendAPI(user.pageAccessToken, messageData)
+
+      }
+
 
       if (event.postback.payload === 'TALKS') {
         getUser().then((user) => {
@@ -379,7 +415,7 @@ module.exports = (event) => {
                         {
                           "type":"web_url",
                           "url": 'https://tedxcincinnati.eventbrite.com',
-                          "title":"Pay Now",
+                          "title":"Buy Now",
                           "webview_height_ratio":"tall"
                         }
                       ]
@@ -757,49 +793,6 @@ module.exports = (event) => {
           })
         }
 
-        if (event.message.quick_reply.payload === 'DONATE') {
-          getUser().then((user) => {
-            let messageData = {
-              "recipient":{
-                "id": event.sender.id
-              },
-              "message":{
-                "attachment":{
-                  "type":"template",
-                  "payload":{
-                    "template_type":"generic",
-                    "elements":[
-                      {
-                        "title":"Single donation, or are you interested in a corporate sponsorship?",
-                        "buttons":[
-                          {
-                            "type":"postback",
-                            "title":"Single Donation",
-                            "payload":"SINGLEDONATE"
-                          },
-                          // {
-                          //   "type":"web_url",
-                          //   "url": 'https://google.com',
-                          //   "title":"Single Donation",
-                          //   "webview_height_ratio":"tall"
-                          // },
-                          {
-                            "type":"web_url",
-                            "url": 'https://google.com',
-                            "title":"Sponsorship",
-                            "webview_height_ratio":"tall"
-                          }
-                        ]
-                      }
-                    ]
-                  }
-                }
-              }
-            }
-            callSendAPI(user.pageAccessToken, messageData)
-          })
-        }
-
         if (event.message.quick_reply.payload === 'TALKS') {
           getUser().then((user) => {
             let messageData = {
@@ -835,39 +828,6 @@ module.exports = (event) => {
             callSendAPI(user.pageAccessToken, messageData)
           })
         }
-
-        if (event.message.quick_reply.payload === 'PURCHASE') {
-          getUser().then((user) => {
-            let messageData = {
-              "recipient":{
-                "id": event.sender.id
-              },
-              "message":{
-                "attachment":{
-                  "type":"template",
-                  "payload":{
-                    "template_type":"generic",
-                    "elements":[
-                      {
-                        "title":"Tap below to purchase your tickets on Eventbrite!",
-                        "buttons":[
-                          {
-                            "type":"web_url",
-                            "url": 'https://tedxcincinnati.eventbrite.com',
-                            "title":"Pay Now",
-                            "webview_height_ratio":"tall"
-                          }
-                        ]
-                      }
-                    ]
-                  }
-                }
-              }
-            }
-            callSendAPI(user.pageAccessToken, messageData)
-          })
-        }
-
 
       }
       // else {
