@@ -32,7 +32,7 @@ tedXRouter.post('/', (req, res, next) => {
   } else {
     // console.log(req.body)
     // var stripe = require("stripe")("sk_live_vCVX2baHRaQSbnF1Y5DMcQiN")
-    var stripe = require("stripe")("pk_test_RcrJKqemWFARPg2zNFfPSZXj")
+    var stripe = require("stripe")("sk_test_8Df2wXol56EATQAeBpYwInGZ")
 
     console.log('body: ' + JSON.stringify(req.body))
     // console.log('cost: ' + req.body.cost)
@@ -49,7 +49,7 @@ tedXRouter.post('/', (req, res, next) => {
     stripe.charges.create({
       amount: req.body.cost,
       currency: "usd",
-      source: req.body.stripe.id, // obtained with Stripe.js
+      source: req.body["stripe[id]"], // obtained with Stripe.js
       description: "Donation to TEDxCincinnati"
     }, function(err, charge) {
       // asynchronously called
