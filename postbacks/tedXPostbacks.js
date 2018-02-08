@@ -696,7 +696,7 @@ module.exports = (event) => {
               "title":"Send Donation",
               "webview_height_ratio":"tall"
             }
-          } else if (event.postback.payload.split('_')[1] === '2') {
+          } else if (event.message.quick_reply.payload.split('_')[1] === '2') {
             button = {
               "type":"web_url",
               "url": '',
