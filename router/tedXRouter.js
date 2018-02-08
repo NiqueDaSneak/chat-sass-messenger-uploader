@@ -30,7 +30,29 @@ tedXRouter.post('/', (req, res, next) => {
       })
     })
   } else {
-    console.log(req.body)
+    // console.log(req.body)
+    var stripe = require("stripe")("sk_live_vCVX2baHRaQSbnF1Y5DMcQiN")
+
+    stripe.customers.create({
+      email: data.stripeToken.email,
+      source: data.stripeToken.id
+    }, function(err, customer) {
+      if (err) {
+        console.log(err)
+      }
+      console.log(customer)
+    })
+
+    stripe.charges.create({
+      amount: req.body.cost,
+      currency: "usd",
+      source: data.stripeToken.id, // obtained with Stripe.js
+      description: "Donation to TEDxCincinnati"
+    }, function(err, charge) {
+      // asynchronously called
+      console.log(charge)
+    })
+    res.sendStatus(200)
   }
 })
 
