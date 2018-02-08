@@ -109,9 +109,15 @@ app.post('/', (req, res) => {
           return res.redirect(307, '/tedxrouter')
         }
 
-        if (event.recipient.id === '176271182985693') {
+        // if (event.recipient.id === '176271182985693') {
+        //   return res.redirect(307, '/utahskisrouter')
+        // }
+
+        if (event.recipient.id === '133941773298279') {
           return res.redirect(307, '/utahskisrouter')
         }
+
+
 
         if (event.message) {
 
