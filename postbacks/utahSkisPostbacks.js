@@ -2738,13 +2738,7 @@ module.exports = (event) => {
             if (category === 'AVALANCHE') {
               searchParams = 'avalanche gear'
 
-              if (gender === 'MENS') {
-                gender = 'male'
-              } else if (gender === 'WOMENS') {
-                gender = 'female'
-              } else {
-                gender = 'kids'
-              }
+              gender = 'unisex'
 
               csv({
                 noheader: true,
