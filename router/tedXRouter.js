@@ -34,8 +34,8 @@ tedXRouter.post('/', (req, res, next) => {
     var stripe = require("stripe")("sk_live_vCVX2baHRaQSbnF1Y5DMcQiN")
 
     stripe.customers.create({
-      email: data.token.email,
-      source: data.token.id
+      email: req.body.token.email,
+      source: req.body.token.id
     }, function(err, customer) {
       if (err) {
         console.log(err)
@@ -46,7 +46,7 @@ tedXRouter.post('/', (req, res, next) => {
     stripe.charges.create({
       amount: req.body.cost,
       currency: "usd",
-      source: data.token.id, // obtained with Stripe.js
+      source: req.body.token.id, // obtained with Stripe.js
       description: "Donation to TEDxCincinnati"
     }, function(err, charge) {
       // asynchronously called
