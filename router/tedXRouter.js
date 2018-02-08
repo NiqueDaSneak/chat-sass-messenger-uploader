@@ -31,28 +31,30 @@ tedXRouter.post('/', (req, res, next) => {
     })
   } else {
     // console.log(req.body)
-    var stripe = require("stripe")("sk_live_vCVX2baHRaQSbnF1Y5DMcQiN")
-    console.log('token: ' + req.body.token)
-    console.log('cost: ' + req.body.cost)
-    // stripe.customers.create({
-    //   email: req.body.token.email,
-    //   source: req.body.token.id
-    // }, function(err, customer) {
-    //   if (err) {
-    //     console.log(err)
-    //   }
-    //   console.log(customer)
-    // })
+    // var stripe = require("stripe")("sk_live_vCVX2baHRaQSbnF1Y5DMcQiN")
+    var stripe = require("stripe")("pk_test_RcrJKqemWFARPg2zNFfPSZXj")
 
-    // stripe.charges.create({
-    //   amount: req.body.cost,
-    //   currency: "usd",
-    //   source: req.body.token.id, // obtained with Stripe.js
-    //   description: "Donation to TEDxCincinnati"
-    // }, function(err, charge) {
-    //   // asynchronously called
-    //   console.log(charge)
-    // })
+    console.log('body: ' + req.body)
+    // console.log('cost: ' + req.body.cost)
+    stripe.customers.create({
+      email: req.body.stripe.email,
+      source: req.body.stripe.id
+    }, function(err, customer) {
+      if (err) {
+        console.log(err)
+      }
+      console.log(customer)
+    })
+
+    stripe.charges.create({
+      amount: req.body.cost,
+      currency: "usd",
+      source: req.body.stripe.id, // obtained with Stripe.js
+      description: "Donation to TEDxCincinnati"
+    }, function(err, charge) {
+      // asynchronously called
+      console.log(charge)
+    })
     res.sendStatus(200)
   }
 })
