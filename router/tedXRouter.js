@@ -29,6 +29,8 @@ tedXRouter.post('/', (req, res, next) => {
         // }
       })
     })
+  } else {
+    console.log(req)
   }
 })
 
