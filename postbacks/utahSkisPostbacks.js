@@ -765,7 +765,7 @@ module.exports = (event) => {
             }
 
             if (category === 'SKIBOOTS') {
-              searchParams = ' ski boots'
+              searchParams = 'ski boots'
 
               if (gender === 'MENS') {
                 gender = 'male'
