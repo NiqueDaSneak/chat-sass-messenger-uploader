@@ -57,7 +57,7 @@ module.exports = (event) => {
             newMember.save((err, member) => {
               if (err) return console.error(err)
               // SEND WELCOME MESSAGES, THEN SEND PROMPT TO REQUEST ENROLLMENT
-              sendTextMessage(event.sender.id, user.pageAccessToken, 'Hi this is Gracie! Welcome to our TEDxCincinnati Experience! Powered by Irrigate Messaging.')
+              sendTextMessage(event.sender.id, user.pageAccessToken, 'Hi, this is Gracie! Welcome to our TEDxCincinnati Experience! Powered by Irrigate Messaging.')
               setTimeout(() => {
                 sendTextMessage(event.sender.id, user.pageAccessToken, 'Treat yourself & a friend to tickets for TEDxCincinnati Main Stage Event on May 12, 2018 at Memorial Hall. We have a special promo code just for you!')
                 // SEND IMAGE HERE!!!!
@@ -182,7 +182,7 @@ module.exports = (event) => {
 
       if (event.postback.payload.split('_')[0] === 'SPONSOR') {
         getUser().then((user) => {
-          if (event.postback.payload.split('_')[0] === 'YES') {
+          if (event.postback.payload.split('_')[1] === 'YES') {
             sendTextMessage(event.sender.id, user.pageAccessToken, "Fantastic, we will call you! Please give us your name and number: https://goo.gl/forms/r4RqixxbOqXJQU3e2")
           } else {
             sendTextMessage(event.sender.id, user.pageAccessToken, "No problem. Thanks for being part of the TEDx community 🤓")
