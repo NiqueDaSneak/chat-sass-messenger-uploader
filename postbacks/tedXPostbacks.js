@@ -57,37 +57,110 @@ module.exports = (event) => {
             newMember.save((err, member) => {
               if (err) return console.error(err)
               // SEND WELCOME MESSAGES, THEN SEND PROMPT TO REQUEST ENROLLMENT
-              sendTextMessage(event.sender.id, user.pageAccessToken, 'Welcome to the TEDxCincinnati Experience! Powered by Irrigate Messaging!')
+              sendTextMessage(event.sender.id, user.pageAccessToken, 'Hi this is Gracie! Welcome to our TEDxCincinnati Experience! Powered by Irrigate Messaging.')
               setTimeout(() => {
-                sendTextMessage(event.sender.id, user.pageAccessToken, 'Treat yourself and a friend to tickets for TEDxCincinnati Main Stage on May 12, 2018 at Memorial Hall. We have created a special promo code just for you!')
+                sendTextMessage(event.sender.id, user.pageAccessToken, 'Treat yourself & a friend to tickets for TEDxCincinnati Main Stage Event on May 12, 2018 at Memorial Hall. We have a special promo code just for you!')
+                // SEND IMAGE HERE!!!!
                 setTimeout(() => {
-                  sendTextMessage(event.sender.id, user.pageAccessToken, "Click the buy tickets now or go to TEDxCincinnati.com and use 'valentine' in the promo code and get $10.00 off a single ticket or bundle. This is our way of saying thank you.  This promo will expire on 2-14-18 at 11:30 pm. Can't wait to see you at Main Stage.")
+                  sendImageMessage(event.sender.id, user.pageAccessToken, 'https://chat-sass-messenger-uploader.herokuapp.com/static/tedx_1.jpg')
                   setTimeout(() => {
-                    sendTextMessage(event.sender.id, user.pageAccessToken, 'Question...are you interested in becoming a TEDxCincinnati Insider. You will hear everything here first...including lineup announcement, deals, and exclusive content. You will also be entered to win free tickets to the event!')
+                    sendTextMessage(event.sender.id, user.pageAccessToken, "Click to buy tickets now or go to TEDxCincinnati.com and use 'valentine' in the promo code and get $10.00 off a single ticket or ticket bundle.  This is our way of saying thank you 💖")
                     setTimeout(() => {
                       let messageData = {
                         "recipient":{
                           "id": event.sender.id
                         },
                         "message":{
-                          "text": "Interested?",
-                          "quick_replies":[
-                            {
-                              "content_type":"text",
-                              "title":"Not Interested",
-                              "payload":"ENROLL_NO"
-                            },
-                            {
-                              "content_type":"text",
-                              "title":"Sure",
-                              "payload":"ENROLL_YES"
+                          "attachment":{
+                            "type":"template",
+                            "payload":{
+                              "template_type":"generic",
+                              "elements":[
+                                {
+                                  "title": "Valentine Ticket Special",
+                                  "image_url": "https://chat-sass-messenger-uploader.herokuapp.com/static/tedx_2.png"
+                                  "buttons":[
+                                    {
+                                      "type":"web_url",
+                                      "url": 'https://tedxcincinnati.eventbrite.com?discount=valentine',
+                                      "title":"Pay Now",
+                                      "webview_height_ratio":"tall"
+                                    }
+                                  ]
+                                }
+                              ]
                             }
-                          ]
+                          }
                         }
                       }
                       callSendAPI(user.pageAccessToken, messageData)
-                    }, 7000)
-                  }, 5000)
+                      setTimeout(() => {
+                        sendTextMessage(event.sender.id, user.pageAccessToken, 'We are looking for 20 TEDxCincinnati Ambassadors to help us build the TEDx community in Cincinnati. Our ambassadors will be given information throughout the year to share with their friends on their social networks. We will list you on the TEDxCincinnati website and give you an extra hug for being part of our team 🤗')
+                        setTimeout(() => {
+                          let messageData = {
+                            "recipient":{
+                              "id": event.sender.id
+                            },
+                            "message":{
+                              "attachment":{
+                                "type":"template",
+                                "payload":{
+                                  "template_type":"generic",
+                                  "elements":[
+                                    {
+                                      "title": "Please tap below if you are interested in becoming a TEDxCincinnati Ambassador",
+                                      "buttons":[
+                                        {
+                                          "type":"web_url",
+                                          "url": 'https://goo.gl/forms/Y7mXtPEtmhVE5PYB2',
+                                          "title":"Become an Ambassador",
+                                          "webview_height_ratio":"tall"
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              }
+                            }
+                          }
+                          callSendAPI(user.pageAccessToken, messageData)
+                          setTimeout(() => {
+                            let messageData = {
+                              "recipient":{
+                                "id": event.sender.id
+                              },
+                              "message":{
+                                "attachment":{
+                                  "type":"template",
+                                  "payload":{
+                                    "template_type":"generic",
+                                    "elements":[
+                                      {
+                                        "title":"Would your company be interested in learning more about becoming a sponsor of TEDxCincinnati?",
+                                        "buttons":[
+                                          {
+                                            "type":"postback",
+                                            "title":"Yes, that would be great!",
+                                            "payload":"SPONSOR_YES"
+                                          },
+                                          {
+                                            "type":"postback",
+                                            "title":"No, but we really like TEDx 😀",
+                                            "payload":"SPONSOR_NO"
+                                          }
+                                        ]
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                            callSendAPI(user.pageAccessToken, messageData)
+                          }, 2000)
+                        }, 11000)
+                      }, 2500)
+                    }, 8000)
+                  }, 6000)
                 }, 6000)
               }, 2500)
             })
@@ -104,6 +177,108 @@ module.exports = (event) => {
       if (event.postback.payload === 'GET_STARTED_PAYLOAD') {
         getUser().then((user) => {
           findMember(user)
+        })
+      }
+
+      if (event.postback.payload.split('_')[0] === 'SPONSOR') {
+        getUser().then((user) => {
+          if (event.postback.payload.split('_')[0] === 'YES') {
+            sendTextMessage(event.sender.id, user.pageAccessToken, "Fantastic, we will call you! Please give us your name and number: https://goo.gl/forms/r4RqixxbOqXJQU3e2")
+          } else {
+            sendTextMessage(event.sender.id, user.pageAccessToken, "No problem. Thanks for being part of the TEDx community 🤓")
+          }
+          // both get the end result
+          setTimeout(() => {
+            let messageData = {
+              "recipient":{
+                "id": event.sender.id
+              },
+              "message":{
+                "attachment":{
+                  "type":"template",
+                  "payload":{
+                    "template_type":"generic",
+                    "elements":[
+                      {
+                        "title":"Interested in some exclusive content and want to enter to win free tickets to the event? 📣",
+                        "buttons":[
+                          {
+                            "type":"postback",
+                            "title":"Yes, that sounds great!",
+                            "payload":"ENROLL_YES"
+                          },
+                          {
+                            "type":"postback",
+                            "title":"No thank you",
+                            "payload":"ENROLL_NO"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+            callSendAPI(user.pageAccessToken, messageData)
+          }, 2500)
+        })
+      }
+
+      if (event.postback.payload.split('_')[0] === 'ENROLL') {
+        if (event.postback.payload.split('_')[1] === 'YES') {
+          getUser().then((user) => {
+            sendTextMessage(event.sender.id, user.pageAccessToken, "OK Thank You, we have entered you to win free tickets!  You can look at the talks from last years TEDxCincinnati Main Stage Event.")
+            Member.findOne({
+              fbID: event.sender.id
+            }, (err, member) => {
+              if (err) {
+                console.error(err)
+              }
+              member.enrolled = true
+              member.save((err, updatedMember) => {
+                if (err) return console.error(err)
+                console.log('updatedMember: ' + updatedMember)
+              })
+            })
+          })
+        } else {
+          getUser().then((user) => {
+            sendTextMessage(event.sender.id, user.pageAccessToken, "OK Thank you. You can look at the talks from last years TEDxCincinnati Main Stage Event.")
+          })
+        }
+        // send quick reply chooser
+        getUser().then((user) => {
+          let messageData = {
+            "recipient":{
+              "id": event.sender.id
+            },
+            "message":{
+              "attachment":{
+                "type":"template",
+                "payload":{
+                  "template_type":"generic",
+                  "elements":[
+                    {
+                      "title":"You wanna see the performaces or the talks from last year?",
+                      "buttons":[
+                        {
+                          "type":"postback",
+                          "title":"2017 Performances 🎵",
+                          "payload":"VIDEO_PERFORM"
+                        },
+                        {
+                          "type":"postback",
+                          "title":"2017 Speakers 🎙",
+                          "payload":"VIDEO_TALKS"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          }
+          callSendAPI(user.pageAccessToken, messageData)
         })
       }
 
@@ -163,16 +338,16 @@ module.exports = (event) => {
                   "template_type":"generic",
                   "elements":[
                     {
-                      "title":"You wanna see the performaces or the talks from last year?",
+                      "title":"Great! Click on last years performances or talks",
                       "buttons":[
                         {
                           "type":"postback",
-                          "title":"Performaces!",
+                          "title":"2017 Performances 🎵",
                           "payload":"VIDEO_PERFORM"
                         },
                         {
                           "type":"postback",
-                          "title":"The talks, please.",
+                          "title":"2017 Speakers 🎙",
                           "payload":"VIDEO_TALKS"
                         }
                       ]
@@ -203,7 +378,7 @@ module.exports = (event) => {
                       "buttons":[
                         {
                           "type":"web_url",
-                          "url": 'https://tedxcincinnati.eventbrite.com?discount=valentine',
+                          "url": 'https://tedxcincinnati.eventbrite.com',
                           "title":"Pay Now",
                           "webview_height_ratio":"tall"
                         }
@@ -239,17 +414,17 @@ module.exports = (event) => {
                           {
                             "type":"web_url",
                             "url": 'https://youtu.be/8fYdYXeHwwY',
-                            "title":"Watch",
+                            "title":"Watch Now 👋",
                             "webview_height_ratio":"tall"
                           },
                           {
                             "type":"postback",
-                            "title":"Purchase Tickets",
+                            "title":"Purchase Tickets for This Year🤗",
                             "payload":"PURCHASE"
                           },
                           {
                             "type":"postback",
-                            "title":"Donate",
+                            "title":"Help a Student Buy a Ticket👍 ",
                             "payload":"DONATE"
                           }
                         ]
@@ -262,17 +437,17 @@ module.exports = (event) => {
                           {
                             "type":"web_url",
                             "url": 'https://youtu.be/2Zt8D7Yl5wY',
-                            "title":"Watch",
+                            "title":"Watch Now 👋",
                             "webview_height_ratio":"tall"
                           },
                           {
                             "type":"postback",
-                            "title":"Purchase Tickets",
+                            "title":"Purchase Tickets for This Year🤗",
                             "payload":"PURCHASE"
                           },
                           {
                             "type":"postback",
-                            "title":"Donate",
+                            "title":"Help a Student Buy a Ticket👍 ",
                             "payload":"DONATE"
                           }
                         ]
@@ -285,17 +460,40 @@ module.exports = (event) => {
                           {
                             "type":"web_url",
                             "url": 'https://youtu.be/Zziqdjxexb4',
-                            "title":"Watch",
+                            "title":"Watch Now 👋",
                             "webview_height_ratio":"tall"
                           },
                           {
                             "type":"postback",
-                            "title":"Purchase Tickets",
+                            "title":"Purchase Tickets for This Year🤗",
                             "payload":"PURCHASE"
                           },
                           {
                             "type":"postback",
-                            "title":"Donate",
+                            "title":"Help a Student Buy a Ticket👍 ",
+                            "payload":"DONATE"
+                          }
+                        ]
+                      },
+                      {
+                        "title":"Lost Generation",
+                        "subtitle":"Siri Imani",
+                        "image_url":"https://img.youtube.com/vi/oNykraHcdQM/hqdefault.jpg",
+                        "buttons":[
+                          {
+                            "type":"web_url",
+                            "url": 'https://youtu.be/oNykraHcdQM',
+                            "title":"Watch Now 👋",
+                            "webview_height_ratio":"tall"
+                          },
+                          {
+                            "type":"postback",
+                            "title":"Purchase Tickets for This Year🤗",
+                            "payload":"PURCHASE"
+                          },
+                          {
+                            "type":"postback",
+                            "title":"Help a Student Buy a Ticket👍 ",
                             "payload":"DONATE"
                           }
                         ]
@@ -318,29 +516,6 @@ module.exports = (event) => {
                     "template_type":"generic",
                     "elements":[
                       {
-                        "title":"Disconnect to Connect: The Path to Work-Life Harmony",
-                        "subtitle":"Amy Vetter",
-                        "image_url":"https://img.youtube.com/vi/c1WYlK-gUME/hqdefault.jpg",
-                        "buttons":[
-                          {
-                            "type":"web_url",
-                            "url": 'https://youtu.be/c1WYlK-gUME',
-                            "title":"Watch",
-                            "webview_height_ratio":"tall"
-                          },
-                          {
-                            "type":"postback",
-                            "title":"Purchase Tickets",
-                            "payload":"PURCHASE"
-                          },
-                          {
-                            "type":"postback",
-                            "title":"Donate",
-                            "payload":"DONATE"
-                          }
-                        ]
-                      },
-                      {
                         "title":"Your Brain Should be Going Places",
                         "subtitle":"Tish Hevel",
                         "image_url":"https://img.youtube.com/vi/r3oPHKqiEHQ/hqdefault.jpg",
@@ -348,86 +523,17 @@ module.exports = (event) => {
                           {
                             "type":"web_url",
                             "url": 'https://youtu.be/r3oPHKqiEHQ',
-                            "title":"Watch",
+                            "title":"Watch Now 👋",
                             "webview_height_ratio":"tall"
                           },
                           {
                             "type":"postback",
-                            "title":"Purchase Tickets",
+                            "title":"Purchase Tickets for This Year🤗",
                             "payload":"PURCHASE"
                           },
                           {
                             "type":"postback",
-                            "title":"Donate",
-                            "payload":"DONATE"
-                          }
-                        ]
-                      },
-                      {
-                        "title":"The Dangers of Snap Judgements",
-                        "subtitle":"Cameron Byerly",
-                        "image_url":"https://img.youtube.com/vi/ou9VqUIurmY/hqdefault.jpg",
-                        "buttons":[
-                          {
-                            "type":"web_url",
-                            "url": 'https://youtu.be/ou9VqUIurmY',
-                            "title":"Watch",
-                            "webview_height_ratio":"tall"
-                          },
-                          {
-                            "type":"postback",
-                            "title":"Purchase Tickets",
-                            "payload":"PURCHASE"
-                          },
-                          {
-                            "type":"postback",
-                            "title":"Donate",
-                            "payload":"DONATE"
-                          }
-                        ]
-                      },
-                      {
-                        "title":"Leadership is Love: The Power of Human Connections",
-                        "subtitle":"Dr. Mark Rittenberg",
-                        "image_url":"https://img.youtube.com/vi/ZrdxOYEr9Bg/hqdefault.jpg",
-                        "buttons":[
-                          {
-                            "type":"web_url",
-                            "url": 'https://youtu.be/ZrdxOYEr9Bg',
-                            "title":"Watch",
-                            "webview_height_ratio":"tall"
-                          },
-                          {
-                            "type":"postback",
-                            "title":"Purchase Tickets",
-                            "payload":"PURCHASE"
-                          },
-                          {
-                            "type":"postback",
-                            "title":"Donate",
-                            "payload":"DONATE"
-                          }
-                        ]
-                      },
-                      {
-                        "title":"The Story Behind the Face",
-                        "subtitle":"Prerna Gandhi",
-                        "image_url":"https://img.youtube.com/vi/ktr1rmwLl0M/hqdefault.jpg",
-                        "buttons":[
-                          {
-                            "type":"web_url",
-                            "url": 'https://youtu.be/ktr1rmwLl0M',
-                            "title":"Watch",
-                            "webview_height_ratio":"tall"
-                          },
-                          {
-                            "type":"postback",
-                            "title":"Purchase Tickets",
-                            "payload":"PURCHASE"
-                          },
-                          {
-                            "type":"postback",
-                            "title":"Donate",
+                            "title":"Help a Student Buy a Ticket👍 ",
                             "payload":"DONATE"
                           }
                         ]
@@ -440,40 +546,63 @@ module.exports = (event) => {
                           {
                             "type":"web_url",
                             "url": 'https://youtu.be/61eEC1-L6RI',
-                            "title":"Watch",
+                            "title":"Watch Now 👋",
                             "webview_height_ratio":"tall"
                           },
                           {
                             "type":"postback",
-                            "title":"Purchase Tickets",
+                            "title":"Purchase Tickets for This Year🤗",
                             "payload":"PURCHASE"
                           },
                           {
                             "type":"postback",
-                            "title":"Donate",
+                            "title":"Help a Student Buy a Ticket👍 ",
                             "payload":"DONATE"
                           }
                         ]
                       },
                       {
-                        "title":"Lost Generation",
-                        "subtitle":"Siri Imani",
-                        "image_url":"https://img.youtube.com/vi/oNykraHcdQM/hqdefault.jpg",
+                        "title":"The Story Behind the Face",
+                        "subtitle":"Prerna Gandhi",
+                        "image_url":"https://img.youtube.com/vi/ktr1rmwLl0M/hqdefault.jpg",
                         "buttons":[
                           {
                             "type":"web_url",
-                            "url": 'https://youtu.be/oNykraHcdQM',
-                            "title":"Watch",
+                            "url": 'https://youtu.be/ktr1rmwLl0M',
+                            "title":"Watch Now 👋",
                             "webview_height_ratio":"tall"
                           },
                           {
                             "type":"postback",
-                            "title":"Purchase Tickets",
+                            "title":"Purchase Tickets for This Year🤗",
                             "payload":"PURCHASE"
                           },
                           {
                             "type":"postback",
-                            "title":"Donate",
+                            "title":"Help a Student Buy a Ticket👍 ",
+                            "payload":"DONATE"
+                          }
+                        ]
+                      },
+                      {
+                        "title":"Leadership is Love: The Power of Human Connections",
+                        "subtitle":"Dr. Mark Rittenberg",
+                        "image_url":"https://img.youtube.com/vi/ZrdxOYEr9Bg/hqdefault.jpg",
+                        "buttons":[
+                          {
+                            "type":"web_url",
+                            "url": 'https://youtu.be/ZrdxOYEr9Bg',
+                            "title":"Watch Now 👋",
+                            "webview_height_ratio":"tall"
+                          },
+                          {
+                            "type":"postback",
+                            "title":"Purchase Tickets for This Year🤗",
+                            "payload":"PURCHASE"
+                          },
+                          {
+                            "type":"postback",
+                            "title":"Help a Student Buy a Ticket👍 ",
                             "payload":"DONATE"
                           }
                         ]
@@ -486,17 +615,63 @@ module.exports = (event) => {
                           {
                             "type":"web_url",
                             "url": 'https://youtu.be/y-lyzsqnK-c',
-                            "title":"Watch",
+                            "title":"Watch Now 👋",
                             "webview_height_ratio":"tall"
                           },
                           {
                             "type":"postback",
-                            "title":"Purchase Tickets",
+                            "title":"Purchase Tickets for This Year🤗",
                             "payload":"PURCHASE"
                           },
                           {
                             "type":"postback",
-                            "title":"Donate",
+                            "title":"Help a Student Buy a Ticket👍 ",
+                            "payload":"DONATE"
+                          }
+                        ]
+                      },
+                      {
+                        "title":"Disconnect to Connect: The Path to Work-Life Harmony",
+                        "subtitle":"Amy Vetter",
+                        "image_url":"https://img.youtube.com/vi/c1WYlK-gUME/hqdefault.jpg",
+                        "buttons":[
+                          {
+                            "type":"web_url",
+                            "url": 'https://youtu.be/c1WYlK-gUME',
+                            "title":"Watch Now 👋",
+                            "webview_height_ratio":"tall"
+                          },
+                          {
+                            "type":"postback",
+                            "title":"Purchase Tickets for This Year🤗",
+                            "payload":"PURCHASE"
+                          },
+                          {
+                            "type":"postback",
+                            "title":"Help a Student Buy a Ticket👍 ",
+                            "payload":"DONATE"
+                          }
+                        ]
+                      },
+                      {
+                        "title":"The Dangers of Snap Judgements",
+                        "subtitle":"Cameron Byerly",
+                        "image_url":"https://img.youtube.com/vi/ou9VqUIurmY/hqdefault.jpg",
+                        "buttons":[
+                          {
+                            "type":"web_url",
+                            "url": 'https://youtu.be/ou9VqUIurmY',
+                            "title":"Watch Now 👋",
+                            "webview_height_ratio":"tall"
+                          },
+                          {
+                            "type":"postback",
+                            "title":"Purchase Tickets for This Year🤗",
+                            "payload":"PURCHASE"
+                          },
+                          {
+                            "type":"postback",
+                            "title":"Help a Student Buy a Ticket👍 ",
                             "payload":"DONATE"
                           }
                         ]
@@ -527,7 +702,7 @@ module.exports = (event) => {
         if (event.message.quick_reply.payload.split('_')[0] === 'ENROLL') {
           if (event.message.quick_reply.payload.split('_')[1] === 'YES') {
             getUser().then((user) => {
-              sendTextMessage(event.sender.id, user.pageAccessToken, "Great!")
+              sendTextMessage(event.sender.id, user.pageAccessToken, "OK Thank You, we have entered you to win free tickets!  You can look at the talks from last years TEDxCincinnati Main Stage Event.")
               Member.findOne({
                 fbID: event.sender.id
               }, (err, member) => {
@@ -543,39 +718,42 @@ module.exports = (event) => {
             })
           } else {
             getUser().then((user) => {
-              sendTextMessage(event.sender.id, user.pageAccessToken, "That's too bad...")
+              sendTextMessage(event.sender.id, user.pageAccessToken, "OK Thank you. You can look at the talks from last years TEDxCincinnati Main Stage Event.")
             })
           }
           // send quick reply chooser
           getUser().then((user) => {
-            setTimeout(() => {
-              let messageData = {
-                "recipient":{
-                  "id": event.sender.id
-                },
-                "message":{
-                  "text": "What would you like to do?",
-                  "quick_replies":[
-                    {
-                      "content_type":"text",
-                      "title":"Purchase Tickets",
-                      "payload":"PURCHASE"
-                    },
-                    {
-                      "content_type":"text",
-                      "title":"Donate",
-                      "payload":"DONATE"
-                    },
-                    {
-                      "content_type":"text",
-                      "title":"Watch Past Talks",
-                      "payload":"TALKS"
-                    }
-                  ]
+            let messageData = {
+              "recipient":{
+                "id": event.sender.id
+              },
+              "message":{
+                "attachment":{
+                  "type":"template",
+                  "payload":{
+                    "template_type":"generic",
+                    "elements":[
+                      {
+                        "title":"You wanna see the performaces or the talks from last year?",
+                        "buttons":[
+                          {
+                            "type":"postback",
+                            "title":"2017 Performances 🎵",
+                            "payload":"VIDEO_PERFORM"
+                          },
+                          {
+                            "type":"postback",
+                            "title":"2017 Speakers 🎙",
+                            "payload":"VIDEO_TALKS"
+                          }
+                        ]
+                      }
+                    ]
+                  }
                 }
               }
-              callSendAPI(user.pageAccessToken, messageData)
-            }, 1500)
+            }
+            callSendAPI(user.pageAccessToken, messageData)
           })
         }
 
@@ -639,12 +817,12 @@ module.exports = (event) => {
                         "buttons":[
                           {
                             "type":"postback",
-                            "title":"Performaces!",
+                            "title":"2017 Performances 🎵",
                             "payload":"VIDEO_PERFORM"
                           },
                           {
                             "type":"postback",
-                            "title":"The talks, please.",
+                            "title":"2017 Speakers 🎙",
                             "payload":"VIDEO_TALKS"
                           }
                         ]
@@ -675,7 +853,7 @@ module.exports = (event) => {
                         "buttons":[
                           {
                             "type":"web_url",
-                            "url": 'https://tedxcincinnati.eventbrite.com?discount=valentine',
+                            "url": 'https://tedxcincinnati.eventbrite.com',
                             "title":"Pay Now",
                             "webview_height_ratio":"tall"
                           }
