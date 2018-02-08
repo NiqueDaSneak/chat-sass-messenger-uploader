@@ -78,7 +78,7 @@ module.exports = (event) => {
                               "elements":[
                                 {
                                   "title": "Valentine Ticket Special",
-                                  "image_url": "https://chat-sass-messenger-uploader.herokuapp.com/static/tedx_2.png",
+                                  // "image_url": "https://chat-sass-messenger-uploader.herokuapp.com/static/tedx_2.png",
                                   "buttons":[
                                     {
                                       "type":"web_url",
