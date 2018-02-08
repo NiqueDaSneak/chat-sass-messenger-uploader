@@ -77,13 +77,13 @@ module.exports = (event) => {
                               "template_type":"generic",
                               "elements":[
                                 {
-                                  "title": "Valentine Ticket Special",
+                                  "title": "Valentine Ticket Special: Ends 2/14/18",
                                   // "image_url": "https://chat-sass-messenger-uploader.herokuapp.com/static/tedx_2.png",
                                   "buttons":[
                                     {
                                       "type":"web_url",
                                       "url": 'https://tedxcincinnati.eventbrite.com?discount=valentine',
-                                      "title":"Pay Now",
+                                      "title":"Buy Your Ticket Now",
                                       "webview_height_ratio":"tall"
                                     }
                                   ]
@@ -136,7 +136,7 @@ module.exports = (event) => {
                                     "template_type":"generic",
                                     "elements":[
                                       {
-                                        "title":"Is your company interested in becoming a sponsor of TEDxCincinnati?",
+                                        "title":"Do you want to learn more about partnering with TEDxCincinnati?",
                                         "buttons":[
                                           {
                                             "type":"postback",
@@ -200,16 +200,16 @@ module.exports = (event) => {
                     "template_type":"generic",
                     "elements":[
                       {
-                        "title":"Want exclusive content and to enter to win free tickets to the event? 📣",
+                        "title":"So have you been to our Main Stage Event?",
                         "buttons":[
                           {
                             "type":"postback",
-                            "title":"Sounds great!",
+                            "title":"Yes, loved it!",
                             "payload":"ENROLL_YES"
                           },
                           {
                             "type":"postback",
-                            "title":"No thank you",
+                            "title":"No, not yet!",
                             "payload":"ENROLL_NO"
                           }
                         ]
@@ -227,7 +227,7 @@ module.exports = (event) => {
       if (event.postback.payload.split('_')[0] === 'ENROLL') {
         if (event.postback.payload.split('_')[1] === 'YES') {
           getUser().then((user) => {
-            sendTextMessage(event.sender.id, user.pageAccessToken, "OK Thank You, we have entered you to win free tickets!  You can look at the talks from last years TEDxCincinnati Main Stage Event.")
+            sendTextMessage(event.sender.id, user.pageAccessToken, "Great! Here are talks from last years TEDxCincinnati Main Stage event. Help us share them! 🙌🙌")
             Member.findOne({
               fbID: event.sender.id
             }, (err, member) => {
@@ -243,7 +243,7 @@ module.exports = (event) => {
           })
         } else {
           getUser().then((user) => {
-            sendTextMessage(event.sender.id, user.pageAccessToken, "OK Thank you. You can look at the talks from last years TEDxCincinnati Main Stage Event.")
+            sendTextMessage(event.sender.id, user.pageAccessToken, "Ok! Hope to see you this year! You can check out last years TEDxCincinnati Main Stage event performances and speakers here! 🙌🙌 ")
           })
         }
         // send quick reply chooser
@@ -259,7 +259,7 @@ module.exports = (event) => {
                   "template_type":"generic",
                   "elements":[
                     {
-                      "title":"You wanna see the performaces or the talks from last year?",
+                      "title":"Performances or Speakers?",
                       "buttons":[
                         {
                           "type":"postback",
@@ -289,7 +289,7 @@ module.exports = (event) => {
               "id": event.sender.id
             },
             "message":{
-              "text": "How many tickets do you want to donate?",
+              "text": "Thank you 👍 Your donation will help students come to the event. Do you want to send 1, 2 or 4 students?",
               "quick_replies":[
                 {
                   "content_type":"text",
@@ -326,7 +326,7 @@ module.exports = (event) => {
                   "template_type":"generic",
                   "elements":[
                     {
-                      "title":"Great! Click on last years performances or talks",
+                      "title":"Great! Performances or Speakers?",
                       "buttons":[
                         {
                           "type":"postback",
@@ -580,6 +580,29 @@ module.exports = (event) => {
                           {
                             "type":"web_url",
                             "url": 'https://youtu.be/ZrdxOYEr9Bg',
+                            "title":"Watch Now 👋",
+                            "webview_height_ratio":"tall"
+                          },
+                          {
+                            "type":"postback",
+                            "title":"Purchase Tickets 🤗",
+                            "payload":"PURCHASE"
+                          },
+                          {
+                            "type":"postback",
+                            "title":"Donate a Ticket 👍",
+                            "payload":"DONATE"
+                          }
+                        ]
+                      },
+                      {
+                        "title":"Opioid Crisis. Little or no attention is given to the actual human toll that this epidemic takes on us, the people who deal with the deaths. This talk is given from the eyes of the Hamilton County Coroner.",
+                        "subtitle":"Dr. Lakshmi Sammarco",
+                        "image_url":"https://img.youtube.com/vi/ulvyYMcljHU/hqdefault.jpg",
+                        "buttons":[
+                          {
+                            "type":"web_url",
+                            "url": 'https://youtu.be/ulvyYMcljHU',
                             "title":"Watch Now 👋",
                             "webview_height_ratio":"tall"
                           },
