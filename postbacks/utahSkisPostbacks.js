@@ -238,16 +238,16 @@ module.exports = (event) => {
                     }
                   ]
                 },
-                {
-                  "title":"Demo Snowboards",
-                  "buttons":[
-                    {
-                      "type":"postback",
-                      "title":"Shop",
-                      "payload":"SHOWPRODUCTS_DEMOSNOWBOARDS_" + gender
-                    }
-                  ]
-                },
+                // {
+                //   "title":"Demo Snowboards",
+                //   "buttons":[
+                //     {
+                //       "type":"postback",
+                //       "title":"Shop",
+                //       "payload":"SHOWPRODUCTS_DEMOSNOWBOARDS_" + gender
+                //     }
+                //   ]
+                // },
                 {
                   "title":"Snowboard Bindings",
                   "buttons":[
@@ -1164,14 +1164,114 @@ module.exports = (event) => {
               })
             }
 
+            if (category === 'SNOWBOARDBINDINGS') {
+              searchParams = 'snowboard bindings'
+
+              if (gender === 'MENS') {
+                gender = 'male'
+              } else if (gender === 'WOMENS') {
+                gender = 'female'
+              } else {
+                gender = 'kids'
+              }
+
+              csv({
+                noheader: true,
+                delimiter: 'auto',
+                headers: ['Unique ID', 'Title', 'Description', 'Category', 'Product URL', 'Image URL', 'Condition', 'Availability', 'Current Price', 'Brand', 'Size', 'Color', 'Original Price', 'Ship Weight', 'Shipping Cost', 'Google Product Category', 'GTIN', 'Connexity Product ID', 'AGE_GROUP', 'GENDER', 'Coupon Code']
+              })
+              .fromFile('data/Irrigate.txt')
+              .on('json',(jsonObj) => {
+                // console.log(jsonObj)
+                if (jsonObj['Category'].toLowerCase() === searchParams) {
+                  if (gender === 'kids') {
+                    if (jsonObj['AGE_GROUP'].toLowerCase() === gender) {
+                      // console.log(jsonObj)
+                      matchedItems.push(jsonObj)
+                    }
+                  } else {
+                    if (jsonObj['GENDER'].toLowerCase() === gender) {
+                      // console.log(jsonObj)
+                      matchedItems.push(jsonObj)
+                    }
+                  }
+
+                }
+              })
+              .on('done',(error) => {
+
+                    var itemCarosel = []
+
+                    for (var i = 0; i < matchedItems.length; i++) {
+                        itemCarosel.push(
+                          {
+                            "title": matchedItems[i].Title,
+                            "subtitle": '$' + Math.round(matchedItems[i]['Current Price'] * 100)/100,
+                            "image_url": matchedItems[i]['Image URL'],
+                            "buttons":[
+                              {
+                                "type":"web_url",
+                                "url": matchedItems[i]['Product URL'],
+                                "title":"Purchase",
+                                "webview_height_ratio":"tall"
+                              },
+                              {
+                                "type":"web_url",
+                                "url": matchedItems[i]['Product URL'],
+                                "title":"View Details",
+                                "webview_height_ratio":"tall"
+                              }
+                            ]
+                          }
+                        )
+                    }
+
+                    if (itemCarosel.length > 10) {
+                      let newCarosel = []
+                      for (var i = 0; i < 10; i++) {
+                        newCarosel.push(itemCarosel[i])
+                      }
+
+                      let messageData = {
+                        "recipient":{
+                          "id": event.sender.id
+                        },
+                        "message":{
+                          "attachment":{
+                            "type":"template",
+                            "payload":{
+                              "template_type":"generic",
+                              "elements": newCarosel
+                            }
+                          }
+                        }
+                      }
+                      callSendAPI(user.pageAccessToken, messageData)
+                    } else {
+                      let messageData = {
+                        "recipient":{
+                          "id": event.sender.id
+                        },
+                        "message":{
+                          "attachment":{
+                            "type":"template",
+                            "payload":{
+                              "template_type":"generic",
+                              "elements": itemCarosel
+                            }
+                          }
+                        }
+                      }
+                      callSendAPI(user.pageAccessToken, messageData)
+                    }
+              })
+            }
 
 
 
 
 
 
-
-            // SNOWBOARDS
             // DEMOSNOWBOARDS
             // SNOWBOARDBINDINGS
             // SNOWBOARDBOOTS
