@@ -693,21 +693,21 @@ module.exports = (event) => {
             if (event.message.quick_reply.payload.split('_')[1] === '1') {
               button = {
                 "type":"web_url",
-                "url": 'https://www.irrigatemsg.com',
+                "url": 'https://www.irrigatemsg.com/tedxdonate?price=25.00',
                 "title":"Donate $25",
                 "webview_height_ratio":"compact"
               }
             } else if (event.message.quick_reply.payload.split('_')[1] === '2') {
               button = {
                 "type":"web_url",
-                "url": 'https://www.irrigatemsg.com',
+                "url": 'https://www.irrigatemsg.com/tedxdonate?price=50.00',
                 "title":"Donate $50",
                 "webview_height_ratio":"compact"
               }
             } else {
               button = {
                 "type":"web_url",
-                "url": 'https://www.irrigatemsg.com',
+                "url": 'https://www.irrigatemsg.com/tedxdonate?price=100.00',
                 "title":"Donate $100",
                 "webview_height_ratio":"compact"
               }
