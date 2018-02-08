@@ -145,16 +145,6 @@ module.exports = (event) => {
                             "payload":"CATS_KIDS"
                           }
                         ]
-                      },
-                      {
-                        "title":"Summer",
-                        "buttons":[
-                          {
-                            "type":"postback",
-                            "title":"Shop",
-                            "payload":"SUMMER"
-                          }
-                        ]
                       }
                     ]
                   }
@@ -482,6 +472,7 @@ module.exports = (event) => {
                     "elements":[
                       {
                         "title":"Ski Gear",
+                        "image_url": 'https://chat-sass-messenger-uploader.herokuapp.com/static/utah/first-filter/skis.png',
                         "buttons":[
                           {
                             "type":"postback",
@@ -492,6 +483,7 @@ module.exports = (event) => {
                       },
                       {
                         "title":"Snowboard Gear",
+                        "image_url": 'https://chat-sass-messenger-uploader.herokuapp.com/static/utah/first-filter/snow.png',
                         "buttons":[
                           {
                             "type":"postback",
@@ -502,6 +494,7 @@ module.exports = (event) => {
                       },
                       {
                         "title":"Outerwear",
+                        "image_url": 'https://chat-sass-messenger-uploader.herokuapp.com/static/utah/first-filter/jacket.png',
                         "buttons":[
                           {
                             "type":"postback",
@@ -512,6 +505,7 @@ module.exports = (event) => {
                       },
                       {
                         "title":"Clothing",
+                        "image_url": 'https://chat-sass-messenger-uploader.herokuapp.com/static/utah/first-filter/cloth.png',
                         "buttons":[
                           {
                             "type":"postback",
@@ -522,6 +516,7 @@ module.exports = (event) => {
                       },
                       {
                         "title":"Accessories",
+                        "image_url": 'https://chat-sass-messenger-uploader.herokuapp.com/static/utah/first-filter/access.png',
                         "buttons":[
                           {
                             "type":"postback",
