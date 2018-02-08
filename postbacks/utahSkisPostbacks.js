@@ -575,7 +575,7 @@ module.exports = (event) => {
                 delimiter: 'auto',
                 headers: ['Unique ID', 'Title', 'Description', 'Category', 'Product URL', 'Image URL', 'Condition', 'Availability', 'Current Price', 'Brand', 'Size', 'Color', 'Original Price', 'Ship Weight', 'Shipping Cost', 'Google Product Category', 'GTIN', 'Connexity Product ID', 'AGE_GROUP', 'GENDER', 'Coupon Code']
               })
-              .fromFile('data/utahSkisProducts.csv')
+              .fromFile('data/Irrigate.txt')
               .on('json',(jsonObj) => {
                 if (jsonObj['Category'].toLowerCase() === searchParams) {
                   if (gender === 'kids') {
@@ -677,7 +677,7 @@ module.exports = (event) => {
                 delimiter: 'auto',
                 headers: ['Unique ID', 'Title', 'Description', 'Category', 'Product URL', 'Image URL', 'Condition', 'Availability', 'Current Price', 'Brand', 'Size', 'Color', 'Original Price', 'Ship Weight', 'Shipping Cost', 'Google Product Category', 'GTIN', 'Connexity Product ID', 'AGE_GROUP', 'GENDER', 'Coupon Code']
               })
-              .fromFile('data/utahSkisProducts.csv')
+              .fromFile('data/Irrigate.txt')
               .on('json',(jsonObj) => {
                 // console.log(jsonObj)
                 if (jsonObj['Category'].toLowerCase() === searchParams) {
@@ -780,7 +780,7 @@ module.exports = (event) => {
                 delimiter: 'auto',
                 headers: ['Unique ID', 'Title', 'Description', 'Category', 'Product URL', 'Image URL', 'Condition', 'Availability', 'Current Price', 'Brand', 'Size', 'Color', 'Original Price', 'Ship Weight', 'Shipping Cost', 'Google Product Category', 'GTIN', 'Connexity Product ID', 'AGE_GROUP', 'GENDER', 'Coupon Code']
               })
-              .fromFile('data/utahSkisProducts.csv')
+              .fromFile('data/Irrigate.txt')
               .on('json',(jsonObj) => {
                 // console.log(jsonObj)
                 if (jsonObj['Category'].toLowerCase() === searchParams) {
@@ -877,7 +877,7 @@ module.exports = (event) => {
                 delimiter: 'auto',
                 headers: ['Unique ID', 'Title', 'Description', 'Category', 'Product URL', 'Image URL', 'Condition', 'Availability', 'Current Price', 'Brand', 'Size', 'Color', 'Original Price', 'Ship Weight', 'Shipping Cost', 'Google Product Category', 'GTIN', 'Connexity Product ID', 'AGE_GROUP', 'GENDER', 'Coupon Code']
               })
-              .fromFile('data/utahSkisProducts.csv')
+              .fromFile('data/Irrigate.txt')
               .on('json',(jsonObj) => {
                 // console.log(jsonObj)
                 if (jsonObj['Category'].toLowerCase() === searchParams) {
