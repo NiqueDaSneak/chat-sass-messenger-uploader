@@ -105,7 +105,7 @@ app.post('/', (req, res) => {
           return res.redirect(307, '/uncrouter')
         }
 
-        if (event.recipient.id === '534877406890866') {
+        if (event.recipient.id === '218246194915265') {
           return res.redirect(307, '/tedxrouter')
         }
 
