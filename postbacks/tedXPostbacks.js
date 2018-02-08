@@ -136,16 +136,16 @@ module.exports = (event) => {
                                     "template_type":"generic",
                                     "elements":[
                                       {
-                                        "title":"Would your company be interested in learning more about becoming a sponsor of TEDxCincinnati?",
+                                        "title":"Is your company interested in becoming a sponsor of TEDxCincinnati?",
                                         "buttons":[
                                           {
                                             "type":"postback",
-                                            "title":"Yes, that would be great!",
+                                            "title":"That would be great!",
                                             "payload":"SPONSOR_YES"
                                           },
                                           {
                                             "type":"postback",
-                                            "title":"No, but we really like TEDx 😀",
+                                            "title":"Nope 😅",
                                             "payload":"SPONSOR_NO"
                                           }
                                         ]
@@ -200,11 +200,11 @@ module.exports = (event) => {
                     "template_type":"generic",
                     "elements":[
                       {
-                        "title":"Interested in some exclusive content and want to enter to win free tickets to the event? 📣",
+                        "title":"Want exclusive content and to enter to win free tickets to the event? 📣",
                         "buttons":[
                           {
                             "type":"postback",
-                            "title":"Yes, that sounds great!",
+                            "title":"Sounds great!",
                             "payload":"ENROLL_YES"
                           },
                           {
@@ -419,12 +419,12 @@ module.exports = (event) => {
                           },
                           {
                             "type":"postback",
-                            "title":"Purchase Tickets for This Year🤗",
+                            "title":"Purchase Tickets 🤗",
                             "payload":"PURCHASE"
                           },
                           {
                             "type":"postback",
-                            "title":"Help a Student Buy a Ticket👍 ",
+                            "title":"Donate a Ticket 👍",
                             "payload":"DONATE"
                           }
                         ]
@@ -442,12 +442,12 @@ module.exports = (event) => {
                           },
                           {
                             "type":"postback",
-                            "title":"Purchase Tickets for This Year🤗",
+                            "title":"Purchase Tickets 🤗",
                             "payload":"PURCHASE"
                           },
                           {
                             "type":"postback",
-                            "title":"Help a Student Buy a Ticket👍 ",
+                            "title":"Donate a Ticket 👍",
                             "payload":"DONATE"
                           }
                         ]
@@ -465,12 +465,12 @@ module.exports = (event) => {
                           },
                           {
                             "type":"postback",
-                            "title":"Purchase Tickets for This Year🤗",
+                            "title":"Purchase Tickets 🤗",
                             "payload":"PURCHASE"
                           },
                           {
                             "type":"postback",
-                            "title":"Help a Student Buy a Ticket👍 ",
+                            "title":"Donate a Ticket 👍",
                             "payload":"DONATE"
                           }
                         ]
@@ -488,12 +488,12 @@ module.exports = (event) => {
                           },
                           {
                             "type":"postback",
-                            "title":"Purchase Tickets for This Year🤗",
+                            "title":"Purchase Tickets 🤗",
                             "payload":"PURCHASE"
                           },
                           {
                             "type":"postback",
-                            "title":"Help a Student Buy a Ticket👍 ",
+                            "title":"Donate a Ticket 👍",
                             "payload":"DONATE"
                           }
                         ]
@@ -528,12 +528,12 @@ module.exports = (event) => {
                           },
                           {
                             "type":"postback",
-                            "title":"Purchase Tickets for This Year🤗",
+                            "title":"Purchase Tickets 🤗",
                             "payload":"PURCHASE"
                           },
                           {
                             "type":"postback",
-                            "title":"Help a Student Buy a Ticket👍 ",
+                            "title":"Donate a Ticket 👍",
                             "payload":"DONATE"
                           }
                         ]
@@ -551,12 +551,12 @@ module.exports = (event) => {
                           },
                           {
                             "type":"postback",
-                            "title":"Purchase Tickets for This Year🤗",
+                            "title":"Purchase Tickets 🤗",
                             "payload":"PURCHASE"
                           },
                           {
                             "type":"postback",
-                            "title":"Help a Student Buy a Ticket👍 ",
+                            "title":"Donate a Ticket 👍",
                             "payload":"DONATE"
                           }
                         ]
@@ -574,12 +574,12 @@ module.exports = (event) => {
                           },
                           {
                             "type":"postback",
-                            "title":"Purchase Tickets for This Year🤗",
+                            "title":"Purchase Tickets 🤗",
                             "payload":"PURCHASE"
                           },
                           {
                             "type":"postback",
-                            "title":"Help a Student Buy a Ticket👍 ",
+                            "title":"Donate a Ticket 👍",
                             "payload":"DONATE"
                           }
                         ]
@@ -597,12 +597,12 @@ module.exports = (event) => {
                           },
                           {
                             "type":"postback",
-                            "title":"Purchase Tickets for This Year🤗",
+                            "title":"Purchase Tickets 🤗",
                             "payload":"PURCHASE"
                           },
                           {
                             "type":"postback",
-                            "title":"Help a Student Buy a Ticket👍 ",
+                            "title":"Donate a Ticket 👍",
                             "payload":"DONATE"
                           }
                         ]
@@ -620,12 +620,12 @@ module.exports = (event) => {
                           },
                           {
                             "type":"postback",
-                            "title":"Purchase Tickets for This Year🤗",
+                            "title":"Purchase Tickets 🤗",
                             "payload":"PURCHASE"
                           },
                           {
                             "type":"postback",
-                            "title":"Help a Student Buy a Ticket👍 ",
+                            "title":"Donate a Ticket 👍",
                             "payload":"DONATE"
                           }
                         ]
@@ -643,12 +643,12 @@ module.exports = (event) => {
                           },
                           {
                             "type":"postback",
-                            "title":"Purchase Tickets for This Year🤗",
+                            "title":"Purchase Tickets 🤗",
                             "payload":"PURCHASE"
                           },
                           {
                             "type":"postback",
-                            "title":"Help a Student Buy a Ticket👍 ",
+                            "title":"Donate a Ticket 👍",
                             "payload":"DONATE"
                           }
                         ]
@@ -666,12 +666,12 @@ module.exports = (event) => {
                           },
                           {
                             "type":"postback",
-                            "title":"Purchase Tickets for This Year🤗",
+                            "title":"Purchase Tickets 🤗",
                             "payload":"PURCHASE"
                           },
                           {
                             "type":"postback",
-                            "title":"Help a Student Buy a Ticket👍 ",
+                            "title":"Donate a Ticket 👍",
                             "payload":"DONATE"
                           }
                         ]
