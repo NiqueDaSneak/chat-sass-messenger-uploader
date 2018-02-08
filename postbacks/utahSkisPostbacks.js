@@ -1866,21 +1866,25 @@ module.exports = (event) => {
                       }
                       callSendAPI(user.pageAccessToken, messageData)
                     } else {
-                      let messageData = {
-                        "recipient":{
-                          "id": event.sender.id
-                        },
-                        "message":{
-                          "attachment":{
-                            "type":"template",
-                            "payload":{
-                              "template_type":"generic",
-                              "elements": itemCarosel
+                      if (itemCarosel.length === 0) {
+                        sendTextMessage(event.sender.id, user.pageAccessToken, 'Sold Out!')
+                      } else {
+                        let messageData = {
+                          "recipient":{
+                            "id": event.sender.id
+                          },
+                          "message":{
+                            "attachment":{
+                              "type":"template",
+                              "payload":{
+                                "template_type":"generic",
+                                "elements": itemCarosel
+                              }
                             }
                           }
                         }
+                        callSendAPI(user.pageAccessToken, messageData)
                       }
-                      callSendAPI(user.pageAccessToken, messageData)
                     }
               })
             }
@@ -1889,7 +1893,7 @@ module.exports = (event) => {
 
             // DEMOSNOWBOARDS
 
-            // HOODIES
+            // HOODIES for kids none!
             // SWEATERS
             // TURTLENECKS
             // THERMALS
