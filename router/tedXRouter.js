@@ -37,8 +37,8 @@ tedXRouter.post('/', (req, res, next) => {
     console.log('body: ' + JSON.stringify(req.body))
     // console.log('cost: ' + req.body.cost)
     stripe.customers.create({
-      email: req.body.stripe.email,
-      source: req.body.stripe.id
+      email: req.body["stripe[email]"],
+      source: req.body["stripe[id]"]
     }, function(err, customer) {
       if (err) {
         console.log(err)
