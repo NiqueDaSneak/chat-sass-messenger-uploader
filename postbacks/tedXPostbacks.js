@@ -313,54 +313,6 @@ module.exports = (event) => {
         })
       }
 
-      if (event.postback.payload.split('_')[0] === 'DONATETIX') {
-        var button
-        if (event.postback.payload.split('_')[1] === '1') {
-          button = {
-            "type":"web_url",
-            "url": '',
-            "title":"Send Donation",
-            "webview_height_ratio":"tall"
-          }
-        } else if (event.postback.payload.split('_')[1] === '2') {
-          button = {
-            "type":"web_url",
-            "url": '',
-            "title":"Send Donation",
-            "webview_height_ratio":"tall"
-          }
-        } else {
-          button = {
-            "type":"web_url",
-            "url": '',
-            "title":"Send Donation",
-            "webview_height_ratio":"tall"
-          }
-        }
-        let messageData = {
-          "recipient":{
-            "id": event.sender.id
-          },
-          "message":{
-            "attachment":{
-              "type":"template",
-              "payload":{
-                "template_type":"generic",
-                "elements":[
-                  {
-                    "title":"Tap below to send your donation:",
-                    "buttons":[button]
-                  }
-                ]
-              }
-            }
-          }
-        }
-        callSendAPI(user.pageAccessToken, messageData)
-
-      }
-
-
       if (event.postback.payload === 'TALKS') {
         getUser().then((user) => {
           let messageData = {
@@ -735,6 +687,53 @@ module.exports = (event) => {
 
     if (event.message) {
       if (event.message.quick_reply) {
+        if (event.message.quick_reply.payload.split('_')[0] === 'DONATETIX') {
+          var button
+          if (event.message.quick_reply.payload.split('_')[1] === '1') {
+            button = {
+              "type":"web_url",
+              "url": '',
+              "title":"Send Donation",
+              "webview_height_ratio":"tall"
+            }
+          } else if (event.postback.payload.split('_')[1] === '2') {
+            button = {
+              "type":"web_url",
+              "url": '',
+              "title":"Send Donation",
+              "webview_height_ratio":"tall"
+            }
+          } else {
+            button = {
+              "type":"web_url",
+              "url": '',
+              "title":"Send Donation",
+              "webview_height_ratio":"tall"
+            }
+          }
+          let messageData = {
+            "recipient":{
+              "id": event.sender.id
+            },
+            "message":{
+              "attachment":{
+                "type":"template",
+                "payload":{
+                  "template_type":"generic",
+                  "elements":[
+                    {
+                      "title":"Tap below to send your donation:",
+                      "buttons":[button]
+                    }
+                  ]
+                }
+              }
+            }
+          }
+          callSendAPI(user.pageAccessToken, messageData)
+
+        }
+
         if (event.message.quick_reply.payload.split('_')[0] === 'ENROLL') {
           if (event.message.quick_reply.payload.split('_')[1] === 'YES') {
             getUser().then((user) => {
