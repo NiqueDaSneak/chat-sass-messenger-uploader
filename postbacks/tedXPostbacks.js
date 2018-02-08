@@ -694,21 +694,21 @@ module.exports = (event) => {
               button = {
                 "type":"web_url",
                 "url": 'https://www.irrigatemsg.com',
-                "title":"Send Donation",
+                "title":"Donate $25",
                 "webview_height_ratio":"tall"
               }
             } else if (event.message.quick_reply.payload.split('_')[1] === '2') {
               button = {
                 "type":"web_url",
                 "url": 'https://www.irrigatemsg.com',
-                "title":"Send Donation",
+                "title":"Donate $50",
                 "webview_height_ratio":"tall"
               }
             } else {
               button = {
                 "type":"web_url",
                 "url": 'https://www.irrigatemsg.com',
-                "title":"Send Donation",
+                "title":"Donate $100",
                 "webview_height_ratio":"tall"
               }
             }
