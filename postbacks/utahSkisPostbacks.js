@@ -738,7 +738,7 @@ module.exports = (event) => {
                             "type":"template",
                             "payload":{
                               "template_type":"generic",
-                              "elements": itemCarosel
+                              "elements": newCarosel
                             }
                           }
                         }
