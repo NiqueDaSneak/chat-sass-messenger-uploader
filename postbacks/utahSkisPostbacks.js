@@ -2980,7 +2980,7 @@ module.exports = (event) => {
                 sendTextMessage(event.sender.id, user.pageAccessToken, 'Just click “Shop Now” in the menu to start browsing!')
               }, 4000)
             })
-          }, 3000)
+          }, 4500)
         }
       }
       // else {
