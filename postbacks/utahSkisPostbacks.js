@@ -2977,7 +2977,7 @@ module.exports = (event) => {
             getUser().then((user) => {
               sendTextMessage(event.sender.id, user.pageAccessToken, 'Instructions: scroll/swipe through categories to browse products. Tap “Buy now” to purchase.')
               setTimeout(() => {
-                sendTextMessage(event.sender.id, user.pageAccessToken, 'Just click “Shop Now” in the menu to start browsing!')
+                sendTextMessage(event.sender.id, user.pageAccessToken, 'Just click “Shop” in the menu to start browsing!')
               }, 4000)
             })
           }, 4500)
