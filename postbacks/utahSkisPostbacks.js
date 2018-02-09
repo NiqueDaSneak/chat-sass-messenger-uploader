@@ -2867,7 +2867,7 @@ module.exports = (event) => {
                   itemCarosel.push(
                     {
                       "title": matchedItems[i].Title,
-                      "subtitle": '$' + Math.round(matchedItems[i]['Current Price'] * 100)/100,
+                      "subtitle": '$' + Math.round(matchedItems[i]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[i]['Size'],
                       "image_url": matchedItems[i]['Image URL'],
                       "buttons":[
                         {
