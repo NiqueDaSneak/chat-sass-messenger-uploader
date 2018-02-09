@@ -2965,18 +2965,22 @@ module.exports = (event) => {
           if (event.message.quick_reply.payload.split('_')[1] === 'YES') {
             getUser().then((user) => {
               // send affirmative gif
+              sendImageMessage(event.sender.id, user.pageAccessToken, 'https://chat-sass-messenger-uploader.herokuapp.com/static/utah/gif-yes.gif')
             })
           } else {
             getUser().then((user) => {
               // send negative gif
+              sendImageMessage(event.sender.id, user.pageAccessToken, 'https://chat-sass-messenger-uploader.herokuapp.com/static/utah/gif-no.gif')
             })
           }
-          getUser().then((user) => {
-            sendTextMessage(event.sender.id, user.pageAccessToken, 'Instructions: scroll/swipe through categories to browse products. Tap “Buy now” to purchase.')
-            setTimeout(() => {
-              sendTextMessage(event.sender.id, user.pageAccessToken, 'Just click “Shop Now” in the menu to start browsing!')
-            }, 4000)
-          })
+          setTimeout(() => {
+            getUser().then((user) => {
+              sendTextMessage(event.sender.id, user.pageAccessToken, 'Instructions: scroll/swipe through categories to browse products. Tap “Buy now” to purchase.')
+              setTimeout(() => {
+                sendTextMessage(event.sender.id, user.pageAccessToken, 'Just click “Shop Now” in the menu to start browsing!')
+              }, 4000)
+            })
+          }, 3000)
         }
       }
       // else {
