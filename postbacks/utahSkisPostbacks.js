@@ -611,7 +611,7 @@ module.exports = (event) => {
                       for (var i = 0; i < 10; i++) {
                         if (i === 10) {
                           newCarosel.push({
-                            "title": 'See More'
+                            "title": 'See More',
                             "buttons":[
                               {
                                 "type":"postback",
@@ -729,7 +729,7 @@ module.exports = (event) => {
                       for (var i = 0; i < 10; i++) {
                         if (i === 10) {
                           newCarosel.push({
-                            "title": 'See More'
+                            "title": 'See More',
                             "buttons":[
                               {
                                 "type":"postback",
@@ -847,7 +847,7 @@ module.exports = (event) => {
                       for (var i = 0; i < 10; i++) {
                         if (i === 10) {
                           newCarosel.push({
-                            "title": 'See More'
+                            "title": 'See More',
                             "buttons":[
                               {
                                 "type":"postback",
@@ -959,7 +959,7 @@ module.exports = (event) => {
                       for (var i = 0; i < 10; i++) {
                         if (i === 10) {
                           newCarosel.push({
-                            "title": 'See More'
+                            "title": 'See More',
                             "buttons":[
                               {
                                 "type":"postback",
@@ -1071,7 +1071,7 @@ module.exports = (event) => {
                       for (var i = 0; i < 10; i++) {
                         if (i === 10) {
                           newCarosel.push({
-                            "title": 'See More'
+                            "title": 'See More',
                             "buttons":[
                               {
                                 "type":"postback",
@@ -1189,7 +1189,7 @@ module.exports = (event) => {
                       for (var i = 0; i < 10; i++) {
                         if (i === 10) {
                           newCarosel.push({
-                            "title": 'See More'
+                            "title": 'See More',
                             "buttons":[
                               {
                                 "type":"postback",
@@ -1307,7 +1307,7 @@ module.exports = (event) => {
                       for (var i = 0; i < 10; i++) {
                         if (i === 10) {
                           newCarosel.push({
-                            "title": 'See More'
+                            "title": 'See More',
                             "buttons":[
                               {
                                 "type":"postback",
@@ -1425,7 +1425,7 @@ module.exports = (event) => {
                       for (var i = 0; i < 10; i++) {
                         if (i === 10) {
                           newCarosel.push({
-                            "title": 'See More'
+                            "title": 'See More',
                             "buttons":[
                               {
                                 "type":"postback",
@@ -1544,7 +1544,7 @@ module.exports = (event) => {
                       for (var i = 0; i < 10; i++) {
                         if (i === 10) {
                           newCarosel.push({
-                            "title": 'See More'
+                            "title": 'See More',
                             "buttons":[
                               {
                                 "type":"postback",
@@ -1662,7 +1662,7 @@ module.exports = (event) => {
                       for (var i = 0; i < 10; i++) {
                         if (i === 10) {
                           newCarosel.push({
-                            "title": 'See More'
+                            "title": 'See More',
                             "buttons":[
                               {
                                 "type":"postback",
@@ -1780,7 +1780,7 @@ module.exports = (event) => {
                       for (var i = 0; i < 10; i++) {
                         if (i === 10) {
                           newCarosel.push({
-                            "title": 'See More'
+                            "title": 'See More',
                             "buttons":[
                               {
                                 "type":"postback",
@@ -1898,7 +1898,7 @@ module.exports = (event) => {
                       for (var i = 0; i < 10; i++) {
                         if (i === 10) {
                           newCarosel.push({
-                            "title": 'See More'
+                            "title": 'See More',
                             "buttons":[
                               {
                                 "type":"postback",
@@ -2016,7 +2016,7 @@ module.exports = (event) => {
                       for (var i = 0; i < 10; i++) {
                         if (i === 10) {
                           newCarosel.push({
-                            "title": 'See More'
+                            "title": 'See More',
                             "buttons":[
                               {
                                 "type":"postback",
@@ -2138,7 +2138,7 @@ module.exports = (event) => {
                       for (var i = 0; i < 10; i++) {
                         if (i === 10) {
                           newCarosel.push({
-                            "title": 'See More'
+                            "title": 'See More',
                             "buttons":[
                               {
                                 "type":"postback",
@@ -2260,7 +2260,7 @@ module.exports = (event) => {
                       for (var i = 0; i < 10; i++) {
                         if (i === 10) {
                           newCarosel.push({
-                            "title": 'See More'
+                            "title": 'See More',
                             "buttons":[
                               {
                                 "type":"postback",
@@ -2382,7 +2382,7 @@ module.exports = (event) => {
                       for (var i = 0; i < 10; i++) {
                         if (i === 10) {
                           newCarosel.push({
-                            "title": 'See More'
+                            "title": 'See More',
                             "buttons":[
                               {
                                 "type":"postback",
@@ -2504,7 +2504,7 @@ module.exports = (event) => {
                       for (var i = 0; i < 10; i++) {
                         if (i === 10) {
                           newCarosel.push({
-                            "title": 'See More'
+                            "title": 'See More',
                             "buttons":[
                               {
                                 "type":"postback",
@@ -2626,7 +2626,7 @@ module.exports = (event) => {
                       for (var i = 0; i < 10; i++) {
                         if (i === 10) {
                           newCarosel.push({
-                            "title": 'See More'
+                            "title": 'See More',
                             "buttons":[
                               {
                                 "type":"postback",
@@ -2748,7 +2748,7 @@ module.exports = (event) => {
                       for (var i = 0; i < 10; i++) {
                         if (i === 10) {
                           newCarosel.push({
-                            "title": 'See More'
+                            "title": 'See More',
                             "buttons":[
                               {
                                 "type":"postback",
@@ -2870,7 +2870,7 @@ module.exports = (event) => {
                       for (var i = 0; i < 10; i++) {
                         if (i === 10) {
                           newCarosel.push({
-                            "title": 'See More'
+                            "title": 'See More',
                             "buttons":[
                               {
                                 "type":"postback",
@@ -2992,7 +2992,7 @@ module.exports = (event) => {
                   for (var i = 0; i < 10; i++) {
                     if (i === 10) {
                       newCarosel.push({
-                        "title": 'See More'
+                        "title": 'See More',
                         "buttons":[
                           {
                             "type":"postback",
@@ -3108,7 +3108,7 @@ module.exports = (event) => {
                   for (var i = 0; i < 10; i++) {
                     if (i === 10) {
                       newCarosel.push({
-                        "title": 'See More'
+                        "title": 'See More',
                         "buttons":[
                           {
                             "type":"postback",
@@ -3224,7 +3224,7 @@ module.exports = (event) => {
                   for (var i = 0; i < 10; i++) {
                     if (i === 10) {
                       newCarosel.push({
-                        "title": 'See More'
+                        "title": 'See More',
                         "buttons":[
                           {
                             "type":"postback",
