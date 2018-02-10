@@ -101,16 +101,15 @@ module.exports = (event) => {
       if (event.postback.payload === 'GET_STARTED_PAYLOAD') {
         getUser().then((user) => {
           findMember(user)
+          Member.findOneAndUpdate({ fbID: event.sender.id }, { postbackCount: postbackCount + 1 }, (err, member) => {
+            if (err) {
+              console.error(err)
+            }
+
+            console.log(member)
+          })
         })
       }
-
-      Member.findOneAndUpdate({ fbID: event.sender.id }, { postbackCount: postbackCount + 1 }, (err, member) => {
-        if (err) {
-          console.error(err)
-        }
-
-        console.log(member)
-      })
 
       if (event.postback.payload === 'SHOP') {
         getUser().then((user) => {
