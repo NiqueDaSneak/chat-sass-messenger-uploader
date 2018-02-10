@@ -583,9 +583,11 @@ module.exports = (event) => {
 
                     for (var i = 0; i < matchedItems.length; i++) {
                       var randNum = Math.floor(Math.random() * matchedItems.length) + 1
+                      console.log(matchedItems[randNum])
+
                       itemCarosel.push(
                         {
-                          "title": matchedItems[randNum].Title,
+                          "title": matchedItems[randNum]['Title'],
                           "subtitle": '$' + Math.round(matchedItems[randNum]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[randNum]['Size'],
                           "image_url": matchedItems[randNum]['Image URL'],
                           "buttons":[
@@ -701,9 +703,11 @@ module.exports = (event) => {
 
                     for (var i = 0; i < matchedItems.length; i++) {
                       var randNum = Math.floor(Math.random() * matchedItems.length) + 1
+                      console.log(matchedItems[randNum])
+
                       itemCarosel.push(
                         {
-                          "title": matchedItems[randNum].Title,
+                          "title": matchedItems[randNum]['Title'],
                           "subtitle": '$' + Math.round(matchedItems[randNum]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[randNum]['Size'],
                           "image_url": matchedItems[randNum]['Image URL'],
                           "buttons":[
@@ -819,9 +823,11 @@ module.exports = (event) => {
 
                     for (var i = 0; i < matchedItems.length; i++) {
                       var randNum = Math.floor(Math.random() * matchedItems.length) + 1
+                      console.log(matchedItems[randNum])
+
                       itemCarosel.push(
                         {
-                          "title": matchedItems[randNum].Title,
+                          "title": matchedItems[randNum]['Title'],
                           "subtitle": '$' + Math.round(matchedItems[randNum]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[randNum]['Size'],
                           "image_url": matchedItems[randNum]['Image URL'],
                           "buttons":[
@@ -931,9 +937,11 @@ module.exports = (event) => {
 
                     for (var i = 0; i < matchedItems.length; i++) {
                       var randNum = Math.floor(Math.random() * matchedItems.length) + 1
+                      console.log(matchedItems[randNum])
+
                       itemCarosel.push(
                         {
-                          "title": matchedItems[randNum].Title,
+                          "title": matchedItems[randNum]['Title'],
                           "subtitle": '$' + Math.round(matchedItems[randNum]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[randNum]['Size'],
                           "image_url": matchedItems[randNum]['Image URL'],
                           "buttons":[
@@ -1043,9 +1051,11 @@ module.exports = (event) => {
 
                     for (var i = 0; i < matchedItems.length; i++) {
                       var randNum = Math.floor(Math.random() * matchedItems.length) + 1
+                      console.log(matchedItems[randNum])
+
                       itemCarosel.push(
                         {
-                          "title": matchedItems[randNum].Title,
+                          "title": matchedItems[randNum]['Title'],
                           "subtitle": '$' + Math.round(matchedItems[randNum]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[randNum]['Size'],
                           "image_url": matchedItems[randNum]['Image URL'],
                           "buttons":[
@@ -1161,9 +1171,11 @@ module.exports = (event) => {
 
                     for (var i = 0; i < matchedItems.length; i++) {
                       var randNum = Math.floor(Math.random() * matchedItems.length) + 1
+                      console.log(matchedItems[randNum])
+
                       itemCarosel.push(
                         {
-                          "title": matchedItems[randNum].Title,
+                          "title": matchedItems[randNum]['Title'],
                           "subtitle": '$' + Math.round(matchedItems[randNum]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[randNum]['Size'],
                           "image_url": matchedItems[randNum]['Image URL'],
                           "buttons":[
@@ -1279,9 +1291,11 @@ module.exports = (event) => {
 
                     for (var i = 0; i < matchedItems.length; i++) {
                       var randNum = Math.floor(Math.random() * matchedItems.length) + 1
+                      console.log(matchedItems[randNum])
+
                       itemCarosel.push(
                         {
-                          "title": matchedItems[randNum].Title,
+                          "title": matchedItems[randNum]['Title'],
                           "subtitle": '$' + Math.round(matchedItems[randNum]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[randNum]['Size'],
                           "image_url": matchedItems[randNum]['Image URL'],
                           "buttons":[
@@ -1397,9 +1411,11 @@ module.exports = (event) => {
 
                     for (var i = 0; i < matchedItems.length; i++) {
                       var randNum = Math.floor(Math.random() * matchedItems.length) + 1
+                      console.log(matchedItems[randNum])
+
                       itemCarosel.push(
                         {
-                          "title": matchedItems[randNum].Title,
+                          "title": matchedItems[randNum]['Title'],
                           "subtitle": '$' + Math.round(matchedItems[randNum]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[randNum]['Size'],
                           "image_url": matchedItems[randNum]['Image URL'],
                           "buttons":[
@@ -1516,9 +1532,11 @@ module.exports = (event) => {
 
                     for (var i = 0; i < matchedItems.length; i++) {
                       var randNum = Math.floor(Math.random() * matchedItems.length) + 1
+                      console.log(matchedItems[randNum])
+
                       itemCarosel.push(
                         {
-                          "title": matchedItems[randNum].Title,
+                          "title": matchedItems[randNum]['Title'],
                           "subtitle": '$' + Math.round(matchedItems[randNum]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[randNum]['Size'],
                           "image_url": matchedItems[randNum]['Image URL'],
                           "buttons":[
@@ -1634,9 +1652,11 @@ module.exports = (event) => {
 
                     for (var i = 0; i < matchedItems.length; i++) {
                       var randNum = Math.floor(Math.random() * matchedItems.length) + 1
+                      console.log(matchedItems[randNum])
+
                       itemCarosel.push(
                         {
-                          "title": matchedItems[randNum].Title,
+                          "title": matchedItems[randNum]['Title'],
                           "subtitle": '$' + Math.round(matchedItems[randNum]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[randNum]['Size'],
                           "image_url": matchedItems[randNum]['Image URL'],
                           "buttons":[
@@ -1752,9 +1772,11 @@ module.exports = (event) => {
 
                     for (var i = 0; i < matchedItems.length; i++) {
                       var randNum = Math.floor(Math.random() * matchedItems.length) + 1
+                      console.log(matchedItems[randNum])
+
                       itemCarosel.push(
                         {
-                          "title": matchedItems[randNum].Title,
+                          "title": matchedItems[randNum]['Title'],
                           "subtitle": '$' + Math.round(matchedItems[randNum]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[randNum]['Size'],
                           "image_url": matchedItems[randNum]['Image URL'],
                           "buttons":[
@@ -1870,9 +1892,11 @@ module.exports = (event) => {
 
                     for (var i = 0; i < matchedItems.length; i++) {
                       var randNum = Math.floor(Math.random() * matchedItems.length) + 1
+                      console.log(matchedItems[randNum])
+
                       itemCarosel.push(
                         {
-                          "title": matchedItems[randNum].Title,
+                          "title": matchedItems[randNum]['Title'],
                           "subtitle": '$' + Math.round(matchedItems[randNum]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[randNum]['Size'],
                           "image_url": matchedItems[randNum]['Image URL'],
                           "buttons":[
@@ -1988,9 +2012,11 @@ module.exports = (event) => {
 
                     for (var i = 0; i < matchedItems.length; i++) {
                       var randNum = Math.floor(Math.random() * matchedItems.length) + 1
+                      console.log(matchedItems[randNum])
+                      
                       itemCarosel.push(
                         {
-                          "title": matchedItems[randNum].Title,
+                          "title": matchedItems[randNum]['Title'],
                           "subtitle": '$' + Math.round(matchedItems[randNum]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[randNum]['Size'],
                           "image_url": matchedItems[randNum]['Image URL'],
                           "buttons":[
@@ -2110,9 +2136,10 @@ module.exports = (event) => {
 
                     for (var i = 0; i < matchedItems.length; i++) {
                       var randNum = Math.floor(Math.random() * matchedItems.length) + 1
+                      console.log(matchedItems[randNum])
                       itemCarosel.push(
                         {
-                          "title": matchedItems[randNum].Title,
+                          "title": matchedItems[randNum]['Title'],
                           "subtitle": '$' + Math.round(matchedItems[randNum]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[randNum]['Size'],
                           "image_url": matchedItems[randNum]['Image URL'],
                           "buttons":[
@@ -2232,9 +2259,11 @@ module.exports = (event) => {
 
                     for (var i = 0; i < matchedItems.length; i++) {
                       var randNum = Math.floor(Math.random() * matchedItems.length) + 1
+                      console.log(matchedItems[randNum])
+
                       itemCarosel.push(
                         {
-                          "title": matchedItems[randNum].Title,
+                          "title": matchedItems[randNum]['Title'],
                           "subtitle": '$' + Math.round(matchedItems[randNum]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[randNum]['Size'],
                           "image_url": matchedItems[randNum]['Image URL'],
                           "buttons":[
@@ -2354,9 +2383,11 @@ module.exports = (event) => {
 
                     for (var i = 0; i < matchedItems.length; i++) {
                       var randNum = Math.floor(Math.random() * matchedItems.length) + 1
+                      console.log(matchedItems[randNum])
+
                       itemCarosel.push(
                         {
-                          "title": matchedItems[randNum].Title,
+                          "title": matchedItems[randNum]['Title'],
                           "subtitle": '$' + Math.round(matchedItems[randNum]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[randNum]['Size'],
                           "image_url": matchedItems[randNum]['Image URL'],
                           "buttons":[
@@ -2476,9 +2507,11 @@ module.exports = (event) => {
 
                     for (var i = 0; i < matchedItems.length; i++) {
                       var randNum = Math.floor(Math.random() * matchedItems.length) + 1
+                      console.log(matchedItems[randNum])
+
                       itemCarosel.push(
                         {
-                          "title": matchedItems[randNum].Title,
+                          "title": matchedItems[randNum]['Title'],
                           "subtitle": '$' + Math.round(matchedItems[randNum]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[randNum]['Size'],
                           "image_url": matchedItems[randNum]['Image URL'],
                           "buttons":[
@@ -2598,9 +2631,11 @@ module.exports = (event) => {
 
                     for (var i = 0; i < matchedItems.length; i++) {
                       var randNum = Math.floor(Math.random() * matchedItems.length) + 1
+                      console.log(matchedItems[randNum])
+
                       itemCarosel.push(
                         {
-                          "title": matchedItems[randNum].Title,
+                          "title": matchedItems[randNum]['Title'],
                           "subtitle": '$' + Math.round(matchedItems[randNum]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[randNum]['Size'],
                           "image_url": matchedItems[randNum]['Image URL'],
                           "buttons":[
@@ -2720,9 +2755,11 @@ module.exports = (event) => {
 
                     for (var i = 0; i < matchedItems.length; i++) {
                       var randNum = Math.floor(Math.random() * matchedItems.length) + 1
+                      console.log(matchedItems[randNum])
+
                       itemCarosel.push(
                         {
-                          "title": matchedItems[randNum].Title,
+                          "title": matchedItems[randNum]['Title'],
                           "subtitle": '$' + Math.round(matchedItems[randNum]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[randNum]['Size'],
                           "image_url": matchedItems[randNum]['Image URL'],
                           "buttons":[
@@ -2842,9 +2879,11 @@ module.exports = (event) => {
 
                     for (var i = 0; i < matchedItems.length; i++) {
                       var randNum = Math.floor(Math.random() * matchedItems.length) + 1
+                      console.log(matchedItems[randNum])
+
                       itemCarosel.push(
                         {
-                          "title": matchedItems[randNum].Title,
+                          "title": matchedItems[randNum]['Title'],
                           "subtitle": '$' + Math.round(matchedItems[randNum]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[randNum]['Size'],
                           "image_url": matchedItems[randNum]['Image URL'],
                           "buttons":[
@@ -2964,9 +3003,11 @@ module.exports = (event) => {
 
                 for (var i = 0; i < matchedItems.length; i++) {
                   var randNum = Math.floor(Math.random() * matchedItems.length) + 1
+                  console.log(matchedItems[randNum])
+
                   itemCarosel.push(
                     {
-                      "title": matchedItems[randNum].Title,
+                      "title": matchedItems[randNum]['Title'],
                       "subtitle": '$' + Math.round(matchedItems[randNum]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[randNum]['Size'],
                       "image_url": matchedItems[randNum]['Image URL'],
                       "buttons":[
@@ -3080,9 +3121,11 @@ module.exports = (event) => {
 
                 for (var i = 0; i < matchedItems.length; i++) {
                   var randNum = Math.floor(Math.random() * matchedItems.length) + 1
+                  console.log(matchedItems[randNum])
+
                   itemCarosel.push(
                     {
-                      "title": matchedItems[randNum].Title,
+                      "title": matchedItems[randNum]['Title'],
                       "subtitle": '$' + Math.round(matchedItems[randNum]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[randNum]['Size'],
                       "image_url": matchedItems[randNum]['Image URL'],
                       "buttons":[
@@ -3196,9 +3239,11 @@ module.exports = (event) => {
 
                 for (var i = 0; i < matchedItems.length; i++) {
                   var randNum = Math.floor(Math.random() * matchedItems.length) + 1
+                  console.log(matchedItems[randNum])
+
                   itemCarosel.push(
                     {
-                      "title": matchedItems[randNum].Title,
+                      "title": matchedItems[randNum]['Title'],
                       "subtitle": '$' + Math.round(matchedItems[randNum]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[randNum]['Size'],
                       "image_url": matchedItems[randNum]['Image URL'],
                       "buttons":[
