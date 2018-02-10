@@ -582,21 +582,22 @@ module.exports = (event) => {
                     var itemCarosel = []
 
                     for (var i = 0; i < matchedItems.length; i++) {
+                      var randNum = Math.floor(Math.random() * matchedItems.length) + 1
                       itemCarosel.push(
                         {
-                          "title": matchedItems[i].Title,
-                          "subtitle": '$' + Math.round(matchedItems[i]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[i]['Size'],
-                          "image_url": matchedItems[i]['Image URL'],
+                          "title": matchedItems[randNum].Title,
+                          "subtitle": '$' + Math.round(matchedItems[randNum]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[randNum]['Size'],
+                          "image_url": matchedItems[randNum]['Image URL'],
                           "buttons":[
                             {
                               "type":"web_url",
-                              "url": matchedItems[i]['Product URL'],
+                              "url": matchedItems[randNum]['Product URL'],
                               "title":"Purchase",
                               "webview_height_ratio":"tall"
                             },
                             {
                               "type":"web_url",
-                              "url": matchedItems[i]['Product URL'],
+                              "url": matchedItems[randNum]['Product URL'],
                               "title":"View Details",
                               "webview_height_ratio":"tall"
                             }
@@ -608,7 +609,21 @@ module.exports = (event) => {
                     if (itemCarosel.length > 10) {
                       let newCarosel = []
                       for (var i = 0; i < 10; i++) {
-                        newCarosel.push(itemCarosel[i])
+                        if (i === 10) {
+                          newCarosel.push({
+                            "title": 'See More'
+                            "buttons":[
+                              {
+                                "type":"postback",
+                                "title":"Show More",
+                                "payload": "SHOWPRODUCTS_" + gender + "_" + category
+                              },
+                            ]
+                          })
+
+                        } else {
+                          newCarosel.push(itemCarosel[i])
+                        }
                       }
 
                       let messageData = {
@@ -685,33 +700,48 @@ module.exports = (event) => {
                     var itemCarosel = []
 
                     for (var i = 0; i < matchedItems.length; i++) {
-                        itemCarosel.push(
-                          {
-                            "title": matchedItems[i].Title,
-                            "subtitle": '$' + Math.round(matchedItems[i]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[i]['Size'],
-                            "image_url": matchedItems[i]['Image URL'],
-                            "buttons":[
-                              {
-                                "type":"web_url",
-                                "url": matchedItems[i]['Product URL'],
-                                "title":"Purchase",
-                                "webview_height_ratio":"tall"
-                              },
-                              {
-                                "type":"web_url",
-                                "url": matchedItems[i]['Product URL'],
-                                "title":"View Details",
-                                "webview_height_ratio":"tall"
-                              }
-                            ]
-                          }
-                        )
+                      var randNum = Math.floor(Math.random() * matchedItems.length) + 1
+                      itemCarosel.push(
+                        {
+                          "title": matchedItems[randNum].Title,
+                          "subtitle": '$' + Math.round(matchedItems[randNum]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[randNum]['Size'],
+                          "image_url": matchedItems[randNum]['Image URL'],
+                          "buttons":[
+                            {
+                              "type":"web_url",
+                              "url": matchedItems[randNum]['Product URL'],
+                              "title":"Purchase",
+                              "webview_height_ratio":"tall"
+                            },
+                            {
+                              "type":"web_url",
+                              "url": matchedItems[randNum]['Product URL'],
+                              "title":"View Details",
+                              "webview_height_ratio":"tall"
+                            }
+                          ]
+                        }
+                      )
                     }
 
                     if (itemCarosel.length > 10) {
                       let newCarosel = []
                       for (var i = 0; i < 10; i++) {
-                        newCarosel.push(itemCarosel[i])
+                        if (i === 10) {
+                          newCarosel.push({
+                            "title": 'See More'
+                            "buttons":[
+                              {
+                                "type":"postback",
+                                "title":"Show More",
+                                "payload": "SHOWPRODUCTS_" + gender + "_" + category
+                              },
+                            ]
+                          })
+
+                        } else {
+                          newCarosel.push(itemCarosel[i])
+                        }
                       }
 
                       let messageData = {
@@ -788,33 +818,48 @@ module.exports = (event) => {
                     var itemCarosel = []
 
                     for (var i = 0; i < matchedItems.length; i++) {
-                        itemCarosel.push(
-                          {
-                            "title": matchedItems[i].Title,
-                            "subtitle": '$' + Math.round(matchedItems[i]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[i]['Size'],
-                            "image_url": matchedItems[i]['Image URL'],
-                            "buttons":[
-                              {
-                                "type":"web_url",
-                                "url": matchedItems[i]['Product URL'],
-                                "title":"Purchase",
-                                "webview_height_ratio":"tall"
-                              },
-                              {
-                                "type":"web_url",
-                                "url": matchedItems[i]['Product URL'],
-                                "title":"View Details",
-                                "webview_height_ratio":"tall"
-                              }
-                            ]
-                          }
-                        )
+                      var randNum = Math.floor(Math.random() * matchedItems.length) + 1
+                      itemCarosel.push(
+                        {
+                          "title": matchedItems[randNum].Title,
+                          "subtitle": '$' + Math.round(matchedItems[randNum]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[randNum]['Size'],
+                          "image_url": matchedItems[randNum]['Image URL'],
+                          "buttons":[
+                            {
+                              "type":"web_url",
+                              "url": matchedItems[randNum]['Product URL'],
+                              "title":"Purchase",
+                              "webview_height_ratio":"tall"
+                            },
+                            {
+                              "type":"web_url",
+                              "url": matchedItems[randNum]['Product URL'],
+                              "title":"View Details",
+                              "webview_height_ratio":"tall"
+                            }
+                          ]
+                        }
+                      )
                     }
 
                     if (itemCarosel.length > 10) {
                       let newCarosel = []
                       for (var i = 0; i < 10; i++) {
-                        newCarosel.push(itemCarosel[i])
+                        if (i === 10) {
+                          newCarosel.push({
+                            "title": 'See More'
+                            "buttons":[
+                              {
+                                "type":"postback",
+                                "title":"Show More",
+                                "payload": "SHOWPRODUCTS_" + gender + "_" + category
+                              },
+                            ]
+                          })
+
+                        } else {
+                          newCarosel.push(itemCarosel[i])
+                        }
                       }
 
                       let messageData = {
@@ -885,33 +930,48 @@ module.exports = (event) => {
                     var itemCarosel = []
 
                     for (var i = 0; i < matchedItems.length; i++) {
-                        itemCarosel.push(
-                          {
-                            "title": matchedItems[i].Title,
-                            "subtitle": '$' + Math.round(matchedItems[i]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[i]['Size'],
-                            "image_url": matchedItems[i]['Image URL'],
-                            "buttons":[
-                              {
-                                "type":"web_url",
-                                "url": matchedItems[i]['Product URL'],
-                                "title":"Purchase",
-                                "webview_height_ratio":"tall"
-                              },
-                              {
-                                "type":"web_url",
-                                "url": matchedItems[i]['Product URL'],
-                                "title":"View Details",
-                                "webview_height_ratio":"tall"
-                              }
-                            ]
-                          }
-                        )
+                      var randNum = Math.floor(Math.random() * matchedItems.length) + 1
+                      itemCarosel.push(
+                        {
+                          "title": matchedItems[randNum].Title,
+                          "subtitle": '$' + Math.round(matchedItems[randNum]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[randNum]['Size'],
+                          "image_url": matchedItems[randNum]['Image URL'],
+                          "buttons":[
+                            {
+                              "type":"web_url",
+                              "url": matchedItems[randNum]['Product URL'],
+                              "title":"Purchase",
+                              "webview_height_ratio":"tall"
+                            },
+                            {
+                              "type":"web_url",
+                              "url": matchedItems[randNum]['Product URL'],
+                              "title":"View Details",
+                              "webview_height_ratio":"tall"
+                            }
+                          ]
+                        }
+                      )
                     }
 
                     if (itemCarosel.length > 10) {
                       let newCarosel = []
                       for (var i = 0; i < 10; i++) {
-                        newCarosel.push(itemCarosel[i])
+                        if (i === 10) {
+                          newCarosel.push({
+                            "title": 'See More'
+                            "buttons":[
+                              {
+                                "type":"postback",
+                                "title":"Show More",
+                                "payload": "SHOWPRODUCTS_" + gender + "_" + category
+                              },
+                            ]
+                          })
+
+                        } else {
+                          newCarosel.push(itemCarosel[i])
+                        }
                       }
 
                       let messageData = {
@@ -982,33 +1042,48 @@ module.exports = (event) => {
                     var itemCarosel = []
 
                     for (var i = 0; i < matchedItems.length; i++) {
-                        itemCarosel.push(
-                          {
-                            "title": matchedItems[i].Title,
-                            "subtitle": '$' + Math.round(matchedItems[i]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[i]['Size'],
-                            "image_url": matchedItems[i]['Image URL'],
-                            "buttons":[
-                              {
-                                "type":"web_url",
-                                "url": matchedItems[i]['Product URL'],
-                                "title":"Purchase",
-                                "webview_height_ratio":"tall"
-                              },
-                              {
-                                "type":"web_url",
-                                "url": matchedItems[i]['Product URL'],
-                                "title":"View Details",
-                                "webview_height_ratio":"tall"
-                              }
-                            ]
-                          }
-                        )
+                      var randNum = Math.floor(Math.random() * matchedItems.length) + 1
+                      itemCarosel.push(
+                        {
+                          "title": matchedItems[randNum].Title,
+                          "subtitle": '$' + Math.round(matchedItems[randNum]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[randNum]['Size'],
+                          "image_url": matchedItems[randNum]['Image URL'],
+                          "buttons":[
+                            {
+                              "type":"web_url",
+                              "url": matchedItems[randNum]['Product URL'],
+                              "title":"Purchase",
+                              "webview_height_ratio":"tall"
+                            },
+                            {
+                              "type":"web_url",
+                              "url": matchedItems[randNum]['Product URL'],
+                              "title":"View Details",
+                              "webview_height_ratio":"tall"
+                            }
+                          ]
+                        }
+                      )
                     }
 
                     if (itemCarosel.length > 10) {
                       let newCarosel = []
                       for (var i = 0; i < 10; i++) {
-                        newCarosel.push(itemCarosel[i])
+                        if (i === 10) {
+                          newCarosel.push({
+                            "title": 'See More'
+                            "buttons":[
+                              {
+                                "type":"postback",
+                                "title":"Show More",
+                                "payload": "SHOWPRODUCTS_" + gender + "_" + category
+                              },
+                            ]
+                          })
+
+                        } else {
+                          newCarosel.push(itemCarosel[i])
+                        }
                       }
 
                       let messageData = {
@@ -1085,33 +1160,48 @@ module.exports = (event) => {
                     var itemCarosel = []
 
                     for (var i = 0; i < matchedItems.length; i++) {
-                        itemCarosel.push(
-                          {
-                            "title": matchedItems[i].Title,
-                            "subtitle": '$' + Math.round(matchedItems[i]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[i]['Size'],
-                            "image_url": matchedItems[i]['Image URL'],
-                            "buttons":[
-                              {
-                                "type":"web_url",
-                                "url": matchedItems[i]['Product URL'],
-                                "title":"Purchase",
-                                "webview_height_ratio":"tall"
-                              },
-                              {
-                                "type":"web_url",
-                                "url": matchedItems[i]['Product URL'],
-                                "title":"View Details",
-                                "webview_height_ratio":"tall"
-                              }
-                            ]
-                          }
-                        )
+                      var randNum = Math.floor(Math.random() * matchedItems.length) + 1
+                      itemCarosel.push(
+                        {
+                          "title": matchedItems[randNum].Title,
+                          "subtitle": '$' + Math.round(matchedItems[randNum]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[randNum]['Size'],
+                          "image_url": matchedItems[randNum]['Image URL'],
+                          "buttons":[
+                            {
+                              "type":"web_url",
+                              "url": matchedItems[randNum]['Product URL'],
+                              "title":"Purchase",
+                              "webview_height_ratio":"tall"
+                            },
+                            {
+                              "type":"web_url",
+                              "url": matchedItems[randNum]['Product URL'],
+                              "title":"View Details",
+                              "webview_height_ratio":"tall"
+                            }
+                          ]
+                        }
+                      )
                     }
 
                     if (itemCarosel.length > 10) {
                       let newCarosel = []
                       for (var i = 0; i < 10; i++) {
-                        newCarosel.push(itemCarosel[i])
+                        if (i === 10) {
+                          newCarosel.push({
+                            "title": 'See More'
+                            "buttons":[
+                              {
+                                "type":"postback",
+                                "title":"Show More",
+                                "payload": "SHOWPRODUCTS_" + gender + "_" + category
+                              },
+                            ]
+                          })
+
+                        } else {
+                          newCarosel.push(itemCarosel[i])
+                        }
                       }
 
                       let messageData = {
@@ -1188,33 +1278,48 @@ module.exports = (event) => {
                     var itemCarosel = []
 
                     for (var i = 0; i < matchedItems.length; i++) {
-                        itemCarosel.push(
-                          {
-                            "title": matchedItems[i].Title,
-                            "subtitle": '$' + Math.round(matchedItems[i]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[i]['Size'],
-                            "image_url": matchedItems[i]['Image URL'],
-                            "buttons":[
-                              {
-                                "type":"web_url",
-                                "url": matchedItems[i]['Product URL'],
-                                "title":"Purchase",
-                                "webview_height_ratio":"tall"
-                              },
-                              {
-                                "type":"web_url",
-                                "url": matchedItems[i]['Product URL'],
-                                "title":"View Details",
-                                "webview_height_ratio":"tall"
-                              }
-                            ]
-                          }
-                        )
+                      var randNum = Math.floor(Math.random() * matchedItems.length) + 1
+                      itemCarosel.push(
+                        {
+                          "title": matchedItems[randNum].Title,
+                          "subtitle": '$' + Math.round(matchedItems[randNum]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[randNum]['Size'],
+                          "image_url": matchedItems[randNum]['Image URL'],
+                          "buttons":[
+                            {
+                              "type":"web_url",
+                              "url": matchedItems[randNum]['Product URL'],
+                              "title":"Purchase",
+                              "webview_height_ratio":"tall"
+                            },
+                            {
+                              "type":"web_url",
+                              "url": matchedItems[randNum]['Product URL'],
+                              "title":"View Details",
+                              "webview_height_ratio":"tall"
+                            }
+                          ]
+                        }
+                      )
                     }
 
                     if (itemCarosel.length > 10) {
                       let newCarosel = []
                       for (var i = 0; i < 10; i++) {
-                        newCarosel.push(itemCarosel[i])
+                        if (i === 10) {
+                          newCarosel.push({
+                            "title": 'See More'
+                            "buttons":[
+                              {
+                                "type":"postback",
+                                "title":"Show More",
+                                "payload": "SHOWPRODUCTS_" + gender + "_" + category
+                              },
+                            ]
+                          })
+
+                        } else {
+                          newCarosel.push(itemCarosel[i])
+                        }
                       }
 
                       let messageData = {
@@ -1291,34 +1396,50 @@ module.exports = (event) => {
                     var itemCarosel = []
 
                     for (var i = 0; i < matchedItems.length; i++) {
-                        itemCarosel.push(
-                          {
-                            "title": matchedItems[i].Title,
-                            "subtitle": '$' + Math.round(matchedItems[i]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[i]['Size'],
-                            "image_url": matchedItems[i]['Image URL'],
-                            "buttons":[
-                              {
-                                "type":"web_url",
-                                "url": matchedItems[i]['Product URL'],
-                                "title":"Purchase",
-                                "webview_height_ratio":"tall"
-                              },
-                              {
-                                "type":"web_url",
-                                "url": matchedItems[i]['Product URL'],
-                                "title":"View Details",
-                                "webview_height_ratio":"tall"
-                              }
-                            ]
-                          }
-                        )
+                      var randNum = Math.floor(Math.random() * matchedItems.length) + 1
+                      itemCarosel.push(
+                        {
+                          "title": matchedItems[randNum].Title,
+                          "subtitle": '$' + Math.round(matchedItems[randNum]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[randNum]['Size'],
+                          "image_url": matchedItems[randNum]['Image URL'],
+                          "buttons":[
+                            {
+                              "type":"web_url",
+                              "url": matchedItems[randNum]['Product URL'],
+                              "title":"Purchase",
+                              "webview_height_ratio":"tall"
+                            },
+                            {
+                              "type":"web_url",
+                              "url": matchedItems[randNum]['Product URL'],
+                              "title":"View Details",
+                              "webview_height_ratio":"tall"
+                            }
+                          ]
+                        }
+                      )
                     }
 
                     if (itemCarosel.length > 10) {
                       let newCarosel = []
                       for (var i = 0; i < 10; i++) {
-                        newCarosel.push(itemCarosel[i])
+                        if (i === 10) {
+                          newCarosel.push({
+                            "title": 'See More'
+                            "buttons":[
+                              {
+                                "type":"postback",
+                                "title":"Show More",
+                                "payload": "SHOWPRODUCTS_" + gender + "_" + category
+                              },
+                            ]
+                          })
+
+                        } else {
+                          newCarosel.push(itemCarosel[i])
+                        }
                       }
+
 
                       let messageData = {
                         "recipient":{
@@ -1394,33 +1515,48 @@ module.exports = (event) => {
                     var itemCarosel = []
 
                     for (var i = 0; i < matchedItems.length; i++) {
-                        itemCarosel.push(
-                          {
-                            "title": matchedItems[i].Title,
-                            "subtitle": '$' + Math.round(matchedItems[i]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[i]['Size'],
-                            "image_url": matchedItems[i]['Image URL'],
-                            "buttons":[
-                              {
-                                "type":"web_url",
-                                "url": matchedItems[i]['Product URL'],
-                                "title":"Purchase",
-                                "webview_height_ratio":"tall"
-                              },
-                              {
-                                "type":"web_url",
-                                "url": matchedItems[i]['Product URL'],
-                                "title":"View Details",
-                                "webview_height_ratio":"tall"
-                              }
-                            ]
-                          }
-                        )
+                      var randNum = Math.floor(Math.random() * matchedItems.length) + 1
+                      itemCarosel.push(
+                        {
+                          "title": matchedItems[randNum].Title,
+                          "subtitle": '$' + Math.round(matchedItems[randNum]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[randNum]['Size'],
+                          "image_url": matchedItems[randNum]['Image URL'],
+                          "buttons":[
+                            {
+                              "type":"web_url",
+                              "url": matchedItems[randNum]['Product URL'],
+                              "title":"Purchase",
+                              "webview_height_ratio":"tall"
+                            },
+                            {
+                              "type":"web_url",
+                              "url": matchedItems[randNum]['Product URL'],
+                              "title":"View Details",
+                              "webview_height_ratio":"tall"
+                            }
+                          ]
+                        }
+                      )
                     }
 
                     if (itemCarosel.length > 10) {
                       let newCarosel = []
                       for (var i = 0; i < 10; i++) {
-                        newCarosel.push(itemCarosel[i])
+                        if (i === 10) {
+                          newCarosel.push({
+                            "title": 'See More'
+                            "buttons":[
+                              {
+                                "type":"postback",
+                                "title":"Show More",
+                                "payload": "SHOWPRODUCTS_" + gender + "_" + category
+                              },
+                            ]
+                          })
+
+                        } else {
+                          newCarosel.push(itemCarosel[i])
+                        }
                       }
 
                       let messageData = {
@@ -1497,33 +1633,48 @@ module.exports = (event) => {
                     var itemCarosel = []
 
                     for (var i = 0; i < matchedItems.length; i++) {
-                        itemCarosel.push(
-                          {
-                            "title": matchedItems[i].Title,
-                            "subtitle": '$' + Math.round(matchedItems[i]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[i]['Size'],
-                            "image_url": matchedItems[i]['Image URL'],
-                            "buttons":[
-                              {
-                                "type":"web_url",
-                                "url": matchedItems[i]['Product URL'],
-                                "title":"Purchase",
-                                "webview_height_ratio":"tall"
-                              },
-                              {
-                                "type":"web_url",
-                                "url": matchedItems[i]['Product URL'],
-                                "title":"View Details",
-                                "webview_height_ratio":"tall"
-                              }
-                            ]
-                          }
-                        )
+                      var randNum = Math.floor(Math.random() * matchedItems.length) + 1
+                      itemCarosel.push(
+                        {
+                          "title": matchedItems[randNum].Title,
+                          "subtitle": '$' + Math.round(matchedItems[randNum]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[randNum]['Size'],
+                          "image_url": matchedItems[randNum]['Image URL'],
+                          "buttons":[
+                            {
+                              "type":"web_url",
+                              "url": matchedItems[randNum]['Product URL'],
+                              "title":"Purchase",
+                              "webview_height_ratio":"tall"
+                            },
+                            {
+                              "type":"web_url",
+                              "url": matchedItems[randNum]['Product URL'],
+                              "title":"View Details",
+                              "webview_height_ratio":"tall"
+                            }
+                          ]
+                        }
+                      )
                     }
 
                     if (itemCarosel.length > 10) {
                       let newCarosel = []
                       for (var i = 0; i < 10; i++) {
-                        newCarosel.push(itemCarosel[i])
+                        if (i === 10) {
+                          newCarosel.push({
+                            "title": 'See More'
+                            "buttons":[
+                              {
+                                "type":"postback",
+                                "title":"Show More",
+                                "payload": "SHOWPRODUCTS_" + gender + "_" + category
+                              },
+                            ]
+                          })
+
+                        } else {
+                          newCarosel.push(itemCarosel[i])
+                        }
                       }
 
                       let messageData = {
@@ -1600,33 +1751,48 @@ module.exports = (event) => {
                     var itemCarosel = []
 
                     for (var i = 0; i < matchedItems.length; i++) {
-                        itemCarosel.push(
-                          {
-                            "title": matchedItems[i].Title,
-                            "subtitle": '$' + Math.round(matchedItems[i]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[i]['Size'],
-                            "image_url": matchedItems[i]['Image URL'],
-                            "buttons":[
-                              {
-                                "type":"web_url",
-                                "url": matchedItems[i]['Product URL'],
-                                "title":"Purchase",
-                                "webview_height_ratio":"tall"
-                              },
-                              {
-                                "type":"web_url",
-                                "url": matchedItems[i]['Product URL'],
-                                "title":"View Details",
-                                "webview_height_ratio":"tall"
-                              }
-                            ]
-                          }
-                        )
+                      var randNum = Math.floor(Math.random() * matchedItems.length) + 1
+                      itemCarosel.push(
+                        {
+                          "title": matchedItems[randNum].Title,
+                          "subtitle": '$' + Math.round(matchedItems[randNum]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[randNum]['Size'],
+                          "image_url": matchedItems[randNum]['Image URL'],
+                          "buttons":[
+                            {
+                              "type":"web_url",
+                              "url": matchedItems[randNum]['Product URL'],
+                              "title":"Purchase",
+                              "webview_height_ratio":"tall"
+                            },
+                            {
+                              "type":"web_url",
+                              "url": matchedItems[randNum]['Product URL'],
+                              "title":"View Details",
+                              "webview_height_ratio":"tall"
+                            }
+                          ]
+                        }
+                      )
                     }
 
                     if (itemCarosel.length > 10) {
                       let newCarosel = []
                       for (var i = 0; i < 10; i++) {
-                        newCarosel.push(itemCarosel[i])
+                        if (i === 10) {
+                          newCarosel.push({
+                            "title": 'See More'
+                            "buttons":[
+                              {
+                                "type":"postback",
+                                "title":"Show More",
+                                "payload": "SHOWPRODUCTS_" + gender + "_" + category
+                              },
+                            ]
+                          })
+
+                        } else {
+                          newCarosel.push(itemCarosel[i])
+                        }
                       }
 
                       let messageData = {
@@ -1703,33 +1869,48 @@ module.exports = (event) => {
                     var itemCarosel = []
 
                     for (var i = 0; i < matchedItems.length; i++) {
-                        itemCarosel.push(
-                          {
-                            "title": matchedItems[i].Title,
-                            "subtitle": '$' + Math.round(matchedItems[i]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[i]['Size'],
-                            "image_url": matchedItems[i]['Image URL'],
-                            "buttons":[
-                              {
-                                "type":"web_url",
-                                "url": matchedItems[i]['Product URL'],
-                                "title":"Purchase",
-                                "webview_height_ratio":"tall"
-                              },
-                              {
-                                "type":"web_url",
-                                "url": matchedItems[i]['Product URL'],
-                                "title":"View Details",
-                                "webview_height_ratio":"tall"
-                              }
-                            ]
-                          }
-                        )
+                      var randNum = Math.floor(Math.random() * matchedItems.length) + 1
+                      itemCarosel.push(
+                        {
+                          "title": matchedItems[randNum].Title,
+                          "subtitle": '$' + Math.round(matchedItems[randNum]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[randNum]['Size'],
+                          "image_url": matchedItems[randNum]['Image URL'],
+                          "buttons":[
+                            {
+                              "type":"web_url",
+                              "url": matchedItems[randNum]['Product URL'],
+                              "title":"Purchase",
+                              "webview_height_ratio":"tall"
+                            },
+                            {
+                              "type":"web_url",
+                              "url": matchedItems[randNum]['Product URL'],
+                              "title":"View Details",
+                              "webview_height_ratio":"tall"
+                            }
+                          ]
+                        }
+                      )
                     }
 
                     if (itemCarosel.length > 10) {
                       let newCarosel = []
                       for (var i = 0; i < 10; i++) {
-                        newCarosel.push(itemCarosel[i])
+                        if (i === 10) {
+                          newCarosel.push({
+                            "title": 'See More'
+                            "buttons":[
+                              {
+                                "type":"postback",
+                                "title":"Show More",
+                                "payload": "SHOWPRODUCTS_" + gender + "_" + category
+                              },
+                            ]
+                          })
+
+                        } else {
+                          newCarosel.push(itemCarosel[i])
+                        }
                       }
 
                       let messageData = {
@@ -1806,33 +1987,48 @@ module.exports = (event) => {
                     var itemCarosel = []
 
                     for (var i = 0; i < matchedItems.length; i++) {
-                        itemCarosel.push(
-                          {
-                            "title": matchedItems[i].Title,
-                            "subtitle": '$' + Math.round(matchedItems[i]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[i]['Size'],
-                            "image_url": matchedItems[i]['Image URL'],
-                            "buttons":[
-                              {
-                                "type":"web_url",
-                                "url": matchedItems[i]['Product URL'],
-                                "title":"Purchase",
-                                "webview_height_ratio":"tall"
-                              },
-                              {
-                                "type":"web_url",
-                                "url": matchedItems[i]['Product URL'],
-                                "title":"View Details",
-                                "webview_height_ratio":"tall"
-                              }
-                            ]
-                          }
-                        )
+                      var randNum = Math.floor(Math.random() * matchedItems.length) + 1
+                      itemCarosel.push(
+                        {
+                          "title": matchedItems[randNum].Title,
+                          "subtitle": '$' + Math.round(matchedItems[randNum]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[randNum]['Size'],
+                          "image_url": matchedItems[randNum]['Image URL'],
+                          "buttons":[
+                            {
+                              "type":"web_url",
+                              "url": matchedItems[randNum]['Product URL'],
+                              "title":"Purchase",
+                              "webview_height_ratio":"tall"
+                            },
+                            {
+                              "type":"web_url",
+                              "url": matchedItems[randNum]['Product URL'],
+                              "title":"View Details",
+                              "webview_height_ratio":"tall"
+                            }
+                          ]
+                        }
+                      )
                     }
 
                     if (itemCarosel.length > 10) {
                       let newCarosel = []
                       for (var i = 0; i < 10; i++) {
-                        newCarosel.push(itemCarosel[i])
+                        if (i === 10) {
+                          newCarosel.push({
+                            "title": 'See More'
+                            "buttons":[
+                              {
+                                "type":"postback",
+                                "title":"Show More",
+                                "payload": "SHOWPRODUCTS_" + gender + "_" + category
+                              },
+                            ]
+                          })
+
+                        } else {
+                          newCarosel.push(itemCarosel[i])
+                        }
                       }
 
                       let messageData = {
@@ -1913,33 +2109,48 @@ module.exports = (event) => {
                     var itemCarosel = []
 
                     for (var i = 0; i < matchedItems.length; i++) {
-                        itemCarosel.push(
-                          {
-                            "title": matchedItems[i].Title,
-                            "subtitle": '$' + Math.round(matchedItems[i]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[i]['Size'],
-                            "image_url": matchedItems[i]['Image URL'],
-                            "buttons":[
-                              {
-                                "type":"web_url",
-                                "url": matchedItems[i]['Product URL'],
-                                "title":"Purchase",
-                                "webview_height_ratio":"tall"
-                              },
-                              {
-                                "type":"web_url",
-                                "url": matchedItems[i]['Product URL'],
-                                "title":"View Details",
-                                "webview_height_ratio":"tall"
-                              }
-                            ]
-                          }
-                        )
+                      var randNum = Math.floor(Math.random() * matchedItems.length) + 1
+                      itemCarosel.push(
+                        {
+                          "title": matchedItems[randNum].Title,
+                          "subtitle": '$' + Math.round(matchedItems[randNum]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[randNum]['Size'],
+                          "image_url": matchedItems[randNum]['Image URL'],
+                          "buttons":[
+                            {
+                              "type":"web_url",
+                              "url": matchedItems[randNum]['Product URL'],
+                              "title":"Purchase",
+                              "webview_height_ratio":"tall"
+                            },
+                            {
+                              "type":"web_url",
+                              "url": matchedItems[randNum]['Product URL'],
+                              "title":"View Details",
+                              "webview_height_ratio":"tall"
+                            }
+                          ]
+                        }
+                      )
                     }
 
                     if (itemCarosel.length > 10) {
                       let newCarosel = []
                       for (var i = 0; i < 10; i++) {
-                        newCarosel.push(itemCarosel[i])
+                        if (i === 10) {
+                          newCarosel.push({
+                            "title": 'See More'
+                            "buttons":[
+                              {
+                                "type":"postback",
+                                "title":"Show More",
+                                "payload": "SHOWPRODUCTS_" + gender + "_" + category
+                              },
+                            ]
+                          })
+
+                        } else {
+                          newCarosel.push(itemCarosel[i])
+                        }
                       }
 
                       let messageData = {
@@ -2020,33 +2231,48 @@ module.exports = (event) => {
                     var itemCarosel = []
 
                     for (var i = 0; i < matchedItems.length; i++) {
-                        itemCarosel.push(
-                          {
-                            "title": matchedItems[i].Title,
-                            "subtitle": '$' + Math.round(matchedItems[i]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[i]['Size'],
-                            "image_url": matchedItems[i]['Image URL'],
-                            "buttons":[
-                              {
-                                "type":"web_url",
-                                "url": matchedItems[i]['Product URL'],
-                                "title":"Purchase",
-                                "webview_height_ratio":"tall"
-                              },
-                              {
-                                "type":"web_url",
-                                "url": matchedItems[i]['Product URL'],
-                                "title":"View Details",
-                                "webview_height_ratio":"tall"
-                              }
-                            ]
-                          }
-                        )
+                      var randNum = Math.floor(Math.random() * matchedItems.length) + 1
+                      itemCarosel.push(
+                        {
+                          "title": matchedItems[randNum].Title,
+                          "subtitle": '$' + Math.round(matchedItems[randNum]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[randNum]['Size'],
+                          "image_url": matchedItems[randNum]['Image URL'],
+                          "buttons":[
+                            {
+                              "type":"web_url",
+                              "url": matchedItems[randNum]['Product URL'],
+                              "title":"Purchase",
+                              "webview_height_ratio":"tall"
+                            },
+                            {
+                              "type":"web_url",
+                              "url": matchedItems[randNum]['Product URL'],
+                              "title":"View Details",
+                              "webview_height_ratio":"tall"
+                            }
+                          ]
+                        }
+                      )
                     }
 
                     if (itemCarosel.length > 10) {
                       let newCarosel = []
                       for (var i = 0; i < 10; i++) {
-                        newCarosel.push(itemCarosel[i])
+                        if (i === 10) {
+                          newCarosel.push({
+                            "title": 'See More'
+                            "buttons":[
+                              {
+                                "type":"postback",
+                                "title":"Show More",
+                                "payload": "SHOWPRODUCTS_" + gender + "_" + category
+                              },
+                            ]
+                          })
+
+                        } else {
+                          newCarosel.push(itemCarosel[i])
+                        }
                       }
 
                       let messageData = {
@@ -2127,33 +2353,48 @@ module.exports = (event) => {
                     var itemCarosel = []
 
                     for (var i = 0; i < matchedItems.length; i++) {
-                        itemCarosel.push(
-                          {
-                            "title": matchedItems[i].Title,
-                            "subtitle": '$' + Math.round(matchedItems[i]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[i]['Size'],
-                            "image_url": matchedItems[i]['Image URL'],
-                            "buttons":[
-                              {
-                                "type":"web_url",
-                                "url": matchedItems[i]['Product URL'],
-                                "title":"Purchase",
-                                "webview_height_ratio":"tall"
-                              },
-                              {
-                                "type":"web_url",
-                                "url": matchedItems[i]['Product URL'],
-                                "title":"View Details",
-                                "webview_height_ratio":"tall"
-                              }
-                            ]
-                          }
-                        )
+                      var randNum = Math.floor(Math.random() * matchedItems.length) + 1
+                      itemCarosel.push(
+                        {
+                          "title": matchedItems[randNum].Title,
+                          "subtitle": '$' + Math.round(matchedItems[randNum]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[randNum]['Size'],
+                          "image_url": matchedItems[randNum]['Image URL'],
+                          "buttons":[
+                            {
+                              "type":"web_url",
+                              "url": matchedItems[randNum]['Product URL'],
+                              "title":"Purchase",
+                              "webview_height_ratio":"tall"
+                            },
+                            {
+                              "type":"web_url",
+                              "url": matchedItems[randNum]['Product URL'],
+                              "title":"View Details",
+                              "webview_height_ratio":"tall"
+                            }
+                          ]
+                        }
+                      )
                     }
 
                     if (itemCarosel.length > 10) {
                       let newCarosel = []
                       for (var i = 0; i < 10; i++) {
-                        newCarosel.push(itemCarosel[i])
+                        if (i === 10) {
+                          newCarosel.push({
+                            "title": 'See More'
+                            "buttons":[
+                              {
+                                "type":"postback",
+                                "title":"Show More",
+                                "payload": "SHOWPRODUCTS_" + gender + "_" + category
+                              },
+                            ]
+                          })
+
+                        } else {
+                          newCarosel.push(itemCarosel[i])
+                        }
                       }
 
                       let messageData = {
@@ -2234,33 +2475,48 @@ module.exports = (event) => {
                     var itemCarosel = []
 
                     for (var i = 0; i < matchedItems.length; i++) {
-                        itemCarosel.push(
-                          {
-                            "title": matchedItems[i].Title,
-                            "subtitle": '$' + Math.round(matchedItems[i]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[i]['Size'],
-                            "image_url": matchedItems[i]['Image URL'],
-                            "buttons":[
-                              {
-                                "type":"web_url",
-                                "url": matchedItems[i]['Product URL'],
-                                "title":"Purchase",
-                                "webview_height_ratio":"tall"
-                              },
-                              {
-                                "type":"web_url",
-                                "url": matchedItems[i]['Product URL'],
-                                "title":"View Details",
-                                "webview_height_ratio":"tall"
-                              }
-                            ]
-                          }
-                        )
+                      var randNum = Math.floor(Math.random() * matchedItems.length) + 1
+                      itemCarosel.push(
+                        {
+                          "title": matchedItems[randNum].Title,
+                          "subtitle": '$' + Math.round(matchedItems[randNum]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[randNum]['Size'],
+                          "image_url": matchedItems[randNum]['Image URL'],
+                          "buttons":[
+                            {
+                              "type":"web_url",
+                              "url": matchedItems[randNum]['Product URL'],
+                              "title":"Purchase",
+                              "webview_height_ratio":"tall"
+                            },
+                            {
+                              "type":"web_url",
+                              "url": matchedItems[randNum]['Product URL'],
+                              "title":"View Details",
+                              "webview_height_ratio":"tall"
+                            }
+                          ]
+                        }
+                      )
                     }
 
                     if (itemCarosel.length > 10) {
                       let newCarosel = []
                       for (var i = 0; i < 10; i++) {
-                        newCarosel.push(itemCarosel[i])
+                        if (i === 10) {
+                          newCarosel.push({
+                            "title": 'See More'
+                            "buttons":[
+                              {
+                                "type":"postback",
+                                "title":"Show More",
+                                "payload": "SHOWPRODUCTS_" + gender + "_" + category
+                              },
+                            ]
+                          })
+
+                        } else {
+                          newCarosel.push(itemCarosel[i])
+                        }
                       }
 
                       let messageData = {
@@ -2341,33 +2597,48 @@ module.exports = (event) => {
                     var itemCarosel = []
 
                     for (var i = 0; i < matchedItems.length; i++) {
-                        itemCarosel.push(
-                          {
-                            "title": matchedItems[i].Title,
-                            "subtitle": '$' + Math.round(matchedItems[i]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[i]['Size'],
-                            "image_url": matchedItems[i]['Image URL'],
-                            "buttons":[
-                              {
-                                "type":"web_url",
-                                "url": matchedItems[i]['Product URL'],
-                                "title":"Purchase",
-                                "webview_height_ratio":"tall"
-                              },
-                              {
-                                "type":"web_url",
-                                "url": matchedItems[i]['Product URL'],
-                                "title":"View Details",
-                                "webview_height_ratio":"tall"
-                              }
-                            ]
-                          }
-                        )
+                      var randNum = Math.floor(Math.random() * matchedItems.length) + 1
+                      itemCarosel.push(
+                        {
+                          "title": matchedItems[randNum].Title,
+                          "subtitle": '$' + Math.round(matchedItems[randNum]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[randNum]['Size'],
+                          "image_url": matchedItems[randNum]['Image URL'],
+                          "buttons":[
+                            {
+                              "type":"web_url",
+                              "url": matchedItems[randNum]['Product URL'],
+                              "title":"Purchase",
+                              "webview_height_ratio":"tall"
+                            },
+                            {
+                              "type":"web_url",
+                              "url": matchedItems[randNum]['Product URL'],
+                              "title":"View Details",
+                              "webview_height_ratio":"tall"
+                            }
+                          ]
+                        }
+                      )
                     }
 
                     if (itemCarosel.length > 10) {
                       let newCarosel = []
                       for (var i = 0; i < 10; i++) {
-                        newCarosel.push(itemCarosel[i])
+                        if (i === 10) {
+                          newCarosel.push({
+                            "title": 'See More'
+                            "buttons":[
+                              {
+                                "type":"postback",
+                                "title":"Show More",
+                                "payload": "SHOWPRODUCTS_" + gender + "_" + category
+                              },
+                            ]
+                          })
+
+                        } else {
+                          newCarosel.push(itemCarosel[i])
+                        }
                       }
 
                       let messageData = {
@@ -2448,33 +2719,48 @@ module.exports = (event) => {
                     var itemCarosel = []
 
                     for (var i = 0; i < matchedItems.length; i++) {
-                        itemCarosel.push(
-                          {
-                            "title": matchedItems[i].Title,
-                            "subtitle": '$' + Math.round(matchedItems[i]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[i]['Size'],
-                            "image_url": matchedItems[i]['Image URL'],
-                            "buttons":[
-                              {
-                                "type":"web_url",
-                                "url": matchedItems[i]['Product URL'],
-                                "title":"Purchase",
-                                "webview_height_ratio":"tall"
-                              },
-                              {
-                                "type":"web_url",
-                                "url": matchedItems[i]['Product URL'],
-                                "title":"View Details",
-                                "webview_height_ratio":"tall"
-                              }
-                            ]
-                          }
-                        )
+                      var randNum = Math.floor(Math.random() * matchedItems.length) + 1
+                      itemCarosel.push(
+                        {
+                          "title": matchedItems[randNum].Title,
+                          "subtitle": '$' + Math.round(matchedItems[randNum]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[randNum]['Size'],
+                          "image_url": matchedItems[randNum]['Image URL'],
+                          "buttons":[
+                            {
+                              "type":"web_url",
+                              "url": matchedItems[randNum]['Product URL'],
+                              "title":"Purchase",
+                              "webview_height_ratio":"tall"
+                            },
+                            {
+                              "type":"web_url",
+                              "url": matchedItems[randNum]['Product URL'],
+                              "title":"View Details",
+                              "webview_height_ratio":"tall"
+                            }
+                          ]
+                        }
+                      )
                     }
 
                     if (itemCarosel.length > 10) {
                       let newCarosel = []
                       for (var i = 0; i < 10; i++) {
-                        newCarosel.push(itemCarosel[i])
+                        if (i === 10) {
+                          newCarosel.push({
+                            "title": 'See More'
+                            "buttons":[
+                              {
+                                "type":"postback",
+                                "title":"Show More",
+                                "payload": "SHOWPRODUCTS_" + gender + "_" + category
+                              },
+                            ]
+                          })
+
+                        } else {
+                          newCarosel.push(itemCarosel[i])
+                        }
                       }
 
                       let messageData = {
@@ -2555,33 +2841,48 @@ module.exports = (event) => {
                     var itemCarosel = []
 
                     for (var i = 0; i < matchedItems.length; i++) {
-                        itemCarosel.push(
-                          {
-                            "title": matchedItems[i].Title,
-                            "subtitle": '$' + Math.round(matchedItems[i]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[i]['Size'],
-                            "image_url": matchedItems[i]['Image URL'],
-                            "buttons":[
-                              {
-                                "type":"web_url",
-                                "url": matchedItems[i]['Product URL'],
-                                "title":"Purchase",
-                                "webview_height_ratio":"tall"
-                              },
-                              {
-                                "type":"web_url",
-                                "url": matchedItems[i]['Product URL'],
-                                "title":"View Details",
-                                "webview_height_ratio":"tall"
-                              }
-                            ]
-                          }
-                        )
+                      var randNum = Math.floor(Math.random() * matchedItems.length) + 1
+                      itemCarosel.push(
+                        {
+                          "title": matchedItems[randNum].Title,
+                          "subtitle": '$' + Math.round(matchedItems[randNum]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[randNum]['Size'],
+                          "image_url": matchedItems[randNum]['Image URL'],
+                          "buttons":[
+                            {
+                              "type":"web_url",
+                              "url": matchedItems[randNum]['Product URL'],
+                              "title":"Purchase",
+                              "webview_height_ratio":"tall"
+                            },
+                            {
+                              "type":"web_url",
+                              "url": matchedItems[randNum]['Product URL'],
+                              "title":"View Details",
+                              "webview_height_ratio":"tall"
+                            }
+                          ]
+                        }
+                      )
                     }
 
                     if (itemCarosel.length > 10) {
                       let newCarosel = []
                       for (var i = 0; i < 10; i++) {
-                        newCarosel.push(itemCarosel[i])
+                        if (i === 10) {
+                          newCarosel.push({
+                            "title": 'See More'
+                            "buttons":[
+                              {
+                                "type":"postback",
+                                "title":"Show More",
+                                "payload": "SHOWPRODUCTS_" + gender + "_" + category
+                              },
+                            ]
+                          })
+
+                        } else {
+                          newCarosel.push(itemCarosel[i])
+                        }
                       }
 
                       let messageData = {
@@ -2662,21 +2963,22 @@ module.exports = (event) => {
                 var itemCarosel = []
 
                 for (var i = 0; i < matchedItems.length; i++) {
+                  var randNum = Math.floor(Math.random() * matchedItems.length) + 1
                   itemCarosel.push(
                     {
-                      "title": matchedItems[i].Title,
-                      "subtitle": '$' + Math.round(matchedItems[i]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[i]['Size'],
-                      "image_url": matchedItems[i]['Image URL'],
+                      "title": matchedItems[randNum].Title,
+                      "subtitle": '$' + Math.round(matchedItems[randNum]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[randNum]['Size'],
+                      "image_url": matchedItems[randNum]['Image URL'],
                       "buttons":[
                         {
                           "type":"web_url",
-                          "url": matchedItems[i]['Product URL'],
+                          "url": matchedItems[randNum]['Product URL'],
                           "title":"Purchase",
                           "webview_height_ratio":"tall"
                         },
                         {
                           "type":"web_url",
-                          "url": matchedItems[i]['Product URL'],
+                          "url": matchedItems[randNum]['Product URL'],
                           "title":"View Details",
                           "webview_height_ratio":"tall"
                         }
@@ -2688,7 +2990,21 @@ module.exports = (event) => {
                 if (itemCarosel.length > 10) {
                   let newCarosel = []
                   for (var i = 0; i < 10; i++) {
-                    newCarosel.push(itemCarosel[i])
+                    if (i === 10) {
+                      newCarosel.push({
+                        "title": 'See More'
+                        "buttons":[
+                          {
+                            "type":"postback",
+                            "title":"Show More",
+                            "payload": "SHOWPRODUCTS_" + gender + "_" + category
+                          },
+                        ]
+                      })
+
+                    } else {
+                      newCarosel.push(itemCarosel[i])
+                    }
                   }
 
                   let messageData = {
@@ -2763,21 +3079,22 @@ module.exports = (event) => {
                 var itemCarosel = []
 
                 for (var i = 0; i < matchedItems.length; i++) {
+                  var randNum = Math.floor(Math.random() * matchedItems.length) + 1
                   itemCarosel.push(
                     {
-                      "title": matchedItems[i].Title,
-                      "subtitle": '$' + Math.round(matchedItems[i]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[i]['Size'],
-                      "image_url": matchedItems[i]['Image URL'],
+                      "title": matchedItems[randNum].Title,
+                      "subtitle": '$' + Math.round(matchedItems[randNum]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[randNum]['Size'],
+                      "image_url": matchedItems[randNum]['Image URL'],
                       "buttons":[
                         {
                           "type":"web_url",
-                          "url": matchedItems[i]['Product URL'],
+                          "url": matchedItems[randNum]['Product URL'],
                           "title":"Purchase",
                           "webview_height_ratio":"tall"
                         },
                         {
                           "type":"web_url",
-                          "url": matchedItems[i]['Product URL'],
+                          "url": matchedItems[randNum]['Product URL'],
                           "title":"View Details",
                           "webview_height_ratio":"tall"
                         }
@@ -2789,7 +3106,21 @@ module.exports = (event) => {
                 if (itemCarosel.length > 10) {
                   let newCarosel = []
                   for (var i = 0; i < 10; i++) {
-                    newCarosel.push(itemCarosel[i])
+                    if (i === 10) {
+                      newCarosel.push({
+                        "title": 'See More'
+                        "buttons":[
+                          {
+                            "type":"postback",
+                            "title":"Show More",
+                            "payload": "SHOWPRODUCTS_" + gender + "_" + category
+                          },
+                        ]
+                      })
+
+                    } else {
+                      newCarosel.push(itemCarosel[i])
+                    }
                   }
 
                   let messageData = {
@@ -2864,21 +3195,22 @@ module.exports = (event) => {
                 var itemCarosel = []
 
                 for (var i = 0; i < matchedItems.length; i++) {
+                  var randNum = Math.floor(Math.random() * matchedItems.length) + 1
                   itemCarosel.push(
                     {
-                      "title": matchedItems[i].Title,
-                      "subtitle": '$' + Math.round(matchedItems[i]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[i]['Size'],
-                      "image_url": matchedItems[i]['Image URL'],
+                      "title": matchedItems[randNum].Title,
+                      "subtitle": '$' + Math.round(matchedItems[randNum]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[randNum]['Size'],
+                      "image_url": matchedItems[randNum]['Image URL'],
                       "buttons":[
                         {
                           "type":"web_url",
-                          "url": matchedItems[i]['Product URL'],
+                          "url": matchedItems[randNum]['Product URL'],
                           "title":"Purchase",
                           "webview_height_ratio":"tall"
                         },
                         {
                           "type":"web_url",
-                          "url": matchedItems[i]['Product URL'],
+                          "url": matchedItems[randNum]['Product URL'],
                           "title":"View Details",
                           "webview_height_ratio":"tall"
                         }
@@ -2890,7 +3222,21 @@ module.exports = (event) => {
                 if (itemCarosel.length > 10) {
                   let newCarosel = []
                   for (var i = 0; i < 10; i++) {
-                    newCarosel.push(itemCarosel[i])
+                    if (i === 10) {
+                      newCarosel.push({
+                        "title": 'See More'
+                        "buttons":[
+                          {
+                            "type":"postback",
+                            "title":"Show More",
+                            "payload": "SHOWPRODUCTS_" + gender + "_" + category
+                          },
+                        ]
+                      })
+
+                    } else {
+                      newCarosel.push(itemCarosel[i])
+                    }
                   }
 
                   let messageData = {
