@@ -59,8 +59,8 @@ module.exports = (event) => {
               if (err) return console.error(err)
               // SEND WELCOME MESSAGES, THEN SEND PROMPT TO REQUEST ENROLLMENT
               sendTextMessage(event.sender.id, user.pageAccessToken, 'Welcome to the UtahSkis.com Experience!')
-              setTimeout(() => {
-                sendTextMessage(event.sender.id, user.pageAccessToken, 'Here you will be able to browse and purchase skis, snowboards, and apparel! You can also gain access to exclusive content and deals curated just for you!')
+              // setTimeout(() => {
+                // sendTextMessage(event.sender.id, user.pageAccessToken, 'Here you will be able to browse and purchase skis, snowboards, and apparel! You can also gain access to exclusive content and deals curated just for you!')
                 setTimeout(() => {
                   let messageData = {
                     "recipient":{
@@ -83,8 +83,8 @@ module.exports = (event) => {
                     }
                   }
                   callSendAPI(user.pageAccessToken, messageData)
-                }, 4500)
-              }, 1500)
+                }, 1000)
+              // }, 1500)
             })
           })
 
@@ -108,7 +108,7 @@ module.exports = (event) => {
         if (err) {
           console.error(err)
         }
-        
+
         console.log(member)
       })
 
