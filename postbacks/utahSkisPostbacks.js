@@ -110,13 +110,17 @@ module.exports = (event) => {
         if (err) {
           console.error(err)
         }
-        member.postbackCount = member.postbackCount + 1
-        member.save((err, updatedMember) => {
-          if (err) {
-            console.error(err)
-          }
-          console.log(updatedMember)
-        })
+        if (member === null) {
+          
+        } else {
+          member.postbackCount = member.postbackCount + 1
+          member.save((err, updatedMember) => {
+            if (err) {
+              console.error(err)
+            }
+            console.log(updatedMember)
+          })
+        }
       })
 
       if (event.postback.payload === 'SHOP') {
