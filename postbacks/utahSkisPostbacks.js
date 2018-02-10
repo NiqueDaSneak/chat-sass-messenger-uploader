@@ -578,28 +578,25 @@ module.exports = (event) => {
                 }
               })
               .on('done',(error) => {
-                    console.log(matchedItems)
+
                     var itemCarosel = []
 
                     for (var i = 0; i < matchedItems.length; i++) {
-                      var randNum = Math.floor(Math.random() * matchedItems.length) + 1
-                      console.log('matchedItems: ' + matchedItems[randNum])
-
                       itemCarosel.push(
                         {
-                          "title": matchedItems[randNum]['Title'],
-                          "subtitle": '$' + Math.round(matchedItems[randNum]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[randNum]['Size'],
-                          "image_url": matchedItems[randNum]['Image URL'],
+                          "title": matchedItems[i].Title,
+                          "subtitle": '$' + Math.round(matchedItems[i]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[i]['Size'],
+                          "image_url": matchedItems[i]['Image URL'],
                           "buttons":[
                             {
                               "type":"web_url",
-                              "url": matchedItems[randNum]['Product URL'],
+                              "url": matchedItems[i]['Product URL'],
                               "title":"Purchase",
                               "webview_height_ratio":"tall"
                             },
                             {
                               "type":"web_url",
-                              "url": matchedItems[randNum]['Product URL'],
+                              "url": matchedItems[i]['Product URL'],
                               "title":"View Details",
                               "webview_height_ratio":"tall"
                             }
@@ -611,21 +608,7 @@ module.exports = (event) => {
                     if (itemCarosel.length > 10) {
                       let newCarosel = []
                       for (var i = 0; i < 10; i++) {
-                        if (i === 10) {
-                          newCarosel.push({
-                            "title": 'See More',
-                            "buttons":[
-                              {
-                                "type":"postback",
-                                "title":"Show More",
-                                "payload": "SHOWPRODUCTS_" + gender + "_" + category
-                              },
-                            ]
-                          })
-
-                        } else {
-                          newCarosel.push(itemCarosel[i])
-                        }
+                        newCarosel.push(itemCarosel[i])
                       }
 
                       let messageData = {
@@ -702,50 +685,33 @@ module.exports = (event) => {
                     var itemCarosel = []
 
                     for (var i = 0; i < matchedItems.length; i++) {
-                      var randNum = Math.floor(Math.random() * matchedItems.length) + 1
-                      console.log(matchedItems[randNum])
-
-                      itemCarosel.push(
-                        {
-                          "title": matchedItems[randNum]['Title'],
-                          "subtitle": '$' + Math.round(matchedItems[randNum]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[randNum]['Size'],
-                          "image_url": matchedItems[randNum]['Image URL'],
-                          "buttons":[
-                            {
-                              "type":"web_url",
-                              "url": matchedItems[randNum]['Product URL'],
-                              "title":"Purchase",
-                              "webview_height_ratio":"tall"
-                            },
-                            {
-                              "type":"web_url",
-                              "url": matchedItems[randNum]['Product URL'],
-                              "title":"View Details",
-                              "webview_height_ratio":"tall"
-                            }
-                          ]
-                        }
-                      )
+                        itemCarosel.push(
+                          {
+                            "title": matchedItems[i].Title,
+                            "subtitle": '$' + Math.round(matchedItems[i]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[i]['Size'],
+                            "image_url": matchedItems[i]['Image URL'],
+                            "buttons":[
+                              {
+                                "type":"web_url",
+                                "url": matchedItems[i]['Product URL'],
+                                "title":"Purchase",
+                                "webview_height_ratio":"tall"
+                              },
+                              {
+                                "type":"web_url",
+                                "url": matchedItems[i]['Product URL'],
+                                "title":"View Details",
+                                "webview_height_ratio":"tall"
+                              }
+                            ]
+                          }
+                        )
                     }
 
                     if (itemCarosel.length > 10) {
                       let newCarosel = []
                       for (var i = 0; i < 10; i++) {
-                        if (i === 10) {
-                          newCarosel.push({
-                            "title": 'See More',
-                            "buttons":[
-                              {
-                                "type":"postback",
-                                "title":"Show More",
-                                "payload": "SHOWPRODUCTS_" + gender + "_" + category
-                              },
-                            ]
-                          })
-
-                        } else {
-                          newCarosel.push(itemCarosel[i])
-                        }
+                        newCarosel.push(itemCarosel[i])
                       }
 
                       let messageData = {
@@ -822,50 +788,33 @@ module.exports = (event) => {
                     var itemCarosel = []
 
                     for (var i = 0; i < matchedItems.length; i++) {
-                      var randNum = Math.floor(Math.random() * matchedItems.length) + 1
-                      console.log(matchedItems[randNum])
-
-                      itemCarosel.push(
-                        {
-                          "title": matchedItems[randNum]['Title'],
-                          "subtitle": '$' + Math.round(matchedItems[randNum]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[randNum]['Size'],
-                          "image_url": matchedItems[randNum]['Image URL'],
-                          "buttons":[
-                            {
-                              "type":"web_url",
-                              "url": matchedItems[randNum]['Product URL'],
-                              "title":"Purchase",
-                              "webview_height_ratio":"tall"
-                            },
-                            {
-                              "type":"web_url",
-                              "url": matchedItems[randNum]['Product URL'],
-                              "title":"View Details",
-                              "webview_height_ratio":"tall"
-                            }
-                          ]
-                        }
-                      )
+                        itemCarosel.push(
+                          {
+                            "title": matchedItems[i].Title,
+                            "subtitle": '$' + Math.round(matchedItems[i]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[i]['Size'],
+                            "image_url": matchedItems[i]['Image URL'],
+                            "buttons":[
+                              {
+                                "type":"web_url",
+                                "url": matchedItems[i]['Product URL'],
+                                "title":"Purchase",
+                                "webview_height_ratio":"tall"
+                              },
+                              {
+                                "type":"web_url",
+                                "url": matchedItems[i]['Product URL'],
+                                "title":"View Details",
+                                "webview_height_ratio":"tall"
+                              }
+                            ]
+                          }
+                        )
                     }
 
                     if (itemCarosel.length > 10) {
                       let newCarosel = []
                       for (var i = 0; i < 10; i++) {
-                        if (i === 10) {
-                          newCarosel.push({
-                            "title": 'See More',
-                            "buttons":[
-                              {
-                                "type":"postback",
-                                "title":"Show More",
-                                "payload": "SHOWPRODUCTS_" + gender + "_" + category
-                              },
-                            ]
-                          })
-
-                        } else {
-                          newCarosel.push(itemCarosel[i])
-                        }
+                        newCarosel.push(itemCarosel[i])
                       }
 
                       let messageData = {
@@ -936,50 +885,33 @@ module.exports = (event) => {
                     var itemCarosel = []
 
                     for (var i = 0; i < matchedItems.length; i++) {
-                      var randNum = Math.floor(Math.random() * matchedItems.length) + 1
-                      console.log(matchedItems[randNum])
-
-                      itemCarosel.push(
-                        {
-                          "title": matchedItems[randNum]['Title'],
-                          "subtitle": '$' + Math.round(matchedItems[randNum]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[randNum]['Size'],
-                          "image_url": matchedItems[randNum]['Image URL'],
-                          "buttons":[
-                            {
-                              "type":"web_url",
-                              "url": matchedItems[randNum]['Product URL'],
-                              "title":"Purchase",
-                              "webview_height_ratio":"tall"
-                            },
-                            {
-                              "type":"web_url",
-                              "url": matchedItems[randNum]['Product URL'],
-                              "title":"View Details",
-                              "webview_height_ratio":"tall"
-                            }
-                          ]
-                        }
-                      )
+                        itemCarosel.push(
+                          {
+                            "title": matchedItems[i].Title,
+                            "subtitle": '$' + Math.round(matchedItems[i]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[i]['Size'],
+                            "image_url": matchedItems[i]['Image URL'],
+                            "buttons":[
+                              {
+                                "type":"web_url",
+                                "url": matchedItems[i]['Product URL'],
+                                "title":"Purchase",
+                                "webview_height_ratio":"tall"
+                              },
+                              {
+                                "type":"web_url",
+                                "url": matchedItems[i]['Product URL'],
+                                "title":"View Details",
+                                "webview_height_ratio":"tall"
+                              }
+                            ]
+                          }
+                        )
                     }
 
                     if (itemCarosel.length > 10) {
                       let newCarosel = []
                       for (var i = 0; i < 10; i++) {
-                        if (i === 10) {
-                          newCarosel.push({
-                            "title": 'See More',
-                            "buttons":[
-                              {
-                                "type":"postback",
-                                "title":"Show More",
-                                "payload": "SHOWPRODUCTS_" + gender + "_" + category
-                              },
-                            ]
-                          })
-
-                        } else {
-                          newCarosel.push(itemCarosel[i])
-                        }
+                        newCarosel.push(itemCarosel[i])
                       }
 
                       let messageData = {
@@ -1050,50 +982,33 @@ module.exports = (event) => {
                     var itemCarosel = []
 
                     for (var i = 0; i < matchedItems.length; i++) {
-                      var randNum = Math.floor(Math.random() * matchedItems.length) + 1
-                      console.log(matchedItems[randNum])
-
-                      itemCarosel.push(
-                        {
-                          "title": matchedItems[randNum]['Title'],
-                          "subtitle": '$' + Math.round(matchedItems[randNum]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[randNum]['Size'],
-                          "image_url": matchedItems[randNum]['Image URL'],
-                          "buttons":[
-                            {
-                              "type":"web_url",
-                              "url": matchedItems[randNum]['Product URL'],
-                              "title":"Purchase",
-                              "webview_height_ratio":"tall"
-                            },
-                            {
-                              "type":"web_url",
-                              "url": matchedItems[randNum]['Product URL'],
-                              "title":"View Details",
-                              "webview_height_ratio":"tall"
-                            }
-                          ]
-                        }
-                      )
+                        itemCarosel.push(
+                          {
+                            "title": matchedItems[i].Title,
+                            "subtitle": '$' + Math.round(matchedItems[i]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[i]['Size'],
+                            "image_url": matchedItems[i]['Image URL'],
+                            "buttons":[
+                              {
+                                "type":"web_url",
+                                "url": matchedItems[i]['Product URL'],
+                                "title":"Purchase",
+                                "webview_height_ratio":"tall"
+                              },
+                              {
+                                "type":"web_url",
+                                "url": matchedItems[i]['Product URL'],
+                                "title":"View Details",
+                                "webview_height_ratio":"tall"
+                              }
+                            ]
+                          }
+                        )
                     }
 
                     if (itemCarosel.length > 10) {
                       let newCarosel = []
                       for (var i = 0; i < 10; i++) {
-                        if (i === 10) {
-                          newCarosel.push({
-                            "title": 'See More',
-                            "buttons":[
-                              {
-                                "type":"postback",
-                                "title":"Show More",
-                                "payload": "SHOWPRODUCTS_" + gender + "_" + category
-                              },
-                            ]
-                          })
-
-                        } else {
-                          newCarosel.push(itemCarosel[i])
-                        }
+                        newCarosel.push(itemCarosel[i])
                       }
 
                       let messageData = {
@@ -1170,50 +1085,33 @@ module.exports = (event) => {
                     var itemCarosel = []
 
                     for (var i = 0; i < matchedItems.length; i++) {
-                      var randNum = Math.floor(Math.random() * matchedItems.length) + 1
-                      console.log(matchedItems[randNum])
-
-                      itemCarosel.push(
-                        {
-                          "title": matchedItems[randNum]['Title'],
-                          "subtitle": '$' + Math.round(matchedItems[randNum]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[randNum]['Size'],
-                          "image_url": matchedItems[randNum]['Image URL'],
-                          "buttons":[
-                            {
-                              "type":"web_url",
-                              "url": matchedItems[randNum]['Product URL'],
-                              "title":"Purchase",
-                              "webview_height_ratio":"tall"
-                            },
-                            {
-                              "type":"web_url",
-                              "url": matchedItems[randNum]['Product URL'],
-                              "title":"View Details",
-                              "webview_height_ratio":"tall"
-                            }
-                          ]
-                        }
-                      )
+                        itemCarosel.push(
+                          {
+                            "title": matchedItems[i].Title,
+                            "subtitle": '$' + Math.round(matchedItems[i]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[i]['Size'],
+                            "image_url": matchedItems[i]['Image URL'],
+                            "buttons":[
+                              {
+                                "type":"web_url",
+                                "url": matchedItems[i]['Product URL'],
+                                "title":"Purchase",
+                                "webview_height_ratio":"tall"
+                              },
+                              {
+                                "type":"web_url",
+                                "url": matchedItems[i]['Product URL'],
+                                "title":"View Details",
+                                "webview_height_ratio":"tall"
+                              }
+                            ]
+                          }
+                        )
                     }
 
                     if (itemCarosel.length > 10) {
                       let newCarosel = []
                       for (var i = 0; i < 10; i++) {
-                        if (i === 10) {
-                          newCarosel.push({
-                            "title": 'See More',
-                            "buttons":[
-                              {
-                                "type":"postback",
-                                "title":"Show More",
-                                "payload": "SHOWPRODUCTS_" + gender + "_" + category
-                              },
-                            ]
-                          })
-
-                        } else {
-                          newCarosel.push(itemCarosel[i])
-                        }
+                        newCarosel.push(itemCarosel[i])
                       }
 
                       let messageData = {
@@ -1290,50 +1188,33 @@ module.exports = (event) => {
                     var itemCarosel = []
 
                     for (var i = 0; i < matchedItems.length; i++) {
-                      var randNum = Math.floor(Math.random() * matchedItems.length) + 1
-                      console.log(matchedItems[randNum])
-
-                      itemCarosel.push(
-                        {
-                          "title": matchedItems[randNum]['Title'],
-                          "subtitle": '$' + Math.round(matchedItems[randNum]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[randNum]['Size'],
-                          "image_url": matchedItems[randNum]['Image URL'],
-                          "buttons":[
-                            {
-                              "type":"web_url",
-                              "url": matchedItems[randNum]['Product URL'],
-                              "title":"Purchase",
-                              "webview_height_ratio":"tall"
-                            },
-                            {
-                              "type":"web_url",
-                              "url": matchedItems[randNum]['Product URL'],
-                              "title":"View Details",
-                              "webview_height_ratio":"tall"
-                            }
-                          ]
-                        }
-                      )
+                        itemCarosel.push(
+                          {
+                            "title": matchedItems[i].Title,
+                            "subtitle": '$' + Math.round(matchedItems[i]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[i]['Size'],
+                            "image_url": matchedItems[i]['Image URL'],
+                            "buttons":[
+                              {
+                                "type":"web_url",
+                                "url": matchedItems[i]['Product URL'],
+                                "title":"Purchase",
+                                "webview_height_ratio":"tall"
+                              },
+                              {
+                                "type":"web_url",
+                                "url": matchedItems[i]['Product URL'],
+                                "title":"View Details",
+                                "webview_height_ratio":"tall"
+                              }
+                            ]
+                          }
+                        )
                     }
 
                     if (itemCarosel.length > 10) {
                       let newCarosel = []
                       for (var i = 0; i < 10; i++) {
-                        if (i === 10) {
-                          newCarosel.push({
-                            "title": 'See More',
-                            "buttons":[
-                              {
-                                "type":"postback",
-                                "title":"Show More",
-                                "payload": "SHOWPRODUCTS_" + gender + "_" + category
-                              },
-                            ]
-                          })
-
-                        } else {
-                          newCarosel.push(itemCarosel[i])
-                        }
+                        newCarosel.push(itemCarosel[i])
                       }
 
                       let messageData = {
@@ -1410,52 +1291,34 @@ module.exports = (event) => {
                     var itemCarosel = []
 
                     for (var i = 0; i < matchedItems.length; i++) {
-                      var randNum = Math.floor(Math.random() * matchedItems.length) + 1
-                      console.log(matchedItems[randNum])
-
-                      itemCarosel.push(
-                        {
-                          "title": matchedItems[randNum]['Title'],
-                          "subtitle": '$' + Math.round(matchedItems[randNum]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[randNum]['Size'],
-                          "image_url": matchedItems[randNum]['Image URL'],
-                          "buttons":[
-                            {
-                              "type":"web_url",
-                              "url": matchedItems[randNum]['Product URL'],
-                              "title":"Purchase",
-                              "webview_height_ratio":"tall"
-                            },
-                            {
-                              "type":"web_url",
-                              "url": matchedItems[randNum]['Product URL'],
-                              "title":"View Details",
-                              "webview_height_ratio":"tall"
-                            }
-                          ]
-                        }
-                      )
+                        itemCarosel.push(
+                          {
+                            "title": matchedItems[i].Title,
+                            "subtitle": '$' + Math.round(matchedItems[i]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[i]['Size'],
+                            "image_url": matchedItems[i]['Image URL'],
+                            "buttons":[
+                              {
+                                "type":"web_url",
+                                "url": matchedItems[i]['Product URL'],
+                                "title":"Purchase",
+                                "webview_height_ratio":"tall"
+                              },
+                              {
+                                "type":"web_url",
+                                "url": matchedItems[i]['Product URL'],
+                                "title":"View Details",
+                                "webview_height_ratio":"tall"
+                              }
+                            ]
+                          }
+                        )
                     }
 
                     if (itemCarosel.length > 10) {
                       let newCarosel = []
                       for (var i = 0; i < 10; i++) {
-                        if (i === 10) {
-                          newCarosel.push({
-                            "title": 'See More',
-                            "buttons":[
-                              {
-                                "type":"postback",
-                                "title":"Show More",
-                                "payload": "SHOWPRODUCTS_" + gender + "_" + category
-                              },
-                            ]
-                          })
-
-                        } else {
-                          newCarosel.push(itemCarosel[i])
-                        }
+                        newCarosel.push(itemCarosel[i])
                       }
-
 
                       let messageData = {
                         "recipient":{
@@ -1531,50 +1394,33 @@ module.exports = (event) => {
                     var itemCarosel = []
 
                     for (var i = 0; i < matchedItems.length; i++) {
-                      var randNum = Math.floor(Math.random() * matchedItems.length) + 1
-                      console.log(matchedItems[randNum])
-
-                      itemCarosel.push(
-                        {
-                          "title": matchedItems[randNum]['Title'],
-                          "subtitle": '$' + Math.round(matchedItems[randNum]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[randNum]['Size'],
-                          "image_url": matchedItems[randNum]['Image URL'],
-                          "buttons":[
-                            {
-                              "type":"web_url",
-                              "url": matchedItems[randNum]['Product URL'],
-                              "title":"Purchase",
-                              "webview_height_ratio":"tall"
-                            },
-                            {
-                              "type":"web_url",
-                              "url": matchedItems[randNum]['Product URL'],
-                              "title":"View Details",
-                              "webview_height_ratio":"tall"
-                            }
-                          ]
-                        }
-                      )
+                        itemCarosel.push(
+                          {
+                            "title": matchedItems[i].Title,
+                            "subtitle": '$' + Math.round(matchedItems[i]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[i]['Size'],
+                            "image_url": matchedItems[i]['Image URL'],
+                            "buttons":[
+                              {
+                                "type":"web_url",
+                                "url": matchedItems[i]['Product URL'],
+                                "title":"Purchase",
+                                "webview_height_ratio":"tall"
+                              },
+                              {
+                                "type":"web_url",
+                                "url": matchedItems[i]['Product URL'],
+                                "title":"View Details",
+                                "webview_height_ratio":"tall"
+                              }
+                            ]
+                          }
+                        )
                     }
 
                     if (itemCarosel.length > 10) {
                       let newCarosel = []
                       for (var i = 0; i < 10; i++) {
-                        if (i === 10) {
-                          newCarosel.push({
-                            "title": 'See More',
-                            "buttons":[
-                              {
-                                "type":"postback",
-                                "title":"Show More",
-                                "payload": "SHOWPRODUCTS_" + gender + "_" + category
-                              },
-                            ]
-                          })
-
-                        } else {
-                          newCarosel.push(itemCarosel[i])
-                        }
+                        newCarosel.push(itemCarosel[i])
                       }
 
                       let messageData = {
@@ -1651,50 +1497,33 @@ module.exports = (event) => {
                     var itemCarosel = []
 
                     for (var i = 0; i < matchedItems.length; i++) {
-                      var randNum = Math.floor(Math.random() * matchedItems.length) + 1
-                      console.log(matchedItems[randNum])
-
-                      itemCarosel.push(
-                        {
-                          "title": matchedItems[randNum]['Title'],
-                          "subtitle": '$' + Math.round(matchedItems[randNum]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[randNum]['Size'],
-                          "image_url": matchedItems[randNum]['Image URL'],
-                          "buttons":[
-                            {
-                              "type":"web_url",
-                              "url": matchedItems[randNum]['Product URL'],
-                              "title":"Purchase",
-                              "webview_height_ratio":"tall"
-                            },
-                            {
-                              "type":"web_url",
-                              "url": matchedItems[randNum]['Product URL'],
-                              "title":"View Details",
-                              "webview_height_ratio":"tall"
-                            }
-                          ]
-                        }
-                      )
+                        itemCarosel.push(
+                          {
+                            "title": matchedItems[i].Title,
+                            "subtitle": '$' + Math.round(matchedItems[i]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[i]['Size'],
+                            "image_url": matchedItems[i]['Image URL'],
+                            "buttons":[
+                              {
+                                "type":"web_url",
+                                "url": matchedItems[i]['Product URL'],
+                                "title":"Purchase",
+                                "webview_height_ratio":"tall"
+                              },
+                              {
+                                "type":"web_url",
+                                "url": matchedItems[i]['Product URL'],
+                                "title":"View Details",
+                                "webview_height_ratio":"tall"
+                              }
+                            ]
+                          }
+                        )
                     }
 
                     if (itemCarosel.length > 10) {
                       let newCarosel = []
                       for (var i = 0; i < 10; i++) {
-                        if (i === 10) {
-                          newCarosel.push({
-                            "title": 'See More',
-                            "buttons":[
-                              {
-                                "type":"postback",
-                                "title":"Show More",
-                                "payload": "SHOWPRODUCTS_" + gender + "_" + category
-                              },
-                            ]
-                          })
-
-                        } else {
-                          newCarosel.push(itemCarosel[i])
-                        }
+                        newCarosel.push(itemCarosel[i])
                       }
 
                       let messageData = {
@@ -1771,50 +1600,33 @@ module.exports = (event) => {
                     var itemCarosel = []
 
                     for (var i = 0; i < matchedItems.length; i++) {
-                      var randNum = Math.floor(Math.random() * matchedItems.length) + 1
-                      console.log(matchedItems[randNum])
-
-                      itemCarosel.push(
-                        {
-                          "title": matchedItems[randNum]['Title'],
-                          "subtitle": '$' + Math.round(matchedItems[randNum]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[randNum]['Size'],
-                          "image_url": matchedItems[randNum]['Image URL'],
-                          "buttons":[
-                            {
-                              "type":"web_url",
-                              "url": matchedItems[randNum]['Product URL'],
-                              "title":"Purchase",
-                              "webview_height_ratio":"tall"
-                            },
-                            {
-                              "type":"web_url",
-                              "url": matchedItems[randNum]['Product URL'],
-                              "title":"View Details",
-                              "webview_height_ratio":"tall"
-                            }
-                          ]
-                        }
-                      )
+                        itemCarosel.push(
+                          {
+                            "title": matchedItems[i].Title,
+                            "subtitle": '$' + Math.round(matchedItems[i]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[i]['Size'],
+                            "image_url": matchedItems[i]['Image URL'],
+                            "buttons":[
+                              {
+                                "type":"web_url",
+                                "url": matchedItems[i]['Product URL'],
+                                "title":"Purchase",
+                                "webview_height_ratio":"tall"
+                              },
+                              {
+                                "type":"web_url",
+                                "url": matchedItems[i]['Product URL'],
+                                "title":"View Details",
+                                "webview_height_ratio":"tall"
+                              }
+                            ]
+                          }
+                        )
                     }
 
                     if (itemCarosel.length > 10) {
                       let newCarosel = []
                       for (var i = 0; i < 10; i++) {
-                        if (i === 10) {
-                          newCarosel.push({
-                            "title": 'See More',
-                            "buttons":[
-                              {
-                                "type":"postback",
-                                "title":"Show More",
-                                "payload": "SHOWPRODUCTS_" + gender + "_" + category
-                              },
-                            ]
-                          })
-
-                        } else {
-                          newCarosel.push(itemCarosel[i])
-                        }
+                        newCarosel.push(itemCarosel[i])
                       }
 
                       let messageData = {
@@ -1891,50 +1703,33 @@ module.exports = (event) => {
                     var itemCarosel = []
 
                     for (var i = 0; i < matchedItems.length; i++) {
-                      var randNum = Math.floor(Math.random() * matchedItems.length) + 1
-                      console.log(matchedItems[randNum])
-
-                      itemCarosel.push(
-                        {
-                          "title": matchedItems[randNum]['Title'],
-                          "subtitle": '$' + Math.round(matchedItems[randNum]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[randNum]['Size'],
-                          "image_url": matchedItems[randNum]['Image URL'],
-                          "buttons":[
-                            {
-                              "type":"web_url",
-                              "url": matchedItems[randNum]['Product URL'],
-                              "title":"Purchase",
-                              "webview_height_ratio":"tall"
-                            },
-                            {
-                              "type":"web_url",
-                              "url": matchedItems[randNum]['Product URL'],
-                              "title":"View Details",
-                              "webview_height_ratio":"tall"
-                            }
-                          ]
-                        }
-                      )
+                        itemCarosel.push(
+                          {
+                            "title": matchedItems[i].Title,
+                            "subtitle": '$' + Math.round(matchedItems[i]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[i]['Size'],
+                            "image_url": matchedItems[i]['Image URL'],
+                            "buttons":[
+                              {
+                                "type":"web_url",
+                                "url": matchedItems[i]['Product URL'],
+                                "title":"Purchase",
+                                "webview_height_ratio":"tall"
+                              },
+                              {
+                                "type":"web_url",
+                                "url": matchedItems[i]['Product URL'],
+                                "title":"View Details",
+                                "webview_height_ratio":"tall"
+                              }
+                            ]
+                          }
+                        )
                     }
 
                     if (itemCarosel.length > 10) {
                       let newCarosel = []
                       for (var i = 0; i < 10; i++) {
-                        if (i === 10) {
-                          newCarosel.push({
-                            "title": 'See More',
-                            "buttons":[
-                              {
-                                "type":"postback",
-                                "title":"Show More",
-                                "payload": "SHOWPRODUCTS_" + gender + "_" + category
-                              },
-                            ]
-                          })
-
-                        } else {
-                          newCarosel.push(itemCarosel[i])
-                        }
+                        newCarosel.push(itemCarosel[i])
                       }
 
                       let messageData = {
@@ -2011,50 +1806,33 @@ module.exports = (event) => {
                     var itemCarosel = []
 
                     for (var i = 0; i < matchedItems.length; i++) {
-                      var randNum = Math.floor(Math.random() * matchedItems.length) + 1
-                      console.log(matchedItems[randNum])
-
-                      itemCarosel.push(
-                        {
-                          "title": matchedItems[randNum]['Title'],
-                          "subtitle": '$' + Math.round(matchedItems[randNum]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[randNum]['Size'],
-                          "image_url": matchedItems[randNum]['Image URL'],
-                          "buttons":[
-                            {
-                              "type":"web_url",
-                              "url": matchedItems[randNum]['Product URL'],
-                              "title":"Purchase",
-                              "webview_height_ratio":"tall"
-                            },
-                            {
-                              "type":"web_url",
-                              "url": matchedItems[randNum]['Product URL'],
-                              "title":"View Details",
-                              "webview_height_ratio":"tall"
-                            }
-                          ]
-                        }
-                      )
+                        itemCarosel.push(
+                          {
+                            "title": matchedItems[i].Title,
+                            "subtitle": '$' + Math.round(matchedItems[i]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[i]['Size'],
+                            "image_url": matchedItems[i]['Image URL'],
+                            "buttons":[
+                              {
+                                "type":"web_url",
+                                "url": matchedItems[i]['Product URL'],
+                                "title":"Purchase",
+                                "webview_height_ratio":"tall"
+                              },
+                              {
+                                "type":"web_url",
+                                "url": matchedItems[i]['Product URL'],
+                                "title":"View Details",
+                                "webview_height_ratio":"tall"
+                              }
+                            ]
+                          }
+                        )
                     }
 
                     if (itemCarosel.length > 10) {
                       let newCarosel = []
                       for (var i = 0; i < 10; i++) {
-                        if (i === 10) {
-                          newCarosel.push({
-                            "title": 'See More',
-                            "buttons":[
-                              {
-                                "type":"postback",
-                                "title":"Show More",
-                                "payload": "SHOWPRODUCTS_" + gender + "_" + category
-                              },
-                            ]
-                          })
-
-                        } else {
-                          newCarosel.push(itemCarosel[i])
-                        }
+                        newCarosel.push(itemCarosel[i])
                       }
 
                       let messageData = {
@@ -2135,49 +1913,33 @@ module.exports = (event) => {
                     var itemCarosel = []
 
                     for (var i = 0; i < matchedItems.length; i++) {
-                      var randNum = Math.floor(Math.random() * matchedItems.length) + 1
-                      console.log(matchedItems[randNum])
-                      itemCarosel.push(
-                        {
-                          "title": matchedItems[randNum]['Title'],
-                          "subtitle": '$' + Math.round(matchedItems[randNum]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[randNum]['Size'],
-                          "image_url": matchedItems[randNum]['Image URL'],
-                          "buttons":[
-                            {
-                              "type":"web_url",
-                              "url": matchedItems[randNum]['Product URL'],
-                              "title":"Purchase",
-                              "webview_height_ratio":"tall"
-                            },
-                            {
-                              "type":"web_url",
-                              "url": matchedItems[randNum]['Product URL'],
-                              "title":"View Details",
-                              "webview_height_ratio":"tall"
-                            }
-                          ]
-                        }
-                      )
+                        itemCarosel.push(
+                          {
+                            "title": matchedItems[i].Title,
+                            "subtitle": '$' + Math.round(matchedItems[i]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[i]['Size'],
+                            "image_url": matchedItems[i]['Image URL'],
+                            "buttons":[
+                              {
+                                "type":"web_url",
+                                "url": matchedItems[i]['Product URL'],
+                                "title":"Purchase",
+                                "webview_height_ratio":"tall"
+                              },
+                              {
+                                "type":"web_url",
+                                "url": matchedItems[i]['Product URL'],
+                                "title":"View Details",
+                                "webview_height_ratio":"tall"
+                              }
+                            ]
+                          }
+                        )
                     }
 
                     if (itemCarosel.length > 10) {
                       let newCarosel = []
                       for (var i = 0; i < 10; i++) {
-                        if (i === 10) {
-                          newCarosel.push({
-                            "title": 'See More',
-                            "buttons":[
-                              {
-                                "type":"postback",
-                                "title":"Show More",
-                                "payload": "SHOWPRODUCTS_" + gender + "_" + category
-                              },
-                            ]
-                          })
-
-                        } else {
-                          newCarosel.push(itemCarosel[i])
-                        }
+                        newCarosel.push(itemCarosel[i])
                       }
 
                       let messageData = {
@@ -2258,50 +2020,33 @@ module.exports = (event) => {
                     var itemCarosel = []
 
                     for (var i = 0; i < matchedItems.length; i++) {
-                      var randNum = Math.floor(Math.random() * matchedItems.length) + 1
-                      console.log(matchedItems[randNum])
-
-                      itemCarosel.push(
-                        {
-                          "title": matchedItems[randNum]['Title'],
-                          "subtitle": '$' + Math.round(matchedItems[randNum]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[randNum]['Size'],
-                          "image_url": matchedItems[randNum]['Image URL'],
-                          "buttons":[
-                            {
-                              "type":"web_url",
-                              "url": matchedItems[randNum]['Product URL'],
-                              "title":"Purchase",
-                              "webview_height_ratio":"tall"
-                            },
-                            {
-                              "type":"web_url",
-                              "url": matchedItems[randNum]['Product URL'],
-                              "title":"View Details",
-                              "webview_height_ratio":"tall"
-                            }
-                          ]
-                        }
-                      )
+                        itemCarosel.push(
+                          {
+                            "title": matchedItems[i].Title,
+                            "subtitle": '$' + Math.round(matchedItems[i]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[i]['Size'],
+                            "image_url": matchedItems[i]['Image URL'],
+                            "buttons":[
+                              {
+                                "type":"web_url",
+                                "url": matchedItems[i]['Product URL'],
+                                "title":"Purchase",
+                                "webview_height_ratio":"tall"
+                              },
+                              {
+                                "type":"web_url",
+                                "url": matchedItems[i]['Product URL'],
+                                "title":"View Details",
+                                "webview_height_ratio":"tall"
+                              }
+                            ]
+                          }
+                        )
                     }
 
                     if (itemCarosel.length > 10) {
                       let newCarosel = []
                       for (var i = 0; i < 10; i++) {
-                        if (i === 10) {
-                          newCarosel.push({
-                            "title": 'See More',
-                            "buttons":[
-                              {
-                                "type":"postback",
-                                "title":"Show More",
-                                "payload": "SHOWPRODUCTS_" + gender + "_" + category
-                              },
-                            ]
-                          })
-
-                        } else {
-                          newCarosel.push(itemCarosel[i])
-                        }
+                        newCarosel.push(itemCarosel[i])
                       }
 
                       let messageData = {
@@ -2382,50 +2127,33 @@ module.exports = (event) => {
                     var itemCarosel = []
 
                     for (var i = 0; i < matchedItems.length; i++) {
-                      var randNum = Math.floor(Math.random() * matchedItems.length) + 1
-                      console.log(matchedItems[randNum])
-
-                      itemCarosel.push(
-                        {
-                          "title": matchedItems[randNum]['Title'],
-                          "subtitle": '$' + Math.round(matchedItems[randNum]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[randNum]['Size'],
-                          "image_url": matchedItems[randNum]['Image URL'],
-                          "buttons":[
-                            {
-                              "type":"web_url",
-                              "url": matchedItems[randNum]['Product URL'],
-                              "title":"Purchase",
-                              "webview_height_ratio":"tall"
-                            },
-                            {
-                              "type":"web_url",
-                              "url": matchedItems[randNum]['Product URL'],
-                              "title":"View Details",
-                              "webview_height_ratio":"tall"
-                            }
-                          ]
-                        }
-                      )
+                        itemCarosel.push(
+                          {
+                            "title": matchedItems[i].Title,
+                            "subtitle": '$' + Math.round(matchedItems[i]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[i]['Size'],
+                            "image_url": matchedItems[i]['Image URL'],
+                            "buttons":[
+                              {
+                                "type":"web_url",
+                                "url": matchedItems[i]['Product URL'],
+                                "title":"Purchase",
+                                "webview_height_ratio":"tall"
+                              },
+                              {
+                                "type":"web_url",
+                                "url": matchedItems[i]['Product URL'],
+                                "title":"View Details",
+                                "webview_height_ratio":"tall"
+                              }
+                            ]
+                          }
+                        )
                     }
 
                     if (itemCarosel.length > 10) {
                       let newCarosel = []
                       for (var i = 0; i < 10; i++) {
-                        if (i === 10) {
-                          newCarosel.push({
-                            "title": 'See More',
-                            "buttons":[
-                              {
-                                "type":"postback",
-                                "title":"Show More",
-                                "payload": "SHOWPRODUCTS_" + gender + "_" + category
-                              },
-                            ]
-                          })
-
-                        } else {
-                          newCarosel.push(itemCarosel[i])
-                        }
+                        newCarosel.push(itemCarosel[i])
                       }
 
                       let messageData = {
@@ -2506,50 +2234,33 @@ module.exports = (event) => {
                     var itemCarosel = []
 
                     for (var i = 0; i < matchedItems.length; i++) {
-                      var randNum = Math.floor(Math.random() * matchedItems.length) + 1
-                      console.log(matchedItems[randNum])
-
-                      itemCarosel.push(
-                        {
-                          "title": matchedItems[randNum]['Title'],
-                          "subtitle": '$' + Math.round(matchedItems[randNum]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[randNum]['Size'],
-                          "image_url": matchedItems[randNum]['Image URL'],
-                          "buttons":[
-                            {
-                              "type":"web_url",
-                              "url": matchedItems[randNum]['Product URL'],
-                              "title":"Purchase",
-                              "webview_height_ratio":"tall"
-                            },
-                            {
-                              "type":"web_url",
-                              "url": matchedItems[randNum]['Product URL'],
-                              "title":"View Details",
-                              "webview_height_ratio":"tall"
-                            }
-                          ]
-                        }
-                      )
+                        itemCarosel.push(
+                          {
+                            "title": matchedItems[i].Title,
+                            "subtitle": '$' + Math.round(matchedItems[i]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[i]['Size'],
+                            "image_url": matchedItems[i]['Image URL'],
+                            "buttons":[
+                              {
+                                "type":"web_url",
+                                "url": matchedItems[i]['Product URL'],
+                                "title":"Purchase",
+                                "webview_height_ratio":"tall"
+                              },
+                              {
+                                "type":"web_url",
+                                "url": matchedItems[i]['Product URL'],
+                                "title":"View Details",
+                                "webview_height_ratio":"tall"
+                              }
+                            ]
+                          }
+                        )
                     }
 
                     if (itemCarosel.length > 10) {
                       let newCarosel = []
                       for (var i = 0; i < 10; i++) {
-                        if (i === 10) {
-                          newCarosel.push({
-                            "title": 'See More',
-                            "buttons":[
-                              {
-                                "type":"postback",
-                                "title":"Show More",
-                                "payload": "SHOWPRODUCTS_" + gender + "_" + category
-                              },
-                            ]
-                          })
-
-                        } else {
-                          newCarosel.push(itemCarosel[i])
-                        }
+                        newCarosel.push(itemCarosel[i])
                       }
 
                       let messageData = {
@@ -2630,50 +2341,33 @@ module.exports = (event) => {
                     var itemCarosel = []
 
                     for (var i = 0; i < matchedItems.length; i++) {
-                      var randNum = Math.floor(Math.random() * matchedItems.length) + 1
-                      console.log(matchedItems[randNum])
-
-                      itemCarosel.push(
-                        {
-                          "title": matchedItems[randNum]['Title'],
-                          "subtitle": '$' + Math.round(matchedItems[randNum]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[randNum]['Size'],
-                          "image_url": matchedItems[randNum]['Image URL'],
-                          "buttons":[
-                            {
-                              "type":"web_url",
-                              "url": matchedItems[randNum]['Product URL'],
-                              "title":"Purchase",
-                              "webview_height_ratio":"tall"
-                            },
-                            {
-                              "type":"web_url",
-                              "url": matchedItems[randNum]['Product URL'],
-                              "title":"View Details",
-                              "webview_height_ratio":"tall"
-                            }
-                          ]
-                        }
-                      )
+                        itemCarosel.push(
+                          {
+                            "title": matchedItems[i].Title,
+                            "subtitle": '$' + Math.round(matchedItems[i]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[i]['Size'],
+                            "image_url": matchedItems[i]['Image URL'],
+                            "buttons":[
+                              {
+                                "type":"web_url",
+                                "url": matchedItems[i]['Product URL'],
+                                "title":"Purchase",
+                                "webview_height_ratio":"tall"
+                              },
+                              {
+                                "type":"web_url",
+                                "url": matchedItems[i]['Product URL'],
+                                "title":"View Details",
+                                "webview_height_ratio":"tall"
+                              }
+                            ]
+                          }
+                        )
                     }
 
                     if (itemCarosel.length > 10) {
                       let newCarosel = []
                       for (var i = 0; i < 10; i++) {
-                        if (i === 10) {
-                          newCarosel.push({
-                            "title": 'See More',
-                            "buttons":[
-                              {
-                                "type":"postback",
-                                "title":"Show More",
-                                "payload": "SHOWPRODUCTS_" + gender + "_" + category
-                              },
-                            ]
-                          })
-
-                        } else {
-                          newCarosel.push(itemCarosel[i])
-                        }
+                        newCarosel.push(itemCarosel[i])
                       }
 
                       let messageData = {
@@ -2754,50 +2448,33 @@ module.exports = (event) => {
                     var itemCarosel = []
 
                     for (var i = 0; i < matchedItems.length; i++) {
-                      var randNum = Math.floor(Math.random() * matchedItems.length) + 1
-                      console.log(matchedItems[randNum])
-
-                      itemCarosel.push(
-                        {
-                          "title": matchedItems[randNum]['Title'],
-                          "subtitle": '$' + Math.round(matchedItems[randNum]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[randNum]['Size'],
-                          "image_url": matchedItems[randNum]['Image URL'],
-                          "buttons":[
-                            {
-                              "type":"web_url",
-                              "url": matchedItems[randNum]['Product URL'],
-                              "title":"Purchase",
-                              "webview_height_ratio":"tall"
-                            },
-                            {
-                              "type":"web_url",
-                              "url": matchedItems[randNum]['Product URL'],
-                              "title":"View Details",
-                              "webview_height_ratio":"tall"
-                            }
-                          ]
-                        }
-                      )
+                        itemCarosel.push(
+                          {
+                            "title": matchedItems[i].Title,
+                            "subtitle": '$' + Math.round(matchedItems[i]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[i]['Size'],
+                            "image_url": matchedItems[i]['Image URL'],
+                            "buttons":[
+                              {
+                                "type":"web_url",
+                                "url": matchedItems[i]['Product URL'],
+                                "title":"Purchase",
+                                "webview_height_ratio":"tall"
+                              },
+                              {
+                                "type":"web_url",
+                                "url": matchedItems[i]['Product URL'],
+                                "title":"View Details",
+                                "webview_height_ratio":"tall"
+                              }
+                            ]
+                          }
+                        )
                     }
 
                     if (itemCarosel.length > 10) {
                       let newCarosel = []
                       for (var i = 0; i < 10; i++) {
-                        if (i === 10) {
-                          newCarosel.push({
-                            "title": 'See More',
-                            "buttons":[
-                              {
-                                "type":"postback",
-                                "title":"Show More",
-                                "payload": "SHOWPRODUCTS_" + gender + "_" + category
-                              },
-                            ]
-                          })
-
-                        } else {
-                          newCarosel.push(itemCarosel[i])
-                        }
+                        newCarosel.push(itemCarosel[i])
                       }
 
                       let messageData = {
@@ -2878,50 +2555,33 @@ module.exports = (event) => {
                     var itemCarosel = []
 
                     for (var i = 0; i < matchedItems.length; i++) {
-                      var randNum = Math.floor(Math.random() * matchedItems.length) + 1
-                      console.log(matchedItems[randNum])
-
-                      itemCarosel.push(
-                        {
-                          "title": matchedItems[randNum]['Title'],
-                          "subtitle": '$' + Math.round(matchedItems[randNum]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[randNum]['Size'],
-                          "image_url": matchedItems[randNum]['Image URL'],
-                          "buttons":[
-                            {
-                              "type":"web_url",
-                              "url": matchedItems[randNum]['Product URL'],
-                              "title":"Purchase",
-                              "webview_height_ratio":"tall"
-                            },
-                            {
-                              "type":"web_url",
-                              "url": matchedItems[randNum]['Product URL'],
-                              "title":"View Details",
-                              "webview_height_ratio":"tall"
-                            }
-                          ]
-                        }
-                      )
+                        itemCarosel.push(
+                          {
+                            "title": matchedItems[i].Title,
+                            "subtitle": '$' + Math.round(matchedItems[i]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[i]['Size'],
+                            "image_url": matchedItems[i]['Image URL'],
+                            "buttons":[
+                              {
+                                "type":"web_url",
+                                "url": matchedItems[i]['Product URL'],
+                                "title":"Purchase",
+                                "webview_height_ratio":"tall"
+                              },
+                              {
+                                "type":"web_url",
+                                "url": matchedItems[i]['Product URL'],
+                                "title":"View Details",
+                                "webview_height_ratio":"tall"
+                              }
+                            ]
+                          }
+                        )
                     }
 
                     if (itemCarosel.length > 10) {
                       let newCarosel = []
                       for (var i = 0; i < 10; i++) {
-                        if (i === 10) {
-                          newCarosel.push({
-                            "title": 'See More',
-                            "buttons":[
-                              {
-                                "type":"postback",
-                                "title":"Show More",
-                                "payload": "SHOWPRODUCTS_" + gender + "_" + category
-                              },
-                            ]
-                          })
-
-                        } else {
-                          newCarosel.push(itemCarosel[i])
-                        }
+                        newCarosel.push(itemCarosel[i])
                       }
 
                       let messageData = {
@@ -3002,24 +2662,21 @@ module.exports = (event) => {
                 var itemCarosel = []
 
                 for (var i = 0; i < matchedItems.length; i++) {
-                  var randNum = Math.floor(Math.random() * matchedItems.length) + 1
-                  console.log(matchedItems[randNum])
-
                   itemCarosel.push(
                     {
-                      "title": matchedItems[randNum]['Title'],
-                      "subtitle": '$' + Math.round(matchedItems[randNum]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[randNum]['Size'],
-                      "image_url": matchedItems[randNum]['Image URL'],
+                      "title": matchedItems[i].Title,
+                      "subtitle": '$' + Math.round(matchedItems[i]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[i]['Size'],
+                      "image_url": matchedItems[i]['Image URL'],
                       "buttons":[
                         {
                           "type":"web_url",
-                          "url": matchedItems[randNum]['Product URL'],
+                          "url": matchedItems[i]['Product URL'],
                           "title":"Purchase",
                           "webview_height_ratio":"tall"
                         },
                         {
                           "type":"web_url",
-                          "url": matchedItems[randNum]['Product URL'],
+                          "url": matchedItems[i]['Product URL'],
                           "title":"View Details",
                           "webview_height_ratio":"tall"
                         }
@@ -3031,21 +2688,7 @@ module.exports = (event) => {
                 if (itemCarosel.length > 10) {
                   let newCarosel = []
                   for (var i = 0; i < 10; i++) {
-                    if (i === 10) {
-                      newCarosel.push({
-                        "title": 'See More',
-                        "buttons":[
-                          {
-                            "type":"postback",
-                            "title":"Show More",
-                            "payload": "SHOWPRODUCTS_" + gender + "_" + category
-                          },
-                        ]
-                      })
-
-                    } else {
-                      newCarosel.push(itemCarosel[i])
-                    }
+                    newCarosel.push(itemCarosel[i])
                   }
 
                   let messageData = {
@@ -3120,24 +2763,21 @@ module.exports = (event) => {
                 var itemCarosel = []
 
                 for (var i = 0; i < matchedItems.length; i++) {
-                  var randNum = Math.floor(Math.random() * matchedItems.length) + 1
-                  console.log(matchedItems[randNum])
-
                   itemCarosel.push(
                     {
-                      "title": matchedItems[randNum]['Title'],
-                      "subtitle": '$' + Math.round(matchedItems[randNum]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[randNum]['Size'],
-                      "image_url": matchedItems[randNum]['Image URL'],
+                      "title": matchedItems[i].Title,
+                      "subtitle": '$' + Math.round(matchedItems[i]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[i]['Size'],
+                      "image_url": matchedItems[i]['Image URL'],
                       "buttons":[
                         {
                           "type":"web_url",
-                          "url": matchedItems[randNum]['Product URL'],
+                          "url": matchedItems[i]['Product URL'],
                           "title":"Purchase",
                           "webview_height_ratio":"tall"
                         },
                         {
                           "type":"web_url",
-                          "url": matchedItems[randNum]['Product URL'],
+                          "url": matchedItems[i]['Product URL'],
                           "title":"View Details",
                           "webview_height_ratio":"tall"
                         }
@@ -3149,22 +2789,27 @@ module.exports = (event) => {
                 if (itemCarosel.length > 10) {
                   let newCarosel = []
                   for (var i = 0; i < 10; i++) {
-                    if (i === 10) {
-                      newCarosel.push({
-                        "title": 'See More',
-                        "buttons":[
-                          {
-                            "type":"postback",
-                            "title":"Show More",
-                            "payload": "SHOWPRODUCTS_" + gender + "_" + category
-                          },
-                        ]
-                      })
-
-                    } else {
-                      newCarosel.push(itemCarosel[i])
-                    }
+                    newCarosel.push(itemCarosel[i])
                   }
+                  // THIS IS WHERE THE PAGINATION BEGINS
+                    // ABOVE LOOP STOPS AT 9
+                    // ADD ELEMENT THAT TRIGGERS THE NEXT PAGE
+                    // POSTBACK CONTRUCTION THAT HAS CONTEXT OF WHAT TYPE OF PRODUCT & NEXT SET OF ELEMENTS...
+                      // SEND PRODUCT CAT TRIGGER, SEND WHICH PAGE (WE KNOW THAT EACH FLIGHT OF PRODS === 10) incrementing number
+                      // payload === 'PAGE_<search_params>_<gender>_<pagination_number>'
+
+                  // payload receiver
+                    // take search params and gender, and run search in db on it (as above)
+                    // if pagination_number === 2
+                      // start loop at 10
+                    // if 3
+                      // start loop at 19
+                    // if 4
+                      // start loop at 28
+                    // if 5
+                      // start loop at 37
+
+
 
                   let messageData = {
                     "recipient":{
@@ -3238,24 +2883,21 @@ module.exports = (event) => {
                 var itemCarosel = []
 
                 for (var i = 0; i < matchedItems.length; i++) {
-                  var randNum = Math.floor(Math.random() * matchedItems.length) + 1
-                  console.log(matchedItems[randNum])
-
                   itemCarosel.push(
                     {
-                      "title": matchedItems[randNum]['Title'],
-                      "subtitle": '$' + Math.round(matchedItems[randNum]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[randNum]['Size'],
-                      "image_url": matchedItems[randNum]['Image URL'],
+                      "title": matchedItems[i].Title,
+                      "subtitle": '$' + Math.round(matchedItems[i]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[i]['Size'],
+                      "image_url": matchedItems[i]['Image URL'],
                       "buttons":[
                         {
                           "type":"web_url",
-                          "url": matchedItems[randNum]['Product URL'],
+                          "url": matchedItems[i]['Product URL'],
                           "title":"Purchase",
                           "webview_height_ratio":"tall"
                         },
                         {
                           "type":"web_url",
-                          "url": matchedItems[randNum]['Product URL'],
+                          "url": matchedItems[i]['Product URL'],
                           "title":"View Details",
                           "webview_height_ratio":"tall"
                         }
@@ -3267,21 +2909,7 @@ module.exports = (event) => {
                 if (itemCarosel.length > 10) {
                   let newCarosel = []
                   for (var i = 0; i < 10; i++) {
-                    if (i === 10) {
-                      newCarosel.push({
-                        "title": 'See More',
-                        "buttons":[
-                          {
-                            "type":"postback",
-                            "title":"Show More",
-                            "payload": "SHOWPRODUCTS_" + gender + "_" + category
-                          },
-                        ]
-                      })
-
-                    } else {
-                      newCarosel.push(itemCarosel[i])
-                    }
+                    newCarosel.push(itemCarosel[i])
                   }
 
                   let messageData = {
