@@ -824,6 +824,7 @@ module.exports = (event) => {
                     for (var i = 0; i < matchedItems.length; i++) {
                       var randNum = Math.floor(Math.random() * matchedItems.length) + 1
                       console.log(matchedItems[randNum])
+                      
                       itemCarosel.push(
                         {
                           "title": matchedItems[randNum]['Title'],
