@@ -11,7 +11,8 @@ var memberSchema = mongoose.Schema({
   photo: String,
   gender: String,
   createdDate: Date,
-  enrolled: Boolean
+  enrolled: Boolean,
+  postbackCount: Number
 })
 memberSchema.virtual('firstName').get(() => {
   return this.fullName.split(' ')[0]

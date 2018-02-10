@@ -47,7 +47,8 @@ module.exports = (event) => {
               fullName: facebookProfileResponse.first_name + ' ' + facebookProfileResponse.last_name,
               photo: facebookProfileResponse.profile_pic,
               timezone: facebookProfileResponse.timezone,
-              createdDate: moment().format('MM-DD-YYYY')
+              createdDate: moment().format('MM-DD-YYYY'),
+              postbackCount: 1
             })
 
             if (facebookProfileResponse.gender) {
@@ -96,11 +97,20 @@ module.exports = (event) => {
   }
 
     if (event.postback) {
+
       if (event.postback.payload === 'GET_STARTED_PAYLOAD') {
         getUser().then((user) => {
           findMember(user)
         })
       }
+
+      Member.findOneAndUpdate({ fbID: event.sender.id }, { postbackCount: postbackCount + 1 }, (err, member) => {
+        if (err) {
+          console.error(err)
+        }
+        
+        console.log(member)
+      })
 
       if (event.postback.payload === 'SHOP') {
         getUser().then((user) => {
