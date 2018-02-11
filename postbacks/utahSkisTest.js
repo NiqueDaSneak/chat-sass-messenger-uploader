@@ -864,7 +864,21 @@ module.exports = (event) => {
               if (itemCarosel.length > 10) {
                 let newCarosel = []
                 for (var i = 0; i < 10; i++) {
-                  newCarosel.push(itemCarosel[i])
+                  if (i === 10) {
+                    newCarosel.push(
+                      {
+                        "title": "See More",
+                        "buttons":[
+                          {
+                            "type": "postback",
+                            "payload": 'SEE_MORE',
+                            "title":"More Products"                          },
+                        ]
+                      }
+                    )
+                  } else {
+                    newCarosel.push(itemCarosel[i])
+                  }
                 }
 
                 let messageData = {
