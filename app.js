@@ -55,6 +55,9 @@ app.use('/tedxrouter', tedxRouter)
 var utahSkisRouter = require('./router/utahSkisRouter.js')
 app.use('/utahskisrouter', utahSkisRouter)
 
+var utahSkisTest = require('./router/utahSkisTest.js')
+app.use('/utahskistest', utahSkisTest)
+
 app.use('/data', express.static(path.join(__dirname, 'data')))
 
 
@@ -109,9 +112,9 @@ app.post('/', (req, res) => {
           return res.redirect(307, '/tedxrouter')
         }
 
-        // if (event.recipient.id === '176271182985693') {
-        //   return res.redirect(307, '/utahskisrouter')
-        // }
+        if (event.recipient.id === '176271182985693') {
+          return res.redirect(307, '/utahskistest')
+        }
 
         if (event.recipient.id === '133941773298279') {
           return res.redirect(307, '/utahskisrouter')
