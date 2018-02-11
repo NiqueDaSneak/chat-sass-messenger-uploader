@@ -864,7 +864,7 @@ module.exports = (event) => {
               if (itemCarosel.length > 10) {
                 let newCarosel = []
                 for (var i = 0; i < 10; i++) {
-                  if (i === 10) {
+                  if (i === 9) {
                     newCarosel.push(
                       {
                         "title": "See More",
