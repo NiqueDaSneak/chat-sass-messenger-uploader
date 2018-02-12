@@ -842,7 +842,7 @@ module.exports = (event) => {
                 console.log('rand: ' + rand)
                 itemCarosel.push(
                   {
-                    "title": matchedItems[rand].Title,
+                    "title": matchedItems[rand]['Title'],
                     "subtitle": '$' + Math.round(matchedItems[rand]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[rand]['Size'],
                     "image_url": matchedItems[rand]['Image URL'],
                     "buttons":[
