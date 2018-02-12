@@ -124,57 +124,61 @@ module.exports = (event) => {
       })
 
       if (event.postback.payload === 'SHOP') {
-        getUser().then((user) => {
-          // SEND INITIAL CATS => CATS_MENS, CATS_WOMENS, CATS_KIDS, SUMMER
           getUser().then((user) => {
-            let messageData = {
-              "recipient":{
-                "id": event.sender.id
-              },
-              "message":{
-                "attachment":{
-                  "type":"template",
-                  "payload":{
-                    "template_type":"generic",
-                    "elements":[
-                      {
-                        "title":"Women's",
-                        "buttons":[
+            sendTextMessage(event.sender.id, user.pageAccessToken, 'Instructions: scroll/swipe through categories to browse products. Tap “Buy now” to purchase.')
+            setTimeout(() => {
+              sendTextMessage(event.sender.id, user.pageAccessToken, 'Just click “Shop” in the menu to start browsing!')
+              setTimeout(() => {
+                let messageData = {
+                  "recipient":{
+                    "id": event.sender.id
+                  },
+                  "message":{
+                    "attachment":{
+                      "type":"template",
+                      "payload":{
+                        "template_type":"generic",
+                        "elements":[
                           {
-                            "type":"postback",
-                            "title":"Shop",
-                            "payload":"CATS_WOMENS"
-                          }
-                        ]
-                      },
-                      {
-                        "title":"Men's",
-                        "buttons":[
+                            "title":"Women's",
+                            "buttons":[
+                              {
+                                "type":"postback",
+                                "title":"Shop",
+                                "payload":"CATS_WOMENS"
+                              }
+                            ]
+                          },
                           {
-                            "type":"postback",
-                            "title":"Shop",
-                            "payload":"CATS_MENS"
-                          }
-                        ]
-                      },
-                      {
-                        "title":"Kids's",
-                        "buttons":[
+                            "title":"Men's",
+                            "buttons":[
+                              {
+                                "type":"postback",
+                                "title":"Shop",
+                                "payload":"CATS_MENS"
+                              }
+                            ]
+                          },
                           {
-                            "type":"postback",
-                            "title":"Shop",
-                            "payload":"CATS_KIDS"
+                            "title":"Kids's",
+                            "buttons":[
+                              {
+                                "type":"postback",
+                                "title":"Shop",
+                                "payload":"CATS_KIDS"
+                              }
+                            ]
                           }
                         ]
                       }
-                    ]
+                    }
                   }
                 }
-              }
-            }
-            callSendAPI(user.pageAccessToken, messageData)
+                callSendAPI(user.pageAccessToken, messageData)
+              }, 3000)
+            }, 4000)
+
           })
-        })
       }
 
       if (event.postback.payload.split('_')[0] === 'CATS') {
