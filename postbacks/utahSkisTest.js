@@ -838,21 +838,23 @@ module.exports = (event) => {
               var itemCarosel = []
 
               for (var i = 0; i < matchedItems.length; i++) {
+                var rand = Math.floor(Math.random() * matchedItems.length) + 1
+                console.log('rand: ' + rand)
                 itemCarosel.push(
                   {
-                    "title": matchedItems[i].Title,
-                    "subtitle": '$' + Math.round(matchedItems[i]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[i]['Size'],
-                    "image_url": matchedItems[i]['Image URL'],
+                    "title": matchedItems[rand].Title,
+                    "subtitle": '$' + Math.round(matchedItems[rand]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[rand]['Size'],
+                    "image_url": matchedItems[rand]['Image URL'],
                     "buttons":[
                       {
                         "type":"web_url",
-                        "url": matchedItems[i]['Product URL'],
+                        "url": matchedItems[rand]['Product URL'],
                         "title":"Purchase",
                         "webview_height_ratio":"tall"
                       },
                       {
                         "type":"web_url",
-                        "url": matchedItems[i]['Product URL'],
+                        "url": matchedItems[rand]['Product URL'],
                         "title":"View Details",
                         "webview_height_ratio":"tall"
                       }
@@ -872,7 +874,8 @@ module.exports = (event) => {
                           {
                             "type": "postback",
                             "payload": 'SEE_MORE',
-                            "title":"More Products"                          },
+                            "title":"More Products"
+                          },
                         ]
                       }
                     )
