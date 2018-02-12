@@ -111,7 +111,7 @@ module.exports = (event) => {
           console.error(err)
         }
         if (member === null) {
-          
+
         } else {
           member.postbackCount = member.postbackCount + 1
           member.save((err, updatedMember) => {
@@ -564,2427 +564,372 @@ module.exports = (event) => {
         var gender = event.postback.payload.split('_')[2]
         var searchParams
         var matchedItems = []
-          getUser().then((user) => {
-            if (category === 'SKIS') {
-              searchParams = 'skis'
+        getUser().then((user) => {
+          if (category === 'SKIS') {
+            searchParams = 'skis'
 
-              if (gender === 'MENS') {
-                gender = 'male'
-              } else if (gender === 'WOMENS') {
-                gender = 'female'
-              } else {
-                gender = 'kids'
-              }
-
-              csv({
-                noheader: true,
-                delimiter: 'auto',
-                headers: ['Unique ID', 'Title', 'Description', 'Category', 'Product URL', 'Image URL', 'Condition', 'Availability', 'Current Price', 'Brand', 'Size', 'Color', 'Original Price', 'Ship Weight', 'Shipping Cost', 'Google Product Category', 'GTIN', 'Connexity Product ID', 'AGE_GROUP', 'GENDER', 'Coupon Code']
-              })
-              .fromFile('data/Irrigate.txt')
-              .on('json',(jsonObj) => {
-                if (jsonObj['Category'].toLowerCase() === searchParams) {
-                  if (gender === 'kids') {
-                    if (jsonObj['AGE_GROUP'].toLowerCase() === gender) {
-                      // console.log(jsonObj)
-                      matchedItems.push(jsonObj)
-                    }
-                  } else {
-                    if (jsonObj['GENDER'].toLowerCase() === gender) {
-                      // console.log(jsonObj)
-                      matchedItems.push(jsonObj)
-                    }
-                  }
-
-                }
-              })
-              .on('done',(error) => {
-
-                    var itemCarosel = []
-
-                    for (var i = 0; i < matchedItems.length; i++) {
-                      itemCarosel.push(
-                        {
-                          "title": matchedItems[i].Title,
-                          "subtitle": '$' + Math.round(matchedItems[i]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[i]['Size'],
-                          "image_url": matchedItems[i]['Image URL'],
-                          "buttons":[
-                            {
-                              "type":"web_url",
-                              "url": matchedItems[i]['Product URL'],
-                              "title":"Purchase",
-                              "webview_height_ratio":"tall"
-                            },
-                            {
-                              "type":"web_url",
-                              "url": matchedItems[i]['Product URL'],
-                              "title":"View Details",
-                              "webview_height_ratio":"tall"
-                            }
-                          ]
-                        }
-                      )
-                    }
-
-                    if (itemCarosel.length > 10) {
-                      let newCarosel = []
-                      for (var i = 0; i < 10; i++) {
-                        newCarosel.push(itemCarosel[i])
-                      }
-
-                      let messageData = {
-                        "recipient":{
-                          "id": event.sender.id
-                        },
-                        "message":{
-                          "attachment":{
-                            "type":"template",
-                            "payload":{
-                              "template_type":"generic",
-                              "elements": newCarosel
-                            }
-                          }
-                        }
-                      }
-                      callSendAPI(user.pageAccessToken, messageData)
-                    } else {
-                      let messageData = {
-                        "recipient":{
-                          "id": event.sender.id
-                        },
-                        "message":{
-                          "attachment":{
-                            "type":"template",
-                            "payload":{
-                              "template_type":"generic",
-                              "elements": itemCarosel
-                            }
-                          }
-                        }
-                      }
-                      callSendAPI(user.pageAccessToken, messageData)
-                    }
-              })
+            if (gender === 'MENS') {
+              gender = 'male'
+            } else if (gender === 'WOMENS') {
+              gender = 'female'
+            } else {
+              gender = 'kids'
             }
+          }
 
-            if (category === 'DEMOSKIS') {
-              searchParams = 'demo skis'
+          if (category === 'DEMOSKIS') {
+            searchParams = 'demo skis'
 
-              if (gender === 'MENS') {
-                gender = 'male'
-              } else if (gender === 'WOMENS') {
-                gender = 'female'
-              } else {
-                gender = 'kids'
-              }
-
-              csv({
-                noheader: true,
-                delimiter: 'auto',
-                headers: ['Unique ID', 'Title', 'Description', 'Category', 'Product URL', 'Image URL', 'Condition', 'Availability', 'Current Price', 'Brand', 'Size', 'Color', 'Original Price', 'Ship Weight', 'Shipping Cost', 'Google Product Category', 'GTIN', 'Connexity Product ID', 'AGE_GROUP', 'GENDER', 'Coupon Code']
-              })
-              .fromFile('data/Irrigate.txt')
-              .on('json',(jsonObj) => {
-                // console.log(jsonObj)
-                if (jsonObj['Category'].toLowerCase() === searchParams) {
-                  if (gender === 'kids') {
-                    if (jsonObj['AGE_GROUP'].toLowerCase() === gender) {
-                      // console.log(jsonObj)
-                      matchedItems.push(jsonObj)
-                    }
-                  } else {
-                    if (jsonObj['GENDER'].toLowerCase() === gender) {
-                      // console.log(jsonObj)
-                      matchedItems.push(jsonObj)
-                    }
-                  }
-
-                }
-              })
-              .on('done',(error) => {
-
-                    var itemCarosel = []
-
-                    for (var i = 0; i < matchedItems.length; i++) {
-                        itemCarosel.push(
-                          {
-                            "title": matchedItems[i].Title,
-                            "subtitle": '$' + Math.round(matchedItems[i]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[i]['Size'],
-                            "image_url": matchedItems[i]['Image URL'],
-                            "buttons":[
-                              {
-                                "type":"web_url",
-                                "url": matchedItems[i]['Product URL'],
-                                "title":"Purchase",
-                                "webview_height_ratio":"tall"
-                              },
-                              {
-                                "type":"web_url",
-                                "url": matchedItems[i]['Product URL'],
-                                "title":"View Details",
-                                "webview_height_ratio":"tall"
-                              }
-                            ]
-                          }
-                        )
-                    }
-
-                    if (itemCarosel.length > 10) {
-                      let newCarosel = []
-                      for (var i = 0; i < 10; i++) {
-                        newCarosel.push(itemCarosel[i])
-                      }
-
-                      let messageData = {
-                        "recipient":{
-                          "id": event.sender.id
-                        },
-                        "message":{
-                          "attachment":{
-                            "type":"template",
-                            "payload":{
-                              "template_type":"generic",
-                              "elements": newCarosel
-                            }
-                          }
-                        }
-                      }
-                      callSendAPI(user.pageAccessToken, messageData)
-                    } else {
-                      let messageData = {
-                        "recipient":{
-                          "id": event.sender.id
-                        },
-                        "message":{
-                          "attachment":{
-                            "type":"template",
-                            "payload":{
-                              "template_type":"generic",
-                              "elements": itemCarosel
-                            }
-                          }
-                        }
-                      }
-                      callSendAPI(user.pageAccessToken, messageData)
-                    }
-              })
+            if (gender === 'MENS') {
+              gender = 'male'
+            } else if (gender === 'WOMENS') {
+              gender = 'female'
+            } else {
+              gender = 'kids'
             }
+          }
 
-            if (category === 'SKIBOOTS') {
-              searchParams = 'ski boots'
+          if (category === 'SKIBOOTS') {
+            searchParams = 'ski boots'
 
-              if (gender === 'MENS') {
-                gender = 'male'
-              } else if (gender === 'WOMENS') {
-                gender = 'female'
-              } else {
-                gender = 'kids'
-              }
-
-              csv({
-                noheader: true,
-                delimiter: 'auto',
-                headers: ['Unique ID', 'Title', 'Description', 'Category', 'Product URL', 'Image URL', 'Condition', 'Availability', 'Current Price', 'Brand', 'Size', 'Color', 'Original Price', 'Ship Weight', 'Shipping Cost', 'Google Product Category', 'GTIN', 'Connexity Product ID', 'AGE_GROUP', 'GENDER', 'Coupon Code']
-              })
-              .fromFile('data/Irrigate.txt')
-              .on('json',(jsonObj) => {
-                // console.log(jsonObj)
-                if (jsonObj['Category'].toLowerCase() === searchParams) {
-                  if (gender === 'kids') {
-                    if (jsonObj['AGE_GROUP'].toLowerCase() === gender) {
-                      // console.log(jsonObj)
-                      matchedItems.push(jsonObj)
-                    }
-                  } else {
-                    if (jsonObj['GENDER'].toLowerCase() === gender) {
-                      // console.log(jsonObj)
-                      matchedItems.push(jsonObj)
-                    }
-                  }
-
-                }
-              })
-              .on('done',(error) => {
-
-                    var itemCarosel = []
-
-                    for (var i = 0; i < matchedItems.length; i++) {
-                        itemCarosel.push(
-                          {
-                            "title": matchedItems[i].Title,
-                            "subtitle": '$' + Math.round(matchedItems[i]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[i]['Size'],
-                            "image_url": matchedItems[i]['Image URL'],
-                            "buttons":[
-                              {
-                                "type":"web_url",
-                                "url": matchedItems[i]['Product URL'],
-                                "title":"Purchase",
-                                "webview_height_ratio":"tall"
-                              },
-                              {
-                                "type":"web_url",
-                                "url": matchedItems[i]['Product URL'],
-                                "title":"View Details",
-                                "webview_height_ratio":"tall"
-                              }
-                            ]
-                          }
-                        )
-                    }
-
-                    if (itemCarosel.length > 10) {
-                      let newCarosel = []
-                      for (var i = 0; i < 10; i++) {
-                        newCarosel.push(itemCarosel[i])
-                      }
-
-                      let messageData = {
-                        "recipient":{
-                          "id": event.sender.id
-                        },
-                        "message":{
-                          "attachment":{
-                            "type":"template",
-                            "payload":{
-                              "template_type":"generic",
-                              "elements": newCarosel
-                            }
-                          }
-                        }
-                      }
-                      callSendAPI(user.pageAccessToken, messageData)
-                    } else {
-                      let messageData = {
-                        "recipient":{
-                          "id": event.sender.id
-                        },
-                        "message":{
-                          "attachment":{
-                            "type":"template",
-                            "payload":{
-                              "template_type":"generic",
-                              "elements": itemCarosel
-                            }
-                          }
-                        }
-                      }
-                      callSendAPI(user.pageAccessToken, messageData)
-                    }
-              })
+            if (gender === 'MENS') {
+              gender = 'male'
+            } else if (gender === 'WOMENS') {
+              gender = 'female'
+            } else {
+              gender = 'kids'
             }
+          }
 
-            if (category === 'SKIBINDINGS') {
-              searchParams = 'ski bindings'
+          if (category === 'SKIBINDINGS') {
+            searchParams = 'ski bindings'
+            gender = 'unisex'
+          }
 
-              gender = 'unisex'
+          if (category === 'SKIPOLES') {
+            searchParams = 'ski poles'
+            gender = 'unisex'
+          }
 
-              csv({
-                noheader: true,
-                delimiter: 'auto',
-                headers: ['Unique ID', 'Title', 'Description', 'Category', 'Product URL', 'Image URL', 'Condition', 'Availability', 'Current Price', 'Brand', 'Size', 'Color', 'Original Price', 'Ship Weight', 'Shipping Cost', 'Google Product Category', 'GTIN', 'Connexity Product ID', 'AGE_GROUP', 'GENDER', 'Coupon Code']
-              })
-              .fromFile('data/Irrigate.txt')
-              .on('json',(jsonObj) => {
-                // console.log(jsonObj)
-                if (jsonObj['Category'].toLowerCase() === searchParams) {
-                  if (gender === 'kids') {
-                    if (jsonObj['AGE_GROUP'].toLowerCase() === gender) {
-                      // console.log(jsonObj)
-                      matchedItems.push(jsonObj)
-                    }
-                  } else {
-                    if (jsonObj['GENDER'].toLowerCase() === gender) {
-                      // console.log(jsonObj)
-                      matchedItems.push(jsonObj)
-                    }
-                  }
+          if (category === 'SNOWBOARDS') {
+            searchParams = 'snowboards'
 
-                }
-              })
-              .on('done',(error) => {
-
-                    var itemCarosel = []
-
-                    for (var i = 0; i < matchedItems.length; i++) {
-                        itemCarosel.push(
-                          {
-                            "title": matchedItems[i].Title,
-                            "subtitle": '$' + Math.round(matchedItems[i]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[i]['Size'],
-                            "image_url": matchedItems[i]['Image URL'],
-                            "buttons":[
-                              {
-                                "type":"web_url",
-                                "url": matchedItems[i]['Product URL'],
-                                "title":"Purchase",
-                                "webview_height_ratio":"tall"
-                              },
-                              {
-                                "type":"web_url",
-                                "url": matchedItems[i]['Product URL'],
-                                "title":"View Details",
-                                "webview_height_ratio":"tall"
-                              }
-                            ]
-                          }
-                        )
-                    }
-
-                    if (itemCarosel.length > 10) {
-                      let newCarosel = []
-                      for (var i = 0; i < 10; i++) {
-                        newCarosel.push(itemCarosel[i])
-                      }
-
-                      let messageData = {
-                        "recipient":{
-                          "id": event.sender.id
-                        },
-                        "message":{
-                          "attachment":{
-                            "type":"template",
-                            "payload":{
-                              "template_type":"generic",
-                              "elements": newCarosel
-                            }
-                          }
-                        }
-                      }
-                      callSendAPI(user.pageAccessToken, messageData)
-                    } else {
-                      let messageData = {
-                        "recipient":{
-                          "id": event.sender.id
-                        },
-                        "message":{
-                          "attachment":{
-                            "type":"template",
-                            "payload":{
-                              "template_type":"generic",
-                              "elements": itemCarosel
-                            }
-                          }
-                        }
-                      }
-                      callSendAPI(user.pageAccessToken, messageData)
-                    }
-              })
+            if (gender === 'MENS') {
+              gender = 'male'
+            } else if (gender === 'WOMENS') {
+              gender = 'female'
+            } else {
+              gender = 'kids'
             }
+          }
 
-            if (category === 'SKIPOLES') {
-              searchParams = 'ski poles'
+          if (category === 'SNOWBOARDBINDINGS') {
+            searchParams = 'snowboard bindings'
 
-              gender = 'unisex'
-
-              csv({
-                noheader: true,
-                delimiter: 'auto',
-                headers: ['Unique ID', 'Title', 'Description', 'Category', 'Product URL', 'Image URL', 'Condition', 'Availability', 'Current Price', 'Brand', 'Size', 'Color', 'Original Price', 'Ship Weight', 'Shipping Cost', 'Google Product Category', 'GTIN', 'Connexity Product ID', 'AGE_GROUP', 'GENDER', 'Coupon Code']
-              })
-              .fromFile('data/Irrigate.txt')
-              .on('json',(jsonObj) => {
-                // console.log(jsonObj)
-                if (jsonObj['Category'].toLowerCase() === searchParams) {
-                  if (gender === 'kids') {
-                    if (jsonObj['AGE_GROUP'].toLowerCase() === gender) {
-                      // console.log(jsonObj)
-                      matchedItems.push(jsonObj)
-                    }
-                  } else {
-                    if (jsonObj['GENDER'].toLowerCase() === gender) {
-                      // console.log(jsonObj)
-                      matchedItems.push(jsonObj)
-                    }
-                  }
-
-                }
-              })
-              .on('done',(error) => {
-
-                    var itemCarosel = []
-
-                    for (var i = 0; i < matchedItems.length; i++) {
-                        itemCarosel.push(
-                          {
-                            "title": matchedItems[i].Title,
-                            "subtitle": '$' + Math.round(matchedItems[i]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[i]['Size'],
-                            "image_url": matchedItems[i]['Image URL'],
-                            "buttons":[
-                              {
-                                "type":"web_url",
-                                "url": matchedItems[i]['Product URL'],
-                                "title":"Purchase",
-                                "webview_height_ratio":"tall"
-                              },
-                              {
-                                "type":"web_url",
-                                "url": matchedItems[i]['Product URL'],
-                                "title":"View Details",
-                                "webview_height_ratio":"tall"
-                              }
-                            ]
-                          }
-                        )
-                    }
-
-                    if (itemCarosel.length > 10) {
-                      let newCarosel = []
-                      for (var i = 0; i < 10; i++) {
-                        newCarosel.push(itemCarosel[i])
-                      }
-
-                      let messageData = {
-                        "recipient":{
-                          "id": event.sender.id
-                        },
-                        "message":{
-                          "attachment":{
-                            "type":"template",
-                            "payload":{
-                              "template_type":"generic",
-                              "elements": newCarosel
-                            }
-                          }
-                        }
-                      }
-                      callSendAPI(user.pageAccessToken, messageData)
-                    } else {
-                      let messageData = {
-                        "recipient":{
-                          "id": event.sender.id
-                        },
-                        "message":{
-                          "attachment":{
-                            "type":"template",
-                            "payload":{
-                              "template_type":"generic",
-                              "elements": itemCarosel
-                            }
-                          }
-                        }
-                      }
-                      callSendAPI(user.pageAccessToken, messageData)
-                    }
-              })
+            if (gender === 'MENS') {
+              gender = 'male'
+            } else if (gender === 'WOMENS') {
+              gender = 'female'
+            } else {
+              gender = 'kids'
             }
+          }
 
-            if (category === 'SNOWBOARDS') {
-              searchParams = 'snowboards'
+          if (category === 'SNOWBOARDBOOTS') {
+            searchParams = 'snowboard boots'
 
-              if (gender === 'MENS') {
-                gender = 'male'
-              } else if (gender === 'WOMENS') {
-                gender = 'female'
-              } else {
-                gender = 'kids'
-              }
-
-              csv({
-                noheader: true,
-                delimiter: 'auto',
-                headers: ['Unique ID', 'Title', 'Description', 'Category', 'Product URL', 'Image URL', 'Condition', 'Availability', 'Current Price', 'Brand', 'Size', 'Color', 'Original Price', 'Ship Weight', 'Shipping Cost', 'Google Product Category', 'GTIN', 'Connexity Product ID', 'AGE_GROUP', 'GENDER', 'Coupon Code']
-              })
-              .fromFile('data/Irrigate.txt')
-              .on('json',(jsonObj) => {
-                // console.log(jsonObj)
-                if (jsonObj['Category'].toLowerCase() === searchParams) {
-                  if (gender === 'kids') {
-                    if (jsonObj['AGE_GROUP'].toLowerCase() === gender) {
-                      // console.log(jsonObj)
-                      matchedItems.push(jsonObj)
-                    }
-                  } else {
-                    if (jsonObj['GENDER'].toLowerCase() === gender) {
-                      // console.log(jsonObj)
-                      matchedItems.push(jsonObj)
-                    }
-                  }
-
-                }
-              })
-              .on('done',(error) => {
-
-                    var itemCarosel = []
-
-                    for (var i = 0; i < matchedItems.length; i++) {
-                        itemCarosel.push(
-                          {
-                            "title": matchedItems[i].Title,
-                            "subtitle": '$' + Math.round(matchedItems[i]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[i]['Size'],
-                            "image_url": matchedItems[i]['Image URL'],
-                            "buttons":[
-                              {
-                                "type":"web_url",
-                                "url": matchedItems[i]['Product URL'],
-                                "title":"Purchase",
-                                "webview_height_ratio":"tall"
-                              },
-                              {
-                                "type":"web_url",
-                                "url": matchedItems[i]['Product URL'],
-                                "title":"View Details",
-                                "webview_height_ratio":"tall"
-                              }
-                            ]
-                          }
-                        )
-                    }
-
-                    if (itemCarosel.length > 10) {
-                      let newCarosel = []
-                      for (var i = 0; i < 10; i++) {
-                        newCarosel.push(itemCarosel[i])
-                      }
-
-                      let messageData = {
-                        "recipient":{
-                          "id": event.sender.id
-                        },
-                        "message":{
-                          "attachment":{
-                            "type":"template",
-                            "payload":{
-                              "template_type":"generic",
-                              "elements": newCarosel
-                            }
-                          }
-                        }
-                      }
-                      callSendAPI(user.pageAccessToken, messageData)
-                    } else {
-                      let messageData = {
-                        "recipient":{
-                          "id": event.sender.id
-                        },
-                        "message":{
-                          "attachment":{
-                            "type":"template",
-                            "payload":{
-                              "template_type":"generic",
-                              "elements": itemCarosel
-                            }
-                          }
-                        }
-                      }
-                      callSendAPI(user.pageAccessToken, messageData)
-                    }
-              })
+            if (gender === 'MENS') {
+              gender = 'male'
+            } else if (gender === 'WOMENS') {
+              gender = 'female'
+            } else {
+              gender = 'kids'
             }
+          }
 
-            if (category === 'SNOWBOARDBINDINGS') {
-              searchParams = 'snowboard bindings'
+          if (category === 'SKIJACKETS') {
+            searchParams = 'ski jackets'
 
-              if (gender === 'MENS') {
-                gender = 'male'
-              } else if (gender === 'WOMENS') {
-                gender = 'female'
-              } else {
-                gender = 'kids'
-              }
-
-              csv({
-                noheader: true,
-                delimiter: 'auto',
-                headers: ['Unique ID', 'Title', 'Description', 'Category', 'Product URL', 'Image URL', 'Condition', 'Availability', 'Current Price', 'Brand', 'Size', 'Color', 'Original Price', 'Ship Weight', 'Shipping Cost', 'Google Product Category', 'GTIN', 'Connexity Product ID', 'AGE_GROUP', 'GENDER', 'Coupon Code']
-              })
-              .fromFile('data/Irrigate.txt')
-              .on('json',(jsonObj) => {
-                // console.log(jsonObj)
-                if (jsonObj['Category'].toLowerCase() === searchParams) {
-                  if (gender === 'kids') {
-                    if (jsonObj['AGE_GROUP'].toLowerCase() === gender) {
-                      // console.log(jsonObj)
-                      matchedItems.push(jsonObj)
-                    }
-                  } else {
-                    if (jsonObj['GENDER'].toLowerCase() === gender) {
-                      // console.log(jsonObj)
-                      matchedItems.push(jsonObj)
-                    }
-                  }
-
-                }
-              })
-              .on('done',(error) => {
-
-                    var itemCarosel = []
-
-                    for (var i = 0; i < matchedItems.length; i++) {
-                        itemCarosel.push(
-                          {
-                            "title": matchedItems[i].Title,
-                            "subtitle": '$' + Math.round(matchedItems[i]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[i]['Size'],
-                            "image_url": matchedItems[i]['Image URL'],
-                            "buttons":[
-                              {
-                                "type":"web_url",
-                                "url": matchedItems[i]['Product URL'],
-                                "title":"Purchase",
-                                "webview_height_ratio":"tall"
-                              },
-                              {
-                                "type":"web_url",
-                                "url": matchedItems[i]['Product URL'],
-                                "title":"View Details",
-                                "webview_height_ratio":"tall"
-                              }
-                            ]
-                          }
-                        )
-                    }
-
-                    if (itemCarosel.length > 10) {
-                      let newCarosel = []
-                      for (var i = 0; i < 10; i++) {
-                        newCarosel.push(itemCarosel[i])
-                      }
-
-                      let messageData = {
-                        "recipient":{
-                          "id": event.sender.id
-                        },
-                        "message":{
-                          "attachment":{
-                            "type":"template",
-                            "payload":{
-                              "template_type":"generic",
-                              "elements": newCarosel
-                            }
-                          }
-                        }
-                      }
-                      callSendAPI(user.pageAccessToken, messageData)
-                    } else {
-                      let messageData = {
-                        "recipient":{
-                          "id": event.sender.id
-                        },
-                        "message":{
-                          "attachment":{
-                            "type":"template",
-                            "payload":{
-                              "template_type":"generic",
-                              "elements": itemCarosel
-                            }
-                          }
-                        }
-                      }
-                      callSendAPI(user.pageAccessToken, messageData)
-                    }
-              })
+            if (gender === 'MENS') {
+              gender = 'male'
+            } else if (gender === 'WOMENS') {
+              gender = 'female'
+            } else {
+              gender = 'kids'
             }
+          }
 
-            if (category === 'SNOWBOARDBOOTS') {
-              searchParams = 'snowboard boots'
+          if (category === 'SKIPANTS') {
+            searchParams = 'ski pants'
 
-              if (gender === 'MENS') {
-                gender = 'male'
-              } else if (gender === 'WOMENS') {
-                gender = 'female'
-              } else {
-                gender = 'kids'
-              }
-
-              csv({
-                noheader: true,
-                delimiter: 'auto',
-                headers: ['Unique ID', 'Title', 'Description', 'Category', 'Product URL', 'Image URL', 'Condition', 'Availability', 'Current Price', 'Brand', 'Size', 'Color', 'Original Price', 'Ship Weight', 'Shipping Cost', 'Google Product Category', 'GTIN', 'Connexity Product ID', 'AGE_GROUP', 'GENDER', 'Coupon Code']
-              })
-              .fromFile('data/Irrigate.txt')
-              .on('json',(jsonObj) => {
-                // console.log(jsonObj)
-                if (jsonObj['Category'].toLowerCase() === searchParams) {
-                  if (gender === 'kids') {
-                    if (jsonObj['AGE_GROUP'].toLowerCase() === gender) {
-                      // console.log(jsonObj)
-                      matchedItems.push(jsonObj)
-                    }
-                  } else {
-                    if (jsonObj['GENDER'].toLowerCase() === gender) {
-                      // console.log(jsonObj)
-                      matchedItems.push(jsonObj)
-                    }
-                  }
-
-                }
-              })
-              .on('done',(error) => {
-
-                    var itemCarosel = []
-
-                    for (var i = 0; i < matchedItems.length; i++) {
-                        itemCarosel.push(
-                          {
-                            "title": matchedItems[i].Title,
-                            "subtitle": '$' + Math.round(matchedItems[i]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[i]['Size'],
-                            "image_url": matchedItems[i]['Image URL'],
-                            "buttons":[
-                              {
-                                "type":"web_url",
-                                "url": matchedItems[i]['Product URL'],
-                                "title":"Purchase",
-                                "webview_height_ratio":"tall"
-                              },
-                              {
-                                "type":"web_url",
-                                "url": matchedItems[i]['Product URL'],
-                                "title":"View Details",
-                                "webview_height_ratio":"tall"
-                              }
-                            ]
-                          }
-                        )
-                    }
-
-                    if (itemCarosel.length > 10) {
-                      let newCarosel = []
-                      for (var i = 0; i < 10; i++) {
-                        newCarosel.push(itemCarosel[i])
-                      }
-
-                      let messageData = {
-                        "recipient":{
-                          "id": event.sender.id
-                        },
-                        "message":{
-                          "attachment":{
-                            "type":"template",
-                            "payload":{
-                              "template_type":"generic",
-                              "elements": newCarosel
-                            }
-                          }
-                        }
-                      }
-                      callSendAPI(user.pageAccessToken, messageData)
-                    } else {
-                      let messageData = {
-                        "recipient":{
-                          "id": event.sender.id
-                        },
-                        "message":{
-                          "attachment":{
-                            "type":"template",
-                            "payload":{
-                              "template_type":"generic",
-                              "elements": itemCarosel
-                            }
-                          }
-                        }
-                      }
-                      callSendAPI(user.pageAccessToken, messageData)
-                    }
-              })
+            if (gender === 'MENS') {
+              gender = 'male'
+            } else if (gender === 'WOMENS') {
+              gender = 'female'
+            } else {
+              gender = 'kids'
             }
+          }
 
-            if (category === 'SKIJACKETS') {
-              searchParams = 'ski jackets'
+          if (category === 'BIBSANDSUSPENDERS') {
+            searchParams = 'bibs & suspenders'
 
-              if (gender === 'MENS') {
-                gender = 'male'
-              } else if (gender === 'WOMENS') {
-                gender = 'female'
-              } else {
-                gender = 'kids'
-              }
-
-              csv({
-                noheader: true,
-                delimiter: 'auto',
-                headers: ['Unique ID', 'Title', 'Description', 'Category', 'Product URL', 'Image URL', 'Condition', 'Availability', 'Current Price', 'Brand', 'Size', 'Color', 'Original Price', 'Ship Weight', 'Shipping Cost', 'Google Product Category', 'GTIN', 'Connexity Product ID', 'AGE_GROUP', 'GENDER', 'Coupon Code']
-              })
-              .fromFile('data/Irrigate.txt')
-              .on('json',(jsonObj) => {
-                // console.log(jsonObj)
-                if (jsonObj['Category'].toLowerCase() === searchParams) {
-                  if (gender === 'kids') {
-                    if (jsonObj['AGE_GROUP'].toLowerCase() === gender) {
-                      // console.log(jsonObj)
-                      matchedItems.push(jsonObj)
-                    }
-                  } else {
-                    if (jsonObj['GENDER'].toLowerCase() === gender) {
-                      // console.log(jsonObj)
-                      matchedItems.push(jsonObj)
-                    }
-                  }
-
-                }
-              })
-              .on('done',(error) => {
-
-                    var itemCarosel = []
-
-                    for (var i = 0; i < matchedItems.length; i++) {
-                        itemCarosel.push(
-                          {
-                            "title": matchedItems[i].Title,
-                            "subtitle": '$' + Math.round(matchedItems[i]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[i]['Size'],
-                            "image_url": matchedItems[i]['Image URL'],
-                            "buttons":[
-                              {
-                                "type":"web_url",
-                                "url": matchedItems[i]['Product URL'],
-                                "title":"Purchase",
-                                "webview_height_ratio":"tall"
-                              },
-                              {
-                                "type":"web_url",
-                                "url": matchedItems[i]['Product URL'],
-                                "title":"View Details",
-                                "webview_height_ratio":"tall"
-                              }
-                            ]
-                          }
-                        )
-                    }
-
-                    if (itemCarosel.length > 10) {
-                      let newCarosel = []
-                      for (var i = 0; i < 10; i++) {
-                        newCarosel.push(itemCarosel[i])
-                      }
-
-                      let messageData = {
-                        "recipient":{
-                          "id": event.sender.id
-                        },
-                        "message":{
-                          "attachment":{
-                            "type":"template",
-                            "payload":{
-                              "template_type":"generic",
-                              "elements": newCarosel
-                            }
-                          }
-                        }
-                      }
-                      callSendAPI(user.pageAccessToken, messageData)
-                    } else {
-                      let messageData = {
-                        "recipient":{
-                          "id": event.sender.id
-                        },
-                        "message":{
-                          "attachment":{
-                            "type":"template",
-                            "payload":{
-                              "template_type":"generic",
-                              "elements": itemCarosel
-                            }
-                          }
-                        }
-                      }
-                      callSendAPI(user.pageAccessToken, messageData)
-                    }
-              })
+            if (gender === 'MENS') {
+              gender = 'male'
+            } else if (gender === 'WOMENS') {
+              gender = 'female'
+            } else {
+              gender = 'kids'
             }
+          }
 
-            if (category === 'SKIPANTS') {
-              searchParams = 'ski pants'
+          if (category === 'FLEECE') {
+            searchParams = 'fleece'
 
-              if (gender === 'MENS') {
-                gender = 'male'
-              } else if (gender === 'WOMENS') {
-                gender = 'female'
-              } else {
-                gender = 'kids'
-              }
-
-              csv({
-                noheader: true,
-                delimiter: 'auto',
-                headers: ['Unique ID', 'Title', 'Description', 'Category', 'Product URL', 'Image URL', 'Condition', 'Availability', 'Current Price', 'Brand', 'Size', 'Color', 'Original Price', 'Ship Weight', 'Shipping Cost', 'Google Product Category', 'GTIN', 'Connexity Product ID', 'AGE_GROUP', 'GENDER', 'Coupon Code']
-              })
-              .fromFile('data/Irrigate.txt')
-              .on('json',(jsonObj) => {
-                // console.log(jsonObj)
-                if (jsonObj['Category'].toLowerCase() === searchParams) {
-                  if (gender === 'kids') {
-                    if (jsonObj['AGE_GROUP'].toLowerCase() === gender) {
-                      // console.log(jsonObj)
-                      matchedItems.push(jsonObj)
-                    }
-                  } else {
-                    if (jsonObj['GENDER'].toLowerCase() === gender) {
-                      // console.log(jsonObj)
-                      matchedItems.push(jsonObj)
-                    }
-                  }
-
-                }
-              })
-              .on('done',(error) => {
-
-                    var itemCarosel = []
-
-                    for (var i = 0; i < matchedItems.length; i++) {
-                        itemCarosel.push(
-                          {
-                            "title": matchedItems[i].Title,
-                            "subtitle": '$' + Math.round(matchedItems[i]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[i]['Size'],
-                            "image_url": matchedItems[i]['Image URL'],
-                            "buttons":[
-                              {
-                                "type":"web_url",
-                                "url": matchedItems[i]['Product URL'],
-                                "title":"Purchase",
-                                "webview_height_ratio":"tall"
-                              },
-                              {
-                                "type":"web_url",
-                                "url": matchedItems[i]['Product URL'],
-                                "title":"View Details",
-                                "webview_height_ratio":"tall"
-                              }
-                            ]
-                          }
-                        )
-                    }
-
-                    if (itemCarosel.length > 10) {
-                      let newCarosel = []
-                      for (var i = 0; i < 10; i++) {
-                        newCarosel.push(itemCarosel[i])
-                      }
-
-                      let messageData = {
-                        "recipient":{
-                          "id": event.sender.id
-                        },
-                        "message":{
-                          "attachment":{
-                            "type":"template",
-                            "payload":{
-                              "template_type":"generic",
-                              "elements": newCarosel
-                            }
-                          }
-                        }
-                      }
-                      callSendAPI(user.pageAccessToken, messageData)
-                    } else {
-                      let messageData = {
-                        "recipient":{
-                          "id": event.sender.id
-                        },
-                        "message":{
-                          "attachment":{
-                            "type":"template",
-                            "payload":{
-                              "template_type":"generic",
-                              "elements": itemCarosel
-                            }
-                          }
-                        }
-                      }
-                      callSendAPI(user.pageAccessToken, messageData)
-                    }
-              })
+            if (gender === 'MENS') {
+              gender = 'male'
+            } else if (gender === 'WOMENS') {
+              gender = 'female'
+            } else {
+              gender = 'kids'
             }
+          }
+          if (category === 'HOODIES') {
+            searchParams = 'hoodies'
 
-            if (category === 'BIBSANDSUSPENDERS') {
-              searchParams = 'bibs & suspenders'
-
-              if (gender === 'MENS') {
-                gender = 'male'
-              } else if (gender === 'WOMENS') {
-                gender = 'female'
-              } else {
-                gender = 'kids'
-              }
-
-              csv({
-                noheader: true,
-                delimiter: 'auto',
-                headers: ['Unique ID', 'Title', 'Description', 'Category', 'Product URL', 'Image URL', 'Condition', 'Availability', 'Current Price', 'Brand', 'Size', 'Color', 'Original Price', 'Ship Weight', 'Shipping Cost', 'Google Product Category', 'GTIN', 'Connexity Product ID', 'AGE_GROUP', 'GENDER', 'Coupon Code']
-              })
-              .fromFile('data/Irrigate.txt')
-              .on('json',(jsonObj) => {
-                // console.log(jsonObj)
-                if (jsonObj['Category'].toLowerCase() === searchParams) {
-                  if (gender === 'kids') {
-                    if (jsonObj['AGE_GROUP'].toLowerCase() === gender) {
-                      // console.log(jsonObj)
-                      matchedItems.push(jsonObj)
-                    }
-                  } else {
-                    if (jsonObj['GENDER'].toLowerCase() === gender) {
-                      // console.log(jsonObj)
-                      matchedItems.push(jsonObj)
-                    }
-                  }
-
-                }
-              })
-              .on('done',(error) => {
-
-                    var itemCarosel = []
-
-                    for (var i = 0; i < matchedItems.length; i++) {
-                        itemCarosel.push(
-                          {
-                            "title": matchedItems[i].Title,
-                            "subtitle": '$' + Math.round(matchedItems[i]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[i]['Size'],
-                            "image_url": matchedItems[i]['Image URL'],
-                            "buttons":[
-                              {
-                                "type":"web_url",
-                                "url": matchedItems[i]['Product URL'],
-                                "title":"Purchase",
-                                "webview_height_ratio":"tall"
-                              },
-                              {
-                                "type":"web_url",
-                                "url": matchedItems[i]['Product URL'],
-                                "title":"View Details",
-                                "webview_height_ratio":"tall"
-                              }
-                            ]
-                          }
-                        )
-                    }
-
-                    if (itemCarosel.length > 10) {
-                      let newCarosel = []
-                      for (var i = 0; i < 10; i++) {
-                        newCarosel.push(itemCarosel[i])
-                      }
-
-                      let messageData = {
-                        "recipient":{
-                          "id": event.sender.id
-                        },
-                        "message":{
-                          "attachment":{
-                            "type":"template",
-                            "payload":{
-                              "template_type":"generic",
-                              "elements": newCarosel
-                            }
-                          }
-                        }
-                      }
-                      callSendAPI(user.pageAccessToken, messageData)
-                    } else {
-                      let messageData = {
-                        "recipient":{
-                          "id": event.sender.id
-                        },
-                        "message":{
-                          "attachment":{
-                            "type":"template",
-                            "payload":{
-                              "template_type":"generic",
-                              "elements": itemCarosel
-                            }
-                          }
-                        }
-                      }
-                      callSendAPI(user.pageAccessToken, messageData)
-                    }
-              })
+            if (gender === 'MENS') {
+              gender = 'male'
+            } else if (gender === 'WOMENS') {
+              gender = 'female'
+            } else {
+              gender = 'kids'
             }
+          }
+          if (category === 'SWEATERS') {
+            searchParams = 'sweaters'
 
-            if (category === 'FLEECE') {
-              searchParams = 'fleece'
-
-              if (gender === 'MENS') {
-                gender = 'male'
-              } else if (gender === 'WOMENS') {
-                gender = 'female'
-              } else {
-                gender = 'kids'
-              }
-
-              csv({
-                noheader: true,
-                delimiter: 'auto',
-                headers: ['Unique ID', 'Title', 'Description', 'Category', 'Product URL', 'Image URL', 'Condition', 'Availability', 'Current Price', 'Brand', 'Size', 'Color', 'Original Price', 'Ship Weight', 'Shipping Cost', 'Google Product Category', 'GTIN', 'Connexity Product ID', 'AGE_GROUP', 'GENDER', 'Coupon Code']
-              })
-              .fromFile('data/Irrigate.txt')
-              .on('json',(jsonObj) => {
-                // console.log(jsonObj)
-                if (jsonObj['Category'].toLowerCase() === searchParams) {
-                  if (gender === 'kids') {
-                    if (jsonObj['AGE_GROUP'].toLowerCase() === gender) {
-                      // console.log(jsonObj)
-                      matchedItems.push(jsonObj)
-                    }
-                  } else {
-                    if (jsonObj['GENDER'].toLowerCase() === gender) {
-                      // console.log(jsonObj)
-                      matchedItems.push(jsonObj)
-                    }
-                  }
-
-                }
-              })
-              .on('done',(error) => {
-
-                    var itemCarosel = []
-
-                    for (var i = 0; i < matchedItems.length; i++) {
-                        itemCarosel.push(
-                          {
-                            "title": matchedItems[i].Title,
-                            "subtitle": '$' + Math.round(matchedItems[i]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[i]['Size'],
-                            "image_url": matchedItems[i]['Image URL'],
-                            "buttons":[
-                              {
-                                "type":"web_url",
-                                "url": matchedItems[i]['Product URL'],
-                                "title":"Purchase",
-                                "webview_height_ratio":"tall"
-                              },
-                              {
-                                "type":"web_url",
-                                "url": matchedItems[i]['Product URL'],
-                                "title":"View Details",
-                                "webview_height_ratio":"tall"
-                              }
-                            ]
-                          }
-                        )
-                    }
-
-                    if (itemCarosel.length > 10) {
-                      let newCarosel = []
-                      for (var i = 0; i < 10; i++) {
-                        newCarosel.push(itemCarosel[i])
-                      }
-
-                      let messageData = {
-                        "recipient":{
-                          "id": event.sender.id
-                        },
-                        "message":{
-                          "attachment":{
-                            "type":"template",
-                            "payload":{
-                              "template_type":"generic",
-                              "elements": newCarosel
-                            }
-                          }
-                        }
-                      }
-                      callSendAPI(user.pageAccessToken, messageData)
-                    } else {
-                      let messageData = {
-                        "recipient":{
-                          "id": event.sender.id
-                        },
-                        "message":{
-                          "attachment":{
-                            "type":"template",
-                            "payload":{
-                              "template_type":"generic",
-                              "elements": itemCarosel
-                            }
-                          }
-                        }
-                      }
-                      callSendAPI(user.pageAccessToken, messageData)
-                    }
-              })
+            if (gender === 'MENS') {
+              gender = 'male'
+            } else if (gender === 'WOMENS') {
+              gender = 'female'
+            } else {
+              gender = 'kids'
             }
+          }
 
-            if (category === 'HOODIES') {
-              searchParams = 'hoodies'
+          if (category === 'TURTLENECKS') {
+            searchParams = 'turtlenecks'
 
-              if (gender === 'MENS') {
-                gender = 'male'
-              } else if (gender === 'WOMENS') {
-                gender = 'female'
-              } else {
-                gender = 'kids'
-              }
-
-              csv({
-                noheader: true,
-                delimiter: 'auto',
-                headers: ['Unique ID', 'Title', 'Description', 'Category', 'Product URL', 'Image URL', 'Condition', 'Availability', 'Current Price', 'Brand', 'Size', 'Color', 'Original Price', 'Ship Weight', 'Shipping Cost', 'Google Product Category', 'GTIN', 'Connexity Product ID', 'AGE_GROUP', 'GENDER', 'Coupon Code']
-              })
-              .fromFile('data/Irrigate.txt')
-              .on('json',(jsonObj) => {
-                // console.log(jsonObj)
-                if (jsonObj['Category'].toLowerCase() === searchParams) {
-                  if (gender === 'kids') {
-                    if (jsonObj['AGE_GROUP'].toLowerCase() === gender) {
-                      // console.log(jsonObj)
-                      matchedItems.push(jsonObj)
-                    }
-                  } else {
-                    if (jsonObj['GENDER'].toLowerCase() === gender) {
-                      // console.log(jsonObj)
-                      matchedItems.push(jsonObj)
-                    }
-                  }
-
-                }
-              })
-              .on('done',(error) => {
-
-                    var itemCarosel = []
-
-                    for (var i = 0; i < matchedItems.length; i++) {
-                        itemCarosel.push(
-                          {
-                            "title": matchedItems[i].Title,
-                            "subtitle": '$' + Math.round(matchedItems[i]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[i]['Size'],
-                            "image_url": matchedItems[i]['Image URL'],
-                            "buttons":[
-                              {
-                                "type":"web_url",
-                                "url": matchedItems[i]['Product URL'],
-                                "title":"Purchase",
-                                "webview_height_ratio":"tall"
-                              },
-                              {
-                                "type":"web_url",
-                                "url": matchedItems[i]['Product URL'],
-                                "title":"View Details",
-                                "webview_height_ratio":"tall"
-                              }
-                            ]
-                          }
-                        )
-                    }
-
-                    if (itemCarosel.length > 10) {
-                      let newCarosel = []
-                      for (var i = 0; i < 10; i++) {
-                        newCarosel.push(itemCarosel[i])
-                      }
-
-                      let messageData = {
-                        "recipient":{
-                          "id": event.sender.id
-                        },
-                        "message":{
-                          "attachment":{
-                            "type":"template",
-                            "payload":{
-                              "template_type":"generic",
-                              "elements": newCarosel
-                            }
-                          }
-                        }
-                      }
-                      callSendAPI(user.pageAccessToken, messageData)
-                    } else {
-                      if (itemCarosel.length === 0) {
-                        sendTextMessage(event.sender.id, user.pageAccessToken, 'Sold Out!')
-                      } else {
-                        let messageData = {
-                          "recipient":{
-                            "id": event.sender.id
-                          },
-                          "message":{
-                            "attachment":{
-                              "type":"template",
-                              "payload":{
-                                "template_type":"generic",
-                                "elements": itemCarosel
-                              }
-                            }
-                          }
-                        }
-                        callSendAPI(user.pageAccessToken, messageData)
-                      }
-                    }
-              })
+            if (gender === 'MENS') {
+              gender = 'male'
+            } else if (gender === 'WOMENS') {
+              gender = 'female'
+            } else {
+              gender = 'kids'
             }
+          }
 
-            if (category === 'SWEATERS') {
-              searchParams = 'sweaters'
+          if (category === 'THERMALS') {
+            searchParams = 'thermals'
 
-              if (gender === 'MENS') {
-                gender = 'male'
-              } else if (gender === 'WOMENS') {
-                gender = 'female'
-              } else {
-                gender = 'kids'
-              }
-
-              csv({
-                noheader: true,
-                delimiter: 'auto',
-                headers: ['Unique ID', 'Title', 'Description', 'Category', 'Product URL', 'Image URL', 'Condition', 'Availability', 'Current Price', 'Brand', 'Size', 'Color', 'Original Price', 'Ship Weight', 'Shipping Cost', 'Google Product Category', 'GTIN', 'Connexity Product ID', 'AGE_GROUP', 'GENDER', 'Coupon Code']
-              })
-              .fromFile('data/Irrigate.txt')
-              .on('json',(jsonObj) => {
-                // console.log(jsonObj)
-                if (jsonObj['Category'].toLowerCase() === searchParams) {
-                  if (gender === 'kids') {
-                    if (jsonObj['AGE_GROUP'].toLowerCase() === gender) {
-                      // console.log(jsonObj)
-                      matchedItems.push(jsonObj)
-                    }
-                  } else {
-                    if (jsonObj['GENDER'].toLowerCase() === gender) {
-                      // console.log(jsonObj)
-                      matchedItems.push(jsonObj)
-                    }
-                  }
-
-                }
-              })
-              .on('done',(error) => {
-
-                    var itemCarosel = []
-
-                    for (var i = 0; i < matchedItems.length; i++) {
-                        itemCarosel.push(
-                          {
-                            "title": matchedItems[i].Title,
-                            "subtitle": '$' + Math.round(matchedItems[i]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[i]['Size'],
-                            "image_url": matchedItems[i]['Image URL'],
-                            "buttons":[
-                              {
-                                "type":"web_url",
-                                "url": matchedItems[i]['Product URL'],
-                                "title":"Purchase",
-                                "webview_height_ratio":"tall"
-                              },
-                              {
-                                "type":"web_url",
-                                "url": matchedItems[i]['Product URL'],
-                                "title":"View Details",
-                                "webview_height_ratio":"tall"
-                              }
-                            ]
-                          }
-                        )
-                    }
-
-                    if (itemCarosel.length > 10) {
-                      let newCarosel = []
-                      for (var i = 0; i < 10; i++) {
-                        newCarosel.push(itemCarosel[i])
-                      }
-
-                      let messageData = {
-                        "recipient":{
-                          "id": event.sender.id
-                        },
-                        "message":{
-                          "attachment":{
-                            "type":"template",
-                            "payload":{
-                              "template_type":"generic",
-                              "elements": newCarosel
-                            }
-                          }
-                        }
-                      }
-                      callSendAPI(user.pageAccessToken, messageData)
-                    } else {
-                      if (itemCarosel.length === 0) {
-                        sendTextMessage(event.sender.id, user.pageAccessToken, 'Sold Out!')
-                      } else {
-                        let messageData = {
-                          "recipient":{
-                            "id": event.sender.id
-                          },
-                          "message":{
-                            "attachment":{
-                              "type":"template",
-                              "payload":{
-                                "template_type":"generic",
-                                "elements": itemCarosel
-                              }
-                            }
-                          }
-                        }
-                        callSendAPI(user.pageAccessToken, messageData)
-                      }
-                    }
-              })
+            if (gender === 'MENS') {
+              gender = 'male'
+            } else if (gender === 'WOMENS') {
+              gender = 'female'
+            } else {
+              gender = 'kids'
             }
+          }
 
-            if (category === 'TURTLENECKS') {
-              searchParams = 'turtlenecks'
+          if (category === 'TSHIRTS') {
+            searchParams = 't-shirts'
 
-              if (gender === 'MENS') {
-                gender = 'male'
-              } else if (gender === 'WOMENS') {
-                gender = 'female'
-              } else {
-                gender = 'kids'
-              }
-
-              csv({
-                noheader: true,
-                delimiter: 'auto',
-                headers: ['Unique ID', 'Title', 'Description', 'Category', 'Product URL', 'Image URL', 'Condition', 'Availability', 'Current Price', 'Brand', 'Size', 'Color', 'Original Price', 'Ship Weight', 'Shipping Cost', 'Google Product Category', 'GTIN', 'Connexity Product ID', 'AGE_GROUP', 'GENDER', 'Coupon Code']
-              })
-              .fromFile('data/Irrigate.txt')
-              .on('json',(jsonObj) => {
-                // console.log(jsonObj)
-                if (jsonObj['Category'].toLowerCase() === searchParams) {
-                  if (gender === 'kids') {
-                    if (jsonObj['AGE_GROUP'].toLowerCase() === gender) {
-                      // console.log(jsonObj)
-                      matchedItems.push(jsonObj)
-                    }
-                  } else {
-                    if (jsonObj['GENDER'].toLowerCase() === gender) {
-                      // console.log(jsonObj)
-                      matchedItems.push(jsonObj)
-                    }
-                  }
-
-                }
-              })
-              .on('done',(error) => {
-
-                    var itemCarosel = []
-
-                    for (var i = 0; i < matchedItems.length; i++) {
-                        itemCarosel.push(
-                          {
-                            "title": matchedItems[i].Title,
-                            "subtitle": '$' + Math.round(matchedItems[i]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[i]['Size'],
-                            "image_url": matchedItems[i]['Image URL'],
-                            "buttons":[
-                              {
-                                "type":"web_url",
-                                "url": matchedItems[i]['Product URL'],
-                                "title":"Purchase",
-                                "webview_height_ratio":"tall"
-                              },
-                              {
-                                "type":"web_url",
-                                "url": matchedItems[i]['Product URL'],
-                                "title":"View Details",
-                                "webview_height_ratio":"tall"
-                              }
-                            ]
-                          }
-                        )
-                    }
-
-                    if (itemCarosel.length > 10) {
-                      let newCarosel = []
-                      for (var i = 0; i < 10; i++) {
-                        newCarosel.push(itemCarosel[i])
-                      }
-
-                      let messageData = {
-                        "recipient":{
-                          "id": event.sender.id
-                        },
-                        "message":{
-                          "attachment":{
-                            "type":"template",
-                            "payload":{
-                              "template_type":"generic",
-                              "elements": newCarosel
-                            }
-                          }
-                        }
-                      }
-                      callSendAPI(user.pageAccessToken, messageData)
-                    } else {
-                      if (itemCarosel.length === 0) {
-                        sendTextMessage(event.sender.id, user.pageAccessToken, 'Sold Out!')
-                      } else {
-                        let messageData = {
-                          "recipient":{
-                            "id": event.sender.id
-                          },
-                          "message":{
-                            "attachment":{
-                              "type":"template",
-                              "payload":{
-                                "template_type":"generic",
-                                "elements": itemCarosel
-                              }
-                            }
-                          }
-                        }
-                        callSendAPI(user.pageAccessToken, messageData)
-                      }
-                    }
-              })
+            if (gender === 'MENS') {
+              gender = 'male'
+            } else if (gender === 'WOMENS') {
+              gender = 'female'
+            } else {
+              gender = 'kids'
             }
+          }
 
-            if (category === 'THERMALS') {
-              searchParams = 'thermals'
+          if (category === 'GLOVES') {
+            searchParams = 'gloves'
 
-              if (gender === 'MENS') {
-                gender = 'male'
-              } else if (gender === 'WOMENS') {
-                gender = 'female'
-              } else {
-                gender = 'kids'
-              }
-
-              csv({
-                noheader: true,
-                delimiter: 'auto',
-                headers: ['Unique ID', 'Title', 'Description', 'Category', 'Product URL', 'Image URL', 'Condition', 'Availability', 'Current Price', 'Brand', 'Size', 'Color', 'Original Price', 'Ship Weight', 'Shipping Cost', 'Google Product Category', 'GTIN', 'Connexity Product ID', 'AGE_GROUP', 'GENDER', 'Coupon Code']
-              })
-              .fromFile('data/Irrigate.txt')
-              .on('json',(jsonObj) => {
-                // console.log(jsonObj)
-                if (jsonObj['Category'].toLowerCase() === searchParams) {
-                  if (gender === 'kids') {
-                    if (jsonObj['AGE_GROUP'].toLowerCase() === gender) {
-                      // console.log(jsonObj)
-                      matchedItems.push(jsonObj)
-                    }
-                  } else {
-                    if (jsonObj['GENDER'].toLowerCase() === gender) {
-                      // console.log(jsonObj)
-                      matchedItems.push(jsonObj)
-                    }
-                  }
-
-                }
-              })
-              .on('done',(error) => {
-
-                    var itemCarosel = []
-
-                    for (var i = 0; i < matchedItems.length; i++) {
-                        itemCarosel.push(
-                          {
-                            "title": matchedItems[i].Title,
-                            "subtitle": '$' + Math.round(matchedItems[i]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[i]['Size'],
-                            "image_url": matchedItems[i]['Image URL'],
-                            "buttons":[
-                              {
-                                "type":"web_url",
-                                "url": matchedItems[i]['Product URL'],
-                                "title":"Purchase",
-                                "webview_height_ratio":"tall"
-                              },
-                              {
-                                "type":"web_url",
-                                "url": matchedItems[i]['Product URL'],
-                                "title":"View Details",
-                                "webview_height_ratio":"tall"
-                              }
-                            ]
-                          }
-                        )
-                    }
-
-                    if (itemCarosel.length > 10) {
-                      let newCarosel = []
-                      for (var i = 0; i < 10; i++) {
-                        newCarosel.push(itemCarosel[i])
-                      }
-
-                      let messageData = {
-                        "recipient":{
-                          "id": event.sender.id
-                        },
-                        "message":{
-                          "attachment":{
-                            "type":"template",
-                            "payload":{
-                              "template_type":"generic",
-                              "elements": newCarosel
-                            }
-                          }
-                        }
-                      }
-                      callSendAPI(user.pageAccessToken, messageData)
-                    } else {
-                      if (itemCarosel.length === 0) {
-                        sendTextMessage(event.sender.id, user.pageAccessToken, 'Sold Out!')
-                      } else {
-                        let messageData = {
-                          "recipient":{
-                            "id": event.sender.id
-                          },
-                          "message":{
-                            "attachment":{
-                              "type":"template",
-                              "payload":{
-                                "template_type":"generic",
-                                "elements": itemCarosel
-                              }
-                            }
-                          }
-                        }
-                        callSendAPI(user.pageAccessToken, messageData)
-                      }
-                    }
-              })
+            if (gender === 'MENS') {
+              gender = 'male'
+            } else if (gender === 'WOMENS') {
+              gender = 'female'
+            } else {
+              gender = 'kids'
             }
+          }
 
-            if (category === 'TSHIRTS') {
-              searchParams = 't-shirts'
+          if (category === 'GOGGLES') {
+            searchParams = 'goggles'
 
-              if (gender === 'MENS') {
-                gender = 'male'
-              } else if (gender === 'WOMENS') {
-                gender = 'female'
-              } else {
-                gender = 'kids'
-              }
-
-              csv({
-                noheader: true,
-                delimiter: 'auto',
-                headers: ['Unique ID', 'Title', 'Description', 'Category', 'Product URL', 'Image URL', 'Condition', 'Availability', 'Current Price', 'Brand', 'Size', 'Color', 'Original Price', 'Ship Weight', 'Shipping Cost', 'Google Product Category', 'GTIN', 'Connexity Product ID', 'AGE_GROUP', 'GENDER', 'Coupon Code']
-              })
-              .fromFile('data/Irrigate.txt')
-              .on('json',(jsonObj) => {
-                // console.log(jsonObj)
-                if (jsonObj['Category'].toLowerCase() === searchParams) {
-                  if (gender === 'kids') {
-                    if (jsonObj['AGE_GROUP'].toLowerCase() === gender) {
-                      // console.log(jsonObj)
-                      matchedItems.push(jsonObj)
-                    }
-                  } else {
-                    if (jsonObj['GENDER'].toLowerCase() === gender) {
-                      // console.log(jsonObj)
-                      matchedItems.push(jsonObj)
-                    }
-                  }
-
-                }
-              })
-              .on('done',(error) => {
-
-                    var itemCarosel = []
-
-                    for (var i = 0; i < matchedItems.length; i++) {
-                        itemCarosel.push(
-                          {
-                            "title": matchedItems[i].Title,
-                            "subtitle": '$' + Math.round(matchedItems[i]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[i]['Size'],
-                            "image_url": matchedItems[i]['Image URL'],
-                            "buttons":[
-                              {
-                                "type":"web_url",
-                                "url": matchedItems[i]['Product URL'],
-                                "title":"Purchase",
-                                "webview_height_ratio":"tall"
-                              },
-                              {
-                                "type":"web_url",
-                                "url": matchedItems[i]['Product URL'],
-                                "title":"View Details",
-                                "webview_height_ratio":"tall"
-                              }
-                            ]
-                          }
-                        )
-                    }
-
-                    if (itemCarosel.length > 10) {
-                      let newCarosel = []
-                      for (var i = 0; i < 10; i++) {
-                        newCarosel.push(itemCarosel[i])
-                      }
-
-                      let messageData = {
-                        "recipient":{
-                          "id": event.sender.id
-                        },
-                        "message":{
-                          "attachment":{
-                            "type":"template",
-                            "payload":{
-                              "template_type":"generic",
-                              "elements": newCarosel
-                            }
-                          }
-                        }
-                      }
-                      callSendAPI(user.pageAccessToken, messageData)
-                    } else {
-                      if (itemCarosel.length === 0) {
-                        sendTextMessage(event.sender.id, user.pageAccessToken, 'Sold Out!')
-                      } else {
-                        let messageData = {
-                          "recipient":{
-                            "id": event.sender.id
-                          },
-                          "message":{
-                            "attachment":{
-                              "type":"template",
-                              "payload":{
-                                "template_type":"generic",
-                                "elements": itemCarosel
-                              }
-                            }
-                          }
-                        }
-                        callSendAPI(user.pageAccessToken, messageData)
-                      }
-                    }
-              })
+            if (gender === 'MENS') {
+              gender = 'male'
+            } else if (gender === 'WOMENS') {
+              gender = 'female'
+            } else {
+              gender = 'kids'
             }
+          }
 
-            if (category === 'GLOVES') {
-              searchParams = 'gloves'
+          if (category === 'HELMETS') {
+            searchParams = 'helmets'
 
-              if (gender === 'MENS') {
-                gender = 'male'
-              } else if (gender === 'WOMENS') {
-                gender = 'female'
-              } else {
-                gender = 'kids'
-              }
-
-              csv({
-                noheader: true,
-                delimiter: 'auto',
-                headers: ['Unique ID', 'Title', 'Description', 'Category', 'Product URL', 'Image URL', 'Condition', 'Availability', 'Current Price', 'Brand', 'Size', 'Color', 'Original Price', 'Ship Weight', 'Shipping Cost', 'Google Product Category', 'GTIN', 'Connexity Product ID', 'AGE_GROUP', 'GENDER', 'Coupon Code']
-              })
-              .fromFile('data/Irrigate.txt')
-              .on('json',(jsonObj) => {
-                // console.log(jsonObj)
-                if (jsonObj['Category'].toLowerCase() === searchParams) {
-                  if (gender === 'kids') {
-                    if (jsonObj['AGE_GROUP'].toLowerCase() === gender) {
-                      // console.log(jsonObj)
-                      matchedItems.push(jsonObj)
-                    }
-                  } else {
-                    if (jsonObj['GENDER'].toLowerCase() === gender) {
-                      // console.log(jsonObj)
-                      matchedItems.push(jsonObj)
-                    }
-                  }
-
-                }
-              })
-              .on('done',(error) => {
-
-                    var itemCarosel = []
-
-                    for (var i = 0; i < matchedItems.length; i++) {
-                        itemCarosel.push(
-                          {
-                            "title": matchedItems[i].Title,
-                            "subtitle": '$' + Math.round(matchedItems[i]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[i]['Size'],
-                            "image_url": matchedItems[i]['Image URL'],
-                            "buttons":[
-                              {
-                                "type":"web_url",
-                                "url": matchedItems[i]['Product URL'],
-                                "title":"Purchase",
-                                "webview_height_ratio":"tall"
-                              },
-                              {
-                                "type":"web_url",
-                                "url": matchedItems[i]['Product URL'],
-                                "title":"View Details",
-                                "webview_height_ratio":"tall"
-                              }
-                            ]
-                          }
-                        )
-                    }
-
-                    if (itemCarosel.length > 10) {
-                      let newCarosel = []
-                      for (var i = 0; i < 10; i++) {
-                        newCarosel.push(itemCarosel[i])
-                      }
-
-                      let messageData = {
-                        "recipient":{
-                          "id": event.sender.id
-                        },
-                        "message":{
-                          "attachment":{
-                            "type":"template",
-                            "payload":{
-                              "template_type":"generic",
-                              "elements": newCarosel
-                            }
-                          }
-                        }
-                      }
-                      callSendAPI(user.pageAccessToken, messageData)
-                    } else {
-                      if (itemCarosel.length === 0) {
-                        sendTextMessage(event.sender.id, user.pageAccessToken, 'Sold Out!')
-                      } else {
-                        let messageData = {
-                          "recipient":{
-                            "id": event.sender.id
-                          },
-                          "message":{
-                            "attachment":{
-                              "type":"template",
-                              "payload":{
-                                "template_type":"generic",
-                                "elements": itemCarosel
-                              }
-                            }
-                          }
-                        }
-                        callSendAPI(user.pageAccessToken, messageData)
-                      }
-                    }
-              })
+            if (gender === 'MENS') {
+              gender = 'male'
+            } else if (gender === 'WOMENS') {
+              gender = 'female'
+            } else {
+              gender = 'kids'
             }
+          }
 
-            if (category === 'GOGGLES') {
-              searchParams = 'goggles'
+          if (category === 'BAGS') {
+            searchParams = 'bags & packs'
 
-              if (gender === 'MENS') {
-                gender = 'male'
-              } else if (gender === 'WOMENS') {
-                gender = 'female'
-              } else {
-                gender = 'kids'
-              }
-
-              csv({
-                noheader: true,
-                delimiter: 'auto',
-                headers: ['Unique ID', 'Title', 'Description', 'Category', 'Product URL', 'Image URL', 'Condition', 'Availability', 'Current Price', 'Brand', 'Size', 'Color', 'Original Price', 'Ship Weight', 'Shipping Cost', 'Google Product Category', 'GTIN', 'Connexity Product ID', 'AGE_GROUP', 'GENDER', 'Coupon Code']
-              })
-              .fromFile('data/Irrigate.txt')
-              .on('json',(jsonObj) => {
-                // console.log(jsonObj)
-                if (jsonObj['Category'].toLowerCase() === searchParams) {
-                  if (gender === 'kids') {
-                    if (jsonObj['AGE_GROUP'].toLowerCase() === gender) {
-                      // console.log(jsonObj)
-                      matchedItems.push(jsonObj)
-                    }
-                  } else {
-                    if (jsonObj['GENDER'].toLowerCase() === gender) {
-                      // console.log(jsonObj)
-                      matchedItems.push(jsonObj)
-                    }
-                  }
-
-                }
-              })
-              .on('done',(error) => {
-
-                    var itemCarosel = []
-
-                    for (var i = 0; i < matchedItems.length; i++) {
-                        itemCarosel.push(
-                          {
-                            "title": matchedItems[i].Title,
-                            "subtitle": '$' + Math.round(matchedItems[i]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[i]['Size'],
-                            "image_url": matchedItems[i]['Image URL'],
-                            "buttons":[
-                              {
-                                "type":"web_url",
-                                "url": matchedItems[i]['Product URL'],
-                                "title":"Purchase",
-                                "webview_height_ratio":"tall"
-                              },
-                              {
-                                "type":"web_url",
-                                "url": matchedItems[i]['Product URL'],
-                                "title":"View Details",
-                                "webview_height_ratio":"tall"
-                              }
-                            ]
-                          }
-                        )
-                    }
-
-                    if (itemCarosel.length > 10) {
-                      let newCarosel = []
-                      for (var i = 0; i < 10; i++) {
-                        newCarosel.push(itemCarosel[i])
-                      }
-
-                      let messageData = {
-                        "recipient":{
-                          "id": event.sender.id
-                        },
-                        "message":{
-                          "attachment":{
-                            "type":"template",
-                            "payload":{
-                              "template_type":"generic",
-                              "elements": newCarosel
-                            }
-                          }
-                        }
-                      }
-                      callSendAPI(user.pageAccessToken, messageData)
-                    } else {
-                      if (itemCarosel.length === 0) {
-                        sendTextMessage(event.sender.id, user.pageAccessToken, 'Sold Out!')
-                      } else {
-                        let messageData = {
-                          "recipient":{
-                            "id": event.sender.id
-                          },
-                          "message":{
-                            "attachment":{
-                              "type":"template",
-                              "payload":{
-                                "template_type":"generic",
-                                "elements": itemCarosel
-                              }
-                            }
-                          }
-                        }
-                        callSendAPI(user.pageAccessToken, messageData)
-                      }
-                    }
-              })
+            if (gender === 'MENS') {
+              gender = 'male'
+            } else if (gender === 'WOMENS') {
+              gender = 'female'
+            } else {
+              gender = 'kids'
             }
+          }
 
-            if (category === 'HELMETS') {
-              searchParams = 'helmets'
+          if (category === 'AVALANCHE') {
+            searchParams = 'avalanche gear'
+            gender = 'unisex'
+          }
 
-              if (gender === 'MENS') {
-                gender = 'male'
-              } else if (gender === 'WOMENS') {
-                gender = 'female'
-              } else {
-                gender = 'kids'
-              }
+          if (category === 'AUDIO') {
+            searchParams = 'audio'
+            gender = 'unisex'
+          }
 
-              csv({
-                noheader: true,
-                delimiter: 'auto',
-                headers: ['Unique ID', 'Title', 'Description', 'Category', 'Product URL', 'Image URL', 'Condition', 'Availability', 'Current Price', 'Brand', 'Size', 'Color', 'Original Price', 'Ship Weight', 'Shipping Cost', 'Google Product Category', 'GTIN', 'Connexity Product ID', 'AGE_GROUP', 'GENDER', 'Coupon Code']
-              })
-              .fromFile('data/Irrigate.txt')
-              .on('json',(jsonObj) => {
-                // console.log(jsonObj)
-                if (jsonObj['Category'].toLowerCase() === searchParams) {
-                  if (gender === 'kids') {
-                    if (jsonObj['AGE_GROUP'].toLowerCase() === gender) {
-                      // console.log(jsonObj)
-                      matchedItems.push(jsonObj)
-                    }
-                  } else {
-                    if (jsonObj['GENDER'].toLowerCase() === gender) {
-                      // console.log(jsonObj)
-                      matchedItems.push(jsonObj)
-                    }
-                  }
-
-                }
-              })
-              .on('done',(error) => {
-
-                    var itemCarosel = []
-
-                    for (var i = 0; i < matchedItems.length; i++) {
-                        itemCarosel.push(
-                          {
-                            "title": matchedItems[i].Title,
-                            "subtitle": '$' + Math.round(matchedItems[i]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[i]['Size'],
-                            "image_url": matchedItems[i]['Image URL'],
-                            "buttons":[
-                              {
-                                "type":"web_url",
-                                "url": matchedItems[i]['Product URL'],
-                                "title":"Purchase",
-                                "webview_height_ratio":"tall"
-                              },
-                              {
-                                "type":"web_url",
-                                "url": matchedItems[i]['Product URL'],
-                                "title":"View Details",
-                                "webview_height_ratio":"tall"
-                              }
-                            ]
-                          }
-                        )
-                    }
-
-                    if (itemCarosel.length > 10) {
-                      let newCarosel = []
-                      for (var i = 0; i < 10; i++) {
-                        newCarosel.push(itemCarosel[i])
-                      }
-
-                      let messageData = {
-                        "recipient":{
-                          "id": event.sender.id
-                        },
-                        "message":{
-                          "attachment":{
-                            "type":"template",
-                            "payload":{
-                              "template_type":"generic",
-                              "elements": newCarosel
-                            }
-                          }
-                        }
-                      }
-                      callSendAPI(user.pageAccessToken, messageData)
-                    } else {
-                      if (itemCarosel.length === 0) {
-                        sendTextMessage(event.sender.id, user.pageAccessToken, 'Sold Out!')
-                      } else {
-                        let messageData = {
-                          "recipient":{
-                            "id": event.sender.id
-                          },
-                          "message":{
-                            "attachment":{
-                              "type":"template",
-                              "payload":{
-                                "template_type":"generic",
-                                "elements": itemCarosel
-                              }
-                            }
-                          }
-                        }
-                        callSendAPI(user.pageAccessToken, messageData)
-                      }
-                    }
-              })
-            }
-
-            if (category === 'BAGS') {
-              searchParams = 'bags & packs'
-
-              if (gender === 'MENS') {
-                gender = 'male'
-              } else if (gender === 'WOMENS') {
-                gender = 'female'
-              } else {
-                gender = 'kids'
-              }
-
-              csv({
-                noheader: true,
-                delimiter: 'auto',
-                headers: ['Unique ID', 'Title', 'Description', 'Category', 'Product URL', 'Image URL', 'Condition', 'Availability', 'Current Price', 'Brand', 'Size', 'Color', 'Original Price', 'Ship Weight', 'Shipping Cost', 'Google Product Category', 'GTIN', 'Connexity Product ID', 'AGE_GROUP', 'GENDER', 'Coupon Code']
-              })
-              .fromFile('data/Irrigate.txt')
-              .on('json',(jsonObj) => {
-                // console.log(jsonObj)
-                if (jsonObj['Category'].toLowerCase() === searchParams) {
-                  if (gender === 'kids') {
-                    if (jsonObj['AGE_GROUP'].toLowerCase() === gender) {
-                      // console.log(jsonObj)
-                      matchedItems.push(jsonObj)
-                    }
-                  } else {
-                    if (jsonObj['GENDER'].toLowerCase() === gender) {
-                      // console.log(jsonObj)
-                      matchedItems.push(jsonObj)
-                    }
-                  }
-
-                }
-              })
-              .on('done',(error) => {
-
-                var itemCarosel = []
-
-                for (var i = 0; i < matchedItems.length; i++) {
-                  itemCarosel.push(
-                    {
-                      "title": matchedItems[i].Title,
-                      "subtitle": '$' + Math.round(matchedItems[i]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[i]['Size'],
-                      "image_url": matchedItems[i]['Image URL'],
-                      "buttons":[
-                        {
-                          "type":"web_url",
-                          "url": matchedItems[i]['Product URL'],
-                          "title":"Purchase",
-                          "webview_height_ratio":"tall"
-                        },
-                        {
-                          "type":"web_url",
-                          "url": matchedItems[i]['Product URL'],
-                          "title":"View Details",
-                          "webview_height_ratio":"tall"
-                        }
-                      ]
-                    }
-                  )
-                }
-
-                if (itemCarosel.length > 10) {
-                  let newCarosel = []
-                  for (var i = 0; i < 10; i++) {
-                    newCarosel.push(itemCarosel[i])
-                  }
-
-                  let messageData = {
-                    "recipient":{
-                      "id": event.sender.id
-                    },
-                    "message":{
-                      "attachment":{
-                        "type":"template",
-                        "payload":{
-                          "template_type":"generic",
-                          "elements": newCarosel
-                        }
-                      }
-                    }
-                  }
-                  callSendAPI(user.pageAccessToken, messageData)
-                } else {
-                  if (itemCarosel.length === 0) {
-                    sendTextMessage(event.sender.id, user.pageAccessToken, 'Sold Out!')
-                  } else {
-                    let messageData = {
-                      "recipient":{
-                        "id": event.sender.id
-                      },
-                      "message":{
-                        "attachment":{
-                          "type":"template",
-                          "payload":{
-                            "template_type":"generic",
-                            "elements": itemCarosel
-                          }
-                        }
-                      }
-                    }
-                    callSendAPI(user.pageAccessToken, messageData)
-                  }
-                }
-              })
-            }
-
-            if (category === 'AVALANCHE') {
-              searchParams = 'avalanche gear'
-
-              gender = 'unisex'
-
-              csv({
-                noheader: true,
-                delimiter: 'auto',
-                headers: ['Unique ID', 'Title', 'Description', 'Category', 'Product URL', 'Image URL', 'Condition', 'Availability', 'Current Price', 'Brand', 'Size', 'Color', 'Original Price', 'Ship Weight', 'Shipping Cost', 'Google Product Category', 'GTIN', 'Connexity Product ID', 'AGE_GROUP', 'GENDER', 'Coupon Code']
-              })
-              .fromFile('data/Irrigate.txt')
-              .on('json',(jsonObj) => {
-                // console.log(jsonObj)
-                if (jsonObj['Category'].toLowerCase() === searchParams) {
-                  if (gender === 'kids') {
-                    if (jsonObj['AGE_GROUP'].toLowerCase() === gender) {
-                      // console.log(jsonObj)
-                      matchedItems.push(jsonObj)
-                    }
-                  } else {
-                    if (jsonObj['GENDER'].toLowerCase() === gender) {
-                      // console.log(jsonObj)
-                      matchedItems.push(jsonObj)
-                    }
-                  }
-
-                }
-              })
-              .on('done',(error) => {
-
-                var itemCarosel = []
-
-                for (var i = 0; i < matchedItems.length; i++) {
-                  itemCarosel.push(
-                    {
-                      "title": matchedItems[i].Title,
-                      "subtitle": '$' + Math.round(matchedItems[i]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[i]['Size'],
-                      "image_url": matchedItems[i]['Image URL'],
-                      "buttons":[
-                        {
-                          "type":"web_url",
-                          "url": matchedItems[i]['Product URL'],
-                          "title":"Purchase",
-                          "webview_height_ratio":"tall"
-                        },
-                        {
-                          "type":"web_url",
-                          "url": matchedItems[i]['Product URL'],
-                          "title":"View Details",
-                          "webview_height_ratio":"tall"
-                        }
-                      ]
-                    }
-                  )
-                }
-
-                if (itemCarosel.length > 10) {
-                  let newCarosel = []
-                  for (var i = 0; i < 10; i++) {
-                    newCarosel.push(itemCarosel[i])
-                  }
-                  // THIS IS WHERE THE PAGINATION BEGINS
-                    // ABOVE LOOP STOPS AT 9
-                    // ADD ELEMENT THAT TRIGGERS THE NEXT PAGE
-                    // POSTBACK CONTRUCTION THAT HAS CONTEXT OF WHAT TYPE OF PRODUCT & NEXT SET OF ELEMENTS...
-                      // SEND PRODUCT CAT TRIGGER, SEND WHICH PAGE (WE KNOW THAT EACH FLIGHT OF PRODS === 10) incrementing number
-                      // payload === 'PAGE_<search_params>_<gender>_<pagination_number>'
-
-                  // payload receiver
-                    // take search params and gender, and run search in db on it (as above)
-                    // if pagination_number === 2
-                      // start loop at 10
-                    // if 3
-                      // start loop at 19
-                    // if 4
-                      // start loop at 28
-                    // if 5
-                      // start loop at 37
-
-
-
-                  let messageData = {
-                    "recipient":{
-                      "id": event.sender.id
-                    },
-                    "message":{
-                      "attachment":{
-                        "type":"template",
-                        "payload":{
-                          "template_type":"generic",
-                          "elements": newCarosel
-                        }
-                      }
-                    }
-                  }
-                  callSendAPI(user.pageAccessToken, messageData)
-                } else {
-                  if (itemCarosel.length === 0) {
-                    sendTextMessage(event.sender.id, user.pageAccessToken, 'Sold Out!')
-                  } else {
-                    let messageData = {
-                      "recipient":{
-                        "id": event.sender.id
-                      },
-                      "message":{
-                        "attachment":{
-                          "type":"template",
-                          "payload":{
-                            "template_type":"generic",
-                            "elements": itemCarosel
-                          }
-                        }
-                      }
-                    }
-                    callSendAPI(user.pageAccessToken, messageData)
-                  }
-                }
-              })
-            }
-
-            if (category === 'AUDIO') {
-              searchParams = 'audio'
-
-              gender = 'unisex'
-
-              csv({
-                noheader: true,
-                delimiter: 'auto',
-                headers: ['Unique ID', 'Title', 'Description', 'Category', 'Product URL', 'Image URL', 'Condition', 'Availability', 'Current Price', 'Brand', 'Size', 'Color', 'Original Price', 'Ship Weight', 'Shipping Cost', 'Google Product Category', 'GTIN', 'Connexity Product ID', 'AGE_GROUP', 'GENDER', 'Coupon Code']
-              })
-              .fromFile('data/Irrigate.txt')
-              .on('json',(jsonObj) => {
-                // console.log(jsonObj)
-                if (jsonObj['Category'].toLowerCase() === searchParams) {
-                  if (gender === 'kids') {
-                    if (jsonObj['AGE_GROUP'].toLowerCase() === gender) {
-                      // console.log(jsonObj)
-                      matchedItems.push(jsonObj)
-                    }
-                  } else {
-                    if (jsonObj['GENDER'].toLowerCase() === gender) {
-                      // console.log(jsonObj)
-                      matchedItems.push(jsonObj)
-                    }
-                  }
-
-                }
-              })
-              .on('done',(error) => {
-
-                var itemCarosel = []
-
-                for (var i = 0; i < matchedItems.length; i++) {
-                  itemCarosel.push(
-                    {
-                      "title": matchedItems[i].Title,
-                      "subtitle": '$' + Math.round(matchedItems[i]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[i]['Size'],
-                      "image_url": matchedItems[i]['Image URL'],
-                      "buttons":[
-                        {
-                          "type":"web_url",
-                          "url": matchedItems[i]['Product URL'],
-                          "title":"Purchase",
-                          "webview_height_ratio":"tall"
-                        },
-                        {
-                          "type":"web_url",
-                          "url": matchedItems[i]['Product URL'],
-                          "title":"View Details",
-                          "webview_height_ratio":"tall"
-                        }
-                      ]
-                    }
-                  )
-                }
-
-                if (itemCarosel.length > 10) {
-                  let newCarosel = []
-                  for (var i = 0; i < 10; i++) {
-                    newCarosel.push(itemCarosel[i])
-                  }
-
-                  let messageData = {
-                    "recipient":{
-                      "id": event.sender.id
-                    },
-                    "message":{
-                      "attachment":{
-                        "type":"template",
-                        "payload":{
-                          "template_type":"generic",
-                          "elements": newCarosel
-                        }
-                      }
-                    }
-                  }
-                  callSendAPI(user.pageAccessToken, messageData)
-                } else {
-                  if (itemCarosel.length === 0) {
-                    sendTextMessage(event.sender.id, user.pageAccessToken, 'Sold Out!')
-                  } else {
-                    let messageData = {
-                      "recipient":{
-                        "id": event.sender.id
-                      },
-                      "message":{
-                        "attachment":{
-                          "type":"template",
-                          "payload":{
-                            "template_type":"generic",
-                            "elements": itemCarosel
-                          }
-                        }
-                      }
-                    }
-                    callSendAPI(user.pageAccessToken, messageData)
-                  }
-                }
-              })
-            }
-
-
-
-            // DEMOSNOWBOARDS
-
-            // AVALANCHE
-            // AUDIO
-
-
-            // find list of products in category
-            // check length
-              // if under 10, then make carosel
-              // else paginate
+          csv({
+            noheader: true,
+            delimiter: 'auto',
+            headers: ['Unique ID', 'Title', 'Description', 'Category', 'Product URL', 'Image URL', 'Condition', 'Availability', 'Current Price', 'Brand', 'Size', 'Color', 'Original Price', 'Ship Weight', 'Shipping Cost', 'Google Product Category', 'GTIN', 'Connexity Product ID', 'AGE_GROUP', 'GENDER', 'Coupon Code']
           })
+          .fromFile('data/Irrigate.txt')
+          .on('json',(jsonObj) => {
+            if (jsonObj['Category'].toLowerCase() === searchParams) {
+              if (gender === 'kids') {
+                if (jsonObj['AGE_GROUP'].toLowerCase() === gender) {
+                  // console.log(jsonObj)
+                  matchedItems.push(jsonObj)
+                }
+              } else {
+                if (jsonObj['GENDER'].toLowerCase() === gender) {
+                  // console.log(jsonObj)
+                  matchedItems.push(jsonObj)
+                }
+              }
+
+            }
+          })
+          .on('done',(error) => {
+
+            var itemCarosel = []
+
+            for (var i = 0; i < matchedItems.length; i++) {
+              var rand = Math.floor(Math.random() * matchedItems.length)
+              // console.log('rand: ' + rand)
+              while (matchedItems[rand] === undefined) {
+                rand = Math.floor(Math.random() * matchedItems.length)
+              }
+              itemCarosel.push(
+                {
+                  "title": matchedItems[rand]['Title'],
+                  "subtitle": '$' + Math.round(matchedItems[rand]['Current Price'] * 100)/100 + ', Size: ' + matchedItems[rand]['Size'],
+                  "image_url": matchedItems[rand]['Image URL'],
+                  "buttons":[
+                    {
+                      "type":"web_url",
+                      "url": matchedItems[rand]['Product URL'],
+                      "title":"Purchase",
+                      "webview_height_ratio":"tall"
+                    },
+                    {
+                      "type":"web_url",
+                      "url": matchedItems[rand]['Product URL'],
+                      "title":"View Details",
+                      "webview_height_ratio":"tall"
+                    }
+                  ]
+                }
+              )
+            }
+
+            if (itemCarosel.length > 10) {
+              let newCarosel = []
+              for (var i = 0; i < 10; i++) {
+                if (i === 9) {
+                  if (gender === 'male') {
+                    gender = 'MENS'
+
+                  } else if (gender === 'female') {
+                    gender = 'WOMENS'
+                  } else {
+                    // kids
+                    gender = 'KIDS'
+                  }
+                  newCarosel.push(
+                    {
+                      "title": "See More",
+                      "buttons":[
+                        {
+                          "type": "postback",
+                          "payload": 'SHOWPRODUCTS_' + category + '_' + gender,
+                          "title":"More Products"
+                        },
+                      ]
+                    }
+                  )
+                } else {
+                  newCarosel.push(itemCarosel[i])
+                }
+              }
+
+              let messageData = {
+                "recipient":{
+                  "id": event.sender.id
+                },
+                "message":{
+                  "attachment":{
+                    "type":"template",
+                    "payload":{
+                      "template_type":"generic",
+                      "elements": newCarosel
+                    }
+                  }
+                }
+              }
+              callSendAPI(user.pageAccessToken, messageData)
+            } else {
+              let messageData = {
+                "recipient":{
+                  "id": event.sender.id
+                },
+                "message":{
+                  "attachment":{
+                    "type":"template",
+                    "payload":{
+                      "template_type":"generic",
+                      "elements": itemCarosel
+                    }
+                  }
+                }
+              }
+              callSendAPI(user.pageAccessToken, messageData)
+            }
+          })
+        })
       }
 
       if (event.postback.payload === 'CALL') {
