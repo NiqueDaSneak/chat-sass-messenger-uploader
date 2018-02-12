@@ -126,8 +126,6 @@ module.exports = (event) => {
       if (event.postback.payload === 'SHOP') {
           getUser().then((user) => {
             sendTextMessage(event.sender.id, user.pageAccessToken, 'Instructions: scroll/swipe through categories to browse products.')
-            setTimeout(() => {
-              sendTextMessage(event.sender.id, user.pageAccessToken, 'Just click “Shop” in the menu to start browsing!')
               setTimeout(() => {
                 let messageData = {
                   "recipient":{
@@ -176,8 +174,6 @@ module.exports = (event) => {
                 }
                 callSendAPI(user.pageAccessToken, messageData)
               }, 3000)
-            }, 4000)
-
           })
       }
 
