@@ -871,10 +871,10 @@ module.exports = (event) => {
                 for (var i = 0; i < 10; i++) {
                   if (i === 9) {
                     if (gender === 'male') {
-                      gender = 'MALE'
+                      gender = 'MENS'
 
                     } else if (gender === 'female') {
-                      gender = 'FEMALE'
+                      gender = 'WOMENS'
                     } else {
                       // kids
                       gender = 'KIDS'
