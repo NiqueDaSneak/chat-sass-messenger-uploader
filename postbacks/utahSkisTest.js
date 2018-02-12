@@ -819,7 +819,7 @@ module.exports = (event) => {
             .fromFile('data/Irrigate.txt')
             .on('json',(jsonObj) => {
               if (jsonObj['Category'].toLowerCase() === searchParams) {
-                if (gender === 'kids') {d
+                if (gender === 'kids') {
                   if (jsonObj['AGE_GROUP'].toLowerCase() === gender) {
                     // console.log(jsonObj)
                     matchedItems.push(jsonObj)
