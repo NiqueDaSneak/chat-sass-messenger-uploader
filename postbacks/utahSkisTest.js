@@ -873,7 +873,7 @@ module.exports = (event) => {
                         "buttons":[
                           {
                             "type": "postback",
-                            "payload": 'SEE_MORE',
+                            "payload": 'SHOWPRODUCTS_' + category + '_' + gender,
                             "title":"More Products"
                           },
                         ]
