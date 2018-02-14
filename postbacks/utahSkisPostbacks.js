@@ -156,7 +156,7 @@ module.exports = (event) => {
                         ]
                       },
                       {
-                        "title":"Kids's",
+                        "title":"Kids",
                         "buttons":[
                           {
                             "type":"postback",
