@@ -125,55 +125,52 @@ module.exports = (event) => {
 
       if (event.postback.payload === 'SHOP') {
           getUser().then((user) => {
-            sendTextMessage(event.sender.id, user.pageAccessToken, 'Instructions: scroll/swipe through categories to browse products.')
-              setTimeout(() => {
-                let messageData = {
-                  "recipient":{
-                    "id": event.sender.id
-                  },
-                  "message":{
-                    "attachment":{
-                      "type":"template",
-                      "payload":{
-                        "template_type":"generic",
-                        "elements":[
+            let messageData = {
+              "recipient":{
+                "id": event.sender.id
+              },
+              "message":{
+                "attachment":{
+                  "type":"template",
+                  "payload":{
+                    "template_type":"generic",
+                    "elements":[
+                      {
+                        "title":"Women's",
+                        "buttons":[
                           {
-                            "title":"Women's",
-                            "buttons":[
-                              {
-                                "type":"postback",
-                                "title":"Shop",
-                                "payload":"CATS_WOMENS"
-                              }
-                            ]
-                          },
+                            "type":"postback",
+                            "title":"Shop",
+                            "payload":"CATS_WOMENS"
+                          }
+                        ]
+                      },
+                      {
+                        "title":"Men's",
+                        "buttons":[
                           {
-                            "title":"Men's",
-                            "buttons":[
-                              {
-                                "type":"postback",
-                                "title":"Shop",
-                                "payload":"CATS_MENS"
-                              }
-                            ]
-                          },
+                            "type":"postback",
+                            "title":"Shop",
+                            "payload":"CATS_MENS"
+                          }
+                        ]
+                      },
+                      {
+                        "title":"Kids's",
+                        "buttons":[
                           {
-                            "title":"Kids's",
-                            "buttons":[
-                              {
-                                "type":"postback",
-                                "title":"Shop",
-                                "payload":"CATS_KIDS"
-                              }
-                            ]
+                            "type":"postback",
+                            "title":"Shop",
+                            "payload":"CATS_KIDS"
                           }
                         ]
                       }
-                    }
+                    ]
                   }
                 }
-                callSendAPI(user.pageAccessToken, messageData)
-              }, 3000)
+              }
+            }
+            callSendAPI(user.pageAccessToken, messageData)
           })
       }
 
