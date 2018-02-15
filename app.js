@@ -388,6 +388,18 @@ function sendVideoMessage(recipientId, accessToken, url) {
   callSendAPI(accessToken, messageData)
 }
 
+// Member.find({organization: "utahskis"}, (err, members) => {
+//   // var memberArr = []
+//   // memberArr.push(member)
+//   console.log(members)
+//   for (var i = 0; i < members.length; i++) {
+//     console.log(members[i].fullName)
+//     console.log(members[i].gender)
+//     console.log(members[i].fbID)
+//     console.log('')
+//   }
+// })
+
 
 // SERVER LISTENING
 var port = process.env.PORT || 5000;
