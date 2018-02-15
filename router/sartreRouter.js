@@ -9,7 +9,7 @@ var Member = require('../models/memberModel.js')
 
 var eventPostbackHandler = require('../postbacks/sartrePostbacks.js')
 
-utahSkisRouter.post('/', (req, res, next) => {
+sartreRouter.post('/', (req, res, next) => {
 
   var data = req.body
   // Make sure this is a page subscription
@@ -32,4 +32,4 @@ utahSkisRouter.post('/', (req, res, next) => {
   }
 })
 
-module.exports = utahSkisRouter
+module.exports = sartreRouter
