@@ -310,18 +310,67 @@ app.post('/', (req, res) => {
                 resolve()
               }
             })
+            console.log(req.body)
+            // if (event.recipient.id === '394937770929069') {
 
-            sendImage.then(() => {
-              sendVideo.then(() => {
-                sendText
+              // let messageData = {
+              //   "recipient":{
+              //     "id": event.sender.id
+              //   },
+              //   "message":{
+              //     "attachment":{
+              //       "type":"template",
+              //       "payload":{
+              //         "template_type":"generic",
+              //         "elements":[
+              //           {
+              //             "title":"Women's",
+              //             "buttons":[
+              //               {
+              //                 "type":"postback",
+              //                 "title":"Shop",
+              //                 "payload":"CATS_WOMENS"
+              //               }
+              //             ]
+              //           },
+              //           {
+              //             "title":"Men's",
+              //             "buttons":[
+              //               {
+              //                 "type":"postback",
+              //                 "title":"Shop",
+              //                 "payload":"CATS_MENS"
+              //               }
+              //             ]
+              //           },
+              //           {
+              //             "title":"Kids",
+              //             "buttons":[
+              //               {
+              //                 "type":"postback",
+              //                 "title":"Shop",
+              //                 "payload":"CATS_KIDS"
+              //               }
+              //             ]
+              //           }
+              //         ]
+              //       }
+              //     }
+              //   }
+              // }
+              // callSendAPI(user.pageAccessToken, messageData)
+            // } else {
+              sendImage.then(() => {
+                sendVideo.then(() => {
+                  sendText
+                })
               })
-            })
+            // }
             res.sendStatus(200)
           }
         })
       })
     })
-
   }
 })
 
