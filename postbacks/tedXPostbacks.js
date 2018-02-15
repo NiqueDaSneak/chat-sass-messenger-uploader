@@ -59,12 +59,12 @@ module.exports = (event) => {
               // SEND WELCOME MESSAGES, THEN SEND PROMPT TO REQUEST ENROLLMENT
               sendTextMessage(event.sender.id, user.pageAccessToken, 'Hi, this is Gracie! Welcome to our TEDxCincinnati Experience! Powered by Irrigate Messaging.')
               setTimeout(() => {
-                sendTextMessage(event.sender.id, user.pageAccessToken, 'Treat yourself & a friend to tickets for TEDxCincinnati Main Stage Event on May 12, 2018 at Memorial Hall. We have a special promo code just for you!')
+                sendTextMessage(event.sender.id, user.pageAccessToken, 'Treat yourself & a friend to tickets for TEDxCincinnati Main Stage Event on May 12, 2018 at Memorial Hall.')
                 // SEND IMAGE HERE!!!!
                 setTimeout(() => {
                   sendImageMessage(event.sender.id, user.pageAccessToken, 'https://chat-sass-messenger-uploader.herokuapp.com/static/tedx_1.jpg')
                   setTimeout(() => {
-                    sendTextMessage(event.sender.id, user.pageAccessToken, "Click to buy tickets now or go to TEDxCincinnati.com and use 'valentine' in the promo code and get $10.00 off a single ticket or ticket bundle.  This is our way of saying thank you 💖")
+                    sendTextMessage(event.sender.id, user.pageAccessToken, "Click to buy tickets now.")
                     setTimeout(() => {
                       let messageData = {
                         "recipient":{
@@ -77,12 +77,12 @@ module.exports = (event) => {
                               "template_type":"generic",
                               "elements":[
                                 {
-                                  "title": "Valentine Ticket Special: Ends 2/14/18",
+                                  "title": "Main Stage Event: Ends 5/12/18",
                                   // "image_url": "https://chat-sass-messenger-uploader.herokuapp.com/static/tedx_2.png",
                                   "buttons":[
                                     {
                                       "type":"web_url",
-                                      "url": 'https://tedxcincinnati.eventbrite.com?discount=valentine',
+                                      "url": 'https://tedxcincinnati.eventbrite.com?',
                                       "title":"Buy Your Ticket Now",
                                       "webview_height_ratio":"tall"
                                     }
