@@ -74,7 +74,7 @@ module.exports = (event) => {
   }
 
   if (event.postback) {
-    if (event.postback.payload === "") {
+    if (event.postback.payload === "") {}
 
   }
 
