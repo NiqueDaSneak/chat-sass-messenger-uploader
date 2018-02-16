@@ -310,67 +310,70 @@ app.post('/', (req, res) => {
                 resolve()
               }
             })
-            console.log(req.body)
-            // if (event.recipient.id === '394937770929069') {
 
-              // let messageData = {
-              //   "recipient":{
-              //     "id": event.sender.id
-              //   },
-              //   "message":{
-              //     "attachment":{
-              //       "type":"template",
-              //       "payload":{
-              //         "template_type":"generic",
-              //         "elements":[
-              //           {
-              //             "title":"Women's",
-              //             "buttons":[
-              //               {
-              //                 "type":"postback",
-              //                 "title":"Shop",
-              //                 "payload":"CATS_WOMENS"
-              //               }
-              //             ]
-              //           },
-              //           {
-              //             "title":"Men's",
-              //             "buttons":[
-              //               {
-              //                 "type":"postback",
-              //                 "title":"Shop",
-              //                 "payload":"CATS_MENS"
-              //               }
-              //             ]
-              //           },
-              //           {
-              //             "title":"Kids",
-              //             "buttons":[
-              //               {
-              //                 "type":"postback",
-              //                 "title":"Shop",
-              //                 "payload":"CATS_KIDS"
-              //               }
-              //             ]
-              //           }
-              //         ]
-              //       }
-              //     }
-              //   }
-              // }
-              // callSendAPI(user.pageAccessToken, messageData)
-            // } else {
+            if (req.body.organization === 'utahskis') {
+              sendTextMessage(sendees[i], user.pageAccessToken, 'Whoops, I was having a bad day when we first started. I know you get it, so I’ll stop repeating myself now. Now back to where we left off...')
+              setTimeout(() => {
+                let messageData = {
+                  "recipient":{
+                    "id": event.sender.id
+                  },
+                  "message":{
+                    "attachment":{
+                      "type":"template",
+                      "payload":{
+                        "template_type":"generic",
+                        "elements":[
+                          {
+                            "title":"Women's",
+                            "buttons":[
+                              {
+                                "type":"postback",
+                                "title":"Shop",
+                                "payload":"CATS_WOMENS"
+                              }
+                            ]
+                          },
+                          {
+                            "title":"Men's",
+                            "buttons":[
+                              {
+                                "type":"postback",
+                                "title":"Shop",
+                                "payload":"CATS_MENS"
+                              }
+                            ]
+                          },
+                          {
+                            "title":"Kids",
+                            "buttons":[
+                              {
+                                "type":"postback",
+                                "title":"Shop",
+                                "payload":"CATS_KIDS"
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    }
+                  }
+                }
+                callSendAPI(user.pageAccessToken, messageData)
+              }, 3800)
+            } else {
               sendImage.then(() => {
                 sendVideo.then(() => {
                   sendText
                 })
               })
-            // }
+            }
             res.sendStatus(200)
           }
         })
       })
     })
+
   }
 })
 
