@@ -316,7 +316,7 @@ app.post('/', (req, res) => {
               setTimeout(() => {
                 let messageData = {
                   "recipient":{
-                    "id": event.sender.id
+                    "id": sendees[i]
                   },
                   "message":{
                     "attachment":{
