@@ -534,38 +534,6 @@ module.exports = (event) => {
         }
       }
 
-      if (event.message.quick_reply.payload === 'TAB') {
-        getUser().then((user) => {
-          let messageData = {
-            "recipient":{
-              "id": event.sender.id
-            },
-            "message":{
-              "attachment":{
-                "type":"template",
-                "payload":{
-                  "template_type":"generic",
-                  "elements": [
-                    {
-                      "title": "Great! That'll be out shortly. ",
-                      "subtitle": "Tap below to see the drink menu again...",
-                      "buttons":[
-                        {
-                          "type": "postback",
-                          "payload": "TABLE#",
-                          "title":"More Drinks!"
-                        }
-                      ]
-                    }
-                  ]
-                }
-              }
-            }
-          }
-          callSendAPI(user.pageAccessToken, messageData)
-        })
-
-      }
 
       if (event.message.quick_reply.payload.split("_")[0] === 'DATE') {
         var date = event.message.quick_reply.payload.split("_")[1]
@@ -663,6 +631,74 @@ module.exports = (event) => {
         findMember(user)
       })
     }
+
+    if (event.postback.payload === 'TAB') {
+      getUser().then((user) => {
+        let messageData = {
+          "recipient":{
+            "id": event.sender.id
+          },
+          "message":{
+            "attachment":{
+              "type":"template",
+              "payload":{
+                "template_type":"generic",
+                "elements": [
+                  {
+                    "title": "Great! That'll be out shortly. ",
+                    "subtitle": "Tap below to see the drink menu again...",
+                    "buttons":[
+                      {
+                        "type": "postback",
+                        "payload": "TABLE#",
+                        "title":"More Drinks!"
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          }
+        }
+        callSendAPI(user.pageAccessToken, messageData)
+      })
+
+    }
+    if (event.postback.payload === 'TABLE#') {
+      getUser().then((user) => {
+        sendTextMessage(event.sender.id, user.pageAccessToken, "Thanks for coming in! A bartender is coming to see you. In the mean time, you can order a drink and they will bring it over.")
+        setTimeout(() => {
+          let messageData = {
+            "recipient":{
+              "id": event.sender.id
+            },
+            "message":{
+              "text": "Check out the menu:",
+              "quick_replies":[
+                {
+                  "content_type":"text",
+                  "title":"Red Wine",
+                  "payload":"MENU_Red Wine"
+                },
+                {
+                  "content_type":"text",
+                  "title":"White Wine",
+                  "payload":"MENU_White Wine"
+                },
+                {
+                  "content_type":"text",
+                  "title":"Cocktails",
+                  "payload":"MENU_Cocktails"
+                },
+              ]
+            }
+          }
+          callSendAPI(user.pageAccessToken, messageData)
+        }, 3700)
+      })
+
+    }
+
 
   }
 
