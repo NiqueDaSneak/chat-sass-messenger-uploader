@@ -114,12 +114,6 @@ module.exports = (event) => {
   }
 
   if (event.message) {
-    if (event.message.text) {
-      getUser().then((user) => {
-        sendTextMessage(event.sender.id, user.pageAccessToken, 'Thanks for your message! We will get back to you shortly!')
-
-      })
-    }
     if (event.message.quick_reply.payload === 'RESO') {
       getUser().then((user) => {
         let messageData = {
@@ -429,6 +423,12 @@ module.exports = (event) => {
       })
     }
 
+    if (event.message.text) {
+      getUser().then((user) => {
+        sendTextMessage(event.sender.id, user.pageAccessToken, 'Thanks for your message! We will get back to you shortly!')
+
+      })
+    }
   }
 
   if (event.postback) {
