@@ -2,31 +2,56 @@
   {
     "name": "NEGRONI",
     "description": "watershed four peel gin, berto rosso, berto bianco, cappelletti, orange peel",
-    "price": 11,
-    "image_url":""
+    "buttons":[
+      {
+        "type": "postback",
+        "payload": "TAB",
+        "title":"Buy for $11"
+      }
+    ]
   },
   {
     "name": "GEIST SPRITZ",
     "description": "aperol, solerno blood orange, cidergeist bubbles",
-    "price": 11,
-    "image_url": ""
+    "buttons":[
+      {
+        "type": "postback",
+        "payload": "TAB",
+        "title":"Buy for $11"
+      }
+    ]
   },
   {
     "name": "QUEEN LUCILLE DES ALPES",
     "description": "dolin genepy, alsace riesling, shishito pepper & marigold honey, sparkling wine",
-    "price": "12",
-    "image_url": ""
+    "buttons":[
+      {
+        "type": "postback",
+        "payload": "TAB",
+        "title":"Buy for $12"
+      }
+    ]
   },
   {
     "name": "SORE WOUNDED",
     "description": "rye whiskey, china-china, cocchi americano, cigar bitters",
-    "price": "11",
-    "image_url": ""
+    "buttons":[
+      {
+        "type": "postback",
+        "payload": "TAB",
+        "title":"Buy for $11"
+      }
+    ]
   },
   {
     "name": "REMEDY NO. 1",
     "description": "eucalyptu-infused-watershed vodka, orange, green tea, ginger, sea salt",
-    "price": 11,
-    "image_url": ""
+    "buttons":[
+      {
+        "type": "postback",
+        "payload": "TAB",
+        "title":"Buy for $11"
+      }
+    ]
   }
 ]

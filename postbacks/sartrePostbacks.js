@@ -2,7 +2,6 @@
 
 var db = require('diskdb')
 db = db.connect('data', ['cocktails', 'whitewine', 'redwine'])
-console.log(db.whitewine.find())
 
 var Message = require('../models/messageModel.js')
 var Group = require('../models/groupModel.js')
@@ -309,18 +308,38 @@ module.exports = (event) => {
     }
 
     if (event.message.quick_reply.payload.split("_")[0] === 'MENU') {
+      var elements
       if (event.message.quick_reply.payload.split("_")[1] === 'Red Wine') {
-        console.log(db.redWine.find);
+        elements = db.redwine.find()
       }
 
       if (event.message.quick_reply.payload.split("_")[1] === 'White Wine') {
-        console.log(db.whiteWine.find);
+        elements = db.whitewine.find()
 
       }
 
       if (event.message.quick_reply.payload.split("_")[1] === 'Cocktails') {
-        console.log(db.cocktails.find);
+        elements = db.cocktails.find()
       }
+
+      getUser().then((user) => {
+        let messageData = {
+          "recipient":{
+            "id": event.sender.id
+          },
+          "message":{
+            "attachment":{
+              "type":"template",
+              "payload":{
+                "template_type":"generic",
+                "elements": elements
+              }
+            }
+          }
+        }
+        callSendAPI(user.pageAccessToken, messageData)
+      })
+
     }
 
     if (event.message.quick_reply.payload.split("_")[0] === 'DATE') {

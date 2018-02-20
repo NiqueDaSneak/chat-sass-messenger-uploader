@@ -1,32 +1,57 @@
 [
   {
-    "name": "DOMAINE SPECHT",
-    "description": "ALSACE, FR ‘15 REISLING",
-    "price": 11,
-    "image_url": ""
+    "title": "DOMAINE SPECHT",
+    "subtitle": "ALSACE, FR ‘15 REISLING",
+    "buttons":[
+      {
+        "type": "postback",
+        "payload": "TAB",
+        "title":"Buy for $11"
+      }
+    ]
   },
   {
-    "name": "JULIEN BRAUD",
-    "description": "Les Vignes De Bourg: LOIRE, FR ‘15 MELON DE BOURGOGNE",
-    "price": 9,
-    "image_url":  ""
+    "title": "JULIEN BRAUD",
+    "subtitle": "Les Vignes De Bourg: LOIRE, FR ‘15 MELON DE BOURGOGNE",
+    "buttons":[
+      {
+        "type": "postback",
+        "payload": "TAB",
+        "title":"Buy for $9"
+      }
+    ]
   },
   {
-    "name": "FUORI STRADA",
-    "description": "SICILY, IT ‘16 GRILLO",
-    "price": 7,
-    "image_url":   ""
+    "title": "FUORI STRADA",
+    "subtitle": "SICILY, IT ‘16 GRILLO",
+    "buttons":[
+      {
+        "type": "postback",
+        "payload": "TAB",
+        "title":"Buy for $7"
+      }
+    ]
   },
   {
-    "name": "PASCAL JANVIER",
-    "description": "JASNIERES, FR ‘16 CHENIN BLANC",
-    "price": 11,
-    "image_url": ""
+    "title": "PASCAL JANVIER",
+    "subtitle": "JASNIERES, FR ‘16 CHENIN BLANC",
+    "buttons":[
+      {
+        "type": "postback",
+        "payload": "TAB",
+        "title":"Buy for $11"
+      }
+    ]
   },
   {
-    "name": "DOMAINE THEVENOT",
-    "description": "Perles D’or: BURGUNDY, FR ’15 ALIGOTE",
-    "price": 11,
-    "image_url": ""
+    "title": "DOMAINE THEVENOT",
+    "subtitle": "Perles D’or: BURGUNDY, FR ’15 ALIGOTE",
+    "buttons":[
+      {
+        "type": "postback",
+        "payload": "TAB",
+        "title":"Buy for $11"
+      }
+    ]
   }
 ]
