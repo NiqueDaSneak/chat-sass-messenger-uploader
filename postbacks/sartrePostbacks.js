@@ -304,7 +304,6 @@ module.exports = (event) => {
 
       if (event.message.quick_reply.payload.split("_")[0] === 'MENU') {
         if (event.message.quick_reply.payload.split("_")[1] === 'Red Wine') {
-        var elements = db.redwine.find()
         getUser().then((user) => {
           let messageData = {
             "recipient":{
@@ -315,7 +314,63 @@ module.exports = (event) => {
                 "type":"template",
                 "payload":{
                   "template_type":"generic",
-                  "elements": elements
+                  "elements": [
+                    {
+                      "title": "DOMAINE SPECHT",
+                      "subtitle": "ALSACE, FR ‘15 REISLING",
+                      "buttons":[
+                        {
+                          "type": "postback",
+                          "payload": "TAB",
+                          "title":"Buy for $11"
+                        }
+                      ]
+                    },
+                    {
+                      "title": "JULIEN BRAUD",
+                      "subtitle": "Les Vignes De Bourg: LOIRE, FR ‘15 MELON DE BOURGOGNE",
+                      "buttons":[
+                        {
+                          "type": "postback",
+                          "payload": "TAB",
+                          "title":"Buy for $9"
+                        }
+                      ]
+                    },
+                    {
+                      "title": "FUORI STRADA",
+                      "subtitle": "SICILY, IT ‘16 GRILLO",
+                      "buttons":[
+                        {
+                          "type": "postback",
+                          "payload": "TAB",
+                          "title":"Buy for $7"
+                        }
+                      ]
+                    },
+                    {
+                      "title": "PASCAL JANVIER",
+                      "subtitle": "JASNIERES, FR ‘16 CHENIN BLANC",
+                      "buttons":[
+                        {
+                          "type": "postback",
+                          "payload": "TAB",
+                          "title":"Buy for $11"
+                        }
+                      ]
+                    },
+                    {
+                      "title": "DOMAINE THEVENOT",
+                      "subtitle": "Perles D’or: BURGUNDY, FR ’15 ALIGOTE",
+                      "buttons":[
+                        {
+                          "type": "postback",
+                          "payload": "TAB",
+                          "title":"Buy for $11"
+                        }
+                      ]
+                    }
+                  ]
                 }
               }
             }
@@ -326,7 +381,6 @@ module.exports = (event) => {
         }
 
         if (event.message.quick_reply.payload.split("_")[1] === 'White Wine') {
-          var elements = db.whitewine.find()
           getUser().then((user) => {
             let messageData = {
               "recipient":{
@@ -337,7 +391,63 @@ module.exports = (event) => {
                   "type":"template",
                   "payload":{
                     "template_type":"generic",
-                    "elements": elements
+                    "elements": [
+                      {
+                        "title": "JEAN RIJCKAERT",
+                        "subtitle": "CORREAUX VIEILLES VIGNES: BURGUNDY, FR ‘14 GAMAY",
+                        "buttons":[
+                          {
+                            "type": "postback",
+                            "payload": "TAB",
+                            "title":"Buy for $12"
+                          }
+                        ]
+                      },
+                      {
+                        "title": "DOMAINE DU PRE BARON",
+                        "subtitle": "TOURAINE, FR ‘14 MALBEC",
+                        "buttons":[
+                          {
+                            "type": "postback",
+                            "payload": "TAB",
+                            "title":"Buy for $9"
+                          }
+                        ]
+                      },
+                      {
+                        "title": "LA CROIX DE CHAINTRES",
+                        "subtitle": "SAUMUR-CHAMPIGNY: FR‘16 CABERNET FRANC",
+                        "buttons":[
+                          {
+                            "type": "postback",
+                            "payload": "TAB",
+                            "title":"Buy for $11"
+                          }
+                        ]
+                      },
+                      {
+                        "title": "DOMAINE SAINT GAYAN",
+                        "subtitle": "RHONE VALLEY, FR ‘14 GSM BLEND",
+                        "buttons":[
+                          {
+                            "type": "postback",
+                            "payload": "TAB",
+                            "title":"Buy for $10"
+                          }
+                        ]
+                      },
+                      {
+                        "title": "CHATEAU PEYBONHOMME",
+                        "subtitle": "BORDEAUX, FR ‘14 BORDEAUX BLEND",
+                        "buttons":[
+                          {
+                            "type": "postback",
+                            "payload": "TAB",
+                            "title":"Buy for $12"
+                          }
+                        ]
+                      }
+                    ]
                   }
                 }
               }
@@ -349,8 +459,6 @@ module.exports = (event) => {
         }
 
         if (event.message.quick_reply.payload.split("_")[1] === 'Cocktails') {
-          var elements = db.cocktails.find()
-          getUser().then((user) => {
             let messageData = {
               "recipient":{
                 "id": event.sender.id
@@ -360,7 +468,64 @@ module.exports = (event) => {
                   "type":"template",
                   "payload":{
                     "template_type":"generic",
-                    "elements": elements
+                    "elements": [
+                      {
+                        "title": "NEGRONI",
+                        "subtitle": "watershed four peel gin, berto rosso, berto bianco, cappelletti, orange peel",
+                        "buttons":[
+                          {
+                            "type": "postback",
+                            "payload": "TAB",
+                            "title":"Buy for $11"
+                          }
+                        ]
+                      },
+                      {
+                        "title": "GEIST SPRITZ",
+                        "subtitle": "aperol, solerno blood orange, cidergeist bubbles",
+                        "buttons":[
+                          {
+                            "type": "postback",
+                            "payload": "TAB",
+                            "title":"Buy for $11"
+                          }
+                        ]
+                      },
+                      {
+                        "title": "QUEEN LUCILLE DES ALPES",
+                        "subtitle": "dolin genepy, alsace riesling, shishito pepper & marigold honey, sparkling wine",
+                        "buttons":[
+                          {
+                            "type": "postback",
+                            "payload": "TAB",
+                            "title":"Buy for $12"
+                          }
+                        ]
+                      },
+                      {
+                        "title": "SORE WOUNDED",
+                        "subtitle": "rye whiskey, china-china, cocchi americano, cigar bitters",
+                        "buttons":[
+                          {
+                            "type": "postback",
+                            "payload": "TAB",
+                            "title":"Buy for $11"
+                          }
+                        ]
+                      },
+                      {
+                        "title": "REMEDY NO. 1",
+                        "subtitle": "eucalyptu-infused-watershed vodka, orange, green tea, ginger, sea salt",
+                        "buttons":[
+                          {
+                            "type": "postback",
+                            "payload": "TAB",
+                            "title":"Buy for $11"
+                          }
+                        ]
+                      }
+                    ]
+
                   }
                 }
               }
