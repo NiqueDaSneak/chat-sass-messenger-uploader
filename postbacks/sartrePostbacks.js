@@ -1,7 +1,8 @@
 'use strict'
 
 var db = require('diskdb')
-db = db.connect('data', ['cocktails', 'whiteWine', 'redWine'])
+db = db.connect('data', ['cocktails', 'whitewine', 'redwine'])
+console.log(db.whitewine.find())
 
 var Message = require('../models/messageModel.js')
 var Group = require('../models/groupModel.js')
@@ -114,6 +115,12 @@ module.exports = (event) => {
   }
 
   if (event.message) {
+    if (event.message.text) {
+      getUser().then((user) => {
+        sendTextMessage(event.sender.id, user.pageAccessToken, 'Thanks for your message! We will get back to you shortly!')
+
+      })
+    }
     if (event.message.quick_reply.payload === 'RESO') {
       getUser().then((user) => {
         let messageData = {
@@ -302,11 +309,18 @@ module.exports = (event) => {
     }
 
     if (event.message.quick_reply.payload.split("_")[0] === 'MENU') {
-      if (event.message.quick_reply.payload.split("_")[1] === 'Red Wine') {}
+      if (event.message.quick_reply.payload.split("_")[1] === 'Red Wine') {
+        console.log(db.redWine.find);
+      }
 
-      if (event.message.quick_reply.payload.split("_")[1] === 'White Wine') {}
+      if (event.message.quick_reply.payload.split("_")[1] === 'White Wine') {
+        console.log(db.whiteWine.find);
 
-      if (event.message.quick_reply.payload.split("_")[1] === 'Cocktails') {}
+      }
+
+      if (event.message.quick_reply.payload.split("_")[1] === 'Cocktails') {
+        console.log(db.cocktails.find);
+      }
     }
 
     if (event.message.quick_reply.payload.split("_")[0] === 'DATE') {
