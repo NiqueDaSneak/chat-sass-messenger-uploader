@@ -85,7 +85,6 @@ module.exports = (event) => {
             })
           })
         } else {
-          sendTextMessage(event.sender.id, user.pageAccessToken, "Welcome back!")
           let messageData = {
             "recipient":{
               "id": event.sender.id
