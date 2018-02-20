@@ -1,8 +1,5 @@
 'use strict'
 
-var db = require('diskdb')
-db = db.connect('data', ['cocktails', 'whitewine', 'redwine'])
-
 var Message = require('../models/messageModel.js')
 var Group = require('../models/groupModel.js')
 var User = require('../models/userModel.js')
@@ -459,6 +456,7 @@ module.exports = (event) => {
         }
 
         if (event.message.quick_reply.payload.split("_")[1] === 'Cocktails') {
+          getUser().then((user) => {
             let messageData = {
               "recipient":{
                 "id": event.sender.id
