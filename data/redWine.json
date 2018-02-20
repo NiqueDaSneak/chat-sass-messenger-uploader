@@ -9,24 +9,24 @@
     "name": "JULIEN BRAUD",
     "description": "Les Vignes De Bourg: LOIRE, FR ‘15 MELON DE BOURGOGNE",
     "price": 9,
-    "image_url":
+    "image_url":  ""
   },
   {
     "name": "FUORI STRADA",
     "description": "SICILY, IT ‘16 GRILLO",
     "price": 7,
-    "image_url":
+    "image_url":   ""
   },
   {
     "name": "PASCAL JANVIER",
     "description": "JASNIERES, FR ‘16 CHENIN BLANC",
     "price": 11,
-    "image_url":
+    "image_url": ""
   },
   {
     "name": "DOMAINE THEVENOT",
     "description": "Perles D’or: BURGUNDY, FR ’15 ALIGOTE",
     "price": 11,
-    "image_url":
+    "image_url": ""
   }
 ]
