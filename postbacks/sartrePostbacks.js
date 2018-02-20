@@ -80,13 +80,34 @@ module.exports = (event) => {
                   }
                 }
                 callSendAPI(user.pageAccessToken, messageData)
-
               }, 1000)
               resolve()
             })
           })
         } else {
           sendTextMessage(event.sender.id, user.pageAccessToken, "Welcome back!")
+          let messageData = {
+            "recipient":{
+              "id": event.sender.id
+            },
+            "message":{
+              "text": "Looking to create a reservation, or are you dining in?",
+              "quick_replies":[
+                {
+                  "content_type":"text",
+                  "title":"Reservation",
+                  "payload":"RESO"
+                },
+                {
+                  "content_type":"text",
+                  "title":"We're at our table!",
+                  "payload":"DINEIN"
+                }
+              ]
+            }
+          }
+          callSendAPI(user.pageAccessToken, messageData)
+
           resolve()
         }
       })
