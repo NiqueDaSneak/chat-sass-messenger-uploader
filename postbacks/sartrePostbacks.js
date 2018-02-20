@@ -95,7 +95,7 @@ module.exports = (event) => {
                 {
                   "content_type":"text",
                   "title":"Reservation",
-                  "payload":"RESO"
+                  "payload": "RESO"
                 },
                 {
                   "content_type":"text",
@@ -267,7 +267,7 @@ module.exports = (event) => {
       })
     }
 
-    if (event.message.quick_reply.payload === 'DINEIN') {
+    if (event.message.quick_reply.payload === 'TABLE#') {
       getUser().then((user) => {
         sendTextMessage(event.sender.id, user.pageAccessToken, "Thanks for coming in! A bartender is coming to see you. In the mean time, you can order a drink and they will bring it over.")
         setTimeout(() => {
