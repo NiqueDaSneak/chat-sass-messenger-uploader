@@ -303,20 +303,8 @@ module.exports = (event) => {
       }
 
       if (event.message.quick_reply.payload.split("_")[0] === 'MENU') {
-        var elements
         if (event.message.quick_reply.payload.split("_")[1] === 'Red Wine') {
-          elements = db.redwine.find()
-        }
-
-        if (event.message.quick_reply.payload.split("_")[1] === 'White Wine') {
-          elements = db.whitewine.find()
-
-        }
-
-        if (event.message.quick_reply.payload.split("_")[1] === 'Cocktails') {
-          elements = db.cocktails.find()
-        }
-
+        var elements = db.redwine.find()
         getUser().then((user) => {
           let messageData = {
             "recipient":{
@@ -335,12 +323,52 @@ module.exports = (event) => {
           callSendAPI(user.pageAccessToken, messageData)
         })
 
-      }
+        }
 
-      if (event.message.quick_reply.payload.split("_")[0] === 'DATE') {
-        getUser().then((user) => {
+        if (event.message.quick_reply.payload.split("_")[1] === 'White Wine') {
+          var elements = db.whitewine.find()
+          getUser().then((user) => {
+            let messageData = {
+              "recipient":{
+                "id": event.sender.id
+              },
+              "message":{
+                "attachment":{
+                  "type":"template",
+                  "payload":{
+                    "template_type":"generic",
+                    "elements": elements
+                  }
+                }
+              }
+            }
+            callSendAPI(user.pageAccessToken, messageData)
+          })
 
-        })
+
+        }
+
+        if (event.message.quick_reply.payload.split("_")[1] === 'Cocktails') {
+          var elements = db.cocktails.find()
+          getUser().then((user) => {
+            let messageData = {
+              "recipient":{
+                "id": event.sender.id
+              },
+              "message":{
+                "attachment":{
+                  "type":"template",
+                  "payload":{
+                    "template_type":"generic",
+                    "elements": elements
+                  }
+                }
+              }
+            }
+            callSendAPI(user.pageAccessToken, messageData)
+          })
+
+        }
       }
 
       if (event.message.quick_reply.payload.split("_")[0] === 'DATE') {
@@ -423,7 +451,7 @@ module.exports = (event) => {
           sendTextMessage(event.sender.id, user.pageAccessToken, 'You are confirmed! See you on ' + date + ' at ' + time + '.')
         })
       }
-      
+
     } else {
       getUser().then((user) => {
         sendTextMessage(event.sender.id, user.pageAccessToken, 'Thanks for your message! We will get back to you shortly!')
