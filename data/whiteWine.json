@@ -1,7 +1,7 @@
 [
   {
-    "name": "JEAN RIJCKAERT",
-    "description": "CORREAUX VIEILLES VIGNES: BURGUNDY, FR ‘14 GAMAY",
+    "title": "JEAN RIJCKAERT",
+    "subtitle": "CORREAUX VIEILLES VIGNES: BURGUNDY, FR ‘14 GAMAY",
     "buttons":[
       {
         "type": "postback",
@@ -11,8 +11,8 @@
     ]
   },
   {
-    "name": "DOMAINE DU PRE BARON",
-    "description": "TOURAINE, FR ‘14 MALBEC",
+    "title": "DOMAINE DU PRE BARON",
+    "subtitle": "TOURAINE, FR ‘14 MALBEC",
     "buttons":[
       {
         "type": "postback",
@@ -22,8 +22,8 @@
     ]
   },
   {
-    "name": "LA CROIX DE CHAINTRES",
-    "description": "SAUMUR-CHAMPIGNY: FR‘16 CABERNET FRANC",
+    "title": "LA CROIX DE CHAINTRES",
+    "subtitle": "SAUMUR-CHAMPIGNY: FR‘16 CABERNET FRANC",
     "buttons":[
       {
         "type": "postback",
@@ -33,8 +33,8 @@
     ]
   },
   {
-    "name": "DOMAINE SAINT GAYAN",
-    "description": "RHONE VALLEY, FR ‘14 GSM BLEND",
+    "title": "DOMAINE SAINT GAYAN",
+    "subtitle": "RHONE VALLEY, FR ‘14 GSM BLEND",
     "buttons":[
       {
         "type": "postback",
@@ -44,8 +44,8 @@
     ]
   },
   {
-    "name": "CHATEAU PEYBONHOMME",
-    "description": "BORDEAUX, FR ‘14 BORDEAUX BLEND",
+    "title": "CHATEAU PEYBONHOMME",
+    "subtitle": "BORDEAUX, FR ‘14 BORDEAUX BLEND",
     "buttons":[
       {
         "type": "postback",
