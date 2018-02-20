@@ -1,7 +1,7 @@
 'use strict'
 
-// var db = require('diskdb')
-// db = db.connect('data', ['ski'])
+var db = require('diskdb')
+db = db.connect('data', ['cocktails', 'whiteWine', 'redWine'])
 
 var Message = require('../models/messageModel.js')
 var Group = require('../models/groupModel.js')
@@ -57,7 +57,31 @@ module.exports = (event) => {
 
             newMember.save((err, member) => {
               if (err) return console.error(err)
-              sendTextMessage(event.sender.id, user.pageAccessToken, '')
+              sendTextMessage(event.sender.id, user.pageAccessToken, 'Welcome! My name is SartreBot!')
+              setTimeout(() => {
+                let messageData = {
+                  "recipient":{
+                    "id": event.sender.id
+                  },
+                  "message":{
+                    "text": "Looking to create a reservation, or are you dining in?",
+                    "quick_replies":[
+                      {
+                        "content_type":"text",
+                        "title":"Reservation",
+                        "payload":"RESO"
+                      },
+                      {
+                        "content_type":"text",
+                        "title":"We're at our table!",
+                        "payload":"DINEIN"
+                      }
+                    ]
+                  }
+                }
+                callSendAPI(user.pageAccessToken, messageData)
+
+              }, 1000)
               resolve()
             })
           })
@@ -70,7 +94,288 @@ module.exports = (event) => {
   }
 
   if (event.message) {
-    if (event.message.quick_reply.payload === '') {}
+    if (event.message.quick_reply.payload === 'RESO') {
+      getUser().then((user) => {
+        let messageData = {
+          "recipient":{
+            "id": event.sender.id
+          },
+          "message":{
+            "text": "How many guests?",
+            "quick_replies":[
+              {
+                "content_type":"text",
+                "title":"1",
+                "payload":"GUEST_1"
+              },
+              {
+                "content_type":"text",
+                "title":"2",
+                "payload":"GUEST_2"
+              },
+              {
+                "content_type":"text",
+                "title":"3-4",
+                "payload":"GUEST_4"
+              },
+              {
+                "content_type":"text",
+                "title":"5+",
+                "payload":"GUEST_5"
+              }
+            ]
+          }
+        }
+        callSendAPI(user.pageAccessToken, messageData)
+      })
+    }
+
+    if (event.message.quick_reply.payload === 'DINEIN') {
+      getUser().then((user) => {
+        let messageData = {
+          "recipient":{
+            "id": event.sender.id
+          },
+          "message":{
+            "text": "...you should see a plackard with a number. What table are you at?",
+            "quick_replies":[
+              {
+                "content_type":"text",
+                "title":"24",
+                "payload":"TABLE#"
+              },
+              {
+                "content_type":"text",
+                "title":"23",
+                "payload":"TABLE#"
+              },
+              {
+                "content_type":"text",
+                "title":"35",
+                "payload":"TABLE#"
+              },
+              {
+                "content_type":"text",
+                "title":"13",
+                "payload":"TABLE#"
+              },
+              {
+                "content_type":"text",
+                "title":"47",
+                "payload":"TABLE#"
+              },
+              {
+                "content_type":"text",
+                "title":"89",
+                "payload":"TABLE#"
+              }
+            ]
+          }
+        }
+        callSendAPI(user.pageAccessToken, messageData)
+      })
+    }
+
+    if (event.message.quick_reply.payload.split("_")[0] === 'GUEST') {
+      getUser().then((user) => {
+        let messageData = {
+          "recipient":{
+            "id": event.sender.id
+          },
+          "message":{
+            "text": "...when ya coming in?",
+            "quick_replies":[
+              {
+                "content_type":"text",
+                "title":"Feb 22",
+                "payload":"DATE_Feb 22"
+              },
+              {
+                "content_type":"text",
+                "title":"Feb 23",
+                "payload":"DATE_Feb 23"
+              },
+              {
+                "content_type":"text",
+                "title":"Feb 24",
+                "payload":"DATE_Feb 24"
+              },
+              {
+                "content_type":"text",
+                "title":"Feb 25",
+                "payload":"DATE_Feb 25"
+              },
+              {
+                "content_type":"text",
+                "title":"March 1",
+                "payload":"DATE_March 1"
+              },
+              {
+                "content_type":"text",
+                "title":"March 2",
+                "payload":"DATE_March 2"
+              },
+              {
+                "content_type":"text",
+                "title":"March 3",
+                "payload":"DATE_March 3"
+              },
+              {
+                "content_type":"text",
+                "title":"March 4",
+                "payload":"DATE_March 4"
+              },
+              {
+                "content_type":"text",
+                "title":"March 8",
+                "payload":"DATE_March 8"
+              },
+              {
+                "content_type":"text",
+                "title":"March 9",
+                "payload":"DATE_March 9"
+              },
+              {
+                "content_type":"text",
+                "title":"March 10",
+                "payload":"DATE_March 10"
+              }
+            ]
+          }
+        }
+        callSendAPI(user.pageAccessToken, messageData)
+      })
+    }
+
+    if (event.message.quick_reply.payload === 'DINEIN') {
+      getUser().then((user) => {
+        sendTextMessage(event.sender.id, user.pageAccessToken, "Thanks for coming in! A bartender is coming to see you. In the mean time, you can order a drink and they will bring it over.")
+        setTimeout(() => {
+          let messageData = {
+            "recipient":{
+              "id": event.sender.id
+            },
+            "message":{
+              "text": "Check out the menu:",
+              "quick_replies":[
+                {
+                  "content_type":"text",
+                  "title":"Red Wine",
+                  "payload":"MENU_Red Wine"
+                },
+                {
+                  "content_type":"text",
+                  "title":"White Wine",
+                  "payload":"MENU_White Wine"
+                },
+                {
+                  "content_type":"text",
+                  "title":"Cocktails",
+                  "payload":"MENU_Cocktails"
+                },
+              ]
+            }
+          }
+          callSendAPI(user.pageAccessToken, messageData)
+        }, 3700)
+      })
+    }
+
+    if (event.message.quick_reply.payload.split("_")[0] === 'MENU') {
+      if (event.message.quick_reply.payload.split("_")[1] === 'Red Wine') {}
+
+      if (event.message.quick_reply.payload.split("_")[1] === 'White Wine') {}
+
+      if (event.message.quick_reply.payload.split("_")[1] === 'Cocktails') {}
+    }
+
+    if (event.message.quick_reply.payload.split("_")[0] === 'DATE') {
+      getUser().then((user) => {
+
+      })
+    }
+
+    if (event.message.quick_reply.payload.split("_")[0] === 'DATE') {
+      var date = event.message.quick_reply.payload.split("_")[1]
+      getUser().then((user) => {
+        let messageData = {
+          "recipient":{
+            "id": event.sender.id
+          },
+          "message":{
+            "text": "...and at what time?",
+            "quick_replies":[
+              {
+                "content_type":"text",
+                "title":"6pm",
+                "payload":"TIME_6pm_" + date
+              },
+              {
+                "content_type":"text",
+                "title":"6:15pm",
+                "payload":"TIME_6:15pm_" + date
+              },
+              {
+                "content_type":"text",
+                "title":"6:30pm",
+                "payload":"TIME_6:30pm_" + date
+              },
+              {
+                "content_type":"text",
+                "title":"6:45pm",
+                "payload":"TIME_6:45pm_" + date
+              },
+              {
+                "content_type":"text",
+                "title":"7pm",
+                "payload":"TIME_7pm_" + date
+              },
+              {
+                "content_type":"text",
+                "title":"7:15pm",
+                "payload":"TIME_7:15pm_" + date
+              },
+              {
+                "content_type":"text",
+                "title":"7:30pm",
+                "payload":"TIME_7:30pm_" + date
+              },
+              {
+                "content_type":"text",
+                "title":"7:45pm",
+                "payload":"TIME_7:45pm_" + date
+              },
+              {
+                "content_type":"text",
+                "title":"8pm",
+                "payload":"TIME_8pm_" + date
+              },
+              {
+                "content_type":"text",
+                "title":"8:15pm",
+                "payload":"TIME_8:15pm_" + date
+              },
+              {
+                "content_type":"text",
+                "title":"8:30pm",
+                "payload":"TIME_8:30pm_" + date
+              }
+            ]
+          }
+        }
+        callSendAPI(user.pageAccessToken, messageData)
+      })
+    }
+
+    if (event.message.quick_reply.payload.split("_")[0] === 'TIME') {
+      var time = event.message.quick_reply.payload.split("_")[1]
+      var date = event.message.quick_reply.payload.split("_")[2]
+
+      getUser().then((user) => {
+        sendTextMessage(event.sender.id, user.pageAccessToken, 'You are confirmed! See you on ' + date + ' at ' + time + '.')
+      })
+    }
+
   }
 
   if (event.postback) {
