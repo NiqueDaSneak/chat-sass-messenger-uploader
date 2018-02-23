@@ -925,7 +925,7 @@ module.exports = (event) => {
                   {
                     "title": "Sparkle In Silver With Kristen",
                     "subtitle": "@ 12pm - 2pm",
-                    "image_url": "http://demandware.edgesuite.net/aaby_prd/on/demandware.static/-/Sites-jtv-Library/default/dwe4953c40/page%20images/About%20Us/2015/mandy1.jpg",
+                    "image_url": "https://scontent-ort2-1.xx.fbcdn.net/v/t1.0-9/12438979_1111784788845510_8540414339736721462_n.jpg?oh=ecc8bd0fbd371983a8718fc4fed560c7&oe=5B18541F",
                     "buttons": [
                       {
                         "title": "Tap Here",
@@ -937,7 +937,7 @@ module.exports = (event) => {
                   {
                     "title": "Diamond Elegance With Misty",
                     "subtitle": "@ 2pm - 4pm",
-                    "image_url": "https://scontent.fluk1-1.fna.fbcdn.net/v/t1.0-9/23559717_1596843407005785_1600285693681764677_n.jpg?oh=b57f9e85a0e351b4ded3d12059a8de5f&oe=5AB9FBC8",
+                    "image_url": "https://scontent-ort2-1.xx.fbcdn.net/v/t1.0-9/21272389_1512782835470542_3059064897194547114_n.jpg?oh=54f956611a2cadad61a665b1946c0e00&oe=5B4E2469",
                     "buttons": [
                       {
                         "title": "Tap Here",
