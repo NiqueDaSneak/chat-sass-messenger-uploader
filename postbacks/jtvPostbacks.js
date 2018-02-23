@@ -768,7 +768,7 @@ module.exports = (event) => {
                       {
                         "type":"postback",
                         "title":"Add to Cart",
-                        "payload":"ADD_CART_RINGS_" + "*bracelets_11"
+                        "payload":"ADD_CART_RINGS_" + "*rings_10"
                       },
                       {
                         "title":"View Details",
