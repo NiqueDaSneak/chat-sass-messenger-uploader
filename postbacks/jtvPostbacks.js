@@ -761,9 +761,9 @@ module.exports = (event) => {
                 "sharable": true,
                 "elements":[
                   {
-                    "title":"Spin-n-bead Jr with Quick Change Trays",
-                    "image_url":"https://i5.jtv.com/loadimage.aspx?btype=.jpg&cgid=3305343&img=1&h=300&w=400",
-                    "subtitle":"21.79",
+                    "title":"Charles Winston for Bella Luce® 11.03ctw Round and Baguette Rhodium over Silver Ring",
+                    "image_url":"http://i0.jtv.com/loadimage.aspx?btype=.jpg&h=400&w=533&cgid=3162245&img=1",
+                    "subtitle":"134.99",
                     "buttons":[
                       {
                         "type":"postback",
@@ -911,7 +911,7 @@ module.exports = (event) => {
                 "top_element_style": "LARGE",
                 "elements": [
                   {
-                    "title": "Jewel School with Sheree",
+                    "title": "Charles Winston For Bella Luce With Kristen & Charles",
                     "subtitle": "@ 10am - 12pm",
                     "image_url": "https://n6-img-fp.akamaized.net/free-vector/jewelry-flat-icons-set-of-necklace-tiara-earrings-isolated-vector-illustration_1284-2382.jpg?size=338&ext=jpg",
                     "buttons": [
@@ -923,7 +923,7 @@ module.exports = (event) => {
                     ]
                   },
                   {
-                    "title": "Precious World Of Pearls Gifts With Mandy & Mark",
+                    "title": "Sparkle In Silver With Kristen",
                     "subtitle": "@ 12pm - 2pm",
                     "image_url": "http://demandware.edgesuite.net/aaby_prd/on/demandware.static/-/Sites-jtv-Library/default/dwe4953c40/page%20images/About%20Us/2015/mandy1.jpg",
                     "buttons": [
@@ -935,7 +935,7 @@ module.exports = (event) => {
                     ]
                   },
                   {
-                    "title": "Color & Karat With Scott And Mandy",
+                    "title": "Diamond Elegance With Misty",
                     "subtitle": "@ 2pm - 4pm",
                     "image_url": "https://scontent.fluk1-1.fna.fbcdn.net/v/t1.0-9/23559717_1596843407005785_1600285693681764677_n.jpg?oh=b57f9e85a0e351b4ded3d12059a8de5f&oe=5AB9FBC8",
                     "buttons": [
