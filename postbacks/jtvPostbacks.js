@@ -773,7 +773,7 @@ module.exports = (event) => {
                       {
                         "title":"View Details",
                         "type":"web_url",
-                        "url": "https://www.jtv.com/spin-n-bead-jr-with-quick-change-trays/1829459.html",
+                        "url": "https://www.jtv.com/jewelry/charles-winston-for-bella-luce--r-11.03ctw-round-and-baguette-rhodium-over-silver-ring/1654126.html",
                         "webview_height_ratio":"tall"
                       },
                       {
