@@ -262,7 +262,7 @@ module.exports = (event) => {
   }
 
   if (event.message) {
-    if (event.postback.payload === 'LEARN') {
+    if (event.event.message.quick_reply.payload === 'LEARN') {
       getUser().then((user) => {
         let messageData = {
           "recipient":{
@@ -316,7 +316,7 @@ module.exports = (event) => {
       })
     }
 
-    if (event.postback.payload === 'APPLY') {
+    if (event.message.quick_reply.payload === 'APPLY') {
       getUser().then((user) => {
         let messageData = {
           "recipient":{
@@ -349,7 +349,7 @@ module.exports = (event) => {
       })
     }
 
-    if (event.postback.payload === 'BOOK') {
+    if (event.message.quick_reply.payload === 'BOOK') {
       getUser().then((user) => {
         let messageData = {
           "recipient":{
