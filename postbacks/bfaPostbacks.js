@@ -391,7 +391,7 @@ module.exports = (event) => {
   }
 
   if (event.message) {
-    if (event.event.message.quick_reply.payload === 'LEARN') {
+    if (event.message.quick_reply.payload === 'LEARN') {
       getUser().then((user) => {
         let messageData = {
           "recipient":{
