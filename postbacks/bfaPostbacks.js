@@ -98,6 +98,15 @@ module.exports = (event) => {
     })
   }
 
+  if (event.postback) {
+    if (event.postback.payload === "GET_STARTED_PAYLOAD") {
+      getUser().then((user) => {
+        findMember(user)
+      })
+    }
+
+  }
+
   if (event.message) {
     if (event.message.quick_reply.payload.split("_")[1] === 'LEARN') {
       getUser().then((user) => {
@@ -364,13 +373,6 @@ module.exports = (event) => {
       })
     }
   }
-
-  if (event.postback) {
-    if (event.postback.payload === "") {
-
-  }
-
-}
 
 function sendTextMessage(recipientId, accessToken, textMsg) {
   var messageData = {
