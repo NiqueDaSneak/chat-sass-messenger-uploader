@@ -235,8 +235,7 @@ module.exports = (event) => {
                           "template_type":"generic",
                           "elements": [
                             {
-                              "title": "Who Are We",
-                              "subtitle": "...we can’t wait to share it with you!",
+                              "title": "...we can’t wait to share it with you!",
                               "buttons":[
                                 {
                                   "type":"web_url",
