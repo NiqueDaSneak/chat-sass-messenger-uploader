@@ -85,7 +85,7 @@ module.exports = (event) => {
                   }
                 }
                 callSendAPI(user.pageAccessToken, messageData)
-              }, 1000)
+              }, 2000)
 
               resolve()
             })
