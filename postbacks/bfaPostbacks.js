@@ -105,12 +105,9 @@ module.exports = (event) => {
       })
     }
 
-  }
-
-  if (event.message) {
-    if (event.message.quick_reply.payload.split("_")[1] === 'LEARN') {
+    if (event.postback.payload.split("_")[1] === 'LEARN') {
       getUser().then((user) => {
-        if (event.message.quick_reply.payload.split("_")[0] === 'WHY') {
+        if (event.postback.payload.split("_")[0] === 'WHY') {
           let messageData = {
             "recipient":{
               "id": event.sender.id
@@ -141,7 +138,7 @@ module.exports = (event) => {
           callSendAPI(user.pageAccessToken, messageData)
         }
 
-        if (event.message.quick_reply.payload.split("_")[0] === 'OFFER') {
+        if (event.postback.payload.split("_")[0] === 'OFFER') {
           let messageData = {
             "recipient":{
               "id": event.sender.id
@@ -214,7 +211,7 @@ module.exports = (event) => {
           callSendAPI(user.pageAccessToken, messageData)
         }
 
-        if (event.message.quick_reply.payload.split("_")[0] === 'WHO') {
+        if (event.postback.payload.split("_")[0] === 'WHO') {
           let messageData = {
             "recipient":{
               "id": event.sender.id
@@ -246,8 +243,10 @@ module.exports = (event) => {
         }
       })
     }
+  }
 
-    if (event.message.quick_reply.payload === 'LEARN') {
+  if (event.message) {
+    if (event.postback.payload === 'LEARN') {
       getUser().then((user) => {
         let messageData = {
           "recipient":{
@@ -301,7 +300,7 @@ module.exports = (event) => {
       })
     }
 
-    if (event.message.quick_reply.payload === 'APPLY') {
+    if (event.postback.payload === 'APPLY') {
       getUser().then((user) => {
         let messageData = {
           "recipient":{
@@ -334,7 +333,7 @@ module.exports = (event) => {
       })
     }
 
-    if (event.message.quick_reply.payload === 'BOOK') {
+    if (event.postback.payload === 'BOOK') {
       getUser().then((user) => {
         let messageData = {
           "recipient":{
