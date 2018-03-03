@@ -108,34 +108,37 @@ module.exports = (event) => {
     if (event.postback.payload.split("_")[1] === 'LEARN') {
       getUser().then((user) => {
         if (event.postback.payload.split("_")[0] === 'WHY') {
-          let messageData = {
-            "recipient":{
-              "id": event.sender.id
-            },
-            "message":{
-              "attachment":{
-                "type":"template",
-                "payload":{
-                  "template_type":"generic",
-                  "elements": [
-                    {
-                      "title": "Why BFA",
-                      "subtitle": "We are a boutique training program for college auditions. Our fresh approach focuses on cultivating true artistry through our three part teaching philosophy - Artistic voice, Craft, and Business Savvy. We want to fit the business to you, not the other way around.",
-                      "buttons":[
-                        {
-                          "type":"web_url",
-                          "url": 'https://www.broadwayfutureartists.com/home',
-                          "title": "Go To Site",
-                          "webview_height_ratio": "tall"
-                        }
-                      ]
-                    }
-                  ]
+          sendTextMessage(event.sender.id, user.pageAccessToken, 'We are a boutique training program for college auditions. Our fresh approach focuses on cultivating true artistry through our three part teaching philosophy - Artistic voice, Craft, and Business Savvy.')
+          setTimeout(() => {
+            let messageData = {
+              "recipient":{
+                "id": event.sender.id
+              },
+              "message":{
+                "attachment":{
+                  "type":"template",
+                  "payload":{
+                    "template_type":"generic",
+                    "elements": [
+                      {
+                        "title": "Why BFA",
+                        "subtitle": "We want to fit the business to you, not the other way around.",
+                        "buttons":[
+                          {
+                            "type":"web_url",
+                            "url": 'https://www.broadwayfutureartists.com/home',
+                            "title": "Learn More",
+                            "webview_height_ratio": "tall"
+                          }
+                        ]
+                      }
+                    ]
+                  }
                 }
               }
             }
-          }
-          callSendAPI(user.pageAccessToken, messageData)
+            callSendAPI(user.pageAccessToken, messageData)
+          }, 8000)
         }
 
         if (event.postback.payload.split("_")[0] === 'OFFER') {
@@ -212,34 +215,48 @@ module.exports = (event) => {
         }
 
         if (event.postback.payload.split("_")[0] === 'WHO') {
-          let messageData = {
-            "recipient":{
-              "id": event.sender.id
-            },
-            "message":{
-              "attachment":{
-                "type":"template",
-                "payload":{
-                  "template_type":"generic",
-                  "elements": [
-                    {
-                      "title": "Who Are We",
-                      "subtitle": "Two Steph(ff)anie’s, one goal. We’re young, NYC actors passionate about cultivating Broadway’s future artists 😜 After working on various projects on Broadway and on TV/film, we finally met in the OBC of War Paint. Through coaching each other and our Broadway friends, we developed this teaching philosophy that we can’t wait to share with you!",
-                      "buttons":[
-                        {
-                          "type":"web_url",
-                          "url": 'https://www.broadwayfutureartists.com/faculty',
-                          "title": "Go To Site",
-                          "webview_height_ratio": "tall"
+          sendTextMessage(event.sender.id, user.pageAccessToken, 'Two Steph(ff)anie’s, one goal...')
+          sendImageMessage(event.sender.id, user.pageAccessToken, 'https://chat-sass-messenger-uploader.herokuapp.com/static/bfa/icon.png')
+          setTimeout(() => {
+            sendTextMessage(event.sender.id, user.pageAccessToken, 'We’re young, NYC actors passionate about cultivating Broadway’s future artists 😜')
+            setTimeout(() => {
+              sendTextMessage(event.sender.id, user.pageAccessToken, 'After working on various projects on Broadway and on TV/film, we finally met in the OBC of War Paint.')
+              setTimeout(() => {
+                sendTextMessage(event.sender.id, user.pageAccessToken, 'Through coaching each other and our Broadway friends we developed this teaching philosophy...')
+                setTimeout(() => {
+                  let messageData = {
+                    "recipient":{
+                      "id": event.sender.id
+                    },
+                    "message":{
+                      "attachment":{
+                        "type":"template",
+                        "payload":{
+                          "template_type":"generic",
+                          "elements": [
+                            {
+                              "title": "Who Are We",
+                              "subtitle": "...we can’t wait to share it with you!",
+                              "buttons":[
+                                {
+                                  "type":"web_url",
+                                  "url": 'https://www.broadwayfutureartists.com/faculty',
+                                  "title": "Go To Site",
+                                  "webview_height_ratio": "tall"
+                                }
+                              ]
+                            }
+                          ]
                         }
-                      ]
+                      }
                     }
-                  ]
-                }
-              }
-            }
-          }
-          callSendAPI(user.pageAccessToken, messageData)
+                  }
+                  callSendAPI(user.pageAccessToken, messageData)
+                }, 4000)
+              }, 5000)
+            }, 4000)
+          }, 2000)
+
         }
       })
     }
