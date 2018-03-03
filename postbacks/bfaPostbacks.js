@@ -194,40 +194,43 @@ module.exports = (event) => {
 
     if (event.postback.payload === 'BOOK') {
       getUser().then((user) => {
-        let messageData = {
-          "recipient":{
-            "id": event.sender.id
-          },
-          "message":{
-            "attachment":{
-              "type":"template",
-              "payload":{
-                "template_type":"generic",
-                "elements": [
-                  {
-                    "title": "Here is a brief description of the vocal coaching. Tap below for the skype program or NYC:",
-                    // "subtitle": "ALSACE, FR ‘15 REISLING",
-                    "buttons":[
-                      {
-                        "type":"web_url",
-                        "url": 'https://www.broadwayfutureartists.com/book-online',
-                        "title":"Skype",
-                        "webview_height_ratio":"tall"
-                      },
-                      {
-                        "type":"web_url",
-                        "url": 'https://www.broadwayfutureartists.com/book-online',
-                        "title":"NYC",
-                        "webview_height_ratio":"tall"
-                      }
-                    ]
-                  }
-                ]
+        sendTextMessage(event.sender.id, user.pageAccessToken, 'Here is a brief description of the vocal coaching.')
+        setTimeout(() => {
+          let messageData = {
+            "recipient":{
+              "id": event.sender.id
+            },
+            "message":{
+              "attachment":{
+                "type":"template",
+                "payload":{
+                  "template_type":"generic",
+                  "elements": [
+                    {
+                      "title": "Tap below for the skype program or NYC:",
+                      // "subtitle": "ALSACE, FR ‘15 REISLING",
+                      "buttons":[
+                        {
+                          "type":"web_url",
+                          "url": 'https://www.broadwayfutureartists.com/book-online',
+                          "title":"Skype",
+                          "webview_height_ratio":"tall"
+                        },
+                        {
+                          "type":"web_url",
+                          "url": 'https://www.broadwayfutureartists.com/book-online',
+                          "title":"NYC",
+                          "webview_height_ratio":"tall"
+                        }
+                      ]
+                    }
+                  ]
+                }
               }
             }
           }
-        }
-        callSendAPI(user.pageAccessToken, messageData)
+          callSendAPI(user.pageAccessToken, messageData)
+        }, 3000)
       })
     }
 
