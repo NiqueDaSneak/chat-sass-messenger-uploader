@@ -125,7 +125,7 @@ module.exports = (event) => {
                         {
                           "type":"web_url",
                           "url": 'https://www.google.com',
-                          "title": "Learn More",
+                          "title": "Go To Site",
                           "webview_height_ratio": "tall"
                         }
                       ]
@@ -229,7 +229,7 @@ module.exports = (event) => {
                         {
                           "type":"web_url",
                           "url": 'https://www.google.com',
-                          "title": "Learn More",
+                          "title": "Go To Site",
                           "webview_height_ratio": "tall"
                         }
                       ]
