@@ -120,11 +120,11 @@ module.exports = (event) => {
                   "elements": [
                     {
                       "title": "Why BFA",
-                      "subtitle": "Here is some suplementary copy",
+                      "subtitle": "We are a boutique training program for college auditions. Our fresh approach focuses on cultivating true artistry through our three part teaching philosophy - Artistic voice, Craft, and Business Savvy. We want to fit the business to you, not the other way around.",
                       "buttons":[
                         {
                           "type":"web_url",
-                          "url": 'https://www.google.com',
+                          "url": 'https://www.broadwayfutureartists.com/home',
                           "title": "Go To Site",
                           "webview_height_ratio": "tall"
                         }
@@ -151,17 +151,17 @@ module.exports = (event) => {
                   "elements": [
                     {
                       "title": "NYC College Prep program",
-                      "subtitle": "Here is some suplementary copy",
+                      "subtitle": "In NYC? Let’s meet up! This 6 week program gives you a diagnostic session, six private sessions, a group work session, and a final mock audition with a special Broadway guest.",
                       "buttons":[
                         {
                           "type":"web_url",
-                          "url": 'https://www.google.com',
+                          "url": 'https://www.broadwayfutureartists.com/extra',
                           "title": "Apply",
                           "webview_height_ratio": "tall"
                         },
                         {
                           "type":"web_url",
-                          "url": 'https://www.google.com',
+                          "url": 'https://www.broadwayfutureartists.com/services',
                           "title": "Learn More",
                           "webview_height_ratio": "tall"
                         }
@@ -169,17 +169,17 @@ module.exports = (event) => {
                     },
                     {
                       "title": "Skype College Prep program",
-                      "subtitle": "Here is some suplementary copy",
+                      "subtitle": "This training program can be done wherever you are! This is 7.5 hours of intense private training - a diagnostic session, private singing and acting sessions, and a final mock audition. When you’re done, you’ll be ready to nail those auditions.",
                       "buttons":[
                         {
                           "type":"web_url",
-                          "url": 'https://www.google.com',
+                          "url": 'https://www.broadwayfutureartists.com/extra',
                           "title": "Apply",
                           "webview_height_ratio": "tall"
                         },
                         {
                           "type":"web_url",
-                          "url": 'https://www.google.com',
+                          "url": 'https://www.broadwayfutureartists.com/services',
                           "title": "Learn More",
                           "webview_height_ratio": "tall"
                         }
@@ -187,17 +187,17 @@ module.exports = (event) => {
                     },
                     {
                       "title": "Private Coachings",
-                      "subtitle": "Here is some suplementary copy",
+                      "subtitle": "Just wanna work on it? We got you. We offer private singing and/or acting coachings too!",
                       "buttons":[
                         {
                           "type":"web_url",
                           "url": 'https://www.google.com',
-                          "title": "Apply",
+                          "title": "Schedule a private coaching",
                           "webview_height_ratio": "tall"
                         },
                         {
                           "type":"web_url",
-                          "url": 'https://www.google.com',
+                          "url": 'https://www.broadwayfutureartists.com/services',
                           "title": "Learn More",
                           "webview_height_ratio": "tall"
                         }
@@ -224,11 +224,11 @@ module.exports = (event) => {
                   "elements": [
                     {
                       "title": "Who Are We",
-                      "subtitle": "Here is some suplementary copy",
+                      "subtitle": "Two Steph(ff)anie’s, one goal. We’re young, NYC actors passionate about cultivating Broadway’s future artists 😜 After working on various projects on Broadway and on TV/film, we finally met in the OBC of War Paint. Through coaching each other and our Broadway friends, we developed this teaching philosophy that we can’t wait to share with you!",
                       "buttons":[
                         {
                           "type":"web_url",
-                          "url": 'https://www.google.com',
+                          "url": 'https://www.broadwayfutureartists.com/faculty',
                           "title": "Go To Site",
                           "webview_height_ratio": "tall"
                         }
