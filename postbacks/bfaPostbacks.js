@@ -266,7 +266,7 @@ module.exports = (event) => {
                       {
                         "type": "postback",
                         "payload": "WHY_LEARN",
-                        "title":"Buy for $12"
+                        "title":"Learn More"
                       }
                     ]
                   },
@@ -277,7 +277,7 @@ module.exports = (event) => {
                       {
                         "type": "postback",
                         "payload": "OFFER_LEARN",
-                        "title":"Buy for $12"
+                        "title":"Learn More"
                       }
                     ]
                   },
@@ -288,7 +288,7 @@ module.exports = (event) => {
                       {
                         "type": "postback",
                         "payload": "WHO_LEARN",
-                        "title":"Buy for $12"
+                        "title":"Learn More"
                       }
                     ]
                   },
