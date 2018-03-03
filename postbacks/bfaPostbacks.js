@@ -177,7 +177,7 @@ module.exports = (event) => {
                     "buttons":[
                       {
                         "type":"web_url",
-                        "url": 'https://www.google.com',
+                        "url": 'https://www.broadwayfutureartists.com/extra',
                         "title":"Apply Now",
                         "webview_height_ratio":"tall"
                       }
@@ -210,13 +210,13 @@ module.exports = (event) => {
                     "buttons":[
                       {
                         "type":"web_url",
-                        "url": 'https://www.google.com',
+                        "url": 'https://www.broadwayfutureartists.com/book-online',
                         "title":"Skype",
                         "webview_height_ratio":"tall"
                       },
                       {
                         "type":"web_url",
-                        "url": 'https://www.google.com',
+                        "url": 'https://www.broadwayfutureartists.com/book-online',
                         "title":"NYC",
                         "webview_height_ratio":"tall"
                       }
@@ -460,7 +460,7 @@ module.exports = (event) => {
                     "buttons":[
                       {
                         "type":"web_url",
-                        "url": 'https://www.google.com',
+                        "url": 'https://www.broadwayfutureartists.com/extra',
                         "title":"Apply Now",
                         "webview_height_ratio":"tall"
                       }
@@ -493,13 +493,13 @@ module.exports = (event) => {
                     "buttons":[
                       {
                         "type":"web_url",
-                        "url": 'https://www.google.com',
+                        "url": 'https://www.broadwayfutureartists.com/book-online',
                         "title":"Skype",
                         "webview_height_ratio":"tall"
                       },
                       {
                         "type":"web_url",
-                        "url": 'https://www.google.com',
+                        "url": 'https://www.broadwayfutureartists.com/book-online',
                         "title":"NYC",
                         "webview_height_ratio":"tall"
                       }
