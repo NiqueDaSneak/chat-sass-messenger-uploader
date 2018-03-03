@@ -105,6 +105,132 @@ module.exports = (event) => {
       })
     }
 
+    if (event.postback.payload === 'LEARN') {
+      getUser().then((user) => {
+        let messageData = {
+          "recipient":{
+            "id": event.sender.id
+          },
+          "message":{
+            "attachment":{
+              "type":"template",
+              "payload":{
+                "template_type":"generic",
+                "elements": [
+                  {
+                    "title": "Why BFA",
+                    "subtitle": "Here is some suplementary copy",
+                    "buttons":[
+                      {
+                        "type": "postback",
+                        "payload": "WHY_LEARN",
+                        "title":"Learn More"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "What Do We Offer",
+                    "subtitle": "Here is some suplementary copy",
+                    "buttons":[
+                      {
+                        "type": "postback",
+                        "payload": "OFFER_LEARN",
+                        "title":"Learn More"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Who We Are",
+                    "subtitle": "Here is some suplementary copy",
+                    "buttons":[
+                      {
+                        "type": "postback",
+                        "payload": "WHO_LEARN",
+                        "title":"Learn More"
+                      }
+                    ]
+                  },
+                ]
+              }
+            }
+          }
+        }
+        callSendAPI(user.pageAccessToken, messageData)
+      })
+    }
+
+    if (event.postback.payload === 'APPLY') {
+      getUser().then((user) => {
+        let messageData = {
+          "recipient":{
+            "id": event.sender.id
+          },
+          "message":{
+            "attachment":{
+              "type":"template",
+              "payload":{
+                "template_type":"generic",
+                "elements": [
+                  {
+                    "title": "Tap below to apply:",
+                    // "subtitle": "ALSACE, FR ‘15 REISLING",
+                    "buttons":[
+                      {
+                        "type":"web_url",
+                        "url": 'https://www.google.com',
+                        "title":"Apply Now",
+                        "webview_height_ratio":"tall"
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          }
+        }
+        callSendAPI(user.pageAccessToken, messageData)
+      })
+    }
+
+    if (event.postback.payload === 'BOOK') {
+      getUser().then((user) => {
+        let messageData = {
+          "recipient":{
+            "id": event.sender.id
+          },
+          "message":{
+            "attachment":{
+              "type":"template",
+              "payload":{
+                "template_type":"generic",
+                "elements": [
+                  {
+                    "title": "Here is a brief description of the vocal coaching. Tap below for the skype program or NYC:",
+                    // "subtitle": "ALSACE, FR ‘15 REISLING",
+                    "buttons":[
+                      {
+                        "type":"web_url",
+                        "url": 'https://www.google.com',
+                        "title":"Skype",
+                        "webview_height_ratio":"tall"
+                      },
+                      {
+                        "type":"web_url",
+                        "url": 'https://www.google.com',
+                        "title":"NYC",
+                        "webview_height_ratio":"tall"
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          }
+        }
+        callSendAPI(user.pageAccessToken, messageData)
+      })
+    }
+
     if (event.postback.payload.split("_")[1] === 'LEARN') {
       getUser().then((user) => {
         if (event.postback.payload.split("_")[0] === 'WHY') {
