@@ -130,9 +130,9 @@ app.post('/', (req, res) => {
           return res.redirect(307, '/sartrerouter')
         }
 
-        // if (event.recipient.id === '154166262052750') {
-        //   return res.redirect(307, '/bfarouter')
-        // }
+        if (event.recipient.id === '1449601581817476') {
+          return res.redirect(307, '/bfarouter')
+        }
 
 
 
