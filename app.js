@@ -61,6 +61,9 @@ app.use('/utahskistest', utahSkisTest)
 var sartreRouter = require('./router/sartreRouter.js')
 app.use('/sartrerouter', sartreRouter)
 
+var bfaRouter = require('./router/bfaRouter.js')
+app.use('/bfarouter', bfaRouter)
+
 app.use('/data', express.static(path.join(__dirname, 'data')))
 
 
@@ -126,6 +129,10 @@ app.post('/', (req, res) => {
         if (event.recipient.id === '154166262052750') {
           return res.redirect(307, '/sartrerouter')
         }
+
+        // if (event.recipient.id === '154166262052750') {
+        //   return res.redirect(307, '/bfarouter')
+        // }
 
 
 
