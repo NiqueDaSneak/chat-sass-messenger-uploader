@@ -365,7 +365,7 @@ module.exports = (event) => {
               }
             }
             callSendAPI(user.pageAccessToken, messageData)
-          }, 8000)
+          }, 3000)
         }
 
         if (event.postback.payload.split("_")[0] === 'OFFER') {
@@ -493,7 +493,7 @@ module.exports = (event) => {
                   }
                   callSendAPI(user.pageAccessToken, messageData)
                 }, 3500)
-              }, 300)
+              }, 3000)
             }, 3000)
           }, 2000)
 
