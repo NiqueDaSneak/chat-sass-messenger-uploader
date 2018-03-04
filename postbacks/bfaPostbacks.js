@@ -314,12 +314,12 @@ module.exports = (event) => {
                           {
                             "type":"postback",
                             "payload": 'OFFER_LEARN',
-                            "title": "What Do We Offer",
+                            "title": "What Do We Offer?",
                           },
                           {
                             "type":"postback",
                             "payload": 'WHO_LEARN',
-                            "title": "Who Are We",
+                            "title": "Who Are We?",
                           }
                         ]
                       }
@@ -347,6 +347,7 @@ module.exports = (event) => {
                       "title": "NYC College Prep program",
                       "subtitle": "In NYC? Let’s meet up!",
                       "image_url":"https://chat-sass-messenger-uploader.herokuapp.com/static/bfa/nyc.jpeg",
+                      "image_aspect_ratio": "square",
                       "buttons":[
                         {
                           "type":"web_url",
@@ -365,7 +366,8 @@ module.exports = (event) => {
                     {
                       "title": "Skype College Prep program",
                       "subtitle": "	Just wanna work on it? We got you.",
-                      "image_url":"https://chat-sass-messenger-uploader.herokuapp.com/static/bfa/coaching.jpeg",
+                      "image_url":"https://chat-sass-messenger-uploader.herokuapp.com/static/bfa/skype.jpeg",
+                      "image_aspect_ratio": "square",
                       "buttons":[
                         {
                           "type":"web_url",
@@ -384,6 +386,8 @@ module.exports = (event) => {
                     {
                       "title": "Private Coachings",
                       "subtitle": "Just wanna work on it? We got you. We offer private singing and/or acting coachings too!",
+                      "image_aspect_ratio": "square",
+                      "image_url":"https://chat-sass-messenger-uploader.herokuapp.com/static/bfa/coaching.jpeg",
                       "buttons":[
                         {
                           "type":"web_url",
@@ -439,12 +443,12 @@ module.exports = (event) => {
                                 {
                                   "type":"postback",
                                   "payload": 'OFFER_LEARN',
-                                  "title": "What Do We Offer",
+                                  "title": "What Do We Offer?",
                                 },
                                 {
                                   "type":"postback",
                                   "payload": 'WHY_LEARN',
-                                  "title": "Why BFA",
+                                  "title": "Why BFA?",
                                 }
                               ]
                             }
@@ -478,7 +482,7 @@ module.exports = (event) => {
                 "template_type":"generic",
                 "elements": [
                   {
-                    "title": "Why BFA",
+                    "title": "Why BFA?",
                     "subtitle": "Here is some suplementary copy",
                     "buttons":[
                       {
@@ -489,7 +493,7 @@ module.exports = (event) => {
                     ]
                   },
                   {
-                    "title": "What Do We Offer",
+                    "title": "What Do We Offer?",
                     "subtitle": "Here is some suplementary copy",
                     "buttons":[
                       {
@@ -500,7 +504,7 @@ module.exports = (event) => {
                     ]
                   },
                   {
-                    "title": "Who We Are",
+                    "title": "Who We Are?",
                     "subtitle": "Here is some suplementary copy",
                     "buttons":[
                       {
