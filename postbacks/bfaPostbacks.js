@@ -194,8 +194,6 @@ module.exports = (event) => {
 
     if (event.postback.payload === 'BOOK') {
       getUser().then((user) => {
-        sendTextMessage(event.sender.id, user.pageAccessToken, 'Here is a brief description of the vocal coaching.')
-        setTimeout(() => {
           let messageData = {
             "recipient":{
               "id": event.sender.id
@@ -247,7 +245,6 @@ module.exports = (event) => {
             }
           }
           callSendAPI(user.pageAccessToken, messageData)
-        }, 3000)
       })
     }
 
@@ -555,8 +552,6 @@ module.exports = (event) => {
 
     if (event.message.quick_reply.payload === 'BOOK') {
       getUser().then((user) => {
-        sendTextMessage(event.sender.id, user.pageAccessToken, 'Here is a brief description of the vocal coaching.')
-        setTimeout(() => {
           let messageData = {
             "recipient":{
               "id": event.sender.id
@@ -607,7 +602,6 @@ module.exports = (event) => {
             }
           }
           callSendAPI(user.pageAccessToken, messageData)
-        }, 3000)
       })
     }
   }
