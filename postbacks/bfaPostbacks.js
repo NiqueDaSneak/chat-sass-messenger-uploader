@@ -250,8 +250,8 @@ module.exports = (event) => {
                     "template_type":"generic",
                     "elements": [
                       {
-                        "title": "Why BFA",
-                        "subtitle": "We want to fit the business to you, not the other way around.",
+                        "title": "We want to fit the business to you, not the other way around.",
+                        "subtitle": "Check out our website!",
                         "buttons":[
                           {
                             "type":"web_url",
