@@ -345,7 +345,8 @@ module.exports = (event) => {
                   "elements": [
                     {
                       "title": "NYC College Prep program",
-                      "subtitle": "In NYC? Let’s meet up! This 6 week program gives you a diagnostic session, six private sessions, a group work session, and a final mock audition with a special Broadway guest.",
+                      "subtitle": "In NYC? Let’s meet up!",
+                      "image_url":"https://chat-sass-messenger-uploader.herokuapp.com/static/bfa/nyc.jpeg",
                       "buttons":[
                         {
                           "type":"web_url",
@@ -363,7 +364,8 @@ module.exports = (event) => {
                     },
                     {
                       "title": "Skype College Prep program",
-                      "subtitle": "This training program can be done wherever you are! This is 7.5 hours of intense private training - a diagnostic session, private singing and acting sessions, and a final mock audition. When you’re done, you’ll be ready to nail those auditions.",
+                      "subtitle": "	Just wanna work on it? We got you.",
+                      "image_url":"https://chat-sass-messenger-uploader.herokuapp.com/static/bfa/coaching.jpeg",
                       "buttons":[
                         {
                           "type":"web_url",
@@ -407,7 +409,7 @@ module.exports = (event) => {
 
         if (event.postback.payload.split("_")[0] === 'WHO') {
           sendTextMessage(event.sender.id, user.pageAccessToken, 'Two Steph(ff)anie’s, one goal...')
-          sendImageMessage(event.sender.id, user.pageAccessToken, 'https://chat-sass-messenger-uploader.herokuapp.com/static/bfa/icon.png')
+          sendImageMessage(event.sender.id, user.pageAccessToken, 'https://chat-sass-messenger-uploader.herokuapp.com/static/bfa/IMG_0074.jpg')
           setTimeout(() => {
             sendTextMessage(event.sender.id, user.pageAccessToken, 'We’re young, NYC actors passionate about cultivating Broadway’s future artists 😜')
             setTimeout(() => {
