@@ -57,14 +57,14 @@ module.exports = (event) => {
 
             newMember.save((err, member) => {
               if (err) return console.error(err)
-              sendTextMessage(event.sender.id, user.pageAccessToken, 'This is the welcome text.')
+              sendTextMessage(event.sender.id, user.pageAccessToken, 'Hi! Welcome to Broadway Future Artists! How can we help?')
               setTimeout(() => {
                 let messageData = {
                   "recipient":{
                     "id": event.sender.id
                   },
                   "message":{
-                    "text": "This is instructional text...Choose an option:",
+                    "text": "Choose an option below:",
                     "quick_replies":[
                       {
                         "content_type":"text",
@@ -118,8 +118,8 @@ module.exports = (event) => {
                 "template_type":"generic",
                 "elements": [
                   {
-                    "title": "Why BFA",
-                    "subtitle": "Here is some suplementary copy",
+                    "title": "Why BFA?",
+                    // "subtitle": "Here is some suplementary copy",
                     "buttons":[
                       {
                         "type": "postback",
@@ -129,8 +129,8 @@ module.exports = (event) => {
                     ]
                   },
                   {
-                    "title": "What Do We Offer",
-                    "subtitle": "Here is some suplementary copy",
+                    "title": "What Do We Offer?",
+                    // "subtitle": "Here is some suplementary copy",
                     "buttons":[
                       {
                         "type": "postback",
@@ -140,8 +140,8 @@ module.exports = (event) => {
                     ]
                   },
                   {
-                    "title": "Who We Are",
-                    "subtitle": "Here is some suplementary copy",
+                    "title": "Who We Are?",
+                    // "subtitle": "Here is some suplementary copy",
                     "buttons":[
                       {
                         "type": "postback",
@@ -237,7 +237,7 @@ module.exports = (event) => {
     if (event.postback.payload.split("_")[1] === 'LEARN') {
       getUser().then((user) => {
         if (event.postback.payload.split("_")[0] === 'WHY') {
-          sendTextMessage(event.sender.id, user.pageAccessToken, 'We are a boutique training program for college auditions. Our fresh approach focuses on cultivating true artistry through our three part teaching philosophy - Artistic voice, Craft, and Business Savvy.')
+          sendTextMessage(event.sender.id, user.pageAccessToken, 'We are a boutique training program for college auditions. Our fresh approach focuses on cultivating true artistry through our three part teaching philosophy - Artistic voice, Craft, and Business Savvy. We want to fit the business to you, not the other way around.')
           setTimeout(() => {
             let messageData = {
               "recipient":{
@@ -250,8 +250,7 @@ module.exports = (event) => {
                     "template_type":"generic",
                     "elements": [
                       {
-                        "title": "We want to fit the business to you, not the other way around.",
-                        "subtitle": "Check out our website!",
+                        "title": "Check out our website!",
                         "buttons":[
                           {
                             "type":"web_url",
@@ -333,8 +332,8 @@ module.exports = (event) => {
                       "buttons":[
                         {
                           "type":"web_url",
-                          "url": 'https://www.google.com',
-                          "title": "Schedule a private coaching",
+                          "url": 'https://www.broadwayfutureartists.com/book-online',
+                          "title": "Book Now",
                           "webview_height_ratio": "tall"
                         },
                         {
@@ -400,9 +399,9 @@ module.exports = (event) => {
                     }
                   }
                   callSendAPI(user.pageAccessToken, messageData)
-                }, 4000)
-              }, 5000)
-            }, 4000)
+                }, 3500)
+              }, 300)
+            }, 3000)
           }, 2000)
 
         }
