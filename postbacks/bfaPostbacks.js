@@ -365,7 +365,7 @@ module.exports = (event) => {
                     },
                     {
                       "title": "Skype College Prep program",
-                      "subtitle": "	Just wanna work on it? We got you.",
+                      "subtitle": "This training program can be done wherever you are! ",
                       "image_url":"https://chat-sass-messenger-uploader.herokuapp.com/static/bfa/skype.jpeg",
                       "buttons":[
                         {
@@ -384,7 +384,7 @@ module.exports = (event) => {
                     },
                     {
                       "title": "Private Coachings",
-                      "subtitle": "Just wanna work on it? We got you. We offer private singing and/or acting coachings too!",
+                      "subtitle": "Just wanna work on it? We got you.",
                       "image_url":"https://chat-sass-messenger-uploader.herokuapp.com/static/bfa/coaching.jpeg",
                       "buttons":[
                         {
