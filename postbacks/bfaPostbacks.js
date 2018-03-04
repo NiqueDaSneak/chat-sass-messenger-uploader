@@ -206,7 +206,7 @@ module.exports = (event) => {
                   "elements": [
                     {
                       "title": "Private Coachings",
-                      // "subtitle": "ALSACE, FR ‘15 REISLING",
+                      "subtitle": "Available in NYC or Skype!",
                       "buttons":[
                         {
                           "type":"web_url",
@@ -604,7 +604,7 @@ module.exports = (event) => {
                   "elements": [
                     {
                       "title": "Private Coachings",
-                      // "subtitle": "ALSACE, FR ‘15 REISLING",
+                      "subtitle": "Available in NYC or Skype!",
                       "buttons":[
                         {
                           "type":"web_url",
