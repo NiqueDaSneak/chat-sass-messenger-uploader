@@ -342,12 +342,12 @@ module.exports = (event) => {
                 "type":"template",
                 "payload":{
                   "template_type":"generic",
+                  "image_aspect_ratio": "square"
                   "elements": [
                     {
                       "title": "NYC College Prep program",
                       "subtitle": "In NYC? Let’s meet up!",
                       "image_url":"https://chat-sass-messenger-uploader.herokuapp.com/static/bfa/nyc.jpeg",
-                      "image_aspect_ratio": "square",
                       "buttons":[
                         {
                           "type":"web_url",
@@ -367,7 +367,6 @@ module.exports = (event) => {
                       "title": "Skype College Prep program",
                       "subtitle": "	Just wanna work on it? We got you.",
                       "image_url":"https://chat-sass-messenger-uploader.herokuapp.com/static/bfa/skype.jpeg",
-                      "image_aspect_ratio": "square",
                       "buttons":[
                         {
                           "type":"web_url",
@@ -386,7 +385,6 @@ module.exports = (event) => {
                     {
                       "title": "Private Coachings",
                       "subtitle": "Just wanna work on it? We got you. We offer private singing and/or acting coachings too!",
-                      "image_aspect_ratio": "square",
                       "image_url":"https://chat-sass-messenger-uploader.herokuapp.com/static/bfa/coaching.jpeg",
                       "buttons":[
                         {
