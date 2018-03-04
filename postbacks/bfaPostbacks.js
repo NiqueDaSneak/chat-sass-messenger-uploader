@@ -227,10 +227,9 @@ module.exports = (event) => {
                       "subtitle": "Are you currently a student?",
                       "buttons":[
                         {
-                          "type":"web_url",
-                          "url": 'https://www.broadwayfutureartists.com/book-online',
-                          "title":"Yes",
-                          "webview_height_ratio":"tall"
+                          "type": "postback",
+                          "title": "Yes",
+                          "payload": "PREP_YES"
                         },
                         {
                           "type": "postback",
@@ -248,42 +247,79 @@ module.exports = (event) => {
       })
     }
 
-    if (event.postback.payload === 'PREP_NO') {
+    if (event.postback.payload.split("_")[0] === 'PREP') {
       getUser().then((user) => {
-        let messageData = {
-          "recipient":{
-            "id": event.sender.id
-          },
-          "message":{
-            "attachment":{
-              "type":"template",
-              "payload":{
-                "template_type":"generic",
-                "elements": [
-                  {
-                    "title": "Make a selection:",
-                    // "subtitle": "ALSACE, FR ‘15 REISLING",
-                    "buttons":[
-                      {
-                        "type":"web_url",
-                        "url": 'https://www.broadwayfutureartists.com/extra',
-                        "title":"Apply",
-                        "webview_height_ratio":"tall"
-                      },
-                      {
-                        "type":"web_url",
-                        "url": 'https://www.broadwayfutureartists.com/services',
-                        "title":"Learn More",
-                        "webview_height_ratio":"tall"
-                      }
-                    ]
-                  }
-                ]
+        if (event.postback.payload.split("_")[1] === 'YES') {
+          let messageData = {
+            "recipient":{
+              "id": event.sender.id
+            },
+            "message":{
+              "attachment":{
+                "type":"template",
+                "payload":{
+                  "template_type":"generic",
+                  "elements": [
+                    {
+                      "title": "Make a selection:",
+                      "buttons":[
+                        {
+                          "type":"web_url",
+                          "url": 'https://www.broadwayfutureartists.com/book-online',
+                          "title":"Book Now",
+                          "webview_height_ratio":"tall"
+                        },
+                        {
+                          "type":"web_url",
+                          "url": 'https://www.broadwayfutureartists.com/services',
+                          "title":"Learn More",
+                          "webview_height_ratio":"tall"
+                        }
+                      ]
+                    }
+                  ]
+                }
               }
             }
           }
+          callSendAPI(user.pageAccessToken, messageData)
+
         }
-        callSendAPI(user.pageAccessToken, messageData)
+        if (event.postback.payload.split("_")[1] === 'NO') {
+          let messageData = {
+            "recipient":{
+              "id": event.sender.id
+            },
+            "message":{
+              "attachment":{
+                "type":"template",
+                "payload":{
+                  "template_type":"generic",
+                  "elements": [
+                    {
+                      "title": "Make a selection:",
+                      "buttons":[
+                        {
+                          "type":"web_url",
+                          "url": 'https://www.broadwayfutureartists.com/extra',
+                          "title":"Apply",
+                          "webview_height_ratio":"tall"
+                        },
+                        {
+                          "type":"web_url",
+                          "url": 'https://www.broadwayfutureartists.com/services',
+                          "title":"Learn More",
+                          "webview_height_ratio":"tall"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          }
+          callSendAPI(user.pageAccessToken, messageData)
+        }
       })
     }
 
@@ -365,7 +401,7 @@ module.exports = (event) => {
                     },
                     {
                       "title": "Skype College Prep program",
-                      "subtitle": "This training program can be done wherever you are! ",
+                      "subtitle": "This training program can be done wherever you are!",
                       "image_url":"https://chat-sass-messenger-uploader.herokuapp.com/static/bfa/skype.jpeg",
                       "buttons":[
                         {
