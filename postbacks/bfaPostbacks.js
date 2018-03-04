@@ -258,6 +258,16 @@ module.exports = (event) => {
                             "url": 'https://www.broadwayfutureartists.com/home',
                             "title": "Learn More",
                             "webview_height_ratio": "tall"
+                          },
+                          {
+                            "type":"postback",
+                            "payload": 'OFFER_LEARN',
+                            "title": "What Do We Offer",
+                          },
+                          {
+                            "type":"postback",
+                            "payload": 'WHO_LEARN',
+                            "title": "Who Are We",
                           }
                         ]
                       }
@@ -371,6 +381,16 @@ module.exports = (event) => {
                                   "url": 'https://www.broadwayfutureartists.com/faculty',
                                   "title": "Go To Site",
                                   "webview_height_ratio": "tall"
+                                },
+                                {
+                                  "type":"postback",
+                                  "payload": 'OFFER_LEARN',
+                                  "title": "What Do We Offer",
+                                },
+                                {
+                                  "type":"postback",
+                                  "payload": 'WHY_LEARN',
+                                  "title": "Why BFA",
                                 }
                               ]
                             }
