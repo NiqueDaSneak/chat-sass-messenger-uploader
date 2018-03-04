@@ -207,21 +207,38 @@ module.exports = (event) => {
                   "template_type":"generic",
                   "elements": [
                     {
-                      "title": "Tap below for the skype program or NYC:",
+                      "title": "Private Coachings",
                       // "subtitle": "ALSACE, FR ‘15 REISLING",
                       "buttons":[
                         {
                           "type":"web_url",
                           "url": 'https://www.broadwayfutureartists.com/book-online',
-                          "title":"Skype",
+                          "title":"Book Now",
                           "webview_height_ratio":"tall"
                         },
                         {
                           "type":"web_url",
-                          "url": 'https://www.broadwayfutureartists.com/book-online',
-                          "title":"NYC",
+                          "url": 'https://www.broadwayfutureartists.com/services',
+                          "title":"Learn More",
                           "webview_height_ratio":"tall"
                         }
+                      ]
+                    },
+                    {
+                      "title": "College Prep Program",
+                      "subtitle": "Are you currently a student?",
+                      "buttons":[
+                        {
+                          "type":"web_url",
+                          "url": 'https://www.broadwayfutureartists.com/book-online',
+                          "title":"Yes",
+                          "webview_height_ratio":"tall"
+                        },
+                        {
+                          "type": "postback",
+                          "title": "No",
+                          "payload": "PREP_NO"
+                        },
                       ]
                     }
                   ]
@@ -231,6 +248,45 @@ module.exports = (event) => {
           }
           callSendAPI(user.pageAccessToken, messageData)
         }, 3000)
+      })
+    }
+
+    if (event.postback.payload === 'PREP_NO') {
+      getUser().then((user) => {
+        let messageData = {
+          "recipient":{
+            "id": event.sender.id
+          },
+          "message":{
+            "attachment":{
+              "type":"template",
+              "payload":{
+                "template_type":"generic",
+                "elements": [
+                  {
+                    "title": "Make a selection:",
+                    // "subtitle": "ALSACE, FR ‘15 REISLING",
+                    "buttons":[
+                      {
+                        "type":"web_url",
+                        "url": 'https://www.broadwayfutureartists.com/extra',
+                        "title":"Apply",
+                        "webview_height_ratio":"tall"
+                      },
+                      {
+                        "type":"web_url",
+                        "url": 'https://www.broadwayfutureartists.com/services',
+                        "title":"Learn More",
+                        "webview_height_ratio":"tall"
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          }
+        }
+        callSendAPI(user.pageAccessToken, messageData)
       })
     }
 
@@ -360,7 +416,7 @@ module.exports = (event) => {
             setTimeout(() => {
               sendTextMessage(event.sender.id, user.pageAccessToken, 'After working on various projects on Broadway and on TV/film, we finally met in the OBC of War Paint.')
               setTimeout(() => {
-                sendTextMessage(event.sender.id, user.pageAccessToken, 'Through coaching each other and our Broadway friends we developed this teaching philosophy...')
+                sendTextMessage(event.sender.id, user.pageAccessToken, 'Through coaching each other and our Broadway friends we developed our teaching philosophy.')
                 setTimeout(() => {
                   let messageData = {
                     "recipient":{
@@ -373,12 +429,12 @@ module.exports = (event) => {
                           "template_type":"generic",
                           "elements": [
                             {
-                              "title": "...we can’t wait to share it with you!",
+                              "title": "We can’t wait to share it with you!",
                               "buttons":[
                                 {
                                   "type":"web_url",
                                   "url": 'https://www.broadwayfutureartists.com/faculty',
-                                  "title": "Go To Site",
+                                  "title": "Faculty Bios",
                                   "webview_height_ratio": "tall"
                                 },
                                 {
@@ -512,21 +568,37 @@ module.exports = (event) => {
                   "template_type":"generic",
                   "elements": [
                     {
-                      "title": "Tap below for the skype program or NYC:",
+                      "title": "Private Coachings",
                       // "subtitle": "ALSACE, FR ‘15 REISLING",
                       "buttons":[
                         {
                           "type":"web_url",
                           "url": 'https://www.broadwayfutureartists.com/book-online',
-                          "title":"Skype",
+                          "title":"Book Now",
                           "webview_height_ratio":"tall"
                         },
                         {
                           "type":"web_url",
-                          "url": 'https://www.broadwayfutureartists.com/book-online',
-                          "title":"NYC",
+                          "url": 'https://www.broadwayfutureartists.com/services',
+                          "title":"Learn More",
                           "webview_height_ratio":"tall"
                         }
+                      ]
+                    },
+                    {
+                      "title": "College Prep Program",
+                      "subtitle": "Are you currently a student?",
+                      "buttons":[
+                        {
+                          "type": "postback",
+                          "title": "Yes",
+                          "payload": "PREP_YES"
+                        },
+                        {
+                          "type": "postback",
+                          "title": "No",
+                          "payload": "PREP_NO"
+                        },
                       ]
                     }
                   ]
