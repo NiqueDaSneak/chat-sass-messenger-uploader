@@ -568,10 +568,11 @@ module.exports = (event) => {
               "type":"template",
               "payload":{
                 "template_type":"generic",
+                "image_aspect_ratio": "square",
                 "elements": [
                   {
                     "title": "Tap below to apply:",
-                    // "subtitle": "ALSACE, FR ‘15 REISLING",
+                    "image_url":"https://chat-sass-messenger-uploader.herokuapp.com/static/bfa/logo.jpg",
                     "buttons":[
                       {
                         "type":"web_url",
