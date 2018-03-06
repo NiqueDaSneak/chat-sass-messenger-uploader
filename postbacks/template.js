@@ -90,76 +90,78 @@ module.exports = (event) => {
 
     }
 
-}
-
-function sendTextMessage(recipientId, accessToken, textMsg) {
-  var messageData = {
-    "recipient": {
-      "id": recipientId
-    },
-    "message": {
-      "text": textMsg
-    }
   }
 
-  callSendAPI(accessToken, messageData)
-}
-
-function callSendAPI(accessToken, messageData) {
-  request({
-    "uri": 'https://graph.facebook.com/v2.6/me/messages',
-    "qs": {
-      "access_token": accessToken
-    },
-    "method": 'POST',
-    "json": messageData
-
-  }, function(error, response, body) {
-    if (!error && response.statusCode == 200) {
-      var recipientId = body.recipient_id;
-      var messageId = body.message_id;
-
-      console.log("Successfully sent generic message with id %s to recipient %s", messageId, recipientId);
-    } else {
-      console.error("Unable to send message.")
-      console.error('response: ' + JSON.stringify(response))
-      console.error('error: ' + JSON.stringify(error))
+  function sendTextMessage(recipientId, accessToken, textMsg) {
+    var messageData = {
+      "recipient": {
+        "id": recipientId
+      },
+      "message": {
+        "text": textMsg
+      }
     }
-  })
-}
 
-function sendImageMessage(recipientId, accessToken,  url) {
+    callSendAPI(accessToken, messageData)
+  }
 
-  var messageData = {
-    "recipient": {
-      "id": recipientId
-    },
-    "message": {
-      "attachment": {
-        "type": "image",
-        "payload": {
-          "url": url
+  function callSendAPI(accessToken, messageData) {
+    request({
+      "uri": 'https://graph.facebook.com/v2.6/me/messages',
+      "qs": {
+        "access_token": accessToken
+      },
+      "method": 'POST',
+      "json": messageData
+
+    }, function(error, response, body) {
+      if (!error && response.statusCode == 200) {
+        var recipientId = body.recipient_id;
+        var messageId = body.message_id;
+
+        console.log("Successfully sent generic message with id %s to recipient %s", messageId, recipientId);
+      } else {
+        console.error("Unable to send message.")
+        console.error('response: ' + JSON.stringify(response))
+        console.error('error: ' + JSON.stringify(error))
+      }
+    })
+  }
+
+  function sendImageMessage(recipientId, accessToken,  url) {
+
+    var messageData = {
+      "recipient": {
+        "id": recipientId
+      },
+      "message": {
+        "attachment": {
+          "type": "image",
+          "payload": {
+            "url": url
+          }
         }
       }
     }
+    callSendAPI(accessToken, messageData)
   }
-  callSendAPI(accessToken, messageData)
-}
 
-function sendVideoMessage(recipientId, accessToken, url) {
+  function sendVideoMessage(recipientId, accessToken, url) {
 
-  var messageData = {
-    "recipient": {
-      "id": recipientId
-    },
-    "message": {
-      "attachment": {
-        "type": "video",
-        "payload": {
-          "url": url
+    var messageData = {
+      "recipient": {
+        "id": recipientId
+      },
+      "message": {
+        "attachment": {
+          "type": "video",
+          "payload": {
+            "url": url
+          }
         }
       }
     }
+    callSendAPI(accessToken, messageData)
   }
-  callSendAPI(accessToken, messageData)
+
 }
