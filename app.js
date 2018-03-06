@@ -64,6 +64,11 @@ app.use('/sartrerouter', sartreRouter)
 var bfaRouter = require('./router/bfaRouter.js')
 app.use('/bfarouter', bfaRouter)
 
+var jewelSchoolRouter = require('./router/jewelSchoolRouter.js')
+app.use('/jewelschoolrouter', jewelSchoolRouter)
+
+1025868904236964
+
 app.use('/data', express.static(path.join(__dirname, 'data')))
 
 
@@ -134,8 +139,9 @@ app.post('/', (req, res) => {
           return res.redirect(307, '/bfarouter')
         }
 
-
-
+        if (event.recipient.id === '1025868904236964') {
+          return res.redirect(307, '/jewelschoolrouter')
+        }
 
         if (event.message) {
 

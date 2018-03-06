@@ -70,7 +70,13 @@ module.exports = (event) => {
   }
 
   if (event.message) {
-    if (event.message.quick_reply.payload === '') {}
+    if (event.message.text) {
+      getUser().then((user) => {
+        sendTextMessage(event.sender.id, user.pageAccessToken, 'Thanks for your message, we will get back to your shortly!')
+      })
+    } else {
+      if (event.message.quick_reply.payload === '') {}
+    }
   }
 
   if (event.postback) {
