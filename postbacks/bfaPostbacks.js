@@ -508,98 +508,97 @@ module.exports = (event) => {
       getUser().then((user) => {
         sendTextMessage(event.sender.id, user.pageAccessToken, 'Thanks for your message, we will get back to your shortly!')
       })
-    }
-
-    if (event.message.quick_reply.payload === 'LEARN') {
-      getUser().then((user) => {
-        let messageData = {
-          "recipient":{
-            "id": event.sender.id
-          },
-          "message":{
-            "attachment":{
-              "type":"template",
-              "payload":{
-                "template_type":"generic",
-                "elements": [
-                  {
-                    "title": "Why BFA?",
-                    "subtitle": "Here is some suplementary copy",
-                    "buttons":[
-                      {
-                        "type": "postback",
-                        "payload": "WHY_LEARN",
-                        "title":"Learn More"
-                      }
-                    ]
-                  },
-                  {
-                    "title": "What Do We Offer?",
-                    "subtitle": "Here is some suplementary copy",
-                    "buttons":[
-                      {
-                        "type": "postback",
-                        "payload": "OFFER_LEARN",
-                        "title":"Learn More"
-                      }
-                    ]
-                  },
-                  {
-                    "title": "Who We Are?",
-                    "subtitle": "Here is some suplementary copy",
-                    "buttons":[
-                      {
-                        "type": "postback",
-                        "payload": "WHO_LEARN",
-                        "title":"Learn More"
-                      }
-                    ]
-                  },
-                ]
+    } else {
+      if (event.message.quick_reply.payload === 'LEARN') {
+        getUser().then((user) => {
+          let messageData = {
+            "recipient":{
+              "id": event.sender.id
+            },
+            "message":{
+              "attachment":{
+                "type":"template",
+                "payload":{
+                  "template_type":"generic",
+                  "elements": [
+                    {
+                      "title": "Why BFA?",
+                      "subtitle": "Here is some suplementary copy",
+                      "buttons":[
+                        {
+                          "type": "postback",
+                          "payload": "WHY_LEARN",
+                          "title":"Learn More"
+                        }
+                      ]
+                    },
+                    {
+                      "title": "What Do We Offer?",
+                      "subtitle": "Here is some suplementary copy",
+                      "buttons":[
+                        {
+                          "type": "postback",
+                          "payload": "OFFER_LEARN",
+                          "title":"Learn More"
+                        }
+                      ]
+                    },
+                    {
+                      "title": "Who We Are?",
+                      "subtitle": "Here is some suplementary copy",
+                      "buttons":[
+                        {
+                          "type": "postback",
+                          "payload": "WHO_LEARN",
+                          "title":"Learn More"
+                        }
+                      ]
+                    },
+                  ]
+                }
               }
             }
           }
-        }
-        callSendAPI(user.pageAccessToken, messageData)
-      })
-    }
+          callSendAPI(user.pageAccessToken, messageData)
+        })
+      }
 
-    if (event.message.quick_reply.payload === 'APPLY') {
-      getUser().then((user) => {
-        let messageData = {
-          "recipient":{
-            "id": event.sender.id
-          },
-          "message":{
-            "attachment":{
-              "type":"template",
-              "payload":{
-                "template_type":"generic",
-                "image_aspect_ratio": "square",
-                "elements": [
-                  {
-                    "title": "Tap below to apply:",
-                    "image_url":"https://chat-sass-messenger-uploader.herokuapp.com/static/bfa/logo.jpg",
-                    "buttons":[
-                      {
-                        "type":"web_url",
-                        "url": 'https://www.broadwayfutureartists.com/extra',
-                        "title":"Apply Now",
-                        "webview_height_ratio":"tall"
-                      }
-                    ]
-                  }
-                ]
+      if (event.message.quick_reply.payload === 'APPLY') {
+        getUser().then((user) => {
+          let messageData = {
+            "recipient":{
+              "id": event.sender.id
+            },
+            "message":{
+              "attachment":{
+                "type":"template",
+                "payload":{
+                  "template_type":"generic",
+                  "image_aspect_ratio": "square",
+                  "elements": [
+                    {
+                      "title": "Tap below to apply:",
+                      "image_url":"https://chat-sass-messenger-uploader.herokuapp.com/static/bfa/logo.jpg",
+                      "buttons":[
+                        {
+                          "type":"web_url",
+                          "url": 'https://www.broadwayfutureartists.com/extra',
+                          "title":"Apply Now",
+                          "webview_height_ratio":"tall"
+                        }
+                      ]
+                    }
+                  ]
+                }
               }
             }
           }
-        }
-        callSendAPI(user.pageAccessToken, messageData)
-      })
-    }
+          callSendAPI(user.pageAccessToken, messageData)
+        })
+      }
 
-    if (event.message.quick_reply.payload === 'BOOK') {
-      getUser().then((user) => {
+      if (event.message.quick_reply.payload === 'BOOK') {
+        getUser().then((user) => {
           let messageData = {
             "recipient":{
               "id": event.sender.id
@@ -650,7 +649,8 @@ module.exports = (event) => {
             }
           }
           callSendAPI(user.pageAccessToken, messageData)
-      })
+        })
+      }
     }
   }
 
