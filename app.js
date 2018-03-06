@@ -67,7 +67,8 @@ app.use('/bfarouter', bfaRouter)
 var jewelSchoolRouter = require('./router/jewelSchoolRouter.js')
 app.use('/jewelschoolrouter', jewelSchoolRouter)
 
-1025868904236964
+var rachelForKentuckyRouter = require('./router/rachelForKentuckyRouter.js')
+app.use('/rachelforkentuckyrouter', rachelForKentuckyRouter)
 
 app.use('/data', express.static(path.join(__dirname, 'data')))
 
