@@ -99,7 +99,6 @@ module.exports = (event) => {
 
   if (event.message) {
     if (event.message.quick_reply) {
-
         if (event.message.quick_reply.payload === 'DISCOVER') {
           getUser().then((user) => {
             var messageData = {
@@ -706,6 +705,73 @@ module.exports = (event) => {
         }, 1500)
       })
     }
+
+    if (event.postback.payload === 'HOST') {
+      getUser().then((user) => {
+        var messageData = {
+          "recipient":{
+            "id": event.sender.id
+          },
+          "message":{
+            "attachment":{
+              "type":"template",
+              "payload":{
+                "template_type":"generic",
+                "elements": [
+                  {
+                    "title": "Susan Thomas",
+                    "image_url": "",
+                    "buttons":[
+                      {
+                        "type":"postback",
+                        "title":"Show Videos",
+                        "payload": "HOST_SUSAN"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Gail Deluca",
+                    "image_url": "",
+                    "buttons":[
+                      {
+                        "type":"postback",
+                        "title":"Show Videos",
+                        "payload": "HOST_GAIL"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Melissa Cable",
+                    "image_url": "",
+                    "buttons":[
+                      {
+                        "type":"postback",
+                        "title":"Show Videos",
+                        "payload": "HOST_MELISSA"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Wyatt White",
+                    "image_url": "",
+                    "buttons":[
+                      {
+                        "type":"postback",
+                        "title":"Show Videos",
+                        "payload": "HOST_WYATT"
+                      }
+                    ]
+                  }
+
+                ]
+              }
+            }
+          }
+        }
+        callSendAPI(user.pageAccessToken, messageData)
+      })
+    }
+
 
     if (event.postback.payload === "") {
 
