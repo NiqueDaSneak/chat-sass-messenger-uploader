@@ -57,35 +57,33 @@ module.exports = (event) => {
 
             newMember.save((err, member) => {
               if (err) return console.error(err)
-              sendTextMessage(event.sender.id, user.pageAccessToken, 'Welcome to Jewel School!')
-              setTimeout(() => {
-                var messageData = {
-                  "recipient":{
-                    "id": event.sender.id
-                  },
-                  "message":{
-                    "text": "How can we help!",
-                    "quick_replies":[
-                      {
-                        "content_type":"text",
-                        "title":"Discover Products",
-                        "payload":"DISCOVER"
-                      },
-                      {
-                        "content_type":"text",
-                        "title":"How-Tos",
-                        "payload":"HOWTO"
-                      },
-                      {
-                        "content_type": "text",
-                        "title": "Search By Host",
-                        "payload": "HOST"
-                      }
-                    ]
-                  }
+              sendTextMessage(event.sender.id, user.pageAccessToken, 'Welcome to Jewel School! Use the menu below to discover products, see how to videos, or search by your favorite hosts!')
+              var messageData = {
+                "recipient":{
+                  "id": event.sender.id
+                },
+                "message":{
+                  "text": "How can we help!",
+                  "quick_replies":[
+                    {
+                      "content_type":"text",
+                      "title":"Discover Products",
+                      "payload":"DISCOVER"
+                    },
+                    {
+                      "content_type":"text",
+                      "title":"How-Tos",
+                      "payload":"HOWTO"
+                    },
+                    {
+                      "content_type": "text",
+                      "title": "Search By Host",
+                      "payload": "HOST"
+                    }
+                  ]
                 }
-                callSendAPI(user.pageAccessToken, messageData)
-              }, 1000)
+              }
+              callSendAPI(user.pageAccessToken, messageData)
               resolve()
             })
           })
