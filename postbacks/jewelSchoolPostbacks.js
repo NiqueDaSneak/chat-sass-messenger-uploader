@@ -97,225 +97,6 @@ module.exports = (event) => {
     })
   }
 
-  if (event.message) {
-    if (event.message.quick_reply.payload === 'DISCOVER') {
-      getUser().then((user) => {
-        var messageData = {
-          "recipient":{
-            "id": event.sender.id
-          },
-          "message":{
-            "attachment":{
-              "type":"template",
-              "payload":{
-                "template_type":"generic",
-                "elements": [
-                  {
-                    "title": "Kits",
-                    "buttons":[
-                      {
-                        "type":"web_url",
-                        "url": "google.com",
-                        "title":"Shop Now",
-                        "webview_height_ratio":"tall"
-                      }
-                    ]
-                  },
-                  {
-                    "title": "Beads",
-                    "buttons":[
-                      {
-                        "type":"web_url",
-                        "url": "google.com",
-                        "title":"Shop Now",
-                        "webview_height_ratio":"tall"
-                      }
-                    ]
-                  },
-                  {
-                    "title": "Education DVDs",
-                    "buttons":[
-                      {
-                        "type":"web_url",
-                        "url": "google.com",
-                        "title":"Shop Now",
-                        "webview_height_ratio":"tall"
-                      }
-                    ]
-                  },
-                  {
-                    "title": "Tools",
-                    "buttons":[
-                      {
-                        "type":"web_url",
-                        "url": "google.com",
-                        "title":"Shop Now",
-                        "webview_height_ratio":"tall"
-                      }
-                    ]
-                  }
-                ]
-              }
-            }
-          }
-        }
-        callSendAPI(user.pageAccessToken, messageData)
-      })
-    }
-
-    if (event.message.quick_reply.payload === 'HOWTO') {
-      getUser().then((user) => {
-        var messageData = {
-          "recipient":{
-            "id": event.sender.id
-          },
-          "message":{
-            "attachment":{
-              "type":"template",
-              "payload":{
-                "template_type":"generic",
-                "elements": [
-                  {
-                    "title": "Here are our featured how-tos. Visit our Youtube Channel for more!",
-                    "buttons":[
-                      {
-                        "type":"web_url",
-                        "url": "google.com",
-                        "title":"Go To Channel",
-                        "webview_height_ratio":"tall"
-                      }
-                    ]
-                  }
-                ]
-              }
-            }
-          }
-        }
-        callSendAPI(user.pageAccessToken, messageData)
-        setTimeout(() => {
-          var messageData = {
-            "recipient":{
-              "id": event.sender.id
-            },
-            "message":{
-              "attachment":{
-                "type":"template",
-                "payload":{
-                  "template_type":"generic",
-                  "elements": [
-                    {
-                      "title": "DIY Tip- How To Add Thread To A Seed Beading Project",
-                      "image_url": "https://img.youtube.com/vi/YjD64nlyYuQ/hqdefault.jpg",
-                      "buttons":[
-                        {
-                          "type":"web_url",
-                          "url": "https://www.youtube.com/watch?v=YjD64nlyYuQ",
-                          "title":"Watch",
-                          "webview_height_ratio":"compact"
-                        }
-                      ]
-                    },
-                    {
-                      "title": "How to Make a Polymer Clay Rose - Tutorial",
-                      "image_url": "https://img.youtube.com/vi/mRLIxgxriTY/hqdefault.jpg",
-                      "buttons":[
-                        {
-                          "type":"web_url",
-                          "url": "https://www.youtube.com/watch?v=mRLIxgxriTY",
-                          "title":"Watch",
-                          "webview_height_ratio":"compact"
-                        }
-                      ]
-                    },
-                    {
-                      "title": "How to Use Ice Resin - DIY Bezel Pendant",
-                      "image_url": "https://img.youtube.com/vi/yREIw7HmH9Y/hqdefault.jpg",
-                      "buttons":[
-                        {
-                          "type":"web_url",
-                          "url": "https://www.youtube.com/watch?v=yREIw7HmH9Y",
-                          "title":"Watch",
-                          "webview_height_ratio":"compact"
-                        }
-                      ]
-                    }
-                  ]
-                }
-              }
-            }
-          }
-          callSendAPI(user.pageAccessToken, messageData)
-        }, 1500)
-      })
-    }
-
-    if (event.message.quick_reply.payload === 'HOST') {
-      getUser().then((user) => {
-        var messageData = {
-          "recipient":{
-            "id": event.sender.id
-          },
-          "message":{
-            "attachment":{
-              "type":"template",
-              "payload":{
-                "template_type":"generic",
-                "elements": [
-                  {
-                    "title": "Susan Thomas",
-                    "image_url": "",
-                    "buttons":[
-                      {
-                        "type":"postback",
-                        "title":"Show Videos",
-                        "payload": "HOST_SUSAN"
-                      }
-                    ]
-                  },
-                  {
-                    "title": "Gail Deluca",
-                    "image_url": "",
-                    "buttons":[
-                      {
-                        "type":"postback",
-                        "title":"Show Videos",
-                        "payload": "HOST_GAIL"
-                      }
-                    ]
-                  },
-                  {
-                    "title": "Melissa Cable",
-                    "image_url": "",
-                    "buttons":[
-                      {
-                        "type":"postback",
-                        "title":"Show Videos",
-                        "payload": "HOST_MELISSA"
-                      }
-                    ]
-                  },
-                  {
-                    "title": "Wyatt White",
-                    "image_url": "",
-                    "buttons":[
-                      {
-                        "type":"postback",
-                        "title":"Show Videos",
-                        "payload": "HOST_WYATT"
-                      }
-                    ]
-                  }
-
-                ]
-              }
-            }
-          }
-        }
-        callSendAPI(user.pageAccessToken, messageData)
-      })
-    }
-  }
-
   if (event.postback) {
     if (event.postback.payload === "GET_STARTED_PAYLOAD") {
       getUser().then((user) => {
@@ -766,11 +547,224 @@ module.exports = (event) => {
       })
     }
 
-
-    if (event.postback.payload === "") {
-
+    if (event.postback.payload === "") {}
+  } else {
+    if (event.message.quick_reply.payload === 'DISCOVER') {
+      getUser().then((user) => {
+        var messageData = {
+          "recipient":{
+            "id": event.sender.id
+          },
+          "message":{
+            "attachment":{
+              "type":"template",
+              "payload":{
+                "template_type":"generic",
+                "elements": [
+                  {
+                    "title": "Kits",
+                    "buttons":[
+                      {
+                        "type":"web_url",
+                        "url": "google.com",
+                        "title":"Shop Now",
+                        "webview_height_ratio":"tall"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Beads",
+                    "buttons":[
+                      {
+                        "type":"web_url",
+                        "url": "google.com",
+                        "title":"Shop Now",
+                        "webview_height_ratio":"tall"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Education DVDs",
+                    "buttons":[
+                      {
+                        "type":"web_url",
+                        "url": "google.com",
+                        "title":"Shop Now",
+                        "webview_height_ratio":"tall"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Tools",
+                    "buttons":[
+                      {
+                        "type":"web_url",
+                        "url": "google.com",
+                        "title":"Shop Now",
+                        "webview_height_ratio":"tall"
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          }
+        }
+        callSendAPI(user.pageAccessToken, messageData)
+      })
     }
 
+    if (event.message.quick_reply.payload === 'HOWTO') {
+      getUser().then((user) => {
+        var messageData = {
+          "recipient":{
+            "id": event.sender.id
+          },
+          "message":{
+            "attachment":{
+              "type":"template",
+              "payload":{
+                "template_type":"generic",
+                "elements": [
+                  {
+                    "title": "Here are our featured how-tos. Visit our Youtube Channel for more!",
+                    "buttons":[
+                      {
+                        "type":"web_url",
+                        "url": "google.com",
+                        "title":"Go To Channel",
+                        "webview_height_ratio":"tall"
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          }
+        }
+        callSendAPI(user.pageAccessToken, messageData)
+        setTimeout(() => {
+          var messageData = {
+            "recipient":{
+              "id": event.sender.id
+            },
+            "message":{
+              "attachment":{
+                "type":"template",
+                "payload":{
+                  "template_type":"generic",
+                  "elements": [
+                    {
+                      "title": "DIY Tip- How To Add Thread To A Seed Beading Project",
+                      "image_url": "https://img.youtube.com/vi/YjD64nlyYuQ/hqdefault.jpg",
+                      "buttons":[
+                        {
+                          "type":"web_url",
+                          "url": "https://www.youtube.com/watch?v=YjD64nlyYuQ",
+                          "title":"Watch",
+                          "webview_height_ratio":"compact"
+                        }
+                      ]
+                    },
+                    {
+                      "title": "How to Make a Polymer Clay Rose - Tutorial",
+                      "image_url": "https://img.youtube.com/vi/mRLIxgxriTY/hqdefault.jpg",
+                      "buttons":[
+                        {
+                          "type":"web_url",
+                          "url": "https://www.youtube.com/watch?v=mRLIxgxriTY",
+                          "title":"Watch",
+                          "webview_height_ratio":"compact"
+                        }
+                      ]
+                    },
+                    {
+                      "title": "How to Use Ice Resin - DIY Bezel Pendant",
+                      "image_url": "https://img.youtube.com/vi/yREIw7HmH9Y/hqdefault.jpg",
+                      "buttons":[
+                        {
+                          "type":"web_url",
+                          "url": "https://www.youtube.com/watch?v=yREIw7HmH9Y",
+                          "title":"Watch",
+                          "webview_height_ratio":"compact"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          }
+          callSendAPI(user.pageAccessToken, messageData)
+        }, 1500)
+      })
+    }
+
+    if (event.message.quick_reply.payload === 'HOST') {
+      getUser().then((user) => {
+        var messageData = {
+          "recipient":{
+            "id": event.sender.id
+          },
+          "message":{
+            "attachment":{
+              "type":"template",
+              "payload":{
+                "template_type":"generic",
+                "elements": [
+                  {
+                    "title": "Susan Thomas",
+                    "image_url": "",
+                    "buttons":[
+                      {
+                        "type":"postback",
+                        "title":"Show Videos",
+                        "payload": "HOST_SUSAN"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Gail Deluca",
+                    "image_url": "",
+                    "buttons":[
+                      {
+                        "type":"postback",
+                        "title":"Show Videos",
+                        "payload": "HOST_GAIL"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Melissa Cable",
+                    "image_url": "",
+                    "buttons":[
+                      {
+                        "type":"postback",
+                        "title":"Show Videos",
+                        "payload": "HOST_MELISSA"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Wyatt White",
+                    "image_url": "",
+                    "buttons":[
+                      {
+                        "type":"postback",
+                        "title":"Show Videos",
+                        "payload": "HOST_WYATT"
+                      }
+                    ]
+                  }
+
+                ]
+              }
+            }
+          }
+        }
+        callSendAPI(user.pageAccessToken, messageData)
+      })
+    }
   }
 
   function sendTextMessage(recipientId, accessToken, textMsg) {
