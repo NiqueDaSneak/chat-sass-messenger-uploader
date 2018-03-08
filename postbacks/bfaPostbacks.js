@@ -116,9 +116,11 @@ module.exports = (event) => {
               "type":"template",
               "payload":{
                 "template_type":"generic",
+                "image_aspect_ratio": "square",
                 "elements": [
                   {
                     "title": "Why BFA?",
+                    "image_url":"https://chat-sass-messenger-uploader.herokuapp.com/static/bfa/logo.jpg",
                     // "subtitle": "Here is some suplementary copy",
                     "buttons":[
                       {
@@ -130,6 +132,7 @@ module.exports = (event) => {
                   },
                   {
                     "title": "What Do We Offer?",
+                    "image_url":"https://chat-sass-messenger-uploader.herokuapp.com/static/bfa/logo.jpg",
                     // "subtitle": "Here is some suplementary copy",
                     "buttons":[
                       {
@@ -141,6 +144,7 @@ module.exports = (event) => {
                   },
                   {
                     "title": "Who We Are?",
+                    "image_url":"https://chat-sass-messenger-uploader.herokuapp.com/static/bfa/logo.jpg",
                     // "subtitle": "Here is some suplementary copy",
                     "buttons":[
                       {
@@ -453,6 +457,7 @@ module.exports = (event) => {
             sendTextMessage(event.sender.id, user.pageAccessToken, 'We’re young, NYC actors passionate about cultivating Broadway’s future artists 😜')
             setTimeout(() => {
               sendTextMessage(event.sender.id, user.pageAccessToken, 'After working on various projects on Broadway and on TV/film, we finally met in the OBC of War Paint.')
+              sendImageMessage(event.sender.id, user.pageAccessToken, 'https://chat-sass-messenger-uploader.herokuapp.com/static/bfa/IMG_0289.jpeg')
               setTimeout(() => {
                 sendTextMessage(event.sender.id, user.pageAccessToken, 'Through coaching each other and our Broadway friends we developed our teaching philosophy.')
                 setTimeout(() => {
@@ -520,10 +525,11 @@ module.exports = (event) => {
                 "type":"template",
                 "payload":{
                   "template_type":"generic",
+                  "image_aspect_ratio": "square",
                   "elements": [
                     {
                       "title": "Why BFA?",
-                      "subtitle": "Here is some suplementary copy",
+                      "image_url":"https://chat-sass-messenger-uploader.herokuapp.com/static/bfa/logo.jpg",
                       "buttons":[
                         {
                           "type": "postback",
@@ -534,7 +540,7 @@ module.exports = (event) => {
                     },
                     {
                       "title": "What Do We Offer?",
-                      "subtitle": "Here is some suplementary copy",
+                      "image_url":"https://chat-sass-messenger-uploader.herokuapp.com/static/bfa/whatdoweoffer.jpeg",
                       "buttons":[
                         {
                           "type": "postback",
@@ -545,7 +551,7 @@ module.exports = (event) => {
                     },
                     {
                       "title": "Who We Are?",
-                      "subtitle": "Here is some suplementary copy",
+                      "image_url":"https://chat-sass-messenger-uploader.herokuapp.com/static/bfa/IMG_0074.jpg",
                       "buttons":[
                         {
                           "type": "postback",
