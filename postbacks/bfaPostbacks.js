@@ -132,7 +132,7 @@ module.exports = (event) => {
                   },
                   {
                     "title": "What Do We Offer?",
-                    "image_url":"https://chat-sass-messenger-uploader.herokuapp.com/static/bfa/logo.jpg",
+                    "image_url":"https://chat-sass-messenger-uploader.herokuapp.com/static/bfa/whatdoweoffer.jpeg",
                     // "subtitle": "Here is some suplementary copy",
                     "buttons":[
                       {
@@ -144,7 +144,7 @@ module.exports = (event) => {
                   },
                   {
                     "title": "Who We Are?",
-                    "image_url":"https://chat-sass-messenger-uploader.herokuapp.com/static/bfa/logo.jpg",
+                    "image_url":"https://chat-sass-messenger-uploader.herokuapp.com/static/bfa/IMG_0074.jpg",
                     // "subtitle": "Here is some suplementary copy",
                     "buttons":[
                       {
