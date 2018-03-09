@@ -328,7 +328,7 @@ module.exports = (event) => {
                   },
                   {
                     "title": "Beads",
-                    "url": "https://i5.jtv.com/loadimage.aspx?btype=.jpg&cgid=3354030&img=1&h=300&w=400",
+                    "image_url": "https://i5.jtv.com/loadimage.aspx?btype=.jpg&cgid=3354030&img=1&h=300&w=400",
                     "buttons":[
                       {
                         "type":"web_url",
@@ -340,7 +340,7 @@ module.exports = (event) => {
                   },
                   {
                     "title": "Education DVDs",
-                    "url": "https://i5.jtv.com/loadimage.aspx?btype=.jpg&cgid=3392436&img=1&h=300&w=400",
+                    "image_url": "https://i5.jtv.com/loadimage.aspx?btype=.jpg&cgid=3392436&img=1&h=300&w=400",
                     "buttons":[
                       {
                         "type":"web_url",
@@ -352,7 +352,7 @@ module.exports = (event) => {
                   },
                   {
                     "title": "Tools",
-                    "url": "https://i5.jtv.com/loadimage.aspx?btype=.jpg&cgid=3348471&img=1&h=300&w=400",
+                    "image_url": "https://i5.jtv.com/loadimage.aspx?btype=.jpg&cgid=3348471&img=1&h=300&w=400",
                     "buttons":[
                       {
                         "type":"web_url",
