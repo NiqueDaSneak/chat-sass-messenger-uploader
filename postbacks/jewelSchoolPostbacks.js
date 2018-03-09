@@ -316,10 +316,11 @@ module.exports = (event) => {
                 "elements": [
                   {
                     "title": "Kits",
+                    "image_url": "https://i5.jtv.com/loadimage.aspx?btype=.jpg&cgid=3401904&img=1&h=300&w=400",
                     "buttons":[
                       {
                         "type":"web_url",
-                        "url": "google.com",
+                        "url": "https://www.jtv.com/jewelry-making?prefn1=A_TYPE_ID&prefv1=Jewelry%20Making%20Kit&sz=12",
                         "title":"Shop Now",
                         "webview_height_ratio":"tall"
                       }
@@ -327,10 +328,11 @@ module.exports = (event) => {
                   },
                   {
                     "title": "Beads",
+                    "url": "https://i5.jtv.com/loadimage.aspx?btype=.jpg&cgid=3354030&img=1&h=300&w=400",
                     "buttons":[
                       {
                         "type":"web_url",
-                        "url": "google.com",
+                        "url": "https://www.jtv.com/jewelry-making?prefn1=A_TYPE_ID&prefv1=Bead%20Strand&sz=12",
                         "title":"Shop Now",
                         "webview_height_ratio":"tall"
                       }
@@ -338,10 +340,11 @@ module.exports = (event) => {
                   },
                   {
                     "title": "Education DVDs",
+                    "url": "https://i5.jtv.com/loadimage.aspx?btype=.jpg&cgid=3392436&img=1&h=300&w=400",
                     "buttons":[
                       {
                         "type":"web_url",
-                        "url": "google.com",
+                        "url": "https://www.jtv.com/jewelry-making/jewelry-making-education",
                         "title":"Shop Now",
                         "webview_height_ratio":"tall"
                       }
@@ -349,10 +352,11 @@ module.exports = (event) => {
                   },
                   {
                     "title": "Tools",
+                    "url": "https://i5.jtv.com/loadimage.aspx?btype=.jpg&cgid=3348471&img=1&h=300&w=400",
                     "buttons":[
                       {
                         "type":"web_url",
-                        "url": "google.com",
+                        "url": "https://www.jtv.com/jewelry-making/jewelry-making-tools",
                         "title":"Shop Now",
                         "webview_height_ratio":"tall"
                       }
@@ -384,7 +388,7 @@ module.exports = (event) => {
                     "buttons":[
                       {
                         "type":"web_url",
-                        "url": "google.com",
+                        "url": "https://www.youtube.com/user/jewelrytelevision/videos",
                         "title":"Go To Channel",
                         "webview_height_ratio":"tall"
                       }
