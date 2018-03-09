@@ -472,7 +472,7 @@ module.exports = (event) => {
                 "elements": [
                   {
                     "title": "Susan Thomas",
-                    "image_url": "https://img.youtube.com/vi/az76i0ZH77Q/hqdefault.jpg",
+                    "image_url": "https://img.youtube.com/vi/qj15oQt46fM/hqdefault.jpg",
                     "buttons":[
                       {
                         "type":"postback",
@@ -494,7 +494,7 @@ module.exports = (event) => {
                   },
                   {
                     "title": "Melissa Cable",
-                    "image_url": "https://img.youtube.com/vi/KOTo4slIBv8/hqdefault.jpg",
+                    "image_url": "https://img.youtube.com/vi/gY68yfBmD24/hqdefault.jpg",
                     "buttons":[
                       {
                         "type":"postback",
@@ -505,7 +505,7 @@ module.exports = (event) => {
                   },
                   {
                     "title": "Wyatt White",
-                    "image_url": "https://img.youtube.com/vi/s38IemGAXjY/hqdefault.jpg",
+                    "image_url": "https://img.youtube.com/vi/J4ppl_e3gLg/hqdefault.jpg",
                     "buttons":[
                       {
                         "type":"postback",
