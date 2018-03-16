@@ -524,6 +524,7 @@ module.exports = (event) => {
       })
     }
 
+
     if (event.postback.payload === "") {}
   } else {
   //   if (event.message.quick_reply.payload === 'DISCOVER') {
