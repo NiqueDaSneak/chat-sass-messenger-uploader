@@ -67,19 +67,30 @@ module.exports = (event) => {
                       "id": event.sender.id
                     },
                     "message":{
-                      "text": "Interested in exclusive content and deals during the Winter Olympics?",
-                      "quick_replies":[
-                        {
-                          "content_type":"text",
-                          "title":"Not Interested",
-                          "payload":"ENROLL_NO"
-                        },
-                        {
-                          "content_type":"text",
-                          "title":"Sure",
-                          "payload":"ENROLL_YES"
+                      "attachment":{
+                        "type":"template",
+                        "payload":{
+                          "template_type":"generic",
+                          "elements":[
+                            {
+                              "title":"Shop best deals? Or by product",
+                              "buttons":[
+                                {
+                                  "type":"web_url",
+                                  "title":"Best Deals",
+                                  "url": "https://utahskis.com/deals",
+                                  "webview_height_ratio":"tall"
+                                },
+                                {
+                                  "type":"postback",
+                                  "title":"Search Products",
+                                  "payload":"SHOP"
+                                }
+                              ]
+                            }
+                          ]
                         }
-                      ]
+                      }
                     }
                   }
                   callSendAPI(user.pageAccessToken, messageData)
@@ -493,9 +504,10 @@ module.exports = (event) => {
                         "image_url": 'https://chat-sass-messenger-uploader.herokuapp.com/static/utah/first-filter/skis.png',
                         "buttons":[
                           {
-                            "type":"postback",
-                            "title":"Shop",
-                            "payload":"CATS_SKI_" + gender
+                            "type":"web_url",
+                            "title":"Shop Ski Gear",
+                            "url": "https://utahskis.com/" + gender + "/ski-gear.html",
+                            "webview_height_ratio":"tall"
                           }
                         ]
                       },
@@ -504,9 +516,10 @@ module.exports = (event) => {
                         "image_url": 'https://chat-sass-messenger-uploader.herokuapp.com/static/utah/first-filter/snow.png',
                         "buttons":[
                           {
-                            "type":"postback",
-                            "title":"Shop",
-                            "payload":"CATS_SNOW_" + gender
+                            "type":"web_url",
+                            "title":"Shop Snowboard Gear",
+                            "url": "https://utahskis.com/" + gender + "/snowboard-gear.html",
+                            "webview_height_ratio":"tall"
                           }
                         ]
                       },
@@ -515,9 +528,10 @@ module.exports = (event) => {
                         "image_url": 'https://chat-sass-messenger-uploader.herokuapp.com/static/utah/first-filter/jacket.png',
                         "buttons":[
                           {
-                            "type":"postback",
-                            "title":"Shop",
-                            "payload":"CATS_OUTER_" + gender
+                            "type":"web_url",
+                            "title":"Shop Outerwear",
+                            "url": "https://utahskis.com/" + gender + "/outerwear.html",
+                            "webview_height_ratio":"tall"
                           }
                         ]
                       },
@@ -526,9 +540,10 @@ module.exports = (event) => {
                         "image_url": 'https://chat-sass-messenger-uploader.herokuapp.com/static/utah/first-filter/cloth.png',
                         "buttons":[
                           {
-                            "type":"postback",
-                            "title":"Shop",
-                            "payload":"CATS_CLOTH_" + gender
+                            "type":"web_url",
+                            "title":"Shop Clothing",
+                            "url": "https://utahskis.com/" + gender + "/clothing.html",
+                            "webview_height_ratio":"tall"
                           }
                         ]
                       },
@@ -537,9 +552,10 @@ module.exports = (event) => {
                         "image_url": 'https://chat-sass-messenger-uploader.herokuapp.com/static/utah/first-filter/access.png',
                         "buttons":[
                           {
-                            "type":"postback",
-                            "title":"Shop",
-                            "payload":"CATS_ACCESS_" + gender
+                            "type":"web_url",
+                            "title":"Shop Accessories",
+                            "url": "https://utahskis.com/" + gender + "/accessories.html",
+                            "webview_height_ratio":"tall"
                           }
                         ]
                       }
