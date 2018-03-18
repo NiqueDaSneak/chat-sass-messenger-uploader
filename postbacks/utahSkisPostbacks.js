@@ -487,7 +487,8 @@ module.exports = (event) => {
           })
 
         } else {
-          var gender = event.postback.payload.split('_')[1]
+          var gender = event.postback.payload.split('_')[1].toLowerCase()
+          console.log(gender)
           getUser().then((user) => {
             let messageData = {
               "recipient":{
